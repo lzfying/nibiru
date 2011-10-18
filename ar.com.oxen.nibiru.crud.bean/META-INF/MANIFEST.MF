@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Bean utilities for CRUD
+Bundle-SymbolicName: ar.com.oxen.nibiru.crud.bean
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: ar.com.oxen.nibiru.crud.bean.annotation,
+ ar.com.oxen.nibiru.crud.bean.manager
+Import-Package: ar.com.oxen.commons.bean.api,
+ ar.com.oxen.nibiru.crud.manager.api

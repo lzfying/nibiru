@@ -1,0 +1,2378 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{listings}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language spanish
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\listings_params "language=Java"
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Referencia Nibiru
+\end_layout
+
+\begin_layout Part
+Introducción
+\end_layout
+
+\begin_layout Section
+Objetivo del framework
+\end_layout
+
+\begin_layout Standard
+El objetivo es brindar un marco que facilite el desarrollo de aplicaciones
+ modulares.
+ Se establecen las siguientes metas para lograr dicho objetivo:
+\end_layout
+
+\begin_layout Itemize
+Proveer una capa de abstracción de las diferentes tecnologías usadas, para
+ evitar el acoplamiento.
+\end_layout
+
+\begin_layout Itemize
+Brindar servicios que sean comunes a las aplicaciones de negocio, como ser
+ ABMs, reportes, workflow, gestión de transacciones, seguridad o internacionaliz
+ación.
+\end_layout
+
+\begin_layout Itemize
+Proveer mecanismos de actualización dinámica para que el sistema se pueda
+ actualizar en caliente.
+\end_layout
+
+\begin_layout Itemize
+Implementar patrones que faciliten resolver problemas de una manera estructurada.
+ Pero a la vez no forzar al usuario a implementar una solución dada.
+\end_layout
+
+\begin_layout Itemize
+Posibilitar la comunicación desacoplada entre módulos.
+\end_layout
+
+\begin_layout Itemize
+No reinventar la rueda.
+ Crear capas de abstracción pero usar en lo posible tecnologías existentes.
+\end_layout
+
+\begin_layout Section
+Arquitectura
+\end_layout
+
+\begin_layout Standard
+En esta sección se explican las decisiones de arquitectura tomadas.
+\end_layout
+
+\begin_layout Subsection
+Patrón IoC
+\end_layout
+
+\begin_layout Standard
+A fin de desacoplar cada componente del contenedor y de otros componentes,
+ las dependencias de cada componente son inyectadas (patrón 
+\begin_inset CommandInset href
+LatexCommand href
+name "IoC"
+target "http://es.wikipedia.org/wiki/Inversi%C3%B3n_de_control"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsection
+Patrón MVP
+\end_layout
+
+\begin_layout Standard
+El modelo utilizado para la capa de presentación es el patrón MVP, en su
+ variante de 
+\begin_inset CommandInset href
+LatexCommand href
+name "vista pasiva"
+target "http://martinfowler.com/eaaDev/PassiveScreen.html"
+
+\end_inset
+
+.
+ Esto permite tener desacoplados los presenters entre si mediante un bus
+ de eventos y a su vez tener desacoplada la implementación de la vista.
+ Google también hace una buena descripción de este 
+\begin_inset CommandInset href
+LatexCommand href
+name "patrón"
+target "http://code.google.com/intl/es-419/webtoolkit/articles/mvp-architecture.html"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Además se llevó la idea de abstraer la vista un paso más allá, creando abstracci
+ones para los componentes más comunes.
+ De esta manera, el usuario puede optar por crear una vista genérica o una
+ vista utilizando las ventajas particulares de una tecnología dada.
+\end_layout
+
+\begin_layout Subsection
+División entre API e implementación
+\end_layout
+
+\begin_layout Standard
+A fin de facilitar el desacoplamiento entre implementaciones de distintos
+ módulos, se definieron dos tipos de módulos:
+\end_layout
+
+\begin_layout Itemize
+API: Contienen interfaces de componentes a ser expuestos a otros componentes.
+ Por convención de nombre, finalizan en 
+\begin_inset Quotes eld
+\end_inset
+
+.api
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Implementación: Contienen implementaciones de las APIs.
+ Por convención de nombres tienen el mismo nombre del API que implementan
+ pero cambiando el 
+\begin_inset Quotes eld
+\end_inset
+
+.api
+\begin_inset Quotes erd
+\end_inset
+
+ final por algo descriptivo de la implementación.
+\end_layout
+
+\begin_layout Standard
+En general, cualquier módulo sólo puede acceder a otro a través de un API.
+ La excepción a esta regla son los módulos con utilidades, que no exponen
+ servicios en sí, sino que sólo exportan clases de uso general.
+\end_layout
+
+\begin_layout Standard
+Por convención de nombres, las implementaciones de APIs que no dependan
+ de una tecnología en particular tendrán el sufijo 
+\begin_inset Quotes eld
+\end_inset
+
+.generic
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Puntos de extensión
+\end_layout
+
+\begin_layout Standard
+El sistema tiene un mecanismo de puntos de extensión que permite agregar
+ o quitar funcionalidad de manera dinámica.
+ La idea se tomó de la plataforma 
+\begin_inset CommandInset href
+LatexCommand href
+name "Eclipse"
+target "http://www.eclipse.org/"
+
+\end_inset
+
+, pero intentando armar un mecanismo más simple.
+\end_layout
+
+\begin_layout Subsection
+Extensión mediante scripting
+\end_layout
+
+\begin_layout Standard
+El framework permite la personalización mediante scripting.
+ Esto, en combinación con el mecanismo de puntos de extensión, permite que
+ el usuario agregue funcionalidad al sistema desde la administración del
+ mismo, sin necesidad de compilar, empaquetar o instalar nada.
+\end_layout
+
+\begin_layout Subsection
+Plataforma Java
+\end_layout
+
+\begin_layout Standard
+Se optó por 
+\begin_inset CommandInset href
+LatexCommand href
+name "Java"
+target "http://www.java.com/es/"
+
+\end_inset
+
+ debido a que actualmente es la plataforma de más amplia difusión dentro
+ de las aplicaciones empresariales, además de ser fácilmente portable a
+ distintos ambientes, disponer de innumerables frameworks y librerías, etc.
+\end_layout
+
+\begin_layout Subsection
+OSGi / Spring DM
+\end_layout
+
+\begin_layout Standard
+Se optó por usar 
+\begin_inset CommandInset href
+LatexCommand href
+name "OSGi"
+target "http://www.osgi.org"
+
+\end_inset
+
+ debido a que brinda un mecanismo para gestión dinámica de módulos.
+ Se utilizó 
+\begin_inset CommandInset href
+LatexCommand href
+name "Spring DM"
+target "http://www.springsource.org/osgi"
+
+\end_inset
+
+ porque brinda muchas facilidades para implementar el patrón IoC bajo OSGi.
+ No se utilizó 
+\begin_inset CommandInset href
+LatexCommand href
+name "Gemini"
+target "http://www.eclipse.org/gemini/"
+
+\end_inset
+
+ porque al momento de iniciar el proyecto el mismo estaba muy inmaduro aún.
+\end_layout
+
+\begin_layout Standard
+Utilizando estas tecnologías, los componentes compartidos son expuestos
+ mediante servicios OSGi.
+ La división entre API e implementación permite además el cambio en caliente
+ de servicios, al no acceder los componentes cliente a la clase concreta
+ de la implementación.
+ Por otro lado, Spring DM brinda proxies que hacen que dichos cambios en
+ caliente sean transparentes para el código cliente.
+\end_layout
+
+\begin_layout Standard
+De cualquier modo, casi todos los componentes son independientes de OSGi
+ y de Spring, gracias al patrón IoC (salvo los que implementan funcionalidades
+ específicas de Spring).
+\end_layout
+
+\begin_layout Section
+Primeros pasos
+\end_layout
+
+\begin_layout Subsection
+Software requerido
+\end_layout
+
+\begin_layout Enumerate
+Java (
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.java.com/es/download/"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Enumerate
+Eclipse (
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.eclipse.org/"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Enumerate
+Maven (
+\begin_inset CommandInset href
+LatexCommand href
+target "http://maven.apache.org/"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Enumerate
+Algún cliente SVN (
+\begin_inset CommandInset href
+LatexCommand href
+target "http://subversion.tigris.org/"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsection
+Instalación
+\end_layout
+
+\begin_layout Enumerate
+Hacer checkout del proyecto Target Platform desde la siguiente URL: 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://servidor.oxen.com.ar/svn/oxen/nibiru/trunk/ar.com.oxen.nibiru.targetplatform/"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Ejecutar 
+\begin_inset Quotes eld
+\end_inset
+
+mvn eclipse:eclipse
+\begin_inset Quotes erd
+\end_inset
+
+ para generar el proyecto Eclipse a partir de los archivos de Maven y descargar
+ los JARs del target platform.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Importar el proyecto creado desde Eclipse.
+\end_layout
+
+\begin_layout Enumerate
+En preferencias, activar el target platform de Nibiru.
+ Seleccionar la opción 
+\begin_inset Quotes eld
+\end_inset
+
+reload
+\begin_inset Quotes erd
+\end_inset
+
+ para que tome en cuenta los JARs descargados.
+\end_layout
+
+\begin_layout Enumerate
+Ejecutar el launch de aplicación OSGi que se llama 
+\begin_inset Quotes eld
+\end_inset
+
+Nibiru Test
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Para desarrolladores:
+\end_layout
+
+\begin_layout Enumerate
+Hacer checkout del proyecto sobre el que se va a trabajar.
+ Todos se encuentran en 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://servidor.oxen.com.ar/svn/oxen/nibiru/trunk"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Ejecutar el launch de aplicación OSGi que se llama 
+\begin_inset Quotes eld
+\end_inset
+
+Nibiru Test
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Eclipse agrega por defecto los proyectos de tipo plugin (OSGi) que estén
+ en el workspace, de manera que aunque exista un JAR con el mismo proyecto,
+ el proyecto fuente tiene precedencia.
+\end_layout
+
+\begin_layout Subsection
+Proyecto de ejemplo
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+TODO: Armar un proyecto de ejemplo
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+TODO: Simplificar el armado de un proyecto.
+ Opciones:
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Hacer un namespace handler.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Armar anotaciones (aunque no se cómo encajaría esto con Spring DM).
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Usar directamente Guice+Peaberry (
+\begin_inset CommandInset href
+LatexCommand href
+target "http://code.google.com/p/peaberry/"
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Part
+Módulos
+\end_layout
+
+\begin_layout Section
+Aplicación base
+\end_layout
+
+\begin_layout Standard
+El bundle ar.com.oxen.nibiru.application.api contiene las interfaces utilizadas
+ para implementar funciones básicas de la aplicación como ser login, ventana
+ de 
+\begin_inset Quotes eld
+\end_inset
+
+acerca de
+\begin_inset Quotes erd
+\end_inset
+
+, etc.
+\end_layout
+
+\begin_layout Standard
+La idea es que una implementación de este bundle provea la base para levantar
+ la aplicación y toda la funcionalidad extra se agregue mediante otros módulos.
+\end_layout
+
+\begin_layout Standard
+Este módulo contiene los factories para los presentadores:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.application.api/src/main/java/ar/com/oxen/nibiru/
+application/api/ApplicationPresenterFactory.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Y para las vistas de la aplicación:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.application.api/src/main/java/ar/com/oxen/nibiru/
+application/api/ApplicationViewFactory.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+TODO: Los presentadores y las vistas deberían ir en módulos separados.
+\end_layout
+
+\begin_layout Standard
+El bundle ar.com.oxen.nibiru.application.generic provee una implementación genérica
+ de los componentes base de la aplicación.
+\end_layout
+
+\begin_layout Section
+Puntos de extensión
+\end_layout
+
+\begin_layout Standard
+Las interfaces para puntos de extensión se encuentran en el bundle ar.com.oxen.nibi
+ru.extensionpoint.api.
+ El diseño es simple: cada punto de extension tiene una interfaz dada y
+ un nombre.
+ Y además, las extensiones pueden activarse o desactivarse en tiempo de
+ ejecución.
+\end_layout
+
+\begin_layout Standard
+A fin de realizar una acción cada vez que una extensión se agregue o se
+ remueva, se debe utilizar la interfaz ExtensionTracker:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.extensionpoint.api/src/main/java/ar/com/oxen/nibi
+ru/extensionpoint/api/ExtensionTracker.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+que provee los callbacks necesarios para dichos eventos.
+ Los ExtensionTrackers deben ser registrados en el servicio ExtensionPointManage
+r:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.extensionpoint.api/src/main/java/ar/com/oxen/nibi
+ru/extensionpoint/api/ExtensionPointManager.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La interfaz ExtensionPointManager también provee métodos para registrar
+ nuevas extensiones y dar de baja extensiones existentes.
+\end_layout
+
+\begin_layout Standard
+El bundle ar.com.oxen.nibiru.extensionpoint.spring tiene una implementación basada
+ en Spring DM y servicios OSGi de los puntos de extensión.
+ Bajo esta implementación, cada punto de extensión simplemente se implementa
+ mediante un servicio OSGi con una propiedad llamada 
+\begin_inset Quotes eld
+\end_inset
+
+extensionPoint
+\begin_inset Quotes erd
+\end_inset
+
+ utilizada para indicar el nombre del punto de extensión sobre el cual se
+ agregará la funcionalidad.
+\end_layout
+
+\begin_layout Section
+Bus de eventos
+\end_layout
+
+\begin_layout Standard
+Varios módulos hacen uso del bus de evento.
+ El bus de eventos se accede utilizando la interfaz 
+\begin_inset CommandInset href
+LatexCommand href
+name "ar.com.oxen.commons.eventbus.api.EventBus"
+target "http://oxenjavacommons.googlecode.com/svn/trunk/ar.com.oxen.commons/src/main/java/ar/com/oxen/commons/eventbus/api/EventBus.java"
+
+\end_inset
+
+, que no pertenece al proyecto Nibiru sino a 
+\begin_inset CommandInset href
+LatexCommand href
+name "Oxen Java Commons"
+target "http://code.google.com/p/oxenjavacommons/"
+
+\end_inset
+
+.
+ En este proyecto también hay una 
+\begin_inset CommandInset href
+LatexCommand href
+name "implementación"
+target "http://oxenjavacommons.googlecode.com/svn/trunk/ar.com.oxen.commons/src/main/java/ar/com/oxen/commons/eventbus/impl/simple/SimpleEventBus.java"
+
+\end_inset
+
+ (bastante) simple de esa interfaz.
+\end_layout
+
+\begin_layout Section
+Módulos
+\end_layout
+
+\begin_layout Standard
+Como se dijo antes, el framework está pensado para que la funcionalidad
+ se añada a modo de módulos independientes.
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.module.utils provee clases de utilidad para tal
+ fin.
+ Típicamente cada módulo tendrá un componente encargado de configurar dicho
+ módulo al arranque.
+ Para tal fin, este proyecto provee la clase AbstractModuleConfigurator
+ de la cual se puede heredar para crear dichos configuradores.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.module.utils/src/main/java/ar/com/oxen/nibiru/mod
+ule/utils/AbstractModuleConfigurator.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se debe inyectar las dependencias necesarias y disparar el método startup()
+ en el arranque.
+ Al detener el módulo se debe disparar el método shutdown().
+ Los métodos configure() y unconfigure() pueden ser implementados a fin
+ de proveer lógica personalizada de configuración en el arranque y en la
+ detención, respectivamente.
+\end_layout
+
+\begin_layout Standard
+Típicamente este componente configurará la navegación entre distintas pantallas
+ del módulo.
+ Para esto, la clase AbstractModuleConfigurator provee acceso al bus de
+ eventos (que debe ser inyectado) y se pone a si mismo como listener de
+ dicho bus.
+ De manera que pueden agregarse métodos de manejo de eventos anotados con
+ @EventHandler.
+ Para mostrar una vista/presentador se puede usar el método activate().
+\end_layout
+
+\begin_layout Standard
+Además la clase provee métodos para registrar extensiones (debe estar inyectado
+ el ExtensionPointManager).
+ Dichas extensiones son removidas automáticamente cuando el módulo es dado
+ de baja.
+\end_layout
+
+\begin_layout Standard
+En cuanto a los menúes, son implementados mediante puntos de extensión.
+ De modo que solamente es necesario registrar extensiones con las siguiente
+ interfaz:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui.api/src/main/java/ar/com/oxen/nibiru/ui/api/ex
+tension/MenuItemExtension.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+o bien con:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui.api/src/main/java/ar/com/oxen/nibiru/ui/api/ex
+tension/SubMenuExtension.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se debe definir un nombre de punto de extensión para cada menú.
+ El punto de extensión para el menú principal es ar.com.oxen.nibiru.menu.
+\end_layout
+
+\begin_layout Standard
+Vale la pena notar que en el bundle ar.com.oxen.nibiru.ui.utils hay implementaciones
+ simples de estas interfaces.
+\end_layout
+
+\begin_layout Section
+Sesión
+\end_layout
+
+\begin_layout Standard
+Generalmente las aplicaciones tienen algún tipo de información de sesión.
+ Esto es, datos que son propios del usuario que esté conectado en un momento
+ dado.
+ Típicamente, en una aplicación Web, esta información se almacena en la
+ sesión HTTP.
+\end_layout
+
+\begin_layout Standard
+A fin de apoyar la meta de mantener los distintos componentes desacoplados
+ de la implementación, el proyecto ar.com.oxen.nibiru.session.api provee una
+ interfaz genérica para una sesión.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.session.api/src/main/java/ar/com/oxen/nibiru/sess
+ion/api/Session.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.session.spring.http provee acceso a la sesión HTTP
+ utilizando componentes de Spring (filtros de Servlet que brindan acceso
+ a la sesión a través de un ThreadLocal).
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.session.spring.scope provee un scope de Spring
+ que permite declarar beans en el contexto de Spring que sean almacenados
+ en la sesión provista por nibiru.
+ En conjunto con el tag <aop:scoped-proxy/> provisto por Spring, este mecanismo
+ permite qeu beans que son almacenados en la sesión sean inyectados de manera
+ transparente a beans que son singleton.
+\end_layout
+
+\begin_layout Standard
+Por ejemplo:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+<osgi:reference id="nibiruSession"
+\end_layout
+
+\begin_layout Plain Layout
+
+    interface="ar.com.oxen.nibiru.session.api.Session" />
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+  
+\end_layout
+
+\begin_layout Plain Layout
+
+  <property name="scopes">
+\end_layout
+
+\begin_layout Plain Layout
+
+    <map>
+\end_layout
+
+\begin_layout Plain Layout
+
+      <entry key="nibiruSession">
+\end_layout
+
+\begin_layout Plain Layout
+
+        <bean
+\end_layout
+
+\begin_layout Plain Layout
+
+            class="ar.com.oxen.nibiru.session.spring.scope.SessionScope">
+\end_layout
+
+\begin_layout Plain Layout
+
+          <property name="session" ref="nibiruSession" />
+\end_layout
+
+\begin_layout Plain Layout
+
+        </bean>
+\end_layout
+
+\begin_layout Plain Layout
+
+      </entry>
+\end_layout
+
+\begin_layout Plain Layout
+
+    </map>
+\end_layout
+
+\begin_layout Plain Layout
+
+  </property>
+\end_layout
+
+\begin_layout Plain Layout
+
+</bean> 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+<bean name="vaadinApplication" scope="nibiruSession" 
+\end_layout
+
+\begin_layout Plain Layout
+
+    class="ar.com.oxen.nibiru.ui.vaadin.application.NibiruApplication">
+\end_layout
+
+\begin_layout Plain Layout
+
+  <property name="eventBus" ref="eventBus" />
+\end_layout
+
+\begin_layout Plain Layout
+
+  <property name="localeHolder" ref="localeHolder" />
+\end_layout
+
+\begin_layout Plain Layout
+
+  <aop:scoped-proxy />
+\end_layout
+
+\begin_layout Plain Layout
+
+</bean>
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Conversaciones
+\end_layout
+
+\begin_layout Standard
+Un escenario común en las aplicaciones de negocios es que los usuarios operen
+ sobre un conjunto de datos durante un intervalo de tiempo dado y finalmente
+ confirmen las operaciones pendientes sobre ellos o cancelen todo el proceso.
+ La conversación (proyecto ar.com.oxen.nibiru.conversation.api) sirve como abstracció
+n de este concepto:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.conversation.api/src/main/java/ar/com/oxen/nibiru
+/conversation/api/Conversation.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La conversación provee una forma de desacoplar la interfaz de usuario de
+ la implementación de los distintos servicios que requieran de información
+ de conversación.
+ Por ejemplo, supongamos que estamos usando el módulo de ABM con la implementaci
+ón JPA del servicio.
+ La capa de interfaz de usuario crea una conversación al abrir el presentador.
+ Ante cada llamada al servicio, la implementación del mismo extrae de la
+ conversación el EntityManager activo.
+ De esta manera, las capas superiores no necesitan saber los detalles sobre
+ la información de conversación que necesitan las capas inferiores.
+\end_layout
+
+\begin_layout Standard
+Para implementar este proceso, el cliente (usualmente la capa de presentación)
+ crea una conversación utilizando el factory:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.conversation.api/src/main/java/ar/com/oxen/nibiru
+/conversation/api/ConversationFactory.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+y cada vez que accede a un servicio que requiera de información de conversación,
+ lo hace mediante el método execute(), que recibe un callback con un método
+ doInConversation(), que ejecutará luego de activar la conversación:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.conversation.api/src/main/java/ar/com/oxen/nibiru
+/conversation/api/ConversationCallback.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finalmente, el cliente puede invocar el método end() o el método cancel(),
+ según desee finalizar o cancelar la conversación.
+\end_layout
+
+\begin_layout Standard
+Del lado de las capas inferiores, es posible acceder a la conversación activa
+ mediante el servicio ConversationAccessor:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.conversation.api/src/main/java/ar/com/oxen/nibiru
+/conversation/api/ConversationAccessor.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Mediante los métodos put() y get(), el componente puede escribir y leer
+ valores en la conversación.
+ En caso de que se desee realizar una acción al finalizar o cancelar una
+ conversación, se puede utilizar el método registerTracker() para registrar
+ un callback:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.conversation.api/src/main/java/ar/com/oxen/nibiru
+/conversation/api/ConversationTracker.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La idea de establecer un mecanismo de conversaciones proviene de 
+\begin_inset CommandInset href
+LatexCommand href
+name "Seam"
+target "http://seamframework.org/"
+
+\end_inset
+
+, pero se realizaron algunas modificaciones.
+ En primer lugar, se buscó hacer el diseño más simple y que no esté orientado
+ específicamente a aplicaciones Web.
+ Por ejemplo, las conversaciones de Seam son jerárquicas, mientras que las
+ de Nibiru no lo son.
+ Incluso se pensó en unificar el concepto de conversación con el de sesión
+ y hacerlo jerárquico (siendo la sesión la conversación principal), pero
+ esto añadiría complejidad a la semántica de las conversaciones y forzaría
+ una unificación poco elegante de interfaces, sin aportar beneficios.
+\end_layout
+
+\begin_layout Standard
+El módulo ar.com.oxen.nibiru.conversation.Overfull  genérica de los servicios
+ de conversación.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+TODO: Las conversaciones pueden hacer que sea practicamente imposible serializar
+ la sesión.
+\end_layout
+
+\begin_layout Section
+Persistencia
+\end_layout
+
+\begin_layout Standard
+Para persistencia se utiliza 
+\begin_inset CommandInset href
+LatexCommand href
+name "JPA"
+target "http://es.wikipedia.org/wiki/Java_Persistence_API"
+
+\end_inset
+
+.
+ Si bien existen mútliples mecanismo de persistencia en la plataforma Java,
+ JPA es el más difundido.
+ Por este motivo se eligió esta especificación por sobre otros mecanismos.
+ De todas maneras, nada impide que se implementen otros servicios de persistenci
+a utilizando alguna tecnología diferente (claro que esto impicaría implementar
+ nuevamente los módulos que dependan de JPA).
+\end_layout
+
+\begin_layout Standard
+Al ser JPA en sí mismo un API, no se definió un API propio de Nibiru.
+ En cambio, se expone como servicio una instancia de javax.persistence.EntityManag
+erFactory, de la especificación JPA.
+ El bundle ar.com.oxen.nibiru.jpa.spring provee 2 implementaciones de dicho servicio
+ que utilizan clases de Spring:
+\end_layout
+
+\begin_layout Enumerate
+ConversationEntityManagerFactory: Obtiene el EntityManager de la conversación
+ activa y si no existe, lo crea.
+ Actualmente este componente es expuesto como servicio.
+\end_layout
+
+\begin_layout Enumerate
+SessionEntityManagerFactory: Obtiene el EntityManager de la sesión y si
+ no existe, lo crea.
+ Actualmente se está evaluando si este componente debe eliminarse (fue la
+ implementación original del servicio).
+\end_layout
+
+\begin_layout Standard
+Debido a que JPA requiere que se especifique en un archivo META-INF/persistence.x
+ml las clases a persistir, deben crearse fragmentos OSGi para agregar dicho
+ archivo al bundle del servicio JPA.
+ Esto tiene como inconveniente que en dicho archivo se deben incluir las
+ clases a persistir por los diferentes módulos.
+ Ver proyecto ar.com.oxen.nibiru.sample.jpa.fragment para tomar como ejemplo.
+\end_layout
+
+\begin_layout Standard
+En cuanto al acceso a base de datos, se expone un servicio con interfaz
+ javax.sql.DataSource.
+ En este caso tampoco fue necesario definir un API específico de Nibiru.
+ El bundle ar.com.oxen.nibiru.datasource.dbcp provee una implementación con 
+\begin_inset CommandInset href
+LatexCommand href
+name "DBCP"
+target "http://commons.apache.org/dbcp/"
+
+\end_inset
+
+.
+ La configuración de conexión a la base de datos, así como la visibilidad
+ del driver JDBC, se agregan también mediante fragmentos OSGi.
+ Ver proyecto ar.com.oxen.nibiru.sample.datasource.fragment.
+\end_layout
+
+\begin_layout Section
+Interfaz de usuario
+\end_layout
+
+\begin_layout Standard
+El bundle ar.com.oxen.nibiru.ui.api contiene las interfaces para capa de presentación.
+ El esquema apunta a que la vista se construya utilizando el patrón 
+\begin_inset CommandInset href
+LatexCommand href
+name "MVP (vista pasiva)"
+target "http://martinfowler.com/eaaDev/PassiveScreen.html"
+
+\end_inset
+
+.
+ Dentro del paquete principal tenemos 3 sub-paquetes:
+\end_layout
+
+\begin_layout Enumerate
+extension: Contiene interfaces a implementar por las extensiones de UI (actualme
+nte menú y sub-menú - ver sección Módulos para más detalles).
+\end_layout
+
+\begin_layout Enumerate
+mvp: Contiene las interfaces a utilizar para implementar el patrón MVP:
+ Presenter, View y todas las necesarias para acceder a datos y a eventos
+ (HasValue, HasClickHandler, ClickHandler, etc.).
+\end_layout
+
+\begin_layout Enumerate
+view: Contiene interfaces para abstracción de componentes de vista.
+ Estas interfaces se usan cada vez que se quiere acceder de forma genérica
+ a un widget específico.
+ Por ejemplo, un botón o un campo de texto.
+ La idea es que haya adaptadores para los widgets de las diferentes tecnologías
+ de UI.
+\end_layout
+
+\begin_layout Standard
+Bajo este esquema, el usuario tiene dos opciones para crear una vista:
+\end_layout
+
+\begin_layout Enumerate
+De manera genérica, es decir, utilizando una implementación de ar.com.oxen.nibiru.ui.
+api.view.ViewFactory para acceder a interfaces genéricas de los widgets.
+ De esta manera se puede constuir una interfaz limitada, pero se puede cambiar
+ fácilmente la tecnología subyacente.
+\end_layout
+
+\begin_layout Enumerate
+Utilizando una tecnología específica y hacer que implemente la interfaz
+ de la vista.
+ De esta manera se pueden aprovechar características propias de la tecnología
+ y utilizar editores gráficos.
+ En contraste, el cambio de tecnología implicaría mas trabajo.
+\end_layout
+
+\begin_layout Standard
+Como el modelo MVP propuesto es de vista pasiva, el presentador simplemente
+ tiene una referencia a una interfaz que representa a la vista (en el caso
+ de Google usan el término 
+\begin_inset CommandInset href
+LatexCommand href
+name "Display"
+target "http://code.google.com/intl/es-419/webtoolkit/articles/mvp-architecture.html"
+
+\end_inset
+
+).
+ Esto permite usar indistintamente cualquiera de los dos enfoques, sin cambiar
+ el presentador.
+\end_layout
+
+\begin_layout Standard
+En síntesis, las interfaces principales del MVP son Presenter:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui.api/src/main/java/ar/com/oxen/nibiru/ui/api/mv
+p/Presenter.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+y View:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui.api/src/main/java/ar/com/oxen/nibiru/ui/api/mv
+p/View.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En el método go() de Presenter se debe incluir la lógica de capa de presentación.
+\end_layout
+
+\begin_layout Standard
+Las interfaces de abstracción de widgets (paquete ar.com.oxen.nibiru.ui.api.view)
+ son variadas.
+ Pero todas deberían instanciarse por medio de una implementación de ViewFactory
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui.api/src/main/java/ar/com/oxen/nibiru/ui/api/vi
+ew/ViewFactory.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.ui.vaadin contiene adaptadores y su correspondiente
+ factory para implementar las interfaces de ar.com.oxen.nibiru.ui.api.view utilizando
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "Vaadin"
+target "http://vaadin.com"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.ui.utils contiene clases genéricas para uso en
+ la interfaz de usuario.
+ En su mayoría, contiene clases abstractas para heredar y crear presentadores,
+ vistas, extensiones, etc.
+ Pero también decoradores y clases de uso genérico.
+\end_layout
+
+\begin_layout Section
+Seguridad
+\end_layout
+
+\begin_layout Standard
+Las interfaces para acceder a los servicios de seguridad (autenticación
+ y autorización) se encuentran en el proyecto ar.com.oxen.nibiru.security.api.
+ Actualmente se soporta autenticación por usuario/clave y autorización por
+ roles.
+\end_layout
+
+\begin_layout Standard
+La autenticación se realiza por medio de la interfaz AuthenticationService:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security.api/src/main/java/ar/com/oxen/nibiru/sec
+urity/api/AuthenticationService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Mientras que la autorización se lleva a cabo mediante AuthorizationService:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security.api/src/main/java/ar/com/oxen/nibiru/sec
+urity/api/AuthorizationService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+TODO: Habría que pensar bien el esquema de autorización.
+ Si los módulos se van a desarrollar de forma independiente, cómo se evita
+ la colisión de roles? Depende de la implementación asociar los roles específico
+s de cada módulo a un rol general? (como en EJB) O simplemente que cada
+ modulo le ponga un prefijo al rol? (como se está haciendo con la internacionali
+zacion).
+\end_layout
+
+\begin_layout Standard
+Hasta el momento no se ha hecho ninguna implementación de seguridad, sólo
+ hay un bundle que da un servicio dummy (ar.com.oxen.nibiru.security.dummy).
+\end_layout
+
+\begin_layout Section
+Gestión de transacciones
+\end_layout
+
+\begin_layout Standard
+Dado que existen mecanismos no intrusivos (mediante 
+\begin_inset CommandInset href
+LatexCommand href
+name "AOP"
+target "http://es.wikipedia.org/wiki/Programaci%C3%B3n_orientada_a_aspectos"
+
+\end_inset
+
+), no se definió un API específico para este caso.
+ Se podría llegar a definir en caso de que se opte por brindar una gestión
+ programática de transacciones.
+\end_layout
+
+\begin_layout Standard
+El bundle ar.com.oxen.nibiru.transaction.spring expone un TransactionManager
+ de Spring como servicio OSGi.
+ Dentro de cada bundle se pueden utilizar los mecanismos de AOP de Spring
+ para, declarativamente, establecer las transacciones (inyectando el servicio
+ TransactionManager).
+\end_layout
+
+\begin_layout Standard
+Por ejemplo:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+<osgi:reference id="transactionManager" 
+\end_layout
+
+\begin_layout Plain Layout
+
+    interface="org.springframework.transaction.PlatformTransactionManager"
+ />
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+<tx:advice id="txAdvice" transaction-manager="transactionManager"> 
+\end_layout
+
+\begin_layout Plain Layout
+
+  <tx:attributes>
+\end_layout
+
+\begin_layout Plain Layout
+
+    <tx:method name="*" propagation="REQUIRED"/>
+\end_layout
+
+\begin_layout Plain Layout
+
+  </tx:attributes>
+\end_layout
+
+\begin_layout Plain Layout
+
+</tx:advice>
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+<bean  class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProces
+sor" />
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"
+ > 
+\end_layout
+
+\begin_layout Plain Layout
+
+  <property name="beanNames" value="dynamicBundleCrudManager"/>
+\end_layout
+
+\begin_layout Plain Layout
+
+  <property name="interceptorNames" value="txAdvice"/>
+\end_layout
+
+\begin_layout Plain Layout
+
+</bean> 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Actualmente no se soportan todos los tags XML de Spring para gestión de
+ transacciones, por lo que debe usarse un componente de tipo BeanNameAutoProxyCr
+eator, como muestra el ejemplo.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+TODO: El bundle expone un JpaTransactionManager.
+ El nombre del proyecto debería decir 
+\begin_inset Quotes eld
+\end_inset
+
+jpa
+\begin_inset Quotes erd
+\end_inset
+
+ en algún lugar.
+\end_layout
+
+\begin_layout Section
+Internacionalizacion
+\end_layout
+
+\begin_layout Standard
+En el proyecto ar.com.oxen.nibiru.i18n.api se encuentran las interfaces para
+ internacionalización.
+ Hay 3 servicios principales:
+\end_layout
+
+\begin_layout Enumerate
+LocaleHolder: Utilizado para leer o escribir el Locale del usuario.
+\end_layout
+
+\begin_layout Enumerate
+MessageSource: Utilizado para consultar mensajes por clave (con parámetros).
+\end_layout
+
+\begin_layout Enumerate
+MessageProvider: Utilizado para proveer mensajes consultando por clave y
+ Locale.
+ Se realizó esta división para que cada módulo provea su MessageProvider.
+ Típicamente habrá una implementación de MessageSource que los consolide.
+\end_layout
+
+\begin_layout Standard
+Las 3 interfaces son muy simples, como se puede ver.
+\end_layout
+
+\begin_layout Standard
+LocaleHolder:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.i18n.api/src/main/java/ar/com/oxen/nibiru/i18n/ap
+i/LocaleHolder.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+MessageSource:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.i18n.api/src/main/java/ar/com/oxen/nibiru/i18n/ap
+i/MessageSource.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+MessageProvider:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.i18n.api/src/main/java/ar/com/oxen/nibiru/i18n/ap
+i/MessageProvider.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.i18n.generic contiene una implementación genérica
+ de MessageSource al cual se le inyecta el LocaleHolder y una lista de MessagePr
+ovider.
+ Mediante Spring DM se puede inyectar una lista de servicios de tipo MessageProv
+ider que se actualice dinámicamente ante la disponibilidad de nuevas instancias
+ de dichos servicios.
+ Este proyecto también contiene una implementación basada en ResoruceBundle
+ de MessageProvider.
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.i18n.session tiene una implementación de LocaleHolder
+ que almacena el locale en la sesión de Nibiru.
+\end_layout
+
+\begin_layout Section
+ABM
+\end_layout
+
+\begin_layout Standard
+El módulo de ABM (Alta, Baja y Modificación) apunta a facilitar la generación
+ de pantallas de este tipo.
+\end_layout
+
+\begin_layout Standard
+La funcionalidad de este módulo está distribuida entre varios bundles.
+ La misma puede agruparse en 2 capas.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+TODO: pensar cómo integrar seguridad al generador de ABMS.
+\end_layout
+
+\begin_layout Subsection
+Servicios de persistencia
+\end_layout
+
+\begin_layout Standard
+Las interfaces necesarias para exponer servicios de persistencia se encuentran
+ en el proyecto ar.com.oxen.nibiru.crud.manager.api.
+\end_layout
+
+\begin_layout Standard
+La interfaz principal es CrudManager, que provee los métodos necesarios
+ para generar dinámicamente una pantalla de ABM.
+ En otras palabras, la idea es que haya un CrudManager por cada entidad
+ sobre la cual se quiera realizar un ABM.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
+crud/manager/api/CrudManager.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El módulo de ABM está pensado para que las pantallas de ABM puedan crearse
+ sobre diversos tipos de entidades.
+ A diferencia de un generador de ABMs típico, donde se generan pantallas
+ para administrar tablas de una base de datos o sobre beans, en Nibiru se
+ agrega un nivel de indirección.
+ Esto permite que se creen implementaciones del servicio de persistencia
+ provea acceso a beans JPA, a instancias de procesos de negocio, etc.
+\end_layout
+
+\begin_layout Standard
+Las interfaces utilizadas para lograr este nivel de abstracción son CrudEntity
+ (que representa una entidad que está siendo editada) y CrudField (que represent
+a un campo de dicha entidad).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
+crud/manager/api/CrudEntity.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
+crud/manager/api/CrudField.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+WidgetType enumera las formas en las que se puede mostrar un campo:
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
+crud/manager/api/WidgetType.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La abstracción no estaría completa si las acciones a realizar sobre las
+ entidades no fueran configurables.
+ Para este fin existe la interfaz CrudAction.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
+crud/manager/api/CrudAction.java}
+\end_layout
+
+\end_inset
+
+De esta manera las acciones no se limitan a alta, baja y modificaciones;
+ sino que son extensibles.
+ Un motor de workflow podría, por ejemplo, exponer acciones como 
+\begin_inset Quotes eld
+\end_inset
+
+aprobar
+\begin_inset Quotes erd
+\end_inset
+
+ o 
+\begin_inset Quotes eld
+\end_inset
+
+rechazar
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Para que el esquema de ABM sea modular, las acciones a realizar sobre una
+ entidad no son provistas directamente por el CrudManager sino que se usa
+ el mecanismo de puntos de extensión.
+ La interfaz CrudActionExtension permite que se implementen distintas extensione
+s que agregan posibles acciones a realizar sobre una entidad.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
+crud/manager/api/CrudActionExtension.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El bundle ar.com.oxen.nibiru.crud.manager.jpa contiene implementaciones que se
+ basan en JPA.
+ Se apoya en clases de ar.com.oxen.nibiru.crud.bean y de ar.com.oxen.nibiru.crud.utils.
+ En lo posible usa reflection e información de JPA para retornar la información
+ necesaria para el ABM, pero de no ser posible, se basa en las anotaciones
+ de ar.com.oxen.nibiru.crud.bean.
+\end_layout
+
+\begin_layout Subsubsection
+Eventos
+\end_layout
+
+\begin_layout Standard
+El API de ABMs provee eventos de uso común.
+ Su propósito es que sean usados en la comunicación de los distintos componentes
+ de ABM a través del bus de eventos.
+\end_layout
+
+\begin_layout Standard
+El evento ManageCrudEntitiesEvent puede utilizarse para notificar que se
+ desea administrar entidades de un tipo dado.
+ Típicamente se dispara desde un menú.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
+crud/manager/api/ManageCrudEntitiesEvent.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El evento EditCrudEntityEvent indica que una entidad dada debe ser editada.
+ Esto típicamente abrirá un formulario de ABM..
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
+crud/manager/api/EditCrudEntityEvent.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Cuando finaliza la edición, se puede lanzar un ModifiedCrudEntityEvent para
+ notificar que dicha instancia ha sido modificada.
+ Por ejemplo, el presentador de lista de ABM escucha este evento para actualizar
+ la lista.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
+crud/manager/api/ModifiedCrudEntityEvent.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finalmente, se puede disparar un ManageChildCrudEntitiesEvent para activar
+ un ABM de entidades dependientes (en una relación padre-hijo).
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
+crud/manager/api/ManageChildCrudEntitiesEvent.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Servicios de interfaz de usuario
+\end_layout
+
+\begin_layout Standard
+En el proyecto ar.com.oxen.nibiru.crud.ui.api se encuentran las interfaces para
+ vistas y presentadores de las pantallas de ABM.
+\end_layout
+
+\begin_layout Standard
+Dichas interfaces deben ser instanciadas por implementaciones del factory
+ de presentadores:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.crud.ui.api/src/main/java/ar/com/oxen/nibiru/crud/
+ui/api/CrudPresenterFactory.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+y del factory de vistas:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.crud.ui.api/src/main/java/ar/com/oxen/nibiru/crud/
+ui/api/CrudViewFactory.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Existe una implementación genérica que se encuentra en el proyecto ar.com.oxen.nibi
+ru.crud.ui.generic.
+\end_layout
+
+\begin_layout Subsection
+Utilidades
+\end_layout
+
+\begin_layout Standard
+El bundle ar.com.oxen.nibiru.crud.utils contiene clases genéricas de utilidad
+ para la creación de ABMs.
+ Esto inlcuye:
+\end_layout
+
+\begin_layout Itemize
+Implementaciones simples de CrudField y CrudAction.
+\end_layout
+
+\begin_layout Itemize
+Action extensions comunes.
+\end_layout
+
+\begin_layout Itemize
+Una clase base para configurar módulos de ABM (AbstractCrudModuleConfigurator).
+\end_layout
+
+\begin_layout Standard
+La clase AbstractCrudModuleConfigurator provee los siguientes métodos:
+\end_layout
+
+\begin_layout Itemize
+addCrud: Agrega un ABM independiente, que es activado desde el menú de la
+ aplicación.
+ El método registra los puntos de extensión para el menú y las acciones.
+ Además registra en el bus de eventos los listeners necesarios para navegación.
+\end_layout
+
+\begin_layout Itemize
+addChildCrud: Agrega un ABM hijo, que es disparado desde el menú contextual
+ del ABM padre.
+ De manera similar, regista las extensiones y los listeners necesarios.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.crud.utils/src/main/java/ar/com/oxen/nibiru/crud/
+utils/AbstractCrudModuleConfigurator.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.crud.bean contiene clases de utilidad para implementac
+iones de ABM que utilicen beans, como por ejemplo una implementación de
+ CrudEntity que delega en un bean (a través de BeanWrapper, de Oxen Java
+ Commons).
+ También tiene anotaciones para parametrizar el ABM directamente en el bean.
+\end_layout
+
+\begin_layout Section
+Reportes
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+TODO: Definir este módulo.
+\end_layout
+
+\begin_layout Section
+Workflow
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+TODO: Definir este módulo.
+\end_layout
+
+\begin_layout Section
+Bundles dinámicos
+\end_layout
+
+\begin_layout Standard
+El objetivo del mecanismo de bundles dinámicos es proveer, en conjunto con
+ el mecanismo de puntos de extensión, una forma de agregar o personalizar
+ funcionalidad al sistema mientras éste esté corriendo.
+\end_layout
+
+\begin_layout Standard
+OSGi ya provee un servicio para instalar bundles de manera dinámica.
+ La idea del módulo provisto por Nibiru es brindar un mecanismo para que
+ dichos bundles puedan ser almacenados en la base de datos y administrados
+ desde la misma aplicación.
+ Vale la pena notar que el servicio de Nibiru no es genérico, sino que está
+ pensado concretamente para OSGi.
+\end_layout
+
+\begin_layout Standard
+En conjunto con los distintos motores de scripting, es posible agregar funcional
+idad sin recompilar ningún bundle.
+\end_layout
+
+\begin_layout Subsection
+Persistencia
+\end_layout
+
+\begin_layout Standard
+El bundle ar.com.oxen.nibiru.dynamicbundle.domain contiene las clases de dominio
+ utilizadas para persistir bundles.
+ El bundle ar.com.oxen.nibiru.dynamicbundle.dao.api provee un 
+\begin_inset CommandInset href
+LatexCommand href
+name "DAO"
+target "http://es.wikipedia.org/wiki/Data_Access_Object"
+
+\end_inset
+
+ para leer y escribir dichas clases de dominio.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.dynamicbundle.dao.api/src/main/java/ar/com/oxen/ni
+biru/dynamicbundle/dao/api/DynamicBundleDao.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Actualmente hay una implementación JPA de dicho DAO: ar.com.oxen.nibiru.dynamicbundl
+e.dao.jpa.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+TODO: definir mejor el modelo de datos de bundles dinámicos.
+ Por ejemplo, sólo tiene dependencias por bundle, cuando en realidad es
+ mejor poner dependencias por paquete.
+ O también se podría pensar cómo hacer para que además de tener archivos
+ de Spring pueda tener código Java compilado (binario).
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+TODO: La persistencia no se podría hacer por el manager del módulo de ABMs?
+ Actualmente, para lo único que se está usando el DynamicBundleDao, desde
+ SpringDynamicBundleManager, es para leer todos los bundles e inicializarlos
+ al arrancar.
+\end_layout
+
+\begin_layout Subsection
+Negocio
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.dynamicbundle.manager.api provee la interfaz DynamicBun
+dleManager, que permite operar sobre bundles.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.dynamicbundle.manager.api/src/main/java/ar/com/oxe
+n/nibiru/dynamicbundle/manager/api/DynamicBundleManager.java}
+\end_layout
+
+\end_inset
+
+En ar.com.oxen.nibiru.dynamicbundle.manager.spring hay una implementación que
+ se basa en Spring DM para acceder al BundleContext.
+\end_layout
+
+\begin_layout Standard
+Para iniciar y detener servicios se utiliza el esquema de extensiones de
+ acciones provisto por el módulo de ABM.
+ La clase DynamicBundleStatusExtension del bundle ar.com.oxen.nibiru.dynamicbundle.mo
+dule provee CrudActions para iniciar y detener un servicio dado (delegando
+ en DynamicBundleManager).
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.dynamicbundle.module/src/main/java/ar/com/oxen/ni
+biru/dynamicbundle/module/DynamicBundleStatusExtension.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Interfaz de usuario
+\end_layout
+
+\begin_layout Standard
+En el bundle ar.com.oxen.nibiru.dynamicbundle.module se configuran los eventos
+ que activan los distintos presentadores y vistas.
+ No hay un proyecto específico para UI ya que se basa en los servicios de
+ UI provistos por el módulo de ABMs.
+\end_layout
+
+\begin_layout Section
+Log
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+TODO: Es necesario un servicio de log? o simplemente con commons loggin
+ o SLF4J alcanza? OSGi tiene un servicio de log, se podría hacer un adaptador
+ para SLF4J.
+ Y seguir la misma lógic que con transacciones, JPA y DataSource.
+ 
+\end_layout
+
+\begin_layout Part
+Licencia
+\end_layout
+
+\begin_layout Standard
+El framework es distribuido bajo licencia 
+\begin_inset CommandInset href
+LatexCommand href
+name "Apache 2.0"
+target "http://www.apache.org/licenses/LICENSE-2.0.html"
+
+\end_inset
+
+.
+\end_layout
+
+\end_body
+\end_document

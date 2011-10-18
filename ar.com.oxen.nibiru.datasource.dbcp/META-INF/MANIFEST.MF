@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: DBCP datasourcce implementation
+Bundle-SymbolicName: ar.com.oxen.nibiru.datasource.dbcp
+Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: javax.sql,
+ org.apache.commons.dbcp;version="1.2.2.osgi",
+ org.springframework.beans.factory.config;version="3.0.4.RELEASE"

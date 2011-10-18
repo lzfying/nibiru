@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Sprign custom scope for storing in session
+Bundle-SymbolicName: ar.com.oxen.nibiru.session.spring.scope
+Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: ar.com.oxen.nibiru.session.spring.scope
+Import-Package: ar.com.oxen.nibiru.session.api,
+ org.springframework.beans.factory,
+ org.springframework.beans.factory.config,
+ org.springframework.core;version="3.0.4.RELEASE"

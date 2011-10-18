@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Spring JPA service implementation
+Bundle-SymbolicName: ar.com.oxen.nibiru.jpa.spring
+Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: ar.com.oxen.nibiru.conversation.api,
+ ar.com.oxen.nibiru.session.api,
+ javax.persistence;version="1.0.0",
+ javax.sql,
+ javax.transaction,
+ org.springframework.orm.jpa;version="3.0.4.RELEASE"

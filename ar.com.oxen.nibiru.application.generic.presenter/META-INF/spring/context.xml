@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:osgi="http://www.springframework.org/schema/osgi" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
+    http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<osgi:service ref="applicationPresenterFactory"
+		interface="ar.com.oxen.nibiru.application.api.ApplicationPresenterFactory" />
+ 
+	<osgi:reference id="eventBus"
+		interface="ar.com.oxen.commons.eventbus.api.EventBus" />
+
+	<osgi:reference id="extensionPointManager"
+		interface="ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager" />
+
+	<osgi:reference id="authenticationService"
+		interface="ar.com.oxen.nibiru.security.api.AuthenticationService" />
+ 
+	<bean id="applicationPresenterFactory"
+		class="ar.com.oxen.nibiru.application.generic.presenter.GenericApplicationPresenterFactory">
+		<property name="extensionPointManager" ref="extensionPointManager" />
+		<property name="authenticationService" ref="authenticationService" />
+		<property name="eventBus" ref="eventBus" />
+	</bean>
+</beans>

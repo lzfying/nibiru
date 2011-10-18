@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: JPA configuration fragment
+Bundle-SymbolicName: ar.com.oxen.nibiru.sample.jpa.fragment
+Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Fragment-Host: ar.com.oxen.nibiru.jpa.spring;bundle-version="1.0.0.SNAPSHOT"
+Require-Bundle: com.springsource.org.hibernate;version="[3.3.2.GA,3.3.2.GA]",
+ com.springsource.org.hibernate.annotations.common;version="[3.3.0.ga,3.3.0.ga]",
+ com.springsource.antlr;bundle-version="2.7.6"
+Import-Package: ar.com.oxen.nibiru.dynamicbundle.domain,
+ org.h2;version="1.0.71"

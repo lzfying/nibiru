@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:osgi="http://www.springframework.org/schema/osgi" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
+    http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<osgi:service ref="messageProvider"
+		interface="ar.com.oxen.nibiru.i18n.api.MessageProvider" />
+
+	<osgi:reference id="eventBus"
+		interface="ar.com.oxen.commons.eventbus.api.EventBus" />
+
+	<osgi:reference id="wrapperFactory"
+		interface="ar.com.oxen.commons.bean.api.WrapperFactory" />
+
+	<osgi:reference id="extensionPointManager"
+		interface="ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager" />
+
+	<osgi:reference id="authenticationService"
+		interface="ar.com.oxen.nibiru.security.api.AuthenticationService" />
+ 
+	<osgi:reference id="applicationViewFactory"
+		interface="ar.com.oxen.nibiru.application.api.ApplicationViewFactory" />
+		
+	<osgi:reference id="applicationPresenterFactory"
+		interface="ar.com.oxen.nibiru.application.api.ApplicationPresenterFactory" />
+		
+	<bean init-method="startup" destroy-method="shutdown"
+		class="ar.com.oxen.nibiru.application.generic.ModuleConfigurator">
+		<property name="eventBus" ref="eventBus" />
+		<property name="viewFactory" ref="applicationViewFactory" />
+		<property name="presenterFactory" ref="applicationPresenterFactory" />
+		<property name="authenticationService" ref="authenticationService" />
+		<property name="extensionPointManager" ref="extensionPointManager" />
+	</bean>
+
+	<bean name="messageProvider" class="ar.com.oxen.nibiru.i18n.generic.ResourceBundleMessageProvider">
+		<property name="baseName" value="ar.com.oxen.nibiru.application.generic.messages"/>
+		<property name="resourceClassLoader">
+			<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+				<property name="targetObject">
+					<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+						<property name="staticMethod" value="java.lang.Thread.currentThread"/>
+						<property name="singleton" value="false"/>
+					</bean>
+				</property>
+				<property name="targetMethod" value="getContextClassLoader"/>
+				<property name="singleton" value="false"/>
+			</bean>
+		</property>
+	</bean>
+</beans>

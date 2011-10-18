@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
+    http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.0.xsd">
+
+	<osgi:reference id="dataSource" interface="javax.sql.DataSource" />
+
+	<osgi:reference id="conversationAccessor"
+		interface="ar.com.oxen.nibiru.conversation.api.ConversationAccessor" />
+
+	<osgi:service ref="entityManagerFactory" interface="javax.persistence.EntityManagerFactory" />
+
+	<bean id="entityManagerFactory"
+		class="ar.com.oxen.nibiru.jpa.spring.ConversationEntityManagerFactory">
+		<property name="decorated">
+			<bean
+				class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+				<property name="dataSource" ref="dataSource" />
+			</bean>
+		</property>
+		<property name="conversationAccessor" ref="conversationAccessor" />
+	</bean>
+</beans>

@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Dummy security implementation
+Bundle-SymbolicName: ar.com.oxen.nibiru.security.dummy
+Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: ar.com.oxen.commons.exception.api,
+ ar.com.oxen.nibiru.security.api
