@@ -4,7 +4,8 @@ Bundle-Name: Dynamic bundle module
 Bundle-SymbolicName: ar.com.oxen.nibiru.dynamicbundle.module
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: ar.com.oxen.commons.eventbus.api,
+Import-Package: ar.com.oxen.commons.bean.api,
+ ar.com.oxen.commons.eventbus.api,
  ar.com.oxen.nibiru.crud.manager.api,
  ar.com.oxen.nibiru.crud.manager.jpa,
  ar.com.oxen.nibiru.crud.ui.api,
