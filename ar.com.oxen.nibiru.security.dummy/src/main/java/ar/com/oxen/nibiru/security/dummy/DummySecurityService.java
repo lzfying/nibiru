@@ -9,10 +9,9 @@ public class DummySecurityService implements AuthenticationService,
 
 	@Override
 	public void login(String user, String password) {
-		if (!"pepe".equals(user) || !"popo".equals(password)) {
+		if (!"guest".equals(user) || !"guest".equals(password)) {
 			throw new BadCredentialsException();
 		}
-		System.out.println("- El usuario ingreso al sistema");
 	}
 
 	@Override
@@ -22,13 +21,12 @@ public class DummySecurityService implements AuthenticationService,
 
 	@Override
 	public boolean isCallerInRole(String role) {
-		System.out.println("- Se pregunto si el usuario tiene rol " + role);
 		return true;
 	}
 
 	@Override
 	public String getLoggedUserName() {
-		return "pepe";
+		return "guest";
 	}
 
 }
