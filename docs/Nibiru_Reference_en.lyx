@@ -68,6 +68,16 @@
 Nibiru Reference
 \end_layout
 
+\begin_layout Standard
+\begin_inset CommandInset href
+LatexCommand href
+target "http://code.google.com/p/nibiru/"
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Part
 Introduction
 \end_layout
@@ -342,14 +352,23 @@ target "http://maven.apache.org/"
 \end_layout
 
 \begin_layout Enumerate
-A SVN client (
+A GIT client (
 \begin_inset CommandInset href
 LatexCommand href
-target "http://subversion.tigris.org/"
+target "http://git-scm.com/"
 
 \end_inset
 
 ).
+ We use 
+\begin_inset CommandInset href
+LatexCommand href
+name "EGit"
+target "http://eclipse.org/egit/"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -357,14 +376,15 @@ Installation
 \end_layout
 
 \begin_layout Enumerate
-Checkout the Target Platform project from: 
+Clone the project as explained in 
 \begin_inset CommandInset href
 LatexCommand href
-target "http://servidor.oxen.com.ar/svn/oxen/nibiru/trunk/ar.com.oxen.nibiru.targetplatform/"
+name "http://code.google.com/p/nibiru/source/checkout"
+target "http://code.google.com/p/nibiru/source/checkout"
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Enumerate
@@ -376,13 +396,25 @@ mvn eclipse:eclipse
 \begin_inset Quotes erd
 \end_inset
 
- in order to build the Eclipse project from Maven files and downloading
- target platform JARS.
+ from root directory in order to build the Eclipse project from Maven files
+ and downloading target platform JARS.
  
 \end_layout
 
 \begin_layout Enumerate
-Import the project into Eclipse.
+Go to ar.com.oxen.sample/ar.com.oxen.sample.targetplatform and run 
+\begin_inset Quotes eld
+\end_inset
+
+mvn compile
+\begin_inset Quotes erd
+\end_inset
+
+ in order to build the target platform from Maven dependencies.
+\end_layout
+
+\begin_layout Enumerate
+Import the projects into Eclipse.
 \end_layout
 
 \begin_layout Enumerate
@@ -400,29 +432,23 @@ reload
 
 \begin_layout Enumerate
 Run the OSGi application launch called "Nibiru Test".
+ By default, Eclipse adds all the plugin (OSGi) projects which are open
+ in the workspace, so even if there is a JAR with the same module, the source
+ project takes precedence.
 \end_layout
 
 \begin_layout Standard
-For developers:
-\end_layout
-
-\begin_layout Enumerate
-Checkout the the project that you are going to modify.
- All the projects can be found under 
+If you don't want to download the full source code, you can run it downloading
+ a precompiled sample app: 
 \begin_inset CommandInset href
 LatexCommand href
-target "http://servidor.oxen.com.ar/svn/oxen/nibiru/trunk"
+target "http://nibiru.googlecode.com/files/sampleapp.zip"
 
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Enumerate
-Run the OSGi application launch called "Nibiru Test".
- By default, Eclipse adds all the plugin (OSGi) projects which are open
- in the workspace, so even if there is a JAR with the same module, the source
- project takes precedence.
+ Although the sample app is packaged, you must build the target platform
+ and run it from Eclipse.
 \end_layout
 
 \begin_layout Subsection
@@ -430,9 +456,39 @@ Sample project
 \end_layout
 
 \begin_layout Standard
+Running the sample application will create an 
+\begin_inset CommandInset href
+LatexCommand href
+name "H2 database"
+target "http://www.h2database.com/"
 
-\emph on
-TODO: Armar un proyecto de ejemplo
+\end_inset
+
+ in a directory called nibiruDb inside your home directory.
+ Windows users should modify the ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.data
+source.fragment/src/main/resources/database.properties file in order to specify
+ the database location.
+\end_layout
+
+\begin_layout Standard
+The sample application uses a dummy authentication service.
+ Log-in with user 
+\begin_inset Quotes eld
+\end_inset
+
+guest
+\begin_inset Quotes erd
+\end_inset
+
+, password 
+\begin_inset Quotes eld
+\end_inset
+
+guest
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
