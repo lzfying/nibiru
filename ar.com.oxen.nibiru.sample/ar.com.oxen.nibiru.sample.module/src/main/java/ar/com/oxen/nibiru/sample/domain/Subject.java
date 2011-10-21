@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import ar.com.oxen.nibiru.crud.bean.annotation.Action;
 import ar.com.oxen.nibiru.crud.bean.annotation.Actions;
@@ -31,7 +32,13 @@ public class Subject {
 
 	@Column
 	@Show(order = 20)
+	@Widget(type = WidgetType.TEXT_AREA, maxLength = 4000)
 	private String description;
+
+	@ManyToOne
+	@Show(order = 30)
+	@Widget(type = WidgetType.COMBO_BOX, valuesFilterExpression = "'subject.id = ' + id")
+	private Course mainCourse;
 
 	public Integer getId() {
 		return id;
@@ -55,6 +62,14 @@ public class Subject {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Course getMainCourse() {
+		return mainCourse;
+	}
+
+	public void setMainCourse(Course mainCourse) {
+		this.mainCourse = mainCourse;
 	}
 
 	@Override

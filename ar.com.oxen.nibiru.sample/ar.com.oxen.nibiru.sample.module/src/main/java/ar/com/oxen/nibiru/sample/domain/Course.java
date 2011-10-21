@@ -1,9 +1,14 @@
 package ar.com.oxen.nibiru.sample.domain;
 
+import java.util.Date;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import ar.com.oxen.nibiru.crud.bean.annotation.Action;
 import ar.com.oxen.nibiru.crud.bean.annotation.Actions;
@@ -29,6 +34,17 @@ public class Course {
 	@Show(order = 10)
 	private String name;
 
+	@ManyToOne
+	private Subject subject;
+
+	@Column
+	@Show(order = 30)
+	private Date startDate;
+
+	@ManyToMany
+	@Show(order = 40, inList = false)
+	private Set<Student> students;
+
 	public Integer getId() {
 		return id;
 	}
@@ -43,6 +59,30 @@ public class Course {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Subject getSubject() {
+		return subject;
+	}
+
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Set<Student> getStudents() {
+		return students;
+	}
+
+	public void setStudents(Set<Student> students) {
+		this.students = students;
 	}
 
 	@Override

@@ -30,11 +30,9 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 		this.addCrudWithMenu("sample.crud.subject", MENU_EXTENSION,
 				this.subjectCrudManager, this.subjectCrudActionExtension);
 
-		// this.addChildCrudWithMenu("editarVideos", this.libroCrudManager,
-		// "libro", this.videoCrudManager, this.videoCrudActionExtension);
-
-		this.addCrudWithMenu("sample.crud.course", MENU_EXTENSION,
-				this.courseCrudManager, this.courseCrudActionExtension);
+		this.addChildCrudWithMenu("editCourses", this.subjectCrudManager,
+				"subject", this.courseCrudManager,
+				this.courseCrudActionExtension);
 
 		this.addCrudWithMenu("sample.crud.student", MENU_EXTENSION,
 				this.studentCrudManager, this.studentCrudActionExtension);

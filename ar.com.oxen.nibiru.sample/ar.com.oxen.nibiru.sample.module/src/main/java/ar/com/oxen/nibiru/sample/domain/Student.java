@@ -1,9 +1,13 @@
 package ar.com.oxen.nibiru.sample.domain;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 import ar.com.oxen.nibiru.crud.bean.annotation.Action;
 import ar.com.oxen.nibiru.crud.bean.annotation.Actions;
@@ -29,6 +33,11 @@ public class Student {
 	@Show(order = 10)
 	private String name;
 
+	@ManyToMany(mappedBy = "students")
+	@Show(order = 30, inList = false)
+	@Widget(type = WidgetType.MULTISELECT, tab = "courses")
+	private Set<Course> courses;
+
 	public Integer getId() {
 		return id;
 	}
@@ -43,6 +52,14 @@ public class Student {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Set<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(Set<Course> courses) {
+		this.courses = courses;
 	}
 
 	@Override
