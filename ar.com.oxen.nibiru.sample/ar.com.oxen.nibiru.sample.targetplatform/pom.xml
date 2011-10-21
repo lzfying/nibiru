@@ -15,6 +15,11 @@
 		<!-- Nibiru sample project dependencies -->
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.sample</groupId>
+			<artifactId>ar.com.oxen.nibiru.sample.module</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.sample</groupId>
 			<artifactId>ar.com.oxen.nibiru.sample.datasource.fragment</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>

@@ -6,6 +6,9 @@
 	<persistence-unit name="nibiruPersistenceUnit"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>ar.com.oxen.nibiru.sample.domain.Subject</class>
+		<class>ar.com.oxen.nibiru.sample.domain.Course</class>
+		<class>ar.com.oxen.nibiru.sample.domain.Student</class>
 		<class>ar.com.oxen.nibiru.dynamicbundle.domain.DynamicBundle</class>
 		<class>ar.com.oxen.nibiru.dynamicbundle.domain.BundleReference</class>
 		<properties>

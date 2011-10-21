@@ -6,6 +6,7 @@ Bundle-Version: 1.0.0.SNAPSHOT
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Fragment-Host: ar.com.oxen.nibiru.jpa.spring;bundle-version="1.0.0.SNAPSHOT"
 Import-Package: ar.com.oxen.nibiru.dynamicbundle.domain,
+ ar.com.oxen.nibiru.sample.domain,
  org.h2;version="1.0.71",
  org.hibernate;version="3.3.2.GA",
  org.hibernate.ejb;version="3.4.0.GA-A"
