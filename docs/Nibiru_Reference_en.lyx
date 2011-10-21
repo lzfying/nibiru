@@ -92,7 +92,7 @@ The framework objective is to facilitate the building of modular applications.
 \end_layout
 
 \begin_layout Itemize
-Providing an abstraction layer of the different technologies used to avoid
+Providing an abstraction layer over different technologies in order to avoid
  coupling.
 \end_layout
 
