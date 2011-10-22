@@ -71,7 +71,7 @@ Nibiru Reference
 \begin_layout Standard
 \begin_inset CommandInset href
 LatexCommand href
-target "http://code.google.com/p/nibiru/"
+target "http://nibiru.googlecode.com"
 
 \end_inset
 
@@ -402,7 +402,9 @@ mvn eclipse:eclipse
 \end_layout
 
 \begin_layout Enumerate
-Go to ar.com.oxen.sample/ar.com.oxen.sample.targetplatform and run 
+A target platform, with all the dependencies, will be created in ar.com.oxen.sample
+/ar.com.oxen.sample.targetplatform/target/platform.
+ If not (or if you change the dependencies) go to that project and run 
 \begin_inset Quotes eld
 \end_inset
 
@@ -410,15 +412,25 @@ mvn compile
 \begin_inset Quotes erd
 \end_inset
 
- in order to build the target platform from Maven dependencies.
+ in order to rebuild the target platform from Maven dependencies.
 \end_layout
 
 \begin_layout Enumerate
 Import the projects into Eclipse.
+ You must create a M2_REPO classpath variable pointing to the m2/repository
+ directory in your home directory.
 \end_layout
 
 \begin_layout Enumerate
-At preferences menu, activate the Nibiru target platform.
+At preferences menu, activate the 
+\begin_inset Quotes eld
+\end_inset
+
+Nibiru Sample
+\begin_inset Quotes erd
+\end_inset
+
+ target platform.
  Select 
 \begin_inset Quotes eld
 \end_inset
@@ -431,7 +443,7 @@ reload
 \end_layout
 
 \begin_layout Enumerate
-Run the OSGi application launch called "Nibiru Test".
+Run the OSGi application launch called "Nibiru Sample".
  By default, Eclipse adds all the plugin (OSGi) projects which are open
  in the workspace, so even if there is a JAR with the same module, the source
  project takes precedence.
@@ -448,7 +460,8 @@ target "http://nibiru.googlecode.com/files/sampleapp.zip"
 
 .
  Although the sample app is packaged, you must build the target platform
- and run it from Eclipse.
+ from the project, as explained before.
+ After that, just import the existing Eclipse project.
 \end_layout
 
 \begin_layout Subsection

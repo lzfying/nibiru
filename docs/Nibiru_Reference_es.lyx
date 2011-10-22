@@ -71,7 +71,7 @@ Referencia Nibiru
 \begin_layout Standard
 \begin_inset CommandInset href
 LatexCommand href
-target "http://code.google.com/p/nibiru/"
+target "http://nibiru.googlecode.com"
 
 \end_inset
 
@@ -426,16 +426,29 @@ mvn eclipse:eclipse
 \end_layout
 
 \begin_layout Enumerate
-Vaya a ar.com.oxen.sample/ar.com.oxen.sample.targetplatform y ejecute “mvn compile”
- a fin de crear el target platform a partir de las dependencias Maven.
+Esto creará un directorio ar.com.oxen.sample/ar.com.oxen.sample.targetplatform/target/p
+latform con todos las dependencias del proyecto.
+ Si no ocurre (o si se cambian las dependencias en algún momento), vaya
+ a ese proyecto y ejecute “mvn compile” a fin de crear el target platform
+ a partir de las dependencias Maven.
 \end_layout
 
 \begin_layout Enumerate
 Importar los proyectos creados desde Eclipse.
+ Se debe crear una variable de classpath M2_REPO apuntando al directorio
+ m2/repository que se generó en su home directory.
 \end_layout
 
 \begin_layout Enumerate
-En preferencias, activar el target platform de Nibiru.
+En preferencias, activar el target platform 
+\begin_inset Quotes eld
+\end_inset
+
+Nibiru Sample
+\begin_inset Quotes erd
+\end_inset
+
+.
  Seleccionar la opción 
 \begin_inset Quotes eld
 \end_inset
@@ -452,7 +465,7 @@ Ejecutar el launch de aplicación OSGi que se llama
 \begin_inset Quotes eld
 \end_inset
 
-Nibiru Test
+Nibiru Sample
 \begin_inset Quotes erd
 \end_inset
 
@@ -473,7 +486,8 @@ target "http://nibiru.googlecode.com/files/sampleapp.zip"
 
 .
  Aunque la aplicación ya esté empaquetada, se debe crear el target platform
- y se debe ejecutar desde Eclipse.
+ desde el proyecto mismo.
+ Después de eso, simplemente hay que importar el proyecto Eclipse.
 \end_layout
 
 \begin_layout Subsection
