@@ -7,7 +7,6 @@ import java.util.Date;
 
 import com.vaadin.event.FieldEvents;
 import com.vaadin.event.FieldEvents.BlurEvent;
-import com.vaadin.event.FieldEvents.TextChangeEvent;
 import com.vaadin.ui.TextField;
 
 public class TimeFieldAdapter extends AbstractFieldAdapter<Date, TextField>
