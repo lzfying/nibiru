@@ -44,20 +44,20 @@ public abstract class AbstractGenericCrudPresenter<V extends View> extends
 					}
 				});
 
-		this.getEventBus().fireEvent(new ModifiedCrudEntityEvent(entity),
+		this.getEventBus().fireEvent(
+				new ModifiedCrudEntityEvent(entity.getId()),
 				this.crudManager.getEntityTypeName());
 
 		if (returnedEntity != null) {
 			this.onReturnedEntity(returnedEntity);
 			this.getEventBus().fireEvent(
-					new EditCrudEntityEvent(returnedEntity, this
-							.getConversation()),
+					new EditCrudEntityEvent(returnedEntity,
+							this.getConversation()),
 					this.crudManager.getEntityTypeName());
 		}
 	}
-	
+
 	protected abstract <K> void onReturnedEntity(CrudEntity<K> returnedEntity);
-	
 
 	protected CrudManager<?> getCrudManager() {
 		return crudManager;

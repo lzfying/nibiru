@@ -8,10 +8,17 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudField;
 
 public abstract class AbstractBeanCrudEntity<T> implements CrudEntity<T> {
 	private BeanWrapper<T> bean;
+	private String pkName;
 
-	public AbstractBeanCrudEntity(BeanWrapper<T> bean) {
+	public AbstractBeanCrudEntity(BeanWrapper<T> bean, String pkName) {
 		super();
 		this.bean = bean;
+		this.pkName = pkName;
+	}
+
+	@Override
+	public Object getId() {
+		return this.getValue(this.pkName);
 	}
 
 	@Override

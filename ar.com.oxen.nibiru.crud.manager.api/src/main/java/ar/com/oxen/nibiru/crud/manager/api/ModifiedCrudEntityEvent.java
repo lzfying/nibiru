@@ -1,14 +1,14 @@
 package ar.com.oxen.nibiru.crud.manager.api;
 
 public class ModifiedCrudEntityEvent {
-	private CrudEntity<?> entity;
+	private Object id;
 
-	public ModifiedCrudEntityEvent(CrudEntity<?> entity) {
+	public ModifiedCrudEntityEvent(Object id) {
 		super();
-		this.entity = entity;
+		this.id = id;
 	}
 
-	public CrudEntity<?> getCrudEntity() {
-		return entity;
+	public Object getId() {
+		return id;
 	}
 }

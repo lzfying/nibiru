@@ -18,8 +18,8 @@ import ar.com.oxen.nibiru.crud.bean.manager.AbstractBeanCrudEntity;
 public class JpaCrudEntity<T> extends AbstractBeanCrudEntity<T> {
 	private EntityManager entityManager;
 
-	public JpaCrudEntity(BeanWrapper<T> bean, EntityManager entityManager) {
-		super(bean);
+	public JpaCrudEntity(BeanWrapper<T> bean, EntityManager entityManager, String pkName) {
+		super(bean, pkName);
 		this.entityManager = entityManager;
 	}
 

@@ -9,6 +9,13 @@ package ar.com.oxen.nibiru.crud.manager.api;
  */
 public interface CrudEntity<T> {
 	/**
+	 * Reads the id value.
+	 * 
+	 * @return The id
+	 */
+	Object getId();
+
+	/**
 	 * Reads a field value.
 	 * 
 	 * @param field

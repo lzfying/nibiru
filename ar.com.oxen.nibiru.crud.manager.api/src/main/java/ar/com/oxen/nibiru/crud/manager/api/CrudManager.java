@@ -42,6 +42,13 @@ public interface CrudManager<T> {
 	List<CrudEntity<T>> findAll();
 
 	/**
+	 * Finds an entity by its ID.
+	 * 
+	 * @return The entity
+	 */
+	CrudEntity<T> findById(Object id);
+	
+	/**
 	 * Reads entities filtering by a given field. Useful for parent-child
 	 * relations
 	 * 

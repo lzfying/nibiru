@@ -56,7 +56,7 @@ public abstract class AbstractGenericCrudListPresenter extends
 		this.modifiedEventHandler = new EventHandler<ModifiedCrudEntityEvent>() {
 			@Override
 			public void onEvent(ModifiedCrudEntityEvent event) {
-				refreshData();
+				refreshEntity(event.getId());
 			}
 		};
 
@@ -65,9 +65,30 @@ public abstract class AbstractGenericCrudListPresenter extends
 	}
 
 	private void refreshData() {
-		this.getView().clearTable();
 		this.entities.clear();
 
+		for (CrudEntity<?> entity : this.findEntities()) {
+			this.entities.add(entity);
+		}
+
+		this.refreshTable();
+	}
+
+	private void refreshEntity(Object id) {
+		CrudEntity<?> entity = this.getCrudManager().findById(id);
+
+		for (int n = 0; n < this.entities.size(); n++) {
+			if (this.entities.get(n).getId().equals(id)) {
+				this.entities.set(n, entity);
+				break;
+			}
+		}
+		this.refreshTable();
+
+	}
+
+	private void refreshTable() {
+		this.getView().clearTable();
 		List<CrudField> fields = this.getConversation().execute(
 				new ConversationCallback<List<CrudField>>() {
 					@Override
@@ -76,21 +97,19 @@ public abstract class AbstractGenericCrudListPresenter extends
 						return getCrudManager().getListFields();
 					}
 				});
-
 		for (CrudField field : fields) {
 			this.getView().addColumn(field.getName(), field.getType(),
 					field.getListInfo().getColumnWidth());
 		}
 
-		for (CrudEntity<?> entity : this.findEntities()) {
-			this.entities.add(entity);
-
+		for (CrudEntity<?> entity : this.entities) {
 			Object[] values = new Object[fields.size()];
 			for (int n = 0; n < values.length; n++) {
 				values[n] = entity.getValue(fields.get(n));
 			}
 			this.getView().addRow(values);
 		}
+
 	}
 
 	protected abstract <K> List<CrudEntity<K>> findEntities();

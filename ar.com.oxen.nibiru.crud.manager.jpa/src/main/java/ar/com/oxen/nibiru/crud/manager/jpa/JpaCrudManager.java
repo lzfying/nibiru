@@ -1,5 +1,6 @@
 package ar.com.oxen.nibiru.crud.manager.jpa;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -9,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
@@ -34,6 +36,7 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 	private EntityManager entityManager;
 	private Class<T> persistentClass;
 	private WrapperFactory wrapperFactory;
+	private String pkName;
 
 	@Override
 	public String getEntityTypeName() {
@@ -140,6 +143,13 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 		return this.beansToCrudEntities(beans);
 	}
 
+	@Override
+	public CrudEntity<T> findById(Object id) {
+		T bean = this.entityManager.find(this.persistentClass, id);
+		this.entityManager.refresh(bean);
+		return this.beanToCrudEntity(bean);
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CrudEntity<T>> findByfield(String field, Object value) {
@@ -172,8 +182,9 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 	@Override
 	public CrudEntity<T> performAction(CrudAction action, CrudEntity<T> entity) {
 		if (CrudAction.NEW.equals(action.getName())) {
-			return new JpaCrudEntity<T>(this.wrapperFactory
-					.wrapNewBean(this.persistentClass), this.entityManager);
+			return new JpaCrudEntity<T>(
+					this.wrapperFactory.wrapNewBean(this.persistentClass),
+					this.entityManager, this.pkName);
 		} else if (CrudAction.EDIT.equals(action.getName())) {
 			return entity;
 		} else if (CrudAction.UPDATE.equals(action.getName())) {
@@ -202,19 +213,30 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 	}
 
 	private <K> List<CrudEntity<K>> beansToCrudEntities(List<K> beans) {
-		List<CrudEntity<K>> crudEntities = new ArrayList<CrudEntity<K>>(beans
-				.size());
+		List<CrudEntity<K>> crudEntities = new ArrayList<CrudEntity<K>>(
+				beans.size());
 		for (K bean : beans) {
-			crudEntities.add(new JpaCrudEntity<K>(this.wrapperFactory
-					.wrapBean(bean), this.entityManager));
+			crudEntities.add(this.beanToCrudEntity(bean));
 		}
 
 		return crudEntities;
 	}
 
+	private <K> CrudEntity<K> beanToCrudEntity(K bean) {
+		return new JpaCrudEntity<K>(this.wrapperFactory.wrapBean(bean),
+				this.entityManager, this.pkName);
+	}
+
 	/* Setters */
 	public void setPersistentClass(Class<T> persistentClass) {
 		this.persistentClass = persistentClass;
+
+		for (Field field : persistentClass.getDeclaredFields()) {
+			if (field.isAnnotationPresent(Id.class)) {
+				this.pkName = field.getName();
+				break;
+			}
+		}
 	}
 
 	public void setWrapperFactory(WrapperFactory wrapperFactory) {
