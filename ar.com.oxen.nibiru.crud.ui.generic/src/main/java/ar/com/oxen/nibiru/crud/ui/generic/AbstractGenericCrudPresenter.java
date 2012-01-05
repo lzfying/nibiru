@@ -44,9 +44,11 @@ public abstract class AbstractGenericCrudPresenter<V extends View> extends
 					}
 				});
 
-		this.getEventBus().fireEvent(
-				new ModifiedCrudEntityEvent(entity.getId()),
-				this.crudManager.getEntityTypeName());
+		if (entity != null) {
+			this.getEventBus().fireEvent(
+					new ModifiedCrudEntityEvent(entity.getId()),
+					this.crudManager.getEntityTypeName());
+		}
 
 		if (returnedEntity != null) {
 			this.onReturnedEntity(returnedEntity);

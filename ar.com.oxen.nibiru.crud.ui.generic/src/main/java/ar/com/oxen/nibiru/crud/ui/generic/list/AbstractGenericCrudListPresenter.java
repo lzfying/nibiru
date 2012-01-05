@@ -75,16 +75,19 @@ public abstract class AbstractGenericCrudListPresenter extends
 	}
 
 	private void refreshEntity(Object id) {
-		CrudEntity<?> entity = this.getCrudManager().findById(id);
+		if (id != null) {
+			CrudEntity<?> entity = this.getCrudManager().findById(id);
 
-		for (int n = 0; n < this.entities.size(); n++) {
-			if (this.entities.get(n).getId().equals(id)) {
-				this.entities.set(n, entity);
-				break;
+			for (int n = 0; n < this.entities.size(); n++) {
+				if (this.entities.get(n).getId().equals(id)) {
+					this.entities.set(n, entity);
+					break;
+				}
+				this.refreshTable();
 			}
+		} else {
+			this.refreshData();
 		}
-		this.refreshTable();
-
 	}
 
 	private void refreshTable() {
