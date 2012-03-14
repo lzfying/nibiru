@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ar.com.oxen.nibiru</groupId>
 	<artifactId>ar.com.oxen.nibiru</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>0.1</version>
 	<packaging>pom</packaging>
 	<name>Nibiru</name>
 	<repositories>
@@ -138,5 +138,10 @@
 			<name>servidor.oxen.com.ar-snapshots</name>
 			<url>http://servidor.oxen.com.ar/artifactory/libs-snapshot-local</url>
 		</snapshotRepository>
+		<repository>
+			<id>servidor.oxen.com.ar</id>
+			<name>servidor.oxen.com.ar-release</name>
+			<url>http://servidor.oxen.com.ar/artifactory/libs-release-local</url>
+		</repository>
 	</distributionManagement>
 </project>

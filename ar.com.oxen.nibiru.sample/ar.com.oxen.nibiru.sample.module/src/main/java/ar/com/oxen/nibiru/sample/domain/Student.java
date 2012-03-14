@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 
 import ar.com.oxen.nibiru.crud.bean.annotation.Action;
 import ar.com.oxen.nibiru.crud.bean.annotation.Actions;
@@ -21,7 +20,7 @@ import ar.com.oxen.nibiru.crud.manager.api.WidgetType;
 		@Action(name = CrudAction.NEW, requiresEntity = false, showInForm = false),
 		@Action(name = CrudAction.EDIT, requiresEntity = true, showInForm = false),
 		@Action(name = CrudAction.UPDATE, requiresEntity = true, showInList = false),
-		@Action(name = CrudAction.DELETE, requiresEntity = true, showInForm = false, requiresConfirmation = true), })
+		@Action(name = CrudAction.DELETE, requiresEntity = true, showInForm = false, requiresConfirmation = true) })
 public class Student {
 	@Id
 	@GeneratedValue

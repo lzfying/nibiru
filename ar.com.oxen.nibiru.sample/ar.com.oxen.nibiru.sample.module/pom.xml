@@ -6,11 +6,11 @@
 	<parent>
 		<artifactId>ar.com.oxen.nibiru.sample</artifactId>
 		<groupId>ar.com.oxen.nibiru</groupId>
-		<version>1.0-SNAPSHOT</version>
+		<version>0.1</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru.sample</groupId>
 	<artifactId>ar.com.oxen.nibiru.sample.module</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>0.1</version>
 	<name>ar.com.oxen.nibiru.sample.module</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -20,37 +20,37 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru</groupId>
 			<artifactId>ar.com.oxen.nibiru.crud.bean</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru</groupId>
 			<artifactId>ar.com.oxen.nibiru.crud.manager.api</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru</groupId>
 			<artifactId>ar.com.oxen.nibiru.module.utils</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru</groupId>
 			<artifactId>ar.com.oxen.nibiru.crud.ui.api</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru</groupId>
 			<artifactId>ar.com.oxen.nibiru.crud.utils</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru</groupId>
 			<artifactId>ar.com.oxen.nibiru.ui.utils</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru</groupId>
 			<artifactId>ar.com.oxen.nibiru.extensionpoint.api</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.persistence</groupId>

@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>ar.com.oxen.nibiru</artifactId>
 		<groupId>ar.com.oxen.nibiru</groupId>
-		<version>1.0-SNAPSHOT</version>
+		<version>0.1</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru</groupId>
 	<artifactId>ar.com.oxen.nibiru.conversation.generic</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>0.1</version>
 	<name>ar.com.oxen.nibiru.conversation.generic</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -18,7 +18,7 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru</groupId>
 			<artifactId>ar.com.oxen.nibiru.conversation.api</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>0.1</version>
 		</dependency>
 	</dependencies>
 </project>
