@@ -1,8 +1,9 @@
 package ar.com.oxen.nibiru.ui.api.view;
 
 import ar.com.oxen.nibiru.ui.api.mvp.HasValue;
+import ar.com.oxen.nibiru.validation.api.Validatable;
 
-public interface FormField<T> extends Component, HasValue<T> {
+public interface FormField<T> extends Component, HasValue<T>, Validatable<T> {
 	String getCaption();
 
 	void setCaption(String caption);

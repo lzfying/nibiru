@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Generic CRUD UI
 Bundle-SymbolicName: ar.com.oxen.nibiru.crud.ui.generic
-Bundle-Version: 0.1.0
+Bundle-Version: 0.2.0.SNAPSHOT
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: ar.com.oxen.commons.eventbus.api,
  ar.com.oxen.nibiru.conversation.api,
@@ -15,4 +15,5 @@ Import-Package: ar.com.oxen.commons.eventbus.api,
  ar.com.oxen.nibiru.ui.api.mvp,
  ar.com.oxen.nibiru.ui.api.view,
  ar.com.oxen.nibiru.ui.utils.mvp,
- ar.com.oxen.nibiru.ui.utils.view
+ ar.com.oxen.nibiru.ui.utils.view,
+ ar.com.oxen.nibiru.validation.api

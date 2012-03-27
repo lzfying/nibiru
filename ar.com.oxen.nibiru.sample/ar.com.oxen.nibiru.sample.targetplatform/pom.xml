@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>ar.com.oxen.nibiru.sample</artifactId>
 		<groupId>ar.com.oxen.nibiru</groupId>
-		<version>0.1</version>
+		<version>0.2-SNAPSHOT</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru.sample</groupId>
 	<artifactId>ar.com.oxen.nibiru.sample.targetplatform</artifactId>
-	<version>0.1</version>
+	<version>0.2-SNAPSHOT</version>
 	<name>ar.com.oxen.nibiru.sample.targetplatform</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.sample</groupId>
 			<artifactId>ar.com.oxen.nibiru.sample.module</artifactId>
-			<version>0.1</version>
+			<version>0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.sample</groupId>
@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru</groupId>
 			<artifactId>ar.com.oxen.nibiru.targetplatform</artifactId>
-			<version>0.1</version>
+			<version>0.2-SNAPSHOT</version>
 		</dependency>
 		<!-- Non-core Nibiru dependencies -->
 		<dependency>

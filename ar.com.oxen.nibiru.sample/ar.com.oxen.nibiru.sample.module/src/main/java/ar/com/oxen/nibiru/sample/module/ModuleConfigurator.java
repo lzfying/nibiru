@@ -8,6 +8,8 @@ import ar.com.oxen.nibiru.sample.domain.Student;
 import ar.com.oxen.nibiru.sample.domain.Subject;
 import ar.com.oxen.nibiru.ui.api.extension.SubMenuExtension;
 import ar.com.oxen.nibiru.ui.utils.extension.SimpleSubMenuExtension;
+import ar.com.oxen.nibiru.validation.api.Validator;
+import ar.com.oxen.nibiru.validation.generic.RegexpValidator;
 
 public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 	private static final String MENU_EXTENSION = "ar.com.oxen.nibiru.menu.sample.crud";
@@ -36,6 +38,9 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 
 		this.addCrudWithMenu("sample.crud.student", MENU_EXTENSION,
 				this.studentCrudManager, this.studentCrudActionExtension);
+		
+		this.registerExtension(new RegexpValidator("^Mat.*", "explded"),
+				Subject.class.getName() + ".name", Validator.class);
 	}
 
 	public void setSubjectCrudManager(CrudManager<Subject> subjectCrudManager) {

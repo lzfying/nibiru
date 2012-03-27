@@ -12,6 +12,7 @@ import ar.com.oxen.nibiru.crud.ui.generic.AbstractGenericCrudPresenter;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionTracker;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
+import ar.com.oxen.nibiru.validation.api.Validator;
 
 public class GenericCrudFormPresenter extends
 		AbstractGenericCrudPresenter<CrudFormView> {
@@ -30,6 +31,7 @@ public class GenericCrudFormPresenter extends
 
 		this.configureClose(this.getView());
 
+		// TOOD: Falta des-registrar el tracker cuando se cierra el presenter!!
 		this.getExtensionPointManager().registerTracker(
 				new ExtensionTracker<CrudActionExtension<?>>() {
 
@@ -45,17 +47,36 @@ public class GenericCrudFormPresenter extends
 
 				}, this.getTopic(), CrudActionExtension.class);
 
-		for (CrudField field : this.getCrudManager().getFormFields()) {
+		for (final CrudField field : this.getCrudManager().getFormFields()) {
 			Object value = this.entity.getValue(field);
+			
+			/* Readonly and null fields (i.e. IDs) are not shown */
 			if (value != null || !field.getFormInfo().isReadonly()) {
 				this.getView().addField(field, this.entity);
 
 				if (value != null) {
 					this.getView().setFieldValue(field.getName(), value);
 				}
+				
+				/* Register validator tracker for this field */
+				// TOOD: Falta des-registrar el tracker cuando se cierra el presenter!!
+				this.getExtensionPointManager().registerTracker(
+						new ExtensionTracker<Validator<?>>() {
+							@Override
+							public void onRegister(Validator<?> validator) {
+								getView().addValidator(field.getName(),
+										validator);
+							}
+
+							@Override
+							public void onUnregister(Validator<?> validator) {
+								getView().removeValidator(field.getName(),
+										validator);
+							}
+						}, this.getTopic() + "." + field.getName(),
+						Validator.class);
 			}
 		}
-
 	}
 
 	private void addActions(final CrudActionExtension<?> extension) {

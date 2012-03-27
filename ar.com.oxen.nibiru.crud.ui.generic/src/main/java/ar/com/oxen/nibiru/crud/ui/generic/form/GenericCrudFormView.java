@@ -20,6 +20,7 @@ import ar.com.oxen.nibiru.ui.api.view.TextField;
 import ar.com.oxen.nibiru.ui.api.view.ViewFactory;
 import ar.com.oxen.nibiru.ui.api.view.Window;
 import ar.com.oxen.nibiru.ui.utils.view.AbstractWindowViewAdapter;
+import ar.com.oxen.nibiru.validation.api.Validator;
 
 public class GenericCrudFormView extends AbstractWindowViewAdapter<Window>
 		implements CrudFormView {
@@ -176,5 +177,17 @@ public class GenericCrudFormView extends AbstractWindowViewAdapter<Window>
 				CrudViewFactory.I18N_ACTION_PREFIX + label));
 		button.setClickHandler(clickHandler);
 		this.actionsPanel.addComponent(button);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void addValidator(String name, Validator<?> validator) {
+		this.fieldToValue.get(name).addValidator((Validator<Object>) validator);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void removeValidator(String name, Validator<?> validator) {
+		this.fieldToValue.get(name).addValidator((Validator<Object>) validator);
 	}
 }

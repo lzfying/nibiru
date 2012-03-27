@@ -1,5 +1,9 @@
 package ar.com.oxen.nibiru.ui.vaadin.view.adapter;
 
+import ar.com.oxen.nibiru.validation.api.ValidationException;
+import ar.com.oxen.nibiru.validation.api.Validator;
+
+import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.terminal.UserError;
 import com.vaadin.ui.AbstractField;
 
@@ -36,6 +40,27 @@ public abstract class AbstractFieldAdapter<T, K extends AbstractField> extends
 			this.getAdapted().setComponentError(new UserError(errorMessage));
 		} else {
 			this.getAdapted().setComponentError(null);
+		}
+	}
+
+	@Override
+	public void addValidator(Validator<T> validator) {
+		this.getAdapted().addValidator(new ValidatorAdapter<T>(validator));
+	}
+
+	@Override
+	public void removeValidator(Validator<T> validator) {
+		this.getAdapted().removeValidator(new ValidatorAdapter<T>(validator));
+	}
+
+	@Override
+	public void validate() throws ValidationException {
+		try {
+			this.getAdapted().validate();
+		} catch (InvalidValueExceptionAdapter e) {
+			throw e.getValidationException();
+		} catch (InvalidValueException e) {
+			throw new ValidationException(e.getMessage());
 		}
 	}
 }

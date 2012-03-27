@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Validation API
-Bundle-SymbolicName: ar.com.oxen.nibiru.validator.api
+Bundle-SymbolicName: ar.com.oxen.nibiru.validation.api
 Bundle-Version: 0.2.0.SNAPSHOT
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: ar.com.oxen.nibiru.validation.api

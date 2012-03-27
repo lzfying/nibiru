@@ -5,6 +5,7 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudField;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
 import ar.com.oxen.nibiru.ui.api.mvp.HasCloseWidget;
 import ar.com.oxen.nibiru.ui.api.mvp.View;
+import ar.com.oxen.nibiru.validation.api.Validator;
 
 public interface CrudFormView extends View, HasCloseWidget {
 	void setEntityName(String entityName);
@@ -18,4 +19,8 @@ public interface CrudFormView extends View, HasCloseWidget {
 	void setFieldError(String fieldName, String errorCode);
 
 	void addEntityAction(String label, ClickHandler clickHandler);
+
+	void addValidator(String name, Validator<?> validator);
+
+	void removeValidator(String name, Validator<?> validator);
 }
