@@ -6,6 +6,7 @@ import ar.com.oxen.nibiru.ui.api.view.Button;
 import ar.com.oxen.nibiru.ui.api.view.CheckBox;
 import ar.com.oxen.nibiru.ui.api.view.ComboBox;
 import ar.com.oxen.nibiru.ui.api.view.DateField;
+import ar.com.oxen.nibiru.ui.api.view.FormPanel;
 import ar.com.oxen.nibiru.ui.api.view.Label;
 import ar.com.oxen.nibiru.ui.api.view.ListSelect;
 import ar.com.oxen.nibiru.ui.api.view.MainWindow;
@@ -21,6 +22,7 @@ import ar.com.oxen.nibiru.ui.vaadin.view.adapter.ButtonAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.CheckBoxAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.ComboBoxAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.DateFieldAdapter;
+import ar.com.oxen.nibiru.ui.vaadin.view.adapter.FormPanelAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.LabelAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.LayoutPanelAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.ListSelectAdapter;
@@ -35,7 +37,7 @@ import ar.com.oxen.nibiru.ui.vaadin.view.adapter.WindowAdapter;
 
 import com.vaadin.Application;
 import com.vaadin.data.util.ObjectProperty;
-import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.Form;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
@@ -124,8 +126,8 @@ public class VaadinViewFactory implements ViewFactory {
 	}
 
 	@Override
-	public Panel buildFormPanel() {
-		return new LayoutPanelAdapter(new FormLayout());
+	public FormPanel buildFormPanel() {
+		return new FormPanelAdapter(new Form());
 	}
 
 	@Override

@@ -145,7 +145,7 @@ public interface ViewFactory {
 	 * 
 	 * @return The panel.
 	 */
-	Panel buildFormPanel();
+	FormPanel buildFormPanel();
 	
 	/**
 	 * Builds a tabbed panel.

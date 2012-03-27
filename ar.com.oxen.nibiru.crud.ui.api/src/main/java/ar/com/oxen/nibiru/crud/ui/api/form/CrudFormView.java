@@ -23,4 +23,6 @@ public interface CrudFormView extends View, HasCloseWidget {
 	void addValidator(String name, Validator<?> validator);
 
 	void removeValidator(String name, Validator<?> validator);
+	
+	boolean isValid();
 }

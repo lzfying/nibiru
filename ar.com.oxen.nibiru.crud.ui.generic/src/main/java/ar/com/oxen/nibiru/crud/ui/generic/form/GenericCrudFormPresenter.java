@@ -49,7 +49,7 @@ public class GenericCrudFormPresenter extends
 
 		for (final CrudField field : this.getCrudManager().getFormFields()) {
 			Object value = this.entity.getValue(field);
-			
+
 			/* Readonly and null fields (i.e. IDs) are not shown */
 			if (value != null || !field.getFormInfo().isReadonly()) {
 				this.getView().addField(field, this.entity);
@@ -57,9 +57,10 @@ public class GenericCrudFormPresenter extends
 				if (value != null) {
 					this.getView().setFieldValue(field.getName(), value);
 				}
-				
+
 				/* Register validator tracker for this field */
-				// TOOD: Falta des-registrar el tracker cuando se cierra el presenter!!
+				// TOOD: Falta des-registrar el tracker cuando se cierra el
+				// presenter!!
 				this.getExtensionPointManager().registerTracker(
 						new ExtensionTracker<Validator<?>>() {
 							@Override
@@ -86,18 +87,21 @@ public class GenericCrudFormPresenter extends
 						new ClickHandler() {
 							@Override
 							public void onClick() {
-								for (CrudField field : getCrudManager()
-										.getFormFields()) {
-									if (!field.getFormInfo().isReadonly()) {
-										Object value = getView().getFieldValue(
-												field.getName());
-										entity.setValue(field, value);
+								if (getView().isValid()) {
+									for (CrudField field : getCrudManager()
+											.getFormFields()) {
+										if (!field.getFormInfo().isReadonly()) {
+											Object value = getView()
+													.getFieldValue(
+															field.getName());
+											entity.setValue(field, value);
+										}
 									}
+
+									performAction(action, entity, extension);
+
+									getView().close();
 								}
-
-								performAction(action, entity, extension);
-
-								getView().close();
 							}
 						});
 			}

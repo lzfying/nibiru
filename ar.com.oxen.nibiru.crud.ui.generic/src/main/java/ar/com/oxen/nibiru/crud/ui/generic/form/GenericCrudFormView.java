@@ -12,6 +12,7 @@ import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
 import ar.com.oxen.nibiru.ui.api.view.Button;
 import ar.com.oxen.nibiru.ui.api.view.ComboBox;
 import ar.com.oxen.nibiru.ui.api.view.FormField;
+import ar.com.oxen.nibiru.ui.api.view.FormPanel;
 import ar.com.oxen.nibiru.ui.api.view.ListSelect;
 import ar.com.oxen.nibiru.ui.api.view.Panel;
 import ar.com.oxen.nibiru.ui.api.view.PasswordField;
@@ -25,7 +26,7 @@ import ar.com.oxen.nibiru.validation.api.Validator;
 public class GenericCrudFormView extends AbstractWindowViewAdapter<Window>
 		implements CrudFormView {
 	private Panel fieldsTabPanel;
-	private Map<String, Panel> fieldsPanels;
+	private Map<String, FormPanel> fieldsPanels;
 	private Panel actionsPanel;
 	private Map<String, FormField<Object>> fieldToValue;
 
@@ -37,7 +38,7 @@ public class GenericCrudFormView extends AbstractWindowViewAdapter<Window>
 		this.fieldsTabPanel.setWidth(400);
 		this.getAdapted().addComponent(fieldsTabPanel);
 
-		this.fieldsPanels = new HashMap<String, Panel>();
+		this.fieldsPanels = new HashMap<String, FormPanel>();
 		this.fieldToValue = new HashMap<String, FormField<Object>>();
 
 		Panel buttonsPanel = viewFactory.buildHorizontalPanel();
@@ -139,7 +140,7 @@ public class GenericCrudFormView extends AbstractWindowViewAdapter<Window>
 		field.setReadOnly(formInfo.isReadonly());
 
 		String tabName = crudField.getFormInfo().getTab();
-		Panel fieldsPanel = this.fieldsPanels.get(tabName);
+		FormPanel fieldsPanel = this.fieldsPanels.get(tabName);
 
 		if (fieldsPanel == null) {
 			fieldsPanel = this.getViewFactory().buildFormPanel();
@@ -189,5 +190,15 @@ public class GenericCrudFormView extends AbstractWindowViewAdapter<Window>
 	@Override
 	public void removeValidator(String name, Validator<?> validator) {
 		this.fieldToValue.get(name).addValidator((Validator<Object>) validator);
+	}
+
+	@Override
+	public boolean isValid() {
+		for (FormPanel form : this.fieldsPanels.values()) {
+			if (!form.isValid()) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

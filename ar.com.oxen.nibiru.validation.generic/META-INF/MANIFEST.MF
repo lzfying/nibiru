@@ -5,3 +5,4 @@ Bundle-SymbolicName: ar.com.oxen.nibiru.validation.generic
 Bundle-Version: 0.2.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: ar.com.oxen.nibiru.validation.generic
+Import-Package: ar.com.oxen.nibiru.validation.api
