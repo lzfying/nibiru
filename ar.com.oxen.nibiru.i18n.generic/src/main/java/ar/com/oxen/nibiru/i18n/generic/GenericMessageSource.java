@@ -18,6 +18,21 @@ public class GenericMessageSource implements MessageSource {
 
 	@Override
 	public String getMessage(String code, Locale locale, Object... args) {
+		String message = this.findMessage(code, locale, args);
+		if (message != null) {
+			return message;
+		} else {
+			return code;
+		}
+	}
+
+	@Override
+	public String findMessage(String code, Object... args) {
+		return this.findMessage(code, this.localeHolder.getLocale(), args);
+	}
+
+	@Override
+	public String findMessage(String code, Locale locale, Object... args) {
 		for (MessageProvider messageProvider : this.messageProviders) {
 			String message = messageProvider.getMessage(code, locale, args);
 			if (message != null) {

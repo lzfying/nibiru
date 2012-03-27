@@ -131,7 +131,7 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru</groupId>
 			<artifactId>ar.com.oxen.nibiru.i18n.generic</artifactId>
-			<version>0.1</version>
+			<version>0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru</groupId>

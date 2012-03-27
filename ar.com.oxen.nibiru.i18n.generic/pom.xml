@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>ar.com.oxen.nibiru</artifactId>
 		<groupId>ar.com.oxen.nibiru</groupId>
-		<version>0.1</version>
+		<version>0.2-SNAPSHOT</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru</groupId>
 	<artifactId>ar.com.oxen.nibiru.i18n.generic</artifactId>
-	<version>0.1</version>
+	<version>0.2-SNAPSHOT</version>
 	<name>ar.com.oxen.nibiru.i18n.generic</name>
 	<url>http://maven.apache.org</url>
 	<properties>
