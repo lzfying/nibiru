@@ -15,7 +15,13 @@ public class TabSheetPanelAdapter extends AbstractComponentAdapter<TabSheet>
 	@Override
 	public void addComponent(ar.com.oxen.nibiru.ui.api.view.Component component) {
 		AbstractAdapter<Component> adaptedComponent = (AbstractAdapter<Component>) component;
-		this.getAdapted().addTab(adaptedComponent.getAdapted());
+		Component vaadinComponent = adaptedComponent.getAdapted();
+
+		/* Workaround - remove the caption because Vaadin shows it twice */
+		String caption = vaadinComponent.getCaption();
+		vaadinComponent.setCaption(null);
+
+		this.getAdapted().addTab(vaadinComponent, caption, null);
 	}
 
 	@Override

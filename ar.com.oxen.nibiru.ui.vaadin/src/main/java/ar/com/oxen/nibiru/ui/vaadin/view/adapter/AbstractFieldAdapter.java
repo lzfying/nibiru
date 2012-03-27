@@ -12,6 +12,7 @@ public abstract class AbstractFieldAdapter<T, K extends AbstractField> extends
 		ar.com.oxen.nibiru.ui.api.view.FormField<T> {
 	public AbstractFieldAdapter(K adapted) {
 		super(adapted);
+		this.getAdapted().setImmediate(true);
 	}
 
 	@Override

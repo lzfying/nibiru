@@ -1,5 +1,9 @@
 package ar.com.oxen.nibiru.ui.vaadin.view.adapter;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import ar.com.oxen.nibiru.ui.api.view.FormField;
 import ar.com.oxen.nibiru.ui.api.view.FormPanel;
 import ar.com.oxen.nibiru.ui.utils.view.AbstractAdapter;
 
@@ -9,10 +13,12 @@ import com.vaadin.ui.Form;
 
 public class FormPanelAdapter extends AbstractComponentAdapter<Form> implements
 		FormPanel {
-	private int fieldCount = 0;
+	private List<FormField<?>> fields;
 
 	public FormPanelAdapter(Form form) {
 		super(form);
+		form.setImmediate(true);
+		this.fields = new LinkedList<FormField<?>>();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -24,9 +30,10 @@ public class FormPanelAdapter extends AbstractComponentAdapter<Form> implements
 
 		this.getAdapted().getLayout().addComponent(vaadinComponent);
 
-		if (vaadinComponent instanceof Field) {
-			this.getAdapted().addField(this.fieldCount++,
+		if (vaadinComponent instanceof Field && component instanceof FormField) {
+			this.getAdapted().addField(this.fields.size(),
 					(Field) vaadinComponent);
+			this.fields.add((FormField<?>) component);
 		}
 	}
 
@@ -43,5 +50,10 @@ public class FormPanelAdapter extends AbstractComponentAdapter<Form> implements
 	@Override
 	public boolean isValid() {
 		return this.getAdapted().isValid();
+	}
+
+	@Override
+	public Iterable<FormField<?>> getFields() {
+		return this.fields;
 	}
 }

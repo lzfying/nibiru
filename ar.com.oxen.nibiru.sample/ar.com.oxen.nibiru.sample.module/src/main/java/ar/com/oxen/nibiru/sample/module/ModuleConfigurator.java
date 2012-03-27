@@ -39,7 +39,7 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 		this.addCrudWithMenu("sample.crud.student", MENU_EXTENSION,
 				this.studentCrudManager, this.studentCrudActionExtension);
 		
-		this.registerExtension(new RegexpValidator("^Mat.*", "explded"),
+		this.registerExtension(new RegexpValidator("^Mat.*", "subjectBeginning"),
 				Subject.class.getName() + ".name", Validator.class);
 	}
 

@@ -21,6 +21,7 @@ import ar.com.oxen.nibiru.ui.api.view.TextField;
 import ar.com.oxen.nibiru.ui.api.view.ViewFactory;
 import ar.com.oxen.nibiru.ui.api.view.Window;
 import ar.com.oxen.nibiru.ui.utils.view.AbstractWindowViewAdapter;
+import ar.com.oxen.nibiru.validation.api.ValidationException;
 import ar.com.oxen.nibiru.validation.api.Validator;
 
 public class GenericCrudFormView extends AbstractWindowViewAdapter<Window>
@@ -165,13 +166,6 @@ public class GenericCrudFormView extends AbstractWindowViewAdapter<Window>
 	}
 
 	@Override
-	public void setFieldError(String fieldName, String errorCode) {
-		this.fieldToValue.get(fieldName).setErrorMessage(
-				this.getMessageSource().getMessage(
-						CrudViewFactory.I18N_ERROR_PREFIX + errorCode));
-	}
-
-	@Override
 	public void addEntityAction(String label, ClickHandler clickHandler) {
 		Button button = this.getViewFactory().buildButton();
 		button.setValue(this.getMessageSource().getMessage(
@@ -196,9 +190,34 @@ public class GenericCrudFormView extends AbstractWindowViewAdapter<Window>
 	public boolean isValid() {
 		for (FormPanel form : this.fieldsPanels.values()) {
 			if (!form.isValid()) {
+				this.showErrors();
 				return false;
 			}
 		}
 		return true;
+	}
+
+	private void showErrors() {
+		for (FormPanel form : this.fieldsPanels.values()) {
+			for (FormField<?> field : form.getFields()) {
+				try {
+					field.validate();
+				} catch (ValidationException e) {
+					this.setFieldErrors(field, e.getErrorCodes());
+				}
+			}
+		}
+	}
+
+	private void setFieldErrors(FormField<?> field, Iterable<String> errorCodes) {
+		StringBuilder sb = new StringBuilder();
+
+		for (String errorCode : errorCodes) {
+			sb.append(this.getMessageSource().getMessage(
+					CrudViewFactory.I18N_ERROR_PREFIX + errorCode));
+			sb.append("\n");
+		}
+
+		field.setErrorMessage(sb.toString());
 	}
 }

@@ -16,8 +16,6 @@ public interface CrudFormView extends View, HasCloseWidget {
 	
 	Object getFieldValue(String fieldName);
 	
-	void setFieldError(String fieldName, String errorCode);
-
 	void addEntityAction(String label, ClickHandler clickHandler);
 
 	void addValidator(String name, Validator<?> validator);
