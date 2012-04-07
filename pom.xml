@@ -9,6 +9,11 @@
 	<name>Nibiru</name>
 	<repositories>
 		<repository>
+			<id>repo1.maven.org</id>
+			<name>repo1.maven.org</name>
+			<url>http://repo1.maven.org/maven2/</url>
+		</repository>
+		<repository>
 			<id>java.net</id>
 			<name>java.net</name>
 			<url>http://download.java.net/maven/2</url>
