@@ -88,6 +88,7 @@
 		<module>ar.com.oxen.nibiru.ui.vaadin.fragment</module>
 		<module>ar.com.oxen.nibiru.validation.api</module>
 		<module>ar.com.oxen.nibiru.validation.generic</module>
+		<module>ar.com.oxen.nibiru.security.spring</module>
 	</modules>
 	<build>
 		<resources>
