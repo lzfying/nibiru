@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Dynamic Services DAO Api
 Bundle-SymbolicName: ar.com.oxen.nibiru.dynamicbundle.dao.api
-Bundle-Version: 0.1.0
+Bundle-Version: 0.2.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: ar.com.oxen.commons.dao.api,
  ar.com.oxen.nibiru.dynamicbundle.domain
