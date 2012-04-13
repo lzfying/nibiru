@@ -7,7 +7,7 @@ import ar.com.oxen.nibiru.session.api.Session;
 
 public class SessionLocaleHolder implements LocaleHolder {
 	private Session session;
-	private final static String LOCALE_KEY = "ar.com.oxen.i18n.locale";
+	private final static String LOCALE_KEY = "ar.com.oxen.nibiru.i18n.locale";
 
 	@Override
 	public Locale getLocale() {
