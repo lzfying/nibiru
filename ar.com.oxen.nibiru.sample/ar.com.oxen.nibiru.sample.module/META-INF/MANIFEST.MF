@@ -23,10 +23,10 @@ Import-Package: ar.com.oxen.commons.bean.api,
  javax.persistence;version="1.0.0",
  org.aopalliance.aop;version="1.0.0",
  org.hibernate.proxy;version="3.3.2.GA",
- org.springframework.aop;version="3.0.4.RELEASE",
- org.springframework.aop.framework;version="3.0.4.RELEASE",
- org.springframework.aop.framework.autoproxy;version="3.0.4.RELEASE",
- org.springframework.beans.factory.config;version="3.0.4.RELEASE",
- org.springframework.orm.jpa.support;version="3.0.4.RELEASE",
- org.springframework.transaction;version="3.0.4.RELEASE"
+ org.springframework.aop;version="3.0.6.RELEASE",
+ org.springframework.aop.framework;version="3.0.6.RELEASE",
+ org.springframework.aop.framework.autoproxy;version="3.0.6.RELEASE",
+ org.springframework.beans.factory.config;version="3.0.6.RELEASE",
+ org.springframework.orm.jpa.support;version="3.0.6.RELEASE",
+ org.springframework.transaction;version="3.0.6.RELEASE"
 Export-Package: ar.com.oxen.nibiru.sample.domain

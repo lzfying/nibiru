@@ -6,4 +6,4 @@ Bundle-Version: 0.2.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: javax.sql,
  org.apache.commons.dbcp;version="1.2.2.osgi",
- org.springframework.beans.factory.config;version="3.0.4.RELEASE"
+ org.springframework.beans.factory.config;version="3.0.6.RELEASE"

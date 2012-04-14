@@ -57,7 +57,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>org.springframework.web</artifactId>
-			<version>3.0.4.RELEASE</version>
+			<version>3.0.6.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -67,7 +67,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>org.springframework.aop</artifactId>
-			<version>3.0.4.RELEASE</version>
+			<version>3.0.6.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.cglib</groupId>

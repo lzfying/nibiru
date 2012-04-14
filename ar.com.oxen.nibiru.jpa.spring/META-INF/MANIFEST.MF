@@ -9,4 +9,4 @@ Import-Package: ar.com.oxen.nibiru.conversation.api,
  javax.persistence;version="1.0.0",
  javax.sql,
  javax.transaction,
- org.springframework.orm.jpa;version="3.0.4.RELEASE"
+ org.springframework.orm.jpa;version="3.0.6.RELEASE"
