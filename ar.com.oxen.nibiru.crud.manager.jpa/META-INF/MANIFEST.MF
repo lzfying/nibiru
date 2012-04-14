@@ -11,4 +11,8 @@ Import-Package: ar.com.oxen.commons.bean.api,
  ar.com.oxen.nibiru.crud.utils,
  javax.persistence,
  org.mvel2
-Export-Package: ar.com.oxen.nibiru.crud.manager.jpa
+Export-Package: ar.com.oxen.nibiru.crud.manager.jpa;
+  uses:="ar.com.oxen.nibiru.crud.bean.manager,
+   ar.com.oxen.commons.bean.api,
+   ar.com.oxen.nibiru.crud.manager.api,
+   javax.persistence"

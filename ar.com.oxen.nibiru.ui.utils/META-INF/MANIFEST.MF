@@ -10,6 +10,6 @@ Import-Package: ar.com.oxen.commons.eventbus.api,
  ar.com.oxen.nibiru.ui.api.extension,
  ar.com.oxen.nibiru.ui.api.mvp,
  ar.com.oxen.nibiru.ui.api.view
-Export-Package: ar.com.oxen.nibiru.ui.utils.extension,
- ar.com.oxen.nibiru.ui.utils.mvp,
- ar.com.oxen.nibiru.ui.utils.view
+Export-Package: ar.com.oxen.nibiru.ui.utils.extension;uses:="ar.com.oxen.nibiru.ui.api.extension,ar.com.oxen.nibiru.ui.api.mvp",
+ ar.com.oxen.nibiru.ui.utils.mvp;uses:="ar.com.oxen.commons.eventbus.api,ar.com.oxen.nibiru.ui.api.mvp,ar.com.oxen.nibiru.i18n.api",
+ ar.com.oxen.nibiru.ui.utils.view;uses:="ar.com.oxen.nibiru.ui.api.mvp,ar.com.oxen.nibiru.i18n.api,ar.com.oxen.nibiru.ui.api.view"

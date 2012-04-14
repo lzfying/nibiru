@@ -28,10 +28,15 @@
 			<artifactId>ar.com.oxen.nibiru.sample.jpa.fragment</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
-		<!-- Core Nibiru target platform -->
+		<!-- Core Nibiru target platform and dependencies -->
 		<dependency>
 			<groupId>ar.com.oxen.nibiru</groupId>
 			<artifactId>ar.com.oxen.nibiru.targetplatform</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru</groupId>
+			<artifactId>ar.com.oxen.nibiru.security.db</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
 		<!-- Non-core Nibiru dependencies -->

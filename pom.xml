@@ -89,6 +89,7 @@
 		<module>ar.com.oxen.nibiru.validation.api</module>
 		<module>ar.com.oxen.nibiru.validation.generic</module>
 		<module>ar.com.oxen.nibiru.security.spring</module>
+		<module>ar.com.oxen.nibiru.security.db</module>
 	</modules>
 	<build>
 		<resources>

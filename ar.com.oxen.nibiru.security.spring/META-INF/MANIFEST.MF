@@ -5,4 +5,6 @@ Bundle-SymbolicName: ar.com.oxen.nibiru.security.spring
 Bundle-Version: 0.2.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: ar.com.oxen.nibiru.security.api,
- ar.com.oxen.nibiru.session.api
+ ar.com.oxen.nibiru.session.api,
+ org.springframework.security.authentication;version="3.1.0.RELEASE",
+ org.springframework.security.core;version="3.1.0.RELEASE"

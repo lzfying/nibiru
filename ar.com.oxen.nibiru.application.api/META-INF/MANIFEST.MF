@@ -6,7 +6,11 @@ Bundle-Version: 0.2.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: ar.com.oxen.nibiru.ui.api.mvp,
  ar.com.oxen.nibiru.ui.api.view
-Export-Package: ar.com.oxen.nibiru.application.api,
- ar.com.oxen.nibiru.application.api.about,
- ar.com.oxen.nibiru.application.api.login,
- ar.com.oxen.nibiru.application.api.main
+Export-Package: ar.com.oxen.nibiru.application.api;
+  uses:="ar.com.oxen.nibiru.application.api.main,
+   ar.com.oxen.nibiru.application.api.about,
+   ar.com.oxen.nibiru.ui.api.mvp,
+   ar.com.oxen.nibiru.application.api.login",
+ ar.com.oxen.nibiru.application.api.about;uses:="ar.com.oxen.nibiru.ui.api.mvp",
+ ar.com.oxen.nibiru.application.api.login;uses:="ar.com.oxen.nibiru.ui.api.mvp",
+ ar.com.oxen.nibiru.application.api.main;uses:="ar.com.oxen.nibiru.ui.api.mvp,ar.com.oxen.nibiru.ui.api.view"

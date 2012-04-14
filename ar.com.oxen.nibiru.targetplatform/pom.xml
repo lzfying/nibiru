@@ -138,11 +138,6 @@
 			<artifactId>ar.com.oxen.nibiru.i18n.session</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
-		<dependency>
-			<groupId>ar.com.oxen.nibiru</groupId>
-			<artifactId>ar.com.oxen.nibiru.security.dummy</artifactId>
-			<version>0.2-SNAPSHOT</version>
-		</dependency>
 		<!-- Librerias Spring -->
 		<dependency>
 			<groupId>org.springframework.osgi</groupId>

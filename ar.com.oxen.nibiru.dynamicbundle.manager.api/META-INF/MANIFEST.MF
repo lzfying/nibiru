@@ -4,5 +4,5 @@ Bundle-Name: Api
 Bundle-SymbolicName: ar.com.oxen.nibiru.dynamicbundle.manager.api
 Bundle-Version: 0.2.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: ar.com.oxen.nibiru.dynamicbundle.manager.api
+Export-Package: ar.com.oxen.nibiru.dynamicbundle.manager.api;uses:="ar.com.oxen.nibiru.dynamicbundle.domain"
 Import-Package: ar.com.oxen.nibiru.dynamicbundle.domain

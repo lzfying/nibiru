@@ -19,9 +19,6 @@
 	<osgi:reference id="authenticationManager"
 		interface="org.springframework.security.authentication.AuthenticationManager" />
 
-	<osgi:reference id="authenticationManager"
-		interface="org.springframework.security.authentication.AuthenticationManager" />
-
 	<bean name="authenticationService"
 		class="ar.com.oxen.nibiru.security.spring.SpringAuthenticationService">
 		<property name="session" ref="nibiruSession" />
