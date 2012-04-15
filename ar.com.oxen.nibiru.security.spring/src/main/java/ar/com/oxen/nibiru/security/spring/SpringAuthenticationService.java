@@ -34,8 +34,8 @@ public class SpringAuthenticationService implements AuthenticationService {
 
 	@Override
 	public String getLoggedUserName() {
-		Authentication authentication = this.session.get(AUTHENTICATION_KEY);
-		return authentication.getPrincipal().toString();
+		UsernamePasswordAuthenticationToken authentication = this.session.get(AUTHENTICATION_KEY);
+		return authentication.getName();
 	}
 
 	public void setSession(Session session) {
