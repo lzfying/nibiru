@@ -34,12 +34,12 @@
 			<artifactId>ar.com.oxen.nibiru.targetplatform</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
+		<!-- Non-core Nibiru dependencies -->
 		<dependency>
 			<groupId>ar.com.oxen.nibiru</groupId>
 			<artifactId>ar.com.oxen.nibiru.security.db</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
-		<!-- Non-core Nibiru dependencies -->
 		<dependency>
 			<groupId>ar.com.oxen.nibiru</groupId>
 			<artifactId>ar.com.oxen.nibiru.dynamicbundle.dao.jpa</artifactId>
