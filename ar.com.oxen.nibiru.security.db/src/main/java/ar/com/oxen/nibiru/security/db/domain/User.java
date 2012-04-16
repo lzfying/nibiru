@@ -32,7 +32,7 @@ public class User {
 	private String name;
 
 	@Column
-	@Show(order = 20)
+	@Show(order = 20, inList = false)
 	@Widget(type = WidgetType.PASSWORD_FIELD, maxLength = 50)
 	private String password;
 
