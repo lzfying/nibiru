@@ -22,6 +22,51 @@
 			<artifactId>spring-security-core</artifactId>
 			<version>3.1.0.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru</groupId>
+			<artifactId>ar.com.oxen.nibiru.crud.utils</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru</groupId>
+			<artifactId>ar.com.oxen.nibiru.extensionpoint.api</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru</groupId>
+			<artifactId>ar.com.oxen.nibiru.ui.api</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru</groupId>
+			<artifactId>ar.com.oxen.nibiru.ui.utils</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru</groupId>
+			<artifactId>ar.com.oxen.nibiru.crud.manager.api</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru</groupId>
+			<artifactId>ar.com.oxen.nibiru.crud.manager.jpa</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru</groupId>
+			<artifactId>ar.com.oxen.nibiru.i18n.generic</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru</groupId>
+			<artifactId>ar.com.oxen.nibiru.crud.bean</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.commons</groupId>
+			<artifactId>ar.com.oxen.commons</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<!-- Required for namespace handler -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -34,6 +79,11 @@
 			<version>3.1.0.RELEASE</version>
 		</dependency>
 		<!-- 3rd party -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.beans</artifactId>
+			<version>3.0.6.RELEASE</version>
+		</dependency>
 		<dependency>
 			<groupId>javax.persistence</groupId>
 			<artifactId>com.springsource.javax.persistence</artifactId>
