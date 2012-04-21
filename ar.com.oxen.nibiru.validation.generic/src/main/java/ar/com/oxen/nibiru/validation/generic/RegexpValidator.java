@@ -5,6 +5,9 @@ import java.util.regex.Pattern;
 import ar.com.oxen.nibiru.validation.api.ValidationException;
 import ar.com.oxen.nibiru.validation.api.Validator;
 
+/**
+ * Regexp-based validator. Validated must be an String
+ */
 public class RegexpValidator implements Validator<String> {
 	private Pattern pattern;
 	private String errorCode;

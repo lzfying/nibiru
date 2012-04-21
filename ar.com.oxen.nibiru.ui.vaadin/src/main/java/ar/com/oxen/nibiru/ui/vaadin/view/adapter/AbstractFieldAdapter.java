@@ -2,7 +2,9 @@ package ar.com.oxen.nibiru.ui.vaadin.view.adapter;
 
 import ar.com.oxen.nibiru.validation.api.ValidationException;
 import ar.com.oxen.nibiru.validation.api.Validator;
+import ar.com.oxen.nibiru.validation.generic.NotEmptyValidator;
 
+import com.vaadin.data.Validator.EmptyValueException;
 import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.terminal.UserError;
 import com.vaadin.ui.AbstractField;
@@ -46,7 +48,13 @@ public abstract class AbstractFieldAdapter<T, K extends AbstractField> extends
 
 	@Override
 	public void addValidator(Validator<T> validator) {
-		this.getAdapted().addValidator(new ValidatorAdapter<T>(validator));
+		// TODO: esto es horrible, pero Vaadin tiene un bug, si el campo esta
+		// vacio, ignora a los validadores: http://dev.vaadin.com/ticket/8410
+		if (validator instanceof NotEmptyValidator) {
+			this.getAdapted().setRequired(true);
+		} else {
+			this.getAdapted().addValidator(new ValidatorAdapter<T>(validator));
+		}
 	}
 
 	@Override
@@ -60,6 +68,8 @@ public abstract class AbstractFieldAdapter<T, K extends AbstractField> extends
 			this.getAdapted().validate();
 		} catch (InvalidValueExceptionAdapter e) {
 			throw e.getValidationException();
+		} catch (EmptyValueException e) {
+			throw new ValidationException("required");
 		} catch (InvalidValueException e) {
 			throw new ValidationException(e.getMessage());
 		}

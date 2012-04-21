@@ -9,6 +9,7 @@ import ar.com.oxen.nibiru.sample.domain.Subject;
 import ar.com.oxen.nibiru.ui.api.extension.SubMenuExtension;
 import ar.com.oxen.nibiru.ui.utils.extension.SimpleSubMenuExtension;
 import ar.com.oxen.nibiru.validation.api.Validator;
+import ar.com.oxen.nibiru.validation.generic.NotEmptyValidator;
 import ar.com.oxen.nibiru.validation.generic.RegexpValidator;
 
 public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
@@ -41,6 +42,9 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 		
 		this.registerExtension(new RegexpValidator("^Mat.*", "subjectBeginning"),
 				Subject.class.getName() + ".name", Validator.class);
+		
+		this.registerExtension(new NotEmptyValidator(),
+				Subject.class.getName() + ".description", Validator.class);
 	}
 
 	public void setSubjectCrudManager(CrudManager<Subject> subjectCrudManager) {
