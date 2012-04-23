@@ -16,5 +16,6 @@
     <module>ar.com.oxen.nibiru.sample.jpa.fragment</module>
     <module>ar.com.oxen.nibiru.sample.targetplatform</module>
     <module>ar.com.oxen.nibiru.sample.module</module>
+    <module>ar.com.oxen.nibiru.sample.webapp</module>
   </modules>
 </project>

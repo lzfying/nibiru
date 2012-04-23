@@ -59,7 +59,14 @@ public abstract class AbstractFieldAdapter<T, K extends AbstractField> extends
 
 	@Override
 	public void removeValidator(Validator<T> validator) {
-		this.getAdapted().removeValidator(new ValidatorAdapter<T>(validator));
+		// TODO: Agregado por "simetria" (dijo homero cuando le iban a cortar el
+		// dedo) con el metodo anterior
+		if (validator instanceof NotEmptyValidator) {
+			this.getAdapted().setRequired(false);
+		} else {
+			this.getAdapted().removeValidator(
+					new ValidatorAdapter<T>(validator));
+		}
 	}
 
 	@Override
