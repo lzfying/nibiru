@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Nibiru sample webapp
+Bundle-SymbolicName: ar.com.oxen.nibiru.sample.webapp
+Bundle-Version: 0.2.0
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Web-ContextPath: /sample

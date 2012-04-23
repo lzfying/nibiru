@@ -20,7 +20,7 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 	@Override
 	protected void configure() {
 		this.registerExtension(new SimpleSubMenuExtension("security",
-				MENU_EXTENSION, 1), "ar.com.oxen.nibiru.menu",
+				MENU_EXTENSION, 80), "ar.com.oxen.nibiru.menu",
 				SubMenuExtension.class);
 
 		this.addCrudWithMenu("security.users", MENU_EXTENSION, this.userCrudManager,

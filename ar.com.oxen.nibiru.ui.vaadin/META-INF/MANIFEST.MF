@@ -31,7 +31,8 @@ Import-Package: ar.com.oxen.commons.eventbus.api,
  org.springframework.web.context;version="3.0.6.RELEASE",
  org.springframework.web.context.request;version="3.0.6.RELEASE",
  org.springframework.web.context.support
-Export-Package: ar.com.oxen.nibiru.ui.vaadin.application;uses:="ar.com.oxen.commons.eventbus.api,ar.com.oxen.nibiru.i18n.api,com.vaadin",
+Export-Package: ar.com.oxen.nibiru.ui.vaadin.api,
+ ar.com.oxen.nibiru.ui.vaadin.application;uses:="ar.com.oxen.commons.eventbus.api,ar.com.oxen.nibiru.i18n.api,com.vaadin",
  ar.com.oxen.nibiru.ui.vaadin.view.adapter;
   uses:="com.vaadin.data,
    ar.com.oxen.nibiru.ui.api.mvp,
@@ -41,7 +42,6 @@ Export-Package: ar.com.oxen.nibiru.ui.vaadin.application;uses:="ar.com.oxen.comm
    org.vaadin.peter.contextmenu,
    ar.com.oxen.nibiru.ui.utils.view,
    com.vaadin.ui"
-Web-ContextPath: /nibiru
 Require-Bundle: com.vaadin;bundle-version="6.6.4"
-Bundle-ClassPath: WEB-INF/lib/ContextMenu3.1.0.jar,
- .
+Bundle-ClassPath: .,
+ lib/ContextMenu3.1.0.jar
