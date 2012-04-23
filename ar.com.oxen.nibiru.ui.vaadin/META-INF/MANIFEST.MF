@@ -33,7 +33,8 @@ Import-Package: ar.com.oxen.commons.eventbus.api,
  org.springframework.beans.factory;version="3.0.6.RELEASE",
  org.springframework.beans.factory.config;version="3.0.6.RELEASE",
  org.springframework.context,
- org.springframework.core.io.support;version="3.0.6.RELEASE"
+ org.springframework.core.io.support;version="3.0.6.RELEASE",
+ org.vaadin.peter.contextmenu
 Export-Package: ar.com.oxen.nibiru.ui.vaadin.api,
  ar.com.oxen.nibiru.ui.vaadin.application;uses:="ar.com.oxen.commons.eventbus.api,ar.com.oxen.nibiru.i18n.api,com.vaadin",
  ar.com.oxen.nibiru.ui.vaadin.view.adapter;
@@ -45,5 +46,3 @@ Export-Package: ar.com.oxen.nibiru.ui.vaadin.api,
    org.vaadin.peter.contextmenu,
    ar.com.oxen.nibiru.ui.utils.view,
    com.vaadin.ui"
-Bundle-ClassPath: lib/ContextMenu3.1.0.jar,
- target/classes/
