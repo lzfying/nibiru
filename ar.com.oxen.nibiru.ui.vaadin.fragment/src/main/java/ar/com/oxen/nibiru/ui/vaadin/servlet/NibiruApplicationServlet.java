@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import ar.com.oxen.nibiru.ui.vaadin.api.ApplicationAccessor;
+
 import com.vaadin.Application;
 import com.vaadin.terminal.gwt.server.AbstractApplicationServlet;
 
@@ -16,7 +18,7 @@ public class NibiruApplicationServlet extends AbstractApplicationServlet {
 	 */
 	private static final long serialVersionUID = -4897206489141799154L;
 
-	private String beanName = "vaadinApplication";
+	private String beanName = "applicationAccessor";
 
 	@Override
 	public void init() throws ServletException {
@@ -36,7 +38,11 @@ public class NibiruApplicationServlet extends AbstractApplicationServlet {
 				.getServletContext();
 		ApplicationContext context = WebApplicationContextUtils
 				.getRequiredWebApplicationContext(servletContext);
-		return (Application) context.getBean(beanName);
+
+		ApplicationAccessor accessor = (ApplicationAccessor) context
+				.getBean(beanName);
+		
+		return accessor.getApplication();
 	}
 
 	@Override
