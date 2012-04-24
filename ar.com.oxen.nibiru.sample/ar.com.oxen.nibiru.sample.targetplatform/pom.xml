@@ -47,31 +47,6 @@
 			<artifactId>ar.com.oxen.nibiru.security.db</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
-		<dependency>
-			<groupId>ar.com.oxen.nibiru</groupId>
-			<artifactId>ar.com.oxen.nibiru.dynamicbundle.dao.jpa</artifactId>
-			<version>0.2-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>ar.com.oxen.nibiru</groupId>
-			<artifactId>ar.com.oxen.nibiru.dynamicbundle.domain</artifactId>
-			<version>0.2-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>ar.com.oxen.nibiru</groupId>
-			<artifactId>ar.com.oxen.nibiru.dynamicbundle.domain.fragment</artifactId>
-			<version>0.2-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>ar.com.oxen.nibiru</groupId>
-			<artifactId>ar.com.oxen.nibiru.dynamicbundle.manager.spring</artifactId>
-			<version>0.2-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>ar.com.oxen.nibiru</groupId>
-			<artifactId>ar.com.oxen.nibiru.dynamicbundle.module</artifactId>
-			<version>0.2-SNAPSHOT</version>
-		</dependency>
 		<!-- 3rd party dependencies -->
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>

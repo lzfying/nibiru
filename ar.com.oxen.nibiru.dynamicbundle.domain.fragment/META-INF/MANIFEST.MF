@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Domain fragment
-Bundle-SymbolicName: ar.com.oxen.nibiru.dynamicbundle.domain.fragment
-Bundle-Version: 0.2.0
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Fragment-Host: ar.com.oxen.nibiru.dynamicbundle.domain;bundle-version="0.1.0"
-Require-Bundle: com.springsource.org.hibernate;bundle-version="3.3.2",
- com.springsource.javassist;bundle-version="3.9.0"

@@ -45,10 +45,6 @@
 		</repository>
 	</repositories>
 	<modules>
-		<module>ar.com.oxen.nibiru.dynamicbundle.manager.api</module>
-		<module>ar.com.oxen.nibiru.dynamicbundle.manager.spring</module>
-		<module>ar.com.oxen.nibiru.dynamicbundle.domain</module>
-		<module>ar.com.oxen.nibiru.dynamicbundle.dao.api</module>
 		<module>ar.com.oxen.nibiru.session.api</module>
 		<module>ar.com.oxen.nibiru.session.spring.http</module>
 		<module>ar.com.oxen.nibiru.session.spring.scope</module>
@@ -58,9 +54,7 @@
 		<module>ar.com.oxen.nibiru.datasource.dbcp</module>
 		<module>ar.com.oxen.nibiru.jpa.spring</module>
 		<module>ar.com.oxen.nibiru.transaction.spring</module>
-		<module>ar.com.oxen.nibiru.dynamicbundle.dao.jpa</module>
 		<module>ar.com.oxen.nibiru.antlr.fragment</module>
-		<module>ar.com.oxen.nibiru.dynamicbundle.domain.fragment</module>
 		<module>ar.com.oxen.nibiru.ui.vaadin</module>
 		<module>ar.com.oxen.nibiru.application.api</module>
 		<module>ar.com.oxen.nibiru.application.generic</module>
@@ -69,7 +63,6 @@
 		<module>ar.com.oxen.nibiru.crud.manager.jpa</module>
 		<module>ar.com.oxen.nibiru.crud.ui.generic</module>
 		<module>ar.com.oxen.nibiru.crud.ui.api</module>
-		<module>ar.com.oxen.nibiru.dynamicbundle.module</module>
 		<module>ar.com.oxen.nibiru.module.utils</module>
 		<module>ar.com.oxen.nibiru.crud.bean</module>
 		<module>ar.com.oxen.nibiru.targetplatform</module>
