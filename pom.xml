@@ -83,6 +83,7 @@
 		<module>ar.com.oxen.nibiru.sample</module>
 		<module>ar.com.oxen.nibiru.application.generic.presenter</module>
 		<module>ar.com.oxen.nibiru.application.generic.view</module>
+		<module>ar.com.oxen.nibiru.application.generic.view.service</module>
 		<module>ar.com.oxen.nibiru.commons</module>
 		<module>ar.com.oxen.nibiru.crud.utils</module>
 		<module>ar.com.oxen.nibiru.ui.vaadin.fragment</module>

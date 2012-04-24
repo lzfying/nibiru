@@ -35,7 +35,7 @@
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru</groupId>
-			<artifactId>ar.com.oxen.nibiru.application.generic.view</artifactId>
+			<artifactId>ar.com.oxen.nibiru.application.generic.view.service</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
