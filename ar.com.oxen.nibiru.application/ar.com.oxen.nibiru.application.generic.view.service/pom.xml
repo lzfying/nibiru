@@ -4,22 +4,22 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<artifactId>ar.com.oxen.nibiru.sample</artifactId>
+		<artifactId>ar.com.oxen.nibiru.application</artifactId>
 		<groupId>ar.com.oxen.nibiru</groupId>
 		<version>0.2-SNAPSHOT</version>
 	</parent>
-	<groupId>ar.com.oxen.nibiru.sample</groupId>
-	<artifactId>ar.com.oxen.nibiru.sample.webapp</artifactId>
+	<groupId>ar.com.oxen.nibiru.application</groupId>
+	<artifactId>ar.com.oxen.nibiru.application.generic.view.service</artifactId>
 	<version>0.2-SNAPSHOT</version>
-	<name>ar.com.oxen.nibiru.sample.webapp</name>
+	<name>ar.com.oxen.nibiru.application.generic.view.service</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>ar.com.oxen.nibiru.ui</groupId>
-			<artifactId>ar.com.oxen.nibiru.ui.vaadin</artifactId>
+			<groupId>ar.com.oxen.nibiru.application</groupId>
+			<artifactId>ar.com.oxen.nibiru.application.generic.view</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

@@ -32,26 +32,20 @@
 		</dependency>
 		<!-- Core Nibiru target platform and dependencies -->
 		<dependency>
-			<groupId>ar.com.oxen.nibiru</groupId>
+			<groupId>ar.com.oxen.nibiru.support</groupId>
 			<artifactId>ar.com.oxen.nibiru.targetplatform</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
 		<!-- Non-core Nibiru dependencies -->
 		<dependency>
-			<groupId>ar.com.oxen.nibiru</groupId>
+			<groupId>ar.com.oxen.nibiru.security</groupId>
 			<artifactId>ar.com.oxen.nibiru.security.spring</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>ar.com.oxen.nibiru</groupId>
+			<groupId>ar.com.oxen.nibiru.security</groupId>
 			<artifactId>ar.com.oxen.nibiru.security.db</artifactId>
 			<version>0.2-SNAPSHOT</version>
-		</dependency>
-		<!-- 3rd party dependencies -->
-		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy</artifactId>
-			<version>1.8.0</version>
 		</dependency>
 	</dependencies>
 	<properties>

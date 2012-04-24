@@ -45,45 +45,16 @@
 		</repository>
 	</repositories>
 	<modules>
-		<module>ar.com.oxen.nibiru.session.api</module>
-		<module>ar.com.oxen.nibiru.session.spring.http</module>
-		<module>ar.com.oxen.nibiru.session.spring.scope</module>
-		<module>ar.com.oxen.nibiru.ui.api</module>
-		<module>ar.com.oxen.nibiru.extensionpoint.api</module>
-		<module>ar.com.oxen.nibiru.extensionpoint.spring</module>
-		<module>ar.com.oxen.nibiru.datasource.dbcp</module>
-		<module>ar.com.oxen.nibiru.jpa.spring</module>
-		<module>ar.com.oxen.nibiru.transaction.spring</module>
-		<module>ar.com.oxen.nibiru.antlr.fragment</module>
-		<module>ar.com.oxen.nibiru.ui.vaadin</module>
-		<module>ar.com.oxen.nibiru.application.api</module>
-		<module>ar.com.oxen.nibiru.application.generic</module>
-		<module>ar.com.oxen.nibiru.ui.utils</module>
-		<module>ar.com.oxen.nibiru.crud.manager.api</module>
-		<module>ar.com.oxen.nibiru.crud.manager.jpa</module>
-		<module>ar.com.oxen.nibiru.crud.ui.generic</module>
-		<module>ar.com.oxen.nibiru.crud.ui.api</module>
-		<module>ar.com.oxen.nibiru.module.utils</module>
-		<module>ar.com.oxen.nibiru.crud.bean</module>
-		<module>ar.com.oxen.nibiru.targetplatform</module>
-		<module>ar.com.oxen.nibiru.i18n.api</module>
-		<module>ar.com.oxen.nibiru.security.api</module>
-		<module>ar.com.oxen.nibiru.i18n.generic</module>
-		<module>ar.com.oxen.nibiru.security.dummy</module>
-		<module>ar.com.oxen.nibiru.i18n.session</module>
-		<module>ar.com.oxen.nibiru.conversation.api</module>
-		<module>ar.com.oxen.nibiru.conversation.generic</module>
-		<module>ar.com.oxen.nibiru.sample</module>
-		<module>ar.com.oxen.nibiru.application.generic.presenter</module>
-		<module>ar.com.oxen.nibiru.application.generic.view</module>
-		<module>ar.com.oxen.nibiru.application.generic.view.service</module>
-		<module>ar.com.oxen.nibiru.commons</module>
-		<module>ar.com.oxen.nibiru.crud.utils</module>
-		<module>ar.com.oxen.nibiru.ui.vaadin.fragment</module>
-		<module>ar.com.oxen.nibiru.validation.api</module>
-		<module>ar.com.oxen.nibiru.validation.generic</module>
-		<module>ar.com.oxen.nibiru.security.spring</module>
-		<module>ar.com.oxen.nibiru.security.db</module>
+		<module>ar.com.oxen.nibiru.application</module>
+		<module>ar.com.oxen.nibiru.conversation</module>
+		<module>ar.com.oxen.nibiru.crud</module>
+		<module>ar.com.oxen.nibiru.extensionpoint</module>
+		<module>ar.com.oxen.nibiru.i18n</module>
+		<module>ar.com.oxen.nibiru.security</module>
+		<module>ar.com.oxen.nibiru.session</module>
+		<module>ar.com.oxen.nibiru.support</module>
+		<module>ar.com.oxen.nibiru.ui</module>
+		<module>ar.com.oxen.nibiru.validation</module>
 	</modules>
 	<build>
 		<resources>
