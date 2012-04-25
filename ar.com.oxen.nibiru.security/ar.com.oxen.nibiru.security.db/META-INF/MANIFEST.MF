@@ -4,36 +4,20 @@ Bundle-Name: Database security implementation
 Bundle-SymbolicName: ar.com.oxen.nibiru.security.db
 Bundle-Version: 0.2.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: ar.com.oxen.commons.bean.api,
- ar.com.oxen.commons.eventbus.api,
+Export-Package: ar.com.oxen.nibiru.security.db.domain,
+ ar.com.oxen.nibiru.security.db.module;uses:="ar.com.oxen.nibiru.crud.utils,ar.com.oxen.nibiru.crud.manager.api",
+ ar.com.oxen.nibiru.security.db.spring;uses:="org.springframework.security.core.userdetails",
+ ar.com.oxen.nibiru.security.db.ui.i18n
+Import-Package: ar.com.oxen.commons.eventbus.api,
  ar.com.oxen.nibiru.crud.bean.annotation,
  ar.com.oxen.nibiru.crud.manager.api,
- ar.com.oxen.nibiru.crud.manager.jpa,
  ar.com.oxen.nibiru.crud.ui.api,
  ar.com.oxen.nibiru.crud.utils,
  ar.com.oxen.nibiru.extensionpoint.api,
- ar.com.oxen.nibiru.i18n.api,
- ar.com.oxen.nibiru.i18n.generic,
  ar.com.oxen.nibiru.module.utils,
  ar.com.oxen.nibiru.ui.api.extension,
- ar.com.oxen.nibiru.ui.api.mvp,
  ar.com.oxen.nibiru.ui.utils.extension,
- javassist.util.proxy;version="3.9.0.GA",
  javax.persistence;version="1.0.0",
- org.aopalliance.aop;version="1.0.0",
- org.hibernate.proxy;version="3.3.2.GA",
- org.springframework.aop;version="3.0.6.RELEASE",
- org.springframework.aop.framework;version="3.0.6.RELEASE",
- org.springframework.aop.framework.autoproxy;version="3.0.6.RELEASE",
- org.springframework.beans.factory.config;version="3.0.6.RELEASE",
- org.springframework.orm.jpa.support;version="3.0.6.RELEASE",
- org.springframework.security.authentication;version="3.1.0.RELEASE",
- org.springframework.security.authentication.dao;version="3.1.0.RELEASE",
- org.springframework.security.config;version="3.1.0.RELEASE",
  org.springframework.security.core;version="3.1.0.RELEASE",
  org.springframework.security.core.authority;version="3.1.0.RELEASE",
- org.springframework.security.core.userdetails;version="3.1.0.RELEASE",
- org.springframework.security.core.userdetails.jdbc;version="3.1.0.RELEASE",
- org.springframework.security.web;version="3.1.0.RELEASE",
- org.springframework.transaction;version="3.0.6.RELEASE"
-Export-Package: ar.com.oxen.nibiru.security.db.domain
+ org.springframework.security.core.userdetails;version="3.1.0.RELEASE"

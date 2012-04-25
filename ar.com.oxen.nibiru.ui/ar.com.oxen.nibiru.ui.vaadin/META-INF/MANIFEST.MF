@@ -37,6 +37,7 @@ Import-Package: ar.com.oxen.commons.eventbus.api,
  org.vaadin.peter.contextmenu
 Export-Package: ar.com.oxen.nibiru.ui.vaadin.api,
  ar.com.oxen.nibiru.ui.vaadin.application;uses:="ar.com.oxen.commons.eventbus.api,ar.com.oxen.nibiru.i18n.api,com.vaadin",
+ ar.com.oxen.nibiru.ui.vaadin.view,
  ar.com.oxen.nibiru.ui.vaadin.view.adapter;
   uses:="com.vaadin.data,
    ar.com.oxen.nibiru.ui.api.mvp,

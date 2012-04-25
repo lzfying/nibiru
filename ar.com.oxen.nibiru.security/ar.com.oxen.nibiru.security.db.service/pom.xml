@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>ar.com.oxen.nibiru.security</artifactId>
+		<groupId>ar.com.oxen.nibiru</groupId>
+		<version>0.2-SNAPSHOT</version>
+	</parent>
+	<groupId>ar.com.oxen.nibiru.security</groupId>
+	<artifactId>ar.com.oxen.nibiru.security.db.service</artifactId>
+	<version>0.2-SNAPSHOT</version>
+	<name>ar.com.oxen.nibiru.security.db.service</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.security</groupId>
+			<artifactId>ar.com.oxen.nibiru.security.db</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.i18n</groupId>
+			<artifactId>ar.com.oxen.nibiru.i18n.generic</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.commons</groupId>
+			<artifactId>ar.com.oxen.commons</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- 3rd party -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.beans</artifactId>
+			<version>3.0.6.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>3.1.0.RELEASE</version>
+		</dependency>
+		<!-- Required for namespace handler -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>3.1.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.1.0.RELEASE</version>
+		</dependency>
+	</dependencies>
+</project>

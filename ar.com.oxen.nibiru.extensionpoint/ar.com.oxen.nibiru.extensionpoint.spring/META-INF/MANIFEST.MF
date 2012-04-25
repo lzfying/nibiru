@@ -7,3 +7,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: ar.com.oxen.nibiru.extensionpoint.api,
  org.osgi.framework,
  org.springframework.osgi.context
+Export-Package: ar.com.oxen.nibiru.extensionpoint.spring

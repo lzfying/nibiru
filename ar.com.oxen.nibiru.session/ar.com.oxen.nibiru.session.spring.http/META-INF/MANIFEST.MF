@@ -5,5 +5,6 @@ Bundle-SymbolicName: ar.com.oxen.nibiru.session.spring.http
 Bundle-Version: 0.2.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: ar.com.oxen.nibiru.session.api,
- javax.servlet.http,
- org.springframework.web.context.request
+ javax.servlet.http;version="2.4.0",
+ org.springframework.web.context.request;version="3.0.6.RELEASE"
+Export-Package: ar.com.oxen.nibiru.session.spring.http;uses:="ar.com.oxen.nibiru.session.api"

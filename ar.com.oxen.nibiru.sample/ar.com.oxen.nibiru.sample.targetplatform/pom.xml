@@ -39,12 +39,12 @@
 		<!-- Non-core Nibiru dependencies -->
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.security</groupId>
-			<artifactId>ar.com.oxen.nibiru.security.spring</artifactId>
+			<artifactId>ar.com.oxen.nibiru.security.spring.service</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.security</groupId>
-			<artifactId>ar.com.oxen.nibiru.security.db</artifactId>
+			<artifactId>ar.com.oxen.nibiru.security.db.service</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

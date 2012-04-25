@@ -15,3 +15,4 @@ Import-Package: ar.com.oxen.commons.eventbus.api,
  ar.com.oxen.nibiru.ui.api.mvp,
  ar.com.oxen.nibiru.ui.api.view,
  ar.com.oxen.nibiru.ui.utils.mvp
+Export-Package: ar.com.oxen.nibiru.application.generic.presenter
