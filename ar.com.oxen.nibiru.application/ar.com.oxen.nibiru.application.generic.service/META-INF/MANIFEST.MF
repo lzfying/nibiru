@@ -11,4 +11,5 @@ Import-Package: ar.com.oxen.commons.bean.api,
  ar.com.oxen.nibiru.extensionpoint.api,
  ar.com.oxen.nibiru.i18n.api,
  ar.com.oxen.nibiru.i18n.generic,
+ ar.com.oxen.nibiru.security.api,
  org.springframework.beans.factory.config;version="3.0.6.RELEASE"

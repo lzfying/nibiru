@@ -38,7 +38,7 @@
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>ar.com.oxen.nibiru.crud</groupId>
+			<groupId>ar.com.oxen.nibiru.ui</groupId>
 			<artifactId>ar.com.oxen.nibiru.ui.api</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
@@ -76,6 +76,16 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 			<version>3.1.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>com.springsource.org.hibernate</artifactId>
+			<version>3.3.2.GA</version>
+		</dependency>
+				<dependency>
+			<groupId>org.jboss.javassist</groupId>
+			<artifactId>com.springsource.javassist</artifactId>
+			<version>3.9.0.GA</version>
 		</dependency>
 	</dependencies>
 </project>

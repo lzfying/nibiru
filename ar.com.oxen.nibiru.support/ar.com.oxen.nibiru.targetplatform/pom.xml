@@ -55,7 +55,7 @@
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.crud</groupId>
-			<artifactId>ar.com.oxen.nibiru.crud.manager.jpa.service</artifactId>
+			<artifactId>ar.com.oxen.nibiru.crud.manager.jpa</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
