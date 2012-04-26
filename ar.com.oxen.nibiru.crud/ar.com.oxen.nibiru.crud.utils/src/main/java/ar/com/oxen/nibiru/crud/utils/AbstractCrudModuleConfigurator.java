@@ -96,7 +96,7 @@ public abstract class AbstractCrudModuleConfigurator extends
 		}
 	}
 
-	private void registerMenu(String menuName, String parentMenuExtension,
+	protected void registerMenu(String menuName, String parentMenuExtension,
 			CrudManager<?> crudManager) {
 		this.registerExtension(new SimpleMenuItemExtension(menuName, menuPos++,
 				new SimpleEventBusClickHandler(this.getEventBus(),
@@ -105,13 +105,13 @@ public abstract class AbstractCrudModuleConfigurator extends
 				MenuItemExtension.class);
 	}
 
-	private <K> void registerActions(CrudManager<K> crudManager,
+	protected <K> void registerActions(CrudManager<K> crudManager,
 			CrudActionExtension<K> crudActionExtension) {
 		this.registerExtension(crudActionExtension, crudManager
 				.getEntityTypeName(), CrudActionExtension.class);
 	}
 
-	private <K> void registerManageChildrenAction(String menuName,
+	protected <K> void registerManageChildrenAction(String menuName,
 			CrudManager<?> parentCrudManager,
 			final CrudManager<?> childCrudManager, String parentField) {
 		this.registerExtension(new ManageChildrenCrudActionExtension<Object>(
@@ -120,7 +120,7 @@ public abstract class AbstractCrudModuleConfigurator extends
 				CrudActionExtension.class);
 	}
 
-	private void registerManageEntityEvent(final CrudManager<?> crudManager) {
+	protected void registerManageEntityEvent(final CrudManager<?> crudManager) {
 		this.addEventHandler(ManageCrudEntitiesEvent.class,
 				new EventHandler<ManageCrudEntitiesEvent>() {
 
@@ -133,7 +133,7 @@ public abstract class AbstractCrudModuleConfigurator extends
 				}, crudManager.getEntityTypeName());
 	}
 
-	private void registerEditEntityEvent(final CrudManager<?> crudManager) {
+	protected void registerEditEntityEvent(final CrudManager<?> crudManager) {
 		this.addEventHandler(EditCrudEntityEvent.class,
 				new EventHandler<EditCrudEntityEvent>() {
 
@@ -146,7 +146,7 @@ public abstract class AbstractCrudModuleConfigurator extends
 				}, crudManager.getEntityTypeName());
 	}
 
-	private void registerManageChildEntitiesEvent(
+	protected void registerManageChildEntitiesEvent(
 			CrudManager<?> parentCrudManager,
 			final CrudManager<?> childCrudManager) {
 		this.addEventHandler(ManageChildCrudEntitiesEvent.class,
