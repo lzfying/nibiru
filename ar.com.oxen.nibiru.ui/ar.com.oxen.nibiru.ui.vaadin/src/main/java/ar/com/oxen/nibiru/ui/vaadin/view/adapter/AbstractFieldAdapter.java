@@ -1,9 +1,12 @@
 package ar.com.oxen.nibiru.ui.vaadin.view.adapter;
 
+import ar.com.oxen.nibiru.ui.api.mvp.ValueChangeHandler;
 import ar.com.oxen.nibiru.validation.api.ValidationException;
 import ar.com.oxen.nibiru.validation.api.Validator;
 import ar.com.oxen.nibiru.validation.generic.NotEmptyValidator;
 
+import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.Validator.EmptyValueException;
 import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.terminal.UserError;
@@ -80,5 +83,18 @@ public abstract class AbstractFieldAdapter<T, K extends AbstractField> extends
 		} catch (InvalidValueException e) {
 			throw new ValidationException(e.getMessage());
 		}
+	}
+
+	@Override
+	public void setValueChangeHandler(
+			final ValueChangeHandler valueChangeHandler) {
+		this.getAdapted().addListener(new ValueChangeListener() {
+			private static final long serialVersionUID = -960496278173613224L;
+
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				valueChangeHandler.onValueChange();
+			}
+		});
 	}
 }

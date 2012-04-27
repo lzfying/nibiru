@@ -14,6 +14,9 @@ public class WindowAdapter extends AbstractWindowAdapter {
 
 	@Override
 	public void show() {
+		if (this.getAdapted().getParent() != null) {
+			this.getAdapted().getParent().removeWindow(this.getAdapted());
+		}
 		this.mainWindow.addWindow(this.getAdapted());
 	}
 }
