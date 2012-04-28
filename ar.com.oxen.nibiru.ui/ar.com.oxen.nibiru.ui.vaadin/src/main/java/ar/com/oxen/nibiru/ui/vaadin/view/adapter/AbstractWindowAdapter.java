@@ -24,7 +24,9 @@ public abstract class AbstractWindowAdapter extends AbstractAdapter<Window>
 
 	@Override
 	public void close() {
-		this.getAdapted().getParent().removeWindow(this.getAdapted());
+		if (this.getAdapted().getParent() != null) {
+			this.getAdapted().getParent().removeWindow(this.getAdapted());
+		}
 	}
 
 	@SuppressWarnings("unchecked")
