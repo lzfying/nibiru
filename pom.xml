@@ -69,8 +69,11 @@
 				</includes>
 			</resource>
 			<resource>
-				<directory>src/main/resources</directory>
+				<directory>${basedir}/src/main/resources</directory>
 			</resource>
+			<resource>
+				<directory>${basedir}/src/main/java</directory>
+			</resource>			
 		</resources>
 		<plugins>
 			<plugin>
