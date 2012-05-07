@@ -31,6 +31,9 @@ public class GenericMainView extends AbstractWindowViewAdapter<MainWindow>
 			titleLabel.setValue(messageSource.getMessage(
 					"ar.com.oxen.nibiru.app.info", appName));
 			getAdapted().getInfoContainer().addComponent(titleLabel);
+			
+			/* Set main window title */
+			getAdapted().setValue(appName);
 		}
 		this.userLabel = viewFactory.buildLabel(String.class);
 		getAdapted().getInfoContainer().addComponent(this.userLabel);

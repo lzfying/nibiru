@@ -27,8 +27,6 @@ public class GenericMainPresenter extends AbstractPresenter<MainView> {
 
 	@Override
 	public void go() {
-		this.getView().getTitle().setValue("Aplicacion Nibiru");
-
 		this.getView().setUserName(
 				this.authenticationService.getLoggedUserName());
 

@@ -30,6 +30,9 @@ public class GenericLoginView extends AbstractWindowViewAdapter<MainWindow>
 		if (appName != null) {
 			titleLabel.setValue(appName + " - "
 					+ messageSource.getMessage("ar.com.oxen.nibiru.app.login"));
+			
+			/* Set main window title */
+			getAdapted().setValue(appName);
 		} else {
 			titleLabel.setValue(messageSource
 					.getMessage("ar.com.oxen.nibiru.app.login"));
