@@ -145,9 +145,18 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 
 	@Override
 	public CrudEntity<T> findById(Object id) {
-		T bean = this.entityManager.find(this.persistentClass, id);
-		this.entityManager.refresh(bean);
-		return this.beanToCrudEntity(bean);
+		try {
+			T bean = this.entityManager.find(this.persistentClass, id);
+			this.entityManager.refresh(bean);
+			return this.beanToCrudEntity(bean);
+		} catch (IllegalArgumentException e) {
+			/*
+			 * entityManager.refresh throws this exception if a previously
+			 * deleted entity is intended to be read. Since this is equivalent
+			 * to not finding the entity, null is returned.
+			 */
+			return null;
+		}
 	}
 
 	@SuppressWarnings("unchecked")
