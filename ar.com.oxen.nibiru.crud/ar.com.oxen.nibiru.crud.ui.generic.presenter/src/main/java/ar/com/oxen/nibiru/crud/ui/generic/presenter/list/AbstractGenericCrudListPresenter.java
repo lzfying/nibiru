@@ -74,9 +74,17 @@ public abstract class AbstractGenericCrudListPresenter extends
 		this.refreshTable();
 	}
 
-	private void refreshEntity(Object id) {
+	private void refreshEntity(final Object id) {
 		if (id != null) {
-			CrudEntity<?> entity = this.getCrudManager().findById(id);
+			CrudEntity<?> entity = this.getConversation().execute(
+					new ConversationCallback<CrudEntity<?>>() {
+
+						@Override
+						public CrudEntity<?> doInConversation(
+								Conversation conversation) throws Exception {
+							return getCrudManager().findById(id);
+						}
+					});
 
 			if (entity != null) {
 				for (int n = 0; n < this.entities.size(); n++) {

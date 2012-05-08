@@ -18,23 +18,25 @@ public class ConversationEntityManagerFactory implements EntityManagerFactory {
 
 	@Override
 	public EntityManager createEntityManager() {
-		return this.getEntityManager(new EntityManagerCreator() {
+		EntityManager em = this.getEntityManager(new EntityManagerCreator() {
 			@Override
 			public EntityManager create() {
 				return decorated.createEntityManager();
 			}
-		});
+		}); 
+		return em;
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	public EntityManager createEntityManager(final Map map) {
-		return this.getEntityManager(new EntityManagerCreator() {
+		EntityManager em = this.getEntityManager(new EntityManagerCreator() {
 			@Override
 			public EntityManager create() {
 				return decorated.createEntityManager(map);
 			}
 		});
+		return em;
 	}
 
 	private EntityManager getEntityManager(EntityManagerCreator creationCallback) {

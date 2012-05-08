@@ -217,8 +217,8 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 
 	@SuppressWarnings("unchecked")
 	private <K> List<K> findAll(Class<?> type) {
-		return this.entityManager.createQuery("from " + type.getName())
-				.getResultList();
+		Query query = this.entityManager.createQuery("from " + type.getName());
+		return query.getResultList();
 	}
 
 	private <K> List<CrudEntity<K>> beansToCrudEntities(List<K> beans) {
