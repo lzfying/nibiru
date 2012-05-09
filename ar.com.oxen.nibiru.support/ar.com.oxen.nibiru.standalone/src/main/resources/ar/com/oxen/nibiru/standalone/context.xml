@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+    http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<!-- Vaadin application and view factory -->
+	<bean name="applicationAccessor"
+		class="ar.com.oxen.nibiru.ui.vaadin.application.SimpleApplicationAccessor">
+		<property name="application" ref="vaadinApplication" />
+	</bean>
+
+	<bean name="vaadinApplication" scope="nibiruSession"
+		class="ar.com.oxen.nibiru.ui.vaadin.application.NibiruApplication">
+		<property name="eventBus" ref="eventBus" />
+		<property name="localeHolder" ref="localeHolder" />
+		<aop:scoped-proxy />
+	</bean>
+
+	<bean id="viewFactory" class="ar.com.oxen.nibiru.ui.vaadin.view.VaadinViewFactory">
+		<property name="vaadinApplication" ref="vaadinApplication" />
+	</bean>
+
+	<!-- Commons -->
+	<bean name="eventBus"
+		class="ar.com.oxen.commons.eventbus.impl.simple.SimpleEventBus">
+	</bean>
+
+	<bean id="wrapperFactory"
+		class="ar.com.oxen.commons.bean.impl.simple.SimpleWrapperFactory" />
+
+	<!-- Session -->
+	<bean name="nibiruSession"
+		class="ar.com.oxen.nibiru.session.spring.http.SpringHttpSession" />
+
+	<!-- Conversation -->
+	<bean name="conversationManager"
+		class="ar.com.oxen.nibiru.conversation.generic.GenericConversationManager" />
+
+	<!-- i18n -->
+	<bean name="nibiruMessageSource" class="ar.com.oxen.nibiru.i18n.generic.GenericMessageSource">
+		<property name="localeHolder" ref="localeHolder" />
+		<property name="messageProviders" ref="messageProviders"/>
+	</bean>
+
+	<bean name="localeHolder" class="ar.com.oxen.nibiru.i18n.session.SessionLocaleHolder">
+		<property name="session" ref="nibiruSession" />
+	</bean>
+
+	<!-- Application -->
+	<bean init-method="startup" destroy-method="shutdown"
+		class="ar.com.oxen.nibiru.application.generic.ModuleConfigurator">
+		<property name="eventBus" ref="eventBus" />
+		<property name="viewFactory" ref="applicationViewFactory" />
+		<property name="presenterFactory" ref="applicationPresenterFactory" />
+		<property name="authenticationService" ref="authenticationService" />
+		<property name="extensionPointManager" ref="extensionPointManager" />
+	</bean>
+
+	<bean name="applicationMessageProvider"
+		class="ar.com.oxen.nibiru.i18n.generic.ResourceBundleMessageProvider">
+		<property name="baseName"
+			value="ar.com.oxen.nibiru.application.generic.messages" />
+		<property name="resourceClassLoader">
+			<bean
+				class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+				<property name="targetObject">
+					<bean
+						class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+						<property name="staticMethod" value="java.lang.Thread.currentThread" />
+						<property name="singleton" value="false" />
+					</bean>
+				</property>
+				<property name="targetMethod" value="getContextClassLoader" />
+				<property name="singleton" value="false" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="applicationPresenterFactory"
+		class="ar.com.oxen.nibiru.application.generic.presenter.GenericApplicationPresenterFactory">
+		<property name="extensionPointManager" ref="extensionPointManager" />
+		<property name="authenticationService" ref="authenticationService" />
+		<property name="eventBus" ref="eventBus" />
+	</bean>
+
+	<bean id="applicationViewFactory"
+		class="ar.com.oxen.nibiru.application.generic.view.GenericApplicationViewFactory">
+		<property name="viewFactory" ref="viewFactory" />
+		<property name="messageSource" ref="nibiruMessageSource" />
+		<property name="localeHolder" ref="localeHolder" />
+	</bean>
+
+	<!-- Extension Points -->
+	<bean name="extensionPointManager"
+		class="ar.com.oxen.nibiru.extensionpoint.generic.GenericExtensionPointManager" />
+
+	<!-- CRUD -->
+	<bean id="crudPresenterFactory"
+		class="ar.com.oxen.nibiru.crud.ui.generic.presenter.GenericCrudPresenterFactory">
+		<property name="eventBus" ref="eventBus" />
+		<property name="extensionPointManager" ref="extensionPointManager" />
+		<property name="conversationFactory" ref="conversationManager" />
+	</bean>
+
+	<bean id="crudViewFactory"
+		class="ar.com.oxen.nibiru.crud.ui.generic.view.GenericCrudViewFactory">
+		<property name="viewFactory" ref="viewFactory" />
+		<property name="messageSource" ref="nibiruMessageSource" />
+	</bean>
+
+
+	<!-- Security -->
+	<bean name="authenticationService"
+		class="ar.com.oxen.nibiru.security.spring.SpringAuthenticationService">
+		<property name="session" ref="nibiruSession" />
+		<property name="authenticationManager" ref="authenticationManager" />
+	</bean>
+
+	<bean name="authorizationService"
+		class="ar.com.oxen.nibiru.security.spring.SpringAuthorizationService">
+		<property name="session" ref="nibiruSession" />
+	</bean>
+
+	<bean class="ar.com.oxen.nibiru.i18n.generic.ResourceBundleMessageProvider"
+		name="securityMessageProvider">
+		<property name="baseName"
+			value="ar.com.oxen.nibiru.security.db.ui.i18n.messages" />
+		<property name="resourceClassLoader">
+			<bean
+				class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+				<property name="targetObject">
+					<bean
+						class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+						<property name="staticMethod" value="java.lang.Thread.currentThread" />
+						<property name="singleton" value="false" />
+					</bean>
+				</property>
+				<property name="targetMethod" value="getContextClassLoader" />
+				<property name="singleton" value="false" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean init-method="startup" destroy-method="shutdown"
+		class="ar.com.oxen.nibiru.security.db.module.ModuleConfigurator">
+		<property name="extensionPointManager" ref="extensionPointManager" />
+		<property name="eventBus" ref="eventBus" />
+		<property name="viewFactory" ref="crudViewFactory" />
+		<property name="presenterFactory" ref="crudPresenterFactory" />
+		<property name="userCrudManager" ref="userCrudManager" />
+		<property name="userCrudActionExtension" ref="userCrudManager" />
+		<property name="roleCrudManager" ref="roleCrudManager" />
+		<property name="roleCrudActionExtension" ref="roleCrudManager" />
+	</bean>
+
+	<bean name="userCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
+		<property name="persistentClass" value="ar.com.oxen.nibiru.security.db.domain.User" />
+		<property name="wrapperFactory" ref="wrapperFactory" />
+	</bean>
+
+	<bean name="roleCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
+		<property name="persistentClass" value="ar.com.oxen.nibiru.security.db.domain.Role" />
+		<property name="wrapperFactory" ref="wrapperFactory" />
+	</bean>
+
+	<security:authentication-manager id="authenticationManager">
+		<security:authentication-provider
+			user-service-ref="userService">
+			<!-- <password-encoder hash="md5"/> -->
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+	<bean name="userService"
+		class="ar.com.oxen.nibiru.security.db.spring.JpaUserDetailsService" />
+
+	<!-- Database -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${driverClassName}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+		<property name="initialSize" value="2" />
+		<property name="maxActive" value="5" />
+		<property name="maxIdle" value="2" />
+	</bean>
+
+	<!-- Transaction -->
+	<bean name="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="loadUserByUsername" propagation="REQUIRED" />
+			<tx:method name="find*" propagation="REQUIRED" />
+			<tx:method name="performAction" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames" value="userService,*CrudManager" />
+		<property name="interceptorNames" value="txAdvice" />
+	</bean>
+
+	<!-- JPA -->
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<bean id="entityManagerFactory"
+		class="ar.com.oxen.nibiru.jpa.spring.ConversationEntityManagerFactory">
+		<property name="decorated">
+			<bean
+				class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+				<property name="dataSource" ref="dataSource" />
+			</bean>
+		</property>
+		<property name="conversationAccessor" ref="conversationManager" />
+	</bean>
+
+	<!-- Spring scope -->
+	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+		<property name="scopes">
+			<map>
+				<entry key="nibiruSession">
+					<bean class="ar.com.oxen.nibiru.session.spring.scope.SessionScope">
+						<property name="session" ref="nibiruSession" />
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!-- Spring config -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:config.properties" />
+	</bean>
+</beans>
