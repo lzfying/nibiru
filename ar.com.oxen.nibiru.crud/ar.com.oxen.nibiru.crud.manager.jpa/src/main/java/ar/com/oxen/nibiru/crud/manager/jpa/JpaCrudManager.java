@@ -145,16 +145,11 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 
 	@Override
 	public CrudEntity<T> findById(Object id) {
-		try {
-			T bean = this.entityManager.find(this.persistentClass, id);
-			this.entityManager.refresh(bean);
+		T bean = this
+				.refresh(this.entityManager.find(this.persistentClass, id));
+		if (bean != null) {
 			return this.beanToCrudEntity(bean);
-		} catch (IllegalArgumentException e) {
-			/*
-			 * entityManager.refresh throws this exception if a previously
-			 * deleted entity is intended to be read. Since this is equivalent
-			 * to not finding the entity, null is returned.
-			 */
+		} else {
 			return null;
 		}
 	}
@@ -166,7 +161,7 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 				+ this.persistentClass.getName() + " where " + field
 				+ " = :field");
 		query.setParameter("field", value);
-		return this.beansToCrudEntities(query.getResultList());
+		return this.beansToCrudEntities(this.refresh(query.getResultList()));
 	}
 
 	@Override
@@ -218,7 +213,33 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 	@SuppressWarnings("unchecked")
 	private <K> List<K> findAll(Class<?> type) {
 		Query query = this.entityManager.createQuery("from " + type.getName());
-		return query.getResultList();
+		return this.refresh(query.getResultList());
+	}
+	
+	// TODO: estos dos metodos es un workaround feo, pero el cacheo
+	private <K> List<K> refresh(List<K> beans) {
+		List<K> refreshedList = new ArrayList<K>(beans.size());
+		for (K bean:beans) {
+			K refreshedBean = this.refresh(bean);
+			if (refreshedBean != null) {
+				refreshedList.add(refreshedBean);
+			}
+		}
+		return refreshedList;
+	}
+
+	private <K> K refresh(K bean) {
+		try {
+			this.entityManager.refresh(bean);
+			return bean;
+		} catch (IllegalArgumentException e) {
+			/*
+			 * entityManager.refresh throws this exception if a previously
+			 * deleted entity is intended to be read. Since this is equivalent
+			 * to not finding the entity, null is returned.
+			 */
+			return null;
+		}
 	}
 
 	private <K> List<CrudEntity<K>> beansToCrudEntities(List<K> beans) {
