@@ -12,7 +12,7 @@
 	<artifactId>ar.com.oxen.nibiru.sample.springwebapp</artifactId>
 	<version>0.2-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>ar.com.oxen.nibiru.sample.nspringweapp</name>
+	<name>ar.com.oxen.nibiru.sample.springweapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
