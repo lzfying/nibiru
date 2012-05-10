@@ -1,9 +1,7 @@
 package ar.com.oxen.nibiru.ui.vaadin.view.adapter;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import ar.com.oxen.nibiru.ui.api.view.ComponentContainer;
+import ar.com.oxen.nibiru.ui.api.view.HasMenuItems;
 
 import com.vaadin.Application;
 import com.vaadin.ui.HorizontalLayout;
@@ -11,13 +9,11 @@ import com.vaadin.ui.Layout;
 import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-import com.vaadin.ui.MenuBar.MenuItem;
 
 public class MainWindowAdapter extends AbstractWindowAdapter implements
 		ar.com.oxen.nibiru.ui.api.view.MainWindow {
-	private MenuBar mainMenu;
+	private HasMenuItems mainMenu;
 	private Application vaadinApplication;
-	private List<Integer> positions = new LinkedList<Integer>();
 	private Layout menuContainer;
 	private Layout infoContainer;
 
@@ -37,12 +33,13 @@ public class MainWindowAdapter extends AbstractWindowAdapter implements
 		upperContainer.addComponent(this.infoContainer);
 	}
 
-	private MenuBar getMainMenu() {
+	private HasMenuItems getMainMenu() {
 		if (this.mainMenu == null) {
 			synchronized (this) {
 				if (this.mainMenu == null) {
-					this.mainMenu = new MenuBar();
-					this.menuContainer.addComponent(this.mainMenu);
+					MenuBar menuBar = new MenuBar();
+					this.menuContainer.addComponent(menuBar);
+					this.mainMenu = new MenuBarAdapter(menuBar);
 				}
 			}
 		}
@@ -52,31 +49,12 @@ public class MainWindowAdapter extends AbstractWindowAdapter implements
 	@Override
 	public ar.com.oxen.nibiru.ui.api.view.MenuItem addMenuItem(String caption,
 			int position) {
-		int listPosition = 0;
-		while (listPosition < positions.size()
-				&& positions.get(listPosition) < position) {
-			listPosition++;
-		}
-
-		MenuItem menuItem;
-		if (listPosition < positions.size()) {
-			menuItem = this.getMainMenu().addItemBefore(caption, null, null,
-					this.getMainMenu().getItems().get(listPosition));
-		} else {
-			menuItem = this.getMainMenu().addItem(caption, null);
-		}
-
-		this.positions.add(listPosition, position);
-
-		return new MenuItemAdapter(menuItem);
+		return this.getMainMenu().addMenuItem(caption, position);
 	}
 
 	@Override
 	public void removeMenuItem(ar.com.oxen.nibiru.ui.api.view.MenuItem menuItem) {
-		MenuItemAdapter menuItemAdapter = (MenuItemAdapter) menuItem;
-		this.positions.remove(this.getMainMenu().getItems().indexOf(
-				menuItemAdapter.getAdapted()));
-		this.getMainMenu().removeItem(menuItemAdapter.getAdapted());
+		this.removeMenuItem(menuItem);
 	}
 
 	@Override
