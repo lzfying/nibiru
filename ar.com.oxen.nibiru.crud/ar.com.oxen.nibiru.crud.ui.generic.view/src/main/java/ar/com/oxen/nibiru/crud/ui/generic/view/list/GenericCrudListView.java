@@ -4,6 +4,7 @@ import ar.com.oxen.nibiru.crud.ui.api.CrudViewFactory;
 import ar.com.oxen.nibiru.crud.ui.api.list.CrudListView;
 import ar.com.oxen.nibiru.i18n.api.MessageSource;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
+import ar.com.oxen.nibiru.ui.api.mvp.HasCloseHandler;
 import ar.com.oxen.nibiru.ui.api.view.Button;
 import ar.com.oxen.nibiru.ui.api.view.MenuItem;
 import ar.com.oxen.nibiru.ui.api.view.Panel;
@@ -85,4 +86,8 @@ public class GenericCrudListView extends AbstractWindowViewAdapter<Window>
 		return this.table.getSelectedRow();
 	}
 
+	@Override
+	public HasCloseHandler getCloseHander() {
+		return this.getAdapted();
+	}
 }

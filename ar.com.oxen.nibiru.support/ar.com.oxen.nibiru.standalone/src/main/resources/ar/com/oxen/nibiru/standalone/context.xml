@@ -183,10 +183,10 @@
 	<!-- Database -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="${driverClassName}" />
-		<property name="url" value="${url}" />
-		<property name="username" value="${username}" />
-		<property name="password" value="${password}" />
+		<property name="driverClassName" value="$db{driverClassName}" />
+		<property name="url" value="$db{url}" />
+		<property name="username" value="$db{username}" />
+		<property name="password" value="$db{password}" />
 		<property name="initialSize" value="2" />
 		<property name="maxActive" value="5" />
 		<property name="maxIdle" value="2" />
@@ -242,6 +242,7 @@
 	<!-- Spring config -->
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:config.properties" />
+		<property name="location" value="classpath:database.properties" />
+		<property name="placeholderPrefix" value="$db{" />
 	</bean>
 </beans>

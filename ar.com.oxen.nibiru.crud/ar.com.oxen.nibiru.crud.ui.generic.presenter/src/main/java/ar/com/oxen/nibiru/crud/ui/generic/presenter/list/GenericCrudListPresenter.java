@@ -8,6 +8,7 @@ import ar.com.oxen.nibiru.conversation.api.ConversationCallback;
 import ar.com.oxen.nibiru.crud.manager.api.CrudEntity;
 import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
+import ar.com.oxen.nibiru.ui.api.mvp.CloseHandler;
 
 public class GenericCrudListPresenter extends AbstractGenericCrudListPresenter {
 
@@ -34,5 +35,16 @@ public class GenericCrudListPresenter extends AbstractGenericCrudListPresenter {
 
 	@Override
 	protected <K> void onReturnedEntity(CrudEntity<K> returnedEntity) {
+	}
+
+	@Override
+	protected void customGo() {
+		this.getView().getCloseHander().setCloseHandler(new CloseHandler() {
+
+			@Override
+			public void onClose() {
+				getConversation().end();
+			}
+		});
 	}
 }

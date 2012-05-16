@@ -29,6 +29,16 @@
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>ar.com.oxen.nibiru.sample</groupId>
+			<artifactId>ar.com.oxen.nibiru.sample.datasource.fragment</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.sample</groupId>
+			<artifactId>ar.com.oxen.nibiru.sample.jpa.fragment</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>com.springsource.org.h2</artifactId>
 			<version>1.0.71</version>

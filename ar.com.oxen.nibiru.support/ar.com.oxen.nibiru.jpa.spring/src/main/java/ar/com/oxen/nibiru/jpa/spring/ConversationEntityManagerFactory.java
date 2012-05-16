@@ -23,7 +23,7 @@ public class ConversationEntityManagerFactory implements EntityManagerFactory {
 			public EntityManager create() {
 				return decorated.createEntityManager();
 			}
-		}); 
+		});
 		return em;
 	}
 
@@ -55,21 +55,9 @@ public class ConversationEntityManagerFactory implements EntityManagerFactory {
 						currentConversation.put(ENTITY_MANAGER_KEY,
 								conversationEntityManager);
 
-						final EntityManager finalEntityManager = conversationEntityManager;
 						currentConversation
-								.registerTracker(new ConversationTracker() {
-									@Override
-									public void onEnd(Conversation conversation) {
-										finalEntityManager.flush();
-										finalEntityManager.close();
-									}
-
-									@Override
-									public void onCancel(
-											Conversation conversation) {
-										finalEntityManager.close();
-									}
-								});
+								.registerTracker(new EntityManagerConversationTracker(
+										conversationEntityManager));
 					}
 				}
 			}
@@ -96,5 +84,28 @@ public class ConversationEntityManagerFactory implements EntityManagerFactory {
 	public void setConversationAccessor(
 			ConversationAccessor conversationAccessor) {
 		this.conversationAccessor = conversationAccessor;
+	}
+
+	private static class EntityManagerConversationTracker implements
+			ConversationTracker {
+		private EntityManager entityManager;
+
+		public EntityManagerConversationTracker(EntityManager entityManager) {
+			super();
+			this.entityManager = entityManager;
+		}
+
+		@Override
+		public void onEnd(Conversation conversation) {
+			entityManager.getTransaction().begin();
+			entityManager.flush();
+			entityManager.getTransaction().commit();
+			entityManager.close();
+		}
+
+		@Override
+		public void onCancel(Conversation conversation) {
+			entityManager.close();
+		}
 	}
 }

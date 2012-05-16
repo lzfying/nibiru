@@ -62,6 +62,8 @@ public abstract class AbstractGenericCrudListPresenter extends
 
 		this.getEventBus().addHandler(ModifiedCrudEntityEvent.class,
 				this.modifiedEventHandler, this.getTopic());
+		
+		this.customGo();
 	}
 
 	private void refreshData() {
@@ -132,6 +134,8 @@ public abstract class AbstractGenericCrudListPresenter extends
 	}
 
 	protected abstract <K> List<CrudEntity<K>> findEntities();
+
+	protected abstract void customGo();
 
 	private void addActions(final CrudActionExtension<?> extension) {
 		for (final CrudAction action : extension.getActions()) {

@@ -48,4 +48,10 @@ public class GenericCrudListPresenterByParent extends
 			returnedEntity.setValue(this.parentField, this.parent);
 		}
 	}
+
+	@Override
+	protected void customGo() {
+		// TODO Auto-generated method stub
+		
+	}
 }
