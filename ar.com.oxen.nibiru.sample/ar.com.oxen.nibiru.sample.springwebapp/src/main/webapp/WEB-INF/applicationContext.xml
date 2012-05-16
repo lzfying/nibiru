@@ -11,64 +11,15 @@
     http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 	<import resource="classpath:/ar/com/oxen/nibiru/standalone/context.xml" />
+	<import resource="classpath:/ar/com/oxen/nibiru/sample/module/context.xml" />
 
 	<bean name="messageProviders" class="java.util.ArrayList">
 		<constructor-arg>
 			<list>
+				<ref bean="sampleMessageProvider" />
 				<ref bean="applicationMessageProvider" />
 				<ref bean="securityMessageProvider" />
-				<bean
-					class="ar.com.oxen.nibiru.i18n.generic.ResourceBundleMessageProvider">
-					<property name="baseName"
-						value="ar.com.oxen.nibiru.sample.ui.i18n.messages" />
-					<property name="resourceClassLoader">
-						<bean
-							class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-							<property name="targetObject">
-								<bean
-									class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-									<property name="staticMethod" value="java.lang.Thread.currentThread" />
-									<property name="singleton" value="false" />
-								</bean>
-							</property>
-							<property name="targetMethod" value="getContextClassLoader" />
-							<property name="singleton" value="false" />
-						</bean>
-					</property>
-				</bean>
 			</list>
 		</constructor-arg>
-	</bean>
-
-	<bean init-method="startup" destroy-method="shutdown"
-		class="ar.com.oxen.nibiru.sample.module.ModuleConfigurator">
-		<property name="extensionPointManager" ref="extensionPointManager" />
-		<property name="eventBus" ref="eventBus" />
-		<property name="viewFactory" ref="crudViewFactory" />
-		<property name="presenterFactory" ref="crudPresenterFactory" />
-
-		<property name="subjectCrudManager" ref="subjectCrudManager" />
-		<property name="courseCrudManager" ref="courseCrudManager" />
-		<property name="studentCrudManager" ref="studentCrudManager" />
-
-		<property name="subjectCrudActionExtension" ref="subjectCrudManager" />
-		<property name="courseCrudActionExtension" ref="courseCrudManager" />
-		<property name="studentCrudActionExtension" ref="studentCrudManager" />
-	</bean>
-
-	<!-- CRUD managers -->
-	<bean name="subjectCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
-		<property name="persistentClass" value="ar.com.oxen.nibiru.sample.domain.Subject" />
-		<property name="wrapperFactory" ref="wrapperFactory" />
-	</bean>
-
-	<bean name="courseCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
-		<property name="persistentClass" value="ar.com.oxen.nibiru.sample.domain.Course" />
-		<property name="wrapperFactory" ref="wrapperFactory" />
-	</bean>
-
-	<bean name="studentCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
-		<property name="persistentClass" value="ar.com.oxen.nibiru.sample.domain.Student" />
-		<property name="wrapperFactory" ref="wrapperFactory" />
 	</bean>
 </beans>
