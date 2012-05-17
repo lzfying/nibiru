@@ -6,8 +6,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
@@ -19,6 +21,7 @@ import ar.com.oxen.commons.bean.api.PropertyDescriptor;
 import ar.com.oxen.commons.bean.api.WrapperFactory;
 import ar.com.oxen.nibiru.crud.bean.annotation.Action;
 import ar.com.oxen.nibiru.crud.bean.annotation.Actions;
+import ar.com.oxen.nibiru.crud.bean.annotation.Filter;
 import ar.com.oxen.nibiru.crud.bean.annotation.Show;
 import ar.com.oxen.nibiru.crud.bean.annotation.Widget;
 import ar.com.oxen.nibiru.crud.manager.api.CrudAction;
@@ -29,6 +32,7 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.crud.manager.api.WidgetType;
 import ar.com.oxen.nibiru.crud.utils.SimpleCrudAction;
 import ar.com.oxen.nibiru.crud.utils.SimpleCrudField;
+import org.mvel2.MVEL;
 
 public class JpaCrudManager<T> implements CrudManager<T>,
 		CrudActionExtension<T> {
@@ -37,6 +41,7 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 	private Class<T> persistentClass;
 	private WrapperFactory wrapperFactory;
 	private String pkName;
+	private String filter;
 
 	@Override
 	public String getEntityTypeName() {
@@ -157,9 +162,20 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CrudEntity<T>> findByfield(String field, Object value) {
-		Query query = this.entityManager.createQuery("from "
-				+ this.persistentClass.getName() + " where " + field
-				+ " = :field");
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("from ");
+		sb.append(this.persistentClass.getName());
+		sb.append(" where ");
+		sb.append(field);
+		sb.append(" = :field");
+
+		if (this.filter != null) {
+			sb.append(" and");
+			this.appendFilter(sb);
+		}
+
+		Query query = this.entityManager.createQuery(sb.toString());
 		query.setParameter("field", value);
 		return this.beansToCrudEntities(this.refresh(query.getResultList()));
 	}
@@ -174,7 +190,8 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 			for (Action action : actions.value()) {
 				crudActions.add(new SimpleCrudAction(action.name(), action
 						.requiresEntity(), action.requiresConfirmation(),
-						action.showInList(), action.showInForm(), action.allowedRoles()));
+						action.showInList(), action.showInForm(), action
+								.allowedRoles()));
 			}
 		} else {
 			crudActions = new ArrayList<CrudAction>(0);
@@ -212,14 +229,31 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 
 	@SuppressWarnings("unchecked")
 	private <K> List<K> findAll(Class<?> type) {
-		Query query = this.entityManager.createQuery("from " + type.getName());
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("from ");
+		sb.append(type.getName());
+
+		if (this.filter != null) {
+			sb.append(" where");
+			this.appendFilter(sb);
+		}
+
+		Query query = this.entityManager.createQuery(sb.toString());
 		return this.refresh(query.getResultList());
 	}
-	
+
+	private void appendFilter(StringBuilder sb) {
+		sb.append(" ");
+		Map<String, Object> environment = new HashMap<String, Object>();
+		environment.put("entity", this);
+		sb.append(MVEL.evalToString(this.filter, environment));
+	}
+
 	// TODO: estos dos metodos es un workaround feo, pero el cacheo
 	private <K> List<K> refresh(List<K> beans) {
 		List<K> refreshedList = new ArrayList<K>(beans.size());
-		for (K bean:beans) {
+		for (K bean : beans) {
 			K refreshedBean = this.refresh(bean);
 			if (refreshedBean != null) {
 				refreshedList.add(refreshedBean);
@@ -266,6 +300,11 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 				this.pkName = field.getName();
 				break;
 			}
+		}
+
+		Filter filterAnnotation = persistentClass.getAnnotation(Filter.class);
+		if (filterAnnotation != null) {
+			this.filter = filterAnnotation.value();
 		}
 	}
 

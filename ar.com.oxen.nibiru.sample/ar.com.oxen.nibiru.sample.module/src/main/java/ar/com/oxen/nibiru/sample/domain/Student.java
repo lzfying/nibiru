@@ -10,6 +10,7 @@ import javax.persistence.ManyToMany;
 
 import ar.com.oxen.nibiru.crud.bean.annotation.Action;
 import ar.com.oxen.nibiru.crud.bean.annotation.Actions;
+import ar.com.oxen.nibiru.crud.bean.annotation.Filter;
 import ar.com.oxen.nibiru.crud.bean.annotation.Show;
 import ar.com.oxen.nibiru.crud.bean.annotation.Widget;
 import ar.com.oxen.nibiru.crud.manager.api.CrudAction;
@@ -21,6 +22,7 @@ import ar.com.oxen.nibiru.crud.manager.api.WidgetType;
 		@Action(name = CrudAction.EDIT, requiresEntity = true, showInForm = false),
 		@Action(name = CrudAction.UPDATE, requiresEntity = true, showInList = false),
 		@Action(name = CrudAction.DELETE, requiresEntity = true, showInForm = false, requiresConfirmation = true) })
+@Filter("\" name like 'P%' \"")
 public class Student {
 	@Id
 	@GeneratedValue
