@@ -19,11 +19,15 @@
 
 	<osgi:reference id="authenticationService"
 		interface="ar.com.oxen.nibiru.security.api.AuthenticationService" />
+		
+	<osgi:reference id="authorizationService"
+		interface="ar.com.oxen.nibiru.security.api.AuthorizationService" />
  
 	<bean id="applicationPresenterFactory"
 		class="ar.com.oxen.nibiru.application.generic.presenter.GenericApplicationPresenterFactory">
 		<property name="extensionPointManager" ref="extensionPointManager" />
 		<property name="authenticationService" ref="authenticationService" />
+		<property name="authorizationService" ref="authorizationService" />
 		<property name="eventBus" ref="eventBus" />
 	</bean>
 </beans>

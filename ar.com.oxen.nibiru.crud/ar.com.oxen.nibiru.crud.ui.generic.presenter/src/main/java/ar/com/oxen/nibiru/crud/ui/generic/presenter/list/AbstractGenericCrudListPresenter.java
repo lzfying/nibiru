@@ -17,6 +17,7 @@ import ar.com.oxen.nibiru.crud.ui.api.list.CrudListView;
 import ar.com.oxen.nibiru.crud.ui.generic.presenter.AbstractGenericCrudPresenter;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionTracker;
+import ar.com.oxen.nibiru.security.api.AuthorizationService;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
 
 public abstract class AbstractGenericCrudListPresenter extends
@@ -26,8 +27,21 @@ public abstract class AbstractGenericCrudListPresenter extends
 
 	public AbstractGenericCrudListPresenter(CrudManager<?> crudManager,
 			EventBus eventBus, Conversation conversation,
-			ExtensionPointManager extensionPointManager) {
-		super(crudManager, eventBus, conversation, extensionPointManager);
+			ExtensionPointManager extensionPointManager,
+			AuthorizationService authorizationService) {
+		super(crudManager, eventBus, conversation, extensionPointManager, authorizationService);
+	}
+
+	private boolean isAllowedRole(String[] roles) {
+		if (roles == null || roles.length == 0) {
+			return true;
+		}
+		for (String role : roles){
+			if (getAuthorizationService().isCallerInRole(role)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -41,7 +55,10 @@ public abstract class AbstractGenericCrudListPresenter extends
 
 					@Override
 					public void onRegister(CrudActionExtension<?> extension) {
-						addActions(extension);
+						String[] roles = extension.getAllowedRoles();
+						if (isAllowedRole(roles)) {
+							addActions(extension);							
+						}
 					}
 
 					@Override
@@ -139,25 +156,28 @@ public abstract class AbstractGenericCrudListPresenter extends
 
 	private void addActions(final CrudActionExtension<?> extension) {
 		for (final CrudAction action : extension.getActions()) {
-			if (action.isVisibleInList()) {
-				if (action.isEntityRequired()) {
-					this.getView().addEntityAction(action.getName(),
-							new ClickHandler() {
-								@Override
-								public void onClick() {
-									performAction(action, entities
-											.get(getView().getSelectedRow()),
-											extension);
-								}
-							});
-				} else {
-					this.getView().addGlobalAction(action.getName(),
-							new ClickHandler() {
-								@Override
-								public void onClick() {
-									performAction(action, null, extension);
-								}
-							});
+			String[] roles = action.getAllowedRoles();
+			if(isAllowedRole(roles)) {
+				if (action.isVisibleInList()) {
+					if (action.isEntityRequired()) {
+						this.getView().addEntityAction(action.getName(),
+								new ClickHandler() {
+									@Override
+									public void onClick() {
+										performAction(action, entities
+												.get(getView().getSelectedRow()),
+												extension);
+									}
+								});
+					} else {
+						this.getView().addGlobalAction(action.getName(),
+								new ClickHandler() {
+									@Override
+									public void onClick() {
+										performAction(action, null, extension);
+									}
+								});
+					}
 				}
 			}
 		}

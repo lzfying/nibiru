@@ -17,4 +17,7 @@ public @interface Action {
 	boolean showInList() default true;
 
 	boolean showInForm() default true;
+	
+	String[] allowedRoles() default {};
+	
 }

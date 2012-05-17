@@ -17,18 +17,24 @@ public class ManageChildrenCrudActionExtension<T> implements
 	private String parentField;
 	private String topic;
 	private EventBus eventBus;
+	private String[] allowedRoles;
 
 	public ManageChildrenCrudActionExtension(String actionName,
 			String parentField, String topic, EventBus eventBus) {
+		this(actionName, parentField, topic, eventBus, null);
+	}
+	public ManageChildrenCrudActionExtension(String actionName,
+			String parentField, String topic, EventBus eventBus, String[] allowedRoles) {
 		super();
 		this.actionName = actionName;
 		this.parentField = parentField;
 		this.eventBus = eventBus;
 		this.topic = topic;
+		this.allowedRoles = allowedRoles;
 
 		this.actions = new ArrayList<CrudAction>(1);
 		this.actions.add(new SimpleCrudAction(this.actionName, true, false,
-				true, false));
+				true, false, null));
 	}
 
 	@Override
@@ -41,5 +47,10 @@ public class ManageChildrenCrudActionExtension<T> implements
 		this.eventBus.fireEvent(new ManageChildCrudEntitiesEvent(
 				this.parentField, entity.getEntity()), topic);
 		return null;
+	}
+
+	@Override
+	public String[] getAllowedRoles() {
+		return allowedRoles;
 	}
 }

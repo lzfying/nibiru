@@ -8,6 +8,7 @@ import ar.com.oxen.nibiru.conversation.api.ConversationCallback;
 import ar.com.oxen.nibiru.crud.manager.api.CrudEntity;
 import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
+import ar.com.oxen.nibiru.security.api.AuthorizationService;
 
 public class GenericCrudListPresenterByParent extends
 		AbstractGenericCrudListPresenter {
@@ -17,8 +18,8 @@ public class GenericCrudListPresenterByParent extends
 	public GenericCrudListPresenterByParent(CrudManager<?> crudManager,
 			EventBus eventBus, Conversation conversation,
 			ExtensionPointManager extensionPointManager, String parentField,
-			Object parent) {
-		super(crudManager, eventBus, conversation, extensionPointManager);
+			Object parent, AuthorizationService authorizationService) {
+		super(crudManager, eventBus, conversation, extensionPointManager, authorizationService);
 
 		this.parentField = parentField;
 		this.parent = parent;

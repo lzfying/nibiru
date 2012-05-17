@@ -12,6 +12,7 @@ Import-Package: ar.com.oxen.commons.eventbus.api,
  ar.com.oxen.nibiru.crud.ui.api.form,
  ar.com.oxen.nibiru.crud.ui.api.list,
  ar.com.oxen.nibiru.extensionpoint.api,
+ ar.com.oxen.nibiru.security.api,
  ar.com.oxen.nibiru.ui.api.mvp,
  ar.com.oxen.nibiru.ui.utils.mvp,
  ar.com.oxen.nibiru.validation.api

@@ -18,4 +18,9 @@ public interface MenuItemExtension {
 	 * Method to be executed when the menu is created.
 	 */
 	void onClick();
+	
+	/**
+	 * @return Roles which this extension is available
+	 */
+	 String[] getAllowedRoles();
 }

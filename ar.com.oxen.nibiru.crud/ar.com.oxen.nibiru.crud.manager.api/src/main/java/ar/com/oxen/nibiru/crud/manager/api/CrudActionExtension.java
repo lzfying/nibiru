@@ -31,4 +31,10 @@ public interface CrudActionExtension<T> {
 	 * @return The created/updated entity
 	 */
 	CrudEntity<T> performAction(CrudAction action, CrudEntity<T> entity);
+	
+	/**
+	 * 
+	 * @return allowed roles
+	 */
+	String[] getAllowedRoles();
 }

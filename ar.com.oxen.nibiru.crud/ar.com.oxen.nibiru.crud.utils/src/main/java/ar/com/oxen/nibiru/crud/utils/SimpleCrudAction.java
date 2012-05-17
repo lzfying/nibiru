@@ -8,15 +8,17 @@ public class SimpleCrudAction implements CrudAction {
 	private boolean requiresConfirmation;
 	private boolean showInList;
 	private boolean showInForm;
+	private String[] allowedRoles;
 
 	public SimpleCrudAction(String name, boolean requiresEntity,
-			boolean requiresConfirmation, boolean showInList, boolean showInForm) {
+			boolean requiresConfirmation, boolean showInList, boolean showInForm, String[] allowedRoles) {
 		super();
 		this.name = name;
 		this.requiresEntity = requiresEntity;
 		this.requiresConfirmation = requiresConfirmation;
 		this.showInList = showInList;
 		this.showInForm = showInForm;
+		this.allowedRoles = allowedRoles;
 	}
 
 	@Override
@@ -42,5 +44,10 @@ public class SimpleCrudAction implements CrudAction {
 	@Override
 	public boolean isVisibleInForm() {
 		return this.showInForm;
+	}
+
+	@Override
+	public String[] getAllowedRoles() {
+		return this.allowedRoles;
 	}
 }

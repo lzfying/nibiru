@@ -13,16 +13,19 @@ import ar.com.oxen.nibiru.ui.api.view.HasMenuItems;
 import ar.com.oxen.nibiru.ui.api.view.MenuItem;
 import ar.com.oxen.nibiru.ui.utils.mvp.AbstractPresenter;
 import ar.com.oxen.nibiru.security.api.AuthenticationService;
+import ar.com.oxen.nibiru.security.api.AuthorizationService;
 
 public class GenericMainPresenter extends AbstractPresenter<MainView> {
 	private ExtensionPointManager extensionPointManager;
 	private AuthenticationService authenticationService;
+	private AuthorizationService authorizationService;
 
 	public GenericMainPresenter(ExtensionPointManager extensionPointManager,
-			AuthenticationService authenticationService) {
+			AuthenticationService authenticationService, AuthorizationService authorizationService) {
 		super(null);
 		this.extensionPointManager = extensionPointManager;
 		this.authenticationService = authenticationService;
+		this.authorizationService = authorizationService;
 	}
 
 	@Override
@@ -34,6 +37,17 @@ public class GenericMainPresenter extends AbstractPresenter<MainView> {
 				"ar.com.oxen.nibiru.menu");
 	}
 
+	private boolean isAllowedRole(String[] roles) {
+		if (roles == null || roles.length == 0) {
+			return true;
+		}
+		for (String role : roles){
+			if (authorizationService.isCallerInRole(role)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	private void poulateMenuItem(final HasMenuItems barMenuItem,
 			String extensionName) {
 
@@ -43,6 +57,10 @@ public class GenericMainPresenter extends AbstractPresenter<MainView> {
 
 					@Override
 					public void onRegister(SubMenuExtension subMenuExtension) {
+						String[] roles = subMenuExtension.getAllowedRoles();
+						if (!isAllowedRole(roles)) {
+							return;
+						}
 						MenuItem menuItem = getView().addMenuItem(
 								subMenuExtension.getName(), barMenuItem,
 								subMenuExtension.getPosition());
@@ -66,6 +84,11 @@ public class GenericMainPresenter extends AbstractPresenter<MainView> {
 					@Override
 					public void onRegister(
 							final MenuItemExtension menuItemExtension) {
+						String[] roles = menuItemExtension.getAllowedRoles();
+						if (!isAllowedRole(roles)) {
+							return;
+						}
+
 						MenuItem menuItem = getView().addMenuItem(
 								menuItemExtension.getName(), barMenuItem,
 								menuItemExtension.getPosition());

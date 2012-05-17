@@ -174,7 +174,7 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 			for (Action action : actions.value()) {
 				crudActions.add(new SimpleCrudAction(action.name(), action
 						.requiresEntity(), action.requiresConfirmation(),
-						action.showInList(), action.showInForm()));
+						action.showInList(), action.showInForm(), action.allowedRoles()));
 			}
 		} else {
 			crudActions = new ArrayList<CrudAction>(0);
@@ -275,5 +275,10 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 
 	private interface ShowValidator {
 		boolean mustShow(Show show);
+	}
+
+	@Override
+	public String[] getAllowedRoles() {
+		return null;
 	}
 }

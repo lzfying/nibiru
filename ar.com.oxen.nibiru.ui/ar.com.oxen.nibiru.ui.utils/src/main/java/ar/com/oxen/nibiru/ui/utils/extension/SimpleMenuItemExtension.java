@@ -7,6 +7,7 @@ public class SimpleMenuItemExtension implements MenuItemExtension {
 	private String name;
 	private int position;
 	private ClickHandler clickHandler;
+	private String[] allowedRoles;
 
 	public SimpleMenuItemExtension() {
 		super();
@@ -14,12 +15,18 @@ public class SimpleMenuItemExtension implements MenuItemExtension {
 
 	public SimpleMenuItemExtension(String name, int position,
 			ClickHandler clickHandler) {
+		this(name, position, clickHandler, null);
+	}
+
+	public SimpleMenuItemExtension(String name, int position, 
+			ClickHandler clickHandler, String[] allowedRoles) {
 		super();
 		this.name = name;
 		this.position = position;
-		this.clickHandler = clickHandler;
+		this.clickHandler = clickHandler;		
+		this.allowedRoles = allowedRoles;
 	}
-
+	
 	@Override
 	public String getName() {
 		return this.name;
@@ -45,5 +52,10 @@ public class SimpleMenuItemExtension implements MenuItemExtension {
 
 	public void setPosition(int position) {
 		this.position = position;
+	}
+
+	@Override
+	public String[] getAllowedRoles() {
+		return this.allowedRoles;
 	}
 }

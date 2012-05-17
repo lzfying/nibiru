@@ -8,4 +8,5 @@ Import-Package: ar.com.oxen.commons.eventbus.api,
  ar.com.oxen.nibiru.conversation.api,
  ar.com.oxen.nibiru.crud.ui.api,
  ar.com.oxen.nibiru.crud.ui.generic.presenter,
- ar.com.oxen.nibiru.extensionpoint.api
+ ar.com.oxen.nibiru.extensionpoint.api,
+ ar.com.oxen.nibiru.security.api

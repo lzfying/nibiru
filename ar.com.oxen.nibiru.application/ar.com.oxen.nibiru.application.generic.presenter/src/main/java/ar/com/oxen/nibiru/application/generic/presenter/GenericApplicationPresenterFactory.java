@@ -7,12 +7,14 @@ import ar.com.oxen.nibiru.application.api.login.LoginView;
 import ar.com.oxen.nibiru.application.api.main.MainView;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
 import ar.com.oxen.nibiru.security.api.AuthenticationService;
+import ar.com.oxen.nibiru.security.api.AuthorizationService;
 import ar.com.oxen.nibiru.ui.api.mvp.Presenter;
 
 public class GenericApplicationPresenterFactory implements
 		ApplicationPresenterFactory {
 	private ExtensionPointManager extensionPointManager;
 	private AuthenticationService authenticationService;
+	private AuthorizationService authorizationService;
 	private EventBus eventBus;
 
 	@Override
@@ -24,7 +26,7 @@ public class GenericApplicationPresenterFactory implements
 	@Override
 	public Presenter<MainView> buildMainPresenter() {
 		return new GenericMainPresenter(this.extensionPointManager,
-				this.authenticationService);
+				this.authenticationService, this.authorizationService);
 	}
 
 	@Override
@@ -45,4 +47,9 @@ public class GenericApplicationPresenterFactory implements
 	public void setEventBus(EventBus eventBus) {
 		this.eventBus = eventBus;
 	}
+
+	public void setAuthorizationService(AuthorizationService authorizationService) {
+		this.authorizationService = authorizationService;
+	}
+	
 }

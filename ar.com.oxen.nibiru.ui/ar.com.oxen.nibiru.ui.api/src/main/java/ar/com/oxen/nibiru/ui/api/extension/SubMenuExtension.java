@@ -19,4 +19,10 @@ public interface SubMenuExtension {
 	 *         added.
 	 */
 	String getExtensionPoint();
+
+	/**
+	 * @return Roles which this extension is available
+	 */
+	 String[] getAllowedRoles();
+
 }

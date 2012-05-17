@@ -31,6 +31,14 @@ public abstract class AbstractCrudModuleConfigurator extends
 	}
 
 	/**
+	 * Adds a CRUD menu with allowed roles
+	 */
+	protected <K> void addCrudMenu(String menuName, String parentMenuExtension,
+			CrudManager<K> crudManager, String[] allowedRoles) {
+		this.registerMenu(menuName, parentMenuExtension, crudManager, allowedRoles);
+	}
+
+	/**
 	 * Adds a CRUD without a menu option
 	 */
 	protected <K> void addCrud(CrudManager<K> crudManager,
@@ -46,7 +54,16 @@ public abstract class AbstractCrudModuleConfigurator extends
 	protected <K> void addCrudWithMenu(String menuName,
 			String parentMenuExtension, CrudManager<K> crudManager,
 			CrudActionExtension<K> crudActionExtension) {
-		this.addCrudMenu(menuName, parentMenuExtension, crudManager);
+		this.addCrudWithMenu(menuName, parentMenuExtension, crudManager, crudActionExtension, null);
+	}
+
+	/**
+	 * Adds a CRUD with a menu option and allowed roles
+	 */
+	protected <K> void addCrudWithMenu(String menuName,
+			String parentMenuExtension, CrudManager<K> crudManager,
+			CrudActionExtension<K> crudActionExtension, String[] allowedRoles) {
+		this.addCrudMenu(menuName, parentMenuExtension, crudManager, allowedRoles);
 		this.addCrud(crudManager, crudActionExtension);
 	}
 
@@ -57,8 +74,18 @@ public abstract class AbstractCrudModuleConfigurator extends
 			CrudManager<?> parentCrudManager, String parentField,
 			CrudManager<T> childCrudManager) {
 
+		this.addChildCrudMenu(menuName, parentCrudManager, parentField, childCrudManager, null);
+	}
+
+	/**
+	 * Adds a child menu CRUD menu option and allowed roles
+	 */
+	protected <T> void addChildCrudMenu(String menuName,
+			CrudManager<?> parentCrudManager, String parentField,
+			CrudManager<T> childCrudManager, String[] allowedRoles) {
+
 		this.registerManageChildrenAction(menuName, parentCrudManager,
-				childCrudManager, parentField);
+				childCrudManager, parentField, allowedRoles);
 	}
 
 	/**
@@ -88,6 +115,20 @@ public abstract class AbstractCrudModuleConfigurator extends
 				childCrudActionExtension);
 	}
 
+	/**
+	 * Adds a child menu CRUD with a menu option and allowed roles
+	 */
+	protected <T> void addChildCrudWithMenu(String menuName,
+			CrudManager<?> parentCrudManager, String parentField,
+			CrudManager<T> childCrudManager,
+			CrudActionExtension<T> childCrudActionExtension, String[] allowedRoles) {
+
+		this.addChildCrudMenu(menuName, parentCrudManager, parentField,
+				childCrudManager, allowedRoles);
+		this.addChildCrud(parentCrudManager, childCrudManager,
+				childCrudActionExtension);
+	}
+
 	@Override
 	public void shutdown() {
 		super.shutdown();
@@ -105,6 +146,15 @@ public abstract class AbstractCrudModuleConfigurator extends
 				MenuItemExtension.class);
 	}
 
+	protected void registerMenu(String menuName, String parentMenuExtension,
+			CrudManager<?> crudManager, String[] allowedRoles) {
+		this.registerExtension(new SimpleMenuItemExtension(menuName, menuPos++,
+				new SimpleEventBusClickHandler(this.getEventBus(),
+						ManageCrudEntitiesEvent.class, crudManager
+								.getEntityTypeName()), allowedRoles), parentMenuExtension,
+				MenuItemExtension.class);
+	}
+
 	protected <K> void registerActions(CrudManager<K> crudManager,
 			CrudActionExtension<K> crudActionExtension) {
 		this.registerExtension(crudActionExtension, crudManager
@@ -114,9 +164,15 @@ public abstract class AbstractCrudModuleConfigurator extends
 	protected <K> void registerManageChildrenAction(String menuName,
 			CrudManager<?> parentCrudManager,
 			final CrudManager<?> childCrudManager, String parentField) {
+		this.registerManageChildrenAction(menuName, parentCrudManager, childCrudManager, parentField, null);
+	}
+
+	protected <K> void registerManageChildrenAction(String menuName,
+			CrudManager<?> parentCrudManager,
+			final CrudManager<?> childCrudManager, String parentField, String[] allowedRoles) {
 		this.registerExtension(new ManageChildrenCrudActionExtension<Object>(
 				menuName, parentField, childCrudManager.getEntityTypeName(),
-				this.getEventBus()), parentCrudManager.getEntityTypeName(),
+				this.getEventBus(), allowedRoles), parentCrudManager.getEntityTypeName(),
 				CrudActionExtension.class);
 	}
 

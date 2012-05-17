@@ -6,17 +6,22 @@ public class SimpleSubMenuExtension implements SubMenuExtension {
 	private String name;
 	private String extensionPoint;
 	private int position;
+	private String[] allowedRoles;
 
 	public SimpleSubMenuExtension() {
 		super();
 	}
-
 	public SimpleSubMenuExtension(String name, String extensionPoint,
-			int position) {
+			int position) { 
+		this(name, extensionPoint, position, null);
+	}
+	public SimpleSubMenuExtension(String name, String extensionPoint,
+			int position, String[] allowedRoles) {
 		super();
 		this.name = name;
 		this.extensionPoint = extensionPoint;
 		this.position = position;
+		this.allowedRoles = allowedRoles;
 	}
 
 	public void setName(String name) {
@@ -44,5 +49,9 @@ public class SimpleSubMenuExtension implements SubMenuExtension {
 
 	public void setPosition(int position) {
 		this.position = position;
+	}
+	@Override
+	public String[] getAllowedRoles() {
+		return this.allowedRoles;
 	}
 }

@@ -51,4 +51,6 @@ public interface CrudAction {
 	 * @return True if it must be shown
 	 */
 	boolean isVisibleInForm();
+	
+	String[] getAllowedRoles();
 }

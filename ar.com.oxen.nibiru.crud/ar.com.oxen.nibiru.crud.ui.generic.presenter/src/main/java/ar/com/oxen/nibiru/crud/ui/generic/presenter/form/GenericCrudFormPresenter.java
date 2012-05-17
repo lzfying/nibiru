@@ -11,6 +11,7 @@ import ar.com.oxen.nibiru.crud.ui.api.form.CrudFormView;
 import ar.com.oxen.nibiru.crud.ui.generic.presenter.AbstractGenericCrudPresenter;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionTracker;
+import ar.com.oxen.nibiru.security.api.AuthorizationService;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
 import ar.com.oxen.nibiru.validation.api.Validator;
 
@@ -20,8 +21,8 @@ public class GenericCrudFormPresenter extends
 
 	public GenericCrudFormPresenter(CrudManager<?> crudManager,
 			EventBus eventBus, Conversation conversation, CrudEntity<?> entity,
-			ExtensionPointManager extensionPointManager) {
-		super(crudManager, eventBus, conversation, extensionPointManager);
+			ExtensionPointManager extensionPointManager, AuthorizationService authorizationService) {
+		super(crudManager, eventBus, conversation, extensionPointManager, authorizationService);
 		this.entity = entity;
 	}
 
