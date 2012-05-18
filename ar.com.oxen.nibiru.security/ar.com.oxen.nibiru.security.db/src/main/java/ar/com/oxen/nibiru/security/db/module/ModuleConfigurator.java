@@ -1,6 +1,8 @@
 package ar.com.oxen.nibiru.security.db.module;
 
 import ar.com.oxen.nibiru.crud.utils.AbstractCrudModuleConfigurator;
+import ar.com.oxen.nibiru.security.db.domain.RoleGroup;
+import ar.com.oxen.nibiru.security.db.domain.Role;
 import ar.com.oxen.nibiru.security.db.domain.User;
 import ar.com.oxen.nibiru.ui.api.extension.SubMenuExtension;
 import ar.com.oxen.nibiru.ui.utils.extension.SimpleSubMenuExtension;
@@ -14,8 +16,11 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 	private CrudManager<User> userCrudManager;
 	private CrudActionExtension<User> userCrudActionExtension;
 
-	private CrudManager<User> roleCrudManager;
-	private CrudActionExtension<User> roleCrudActionExtension;
+	private CrudManager<Role> roleCrudManager;
+	private CrudActionExtension<Role> roleCrudActionExtension;
+
+	private CrudManager<RoleGroup> groupCrudManager;
+	private CrudActionExtension<RoleGroup> groupCrudActionExtension;
 
 	@Override
 	protected void configure() {
@@ -28,6 +33,9 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 
 		this.addCrudWithMenu("security.roles", MENU_EXTENSION, this.roleCrudManager,
 				this.roleCrudActionExtension);
+
+		this.addCrudWithMenu("security.groups", MENU_EXTENSION, this.groupCrudManager,
+				this.groupCrudActionExtension);
 	}
 
 	public void setUserCrudManager(CrudManager<User> userCrudManager) {
@@ -39,12 +47,22 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 		this.userCrudActionExtension = userCrudActionExtension;
 	}
 
-	public void setRoleCrudManager(CrudManager<User> roleCrudManager) {
+	public void setRoleCrudManager(CrudManager<Role> roleCrudManager) {
 		this.roleCrudManager = roleCrudManager;
 	}
 
 	public void setRoleCrudActionExtension(
-			CrudActionExtension<User> roleCrudActionExtension) {
+			CrudActionExtension<Role> roleCrudActionExtension) {
 		this.roleCrudActionExtension = roleCrudActionExtension;
 	}
+
+	public void setGroupCrudManager(CrudManager<RoleGroup> groupCrudManager) {
+		this.groupCrudManager = groupCrudManager;
+	}
+
+	public void setGroupCrudActionExtension(
+			CrudActionExtension<RoleGroup> groupCrudActionExtension) {
+		this.groupCrudActionExtension = groupCrudActionExtension;
+	}
+	
 }
