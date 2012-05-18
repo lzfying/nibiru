@@ -17,11 +17,11 @@ import ar.com.oxen.nibiru.crud.manager.api.WidgetType;
 
 @Entity
 @Actions({
-		@Action(name = CrudAction.NEW, requiresEntity = false, showInForm = false),
-		@Action(name = CrudAction.EDIT, requiresEntity = true, showInForm = false),
-		@Action(name = CrudAction.UPDATE, requiresEntity = true, showInList = false),
-		@Action(name = CrudAction.DELETE, requiresEntity = true, showInForm = false, requiresConfirmation = true) })
-public class User {
+	@Action(name = CrudAction.NEW, requiresEntity = false, showInForm = false),
+	@Action(name = CrudAction.EDIT, requiresEntity = true, showInForm = false),
+	@Action(name = CrudAction.UPDATE, requiresEntity = true, showInList = false),
+	@Action(name = CrudAction.DELETE, requiresEntity = true, showInForm = false, requiresConfirmation = true) })
+public class RoleGroup {
 	@Id
 	@GeneratedValue
 	private Integer id;
@@ -31,20 +31,15 @@ public class User {
 	@Widget(type = WidgetType.TEXT_FIELD, maxLength = 50)
 	private String name;
 
-	@Column
+	@ManyToMany
 	@Show(order = 20, inList = false)
-	@Widget(type = WidgetType.PASSWORD_FIELD, maxLength = 50)
-	private String password;
+	@Widget(type = WidgetType.MULTISELECT)
+	private Set<Role> roles;
 
 	@ManyToMany
 	@Show(order = 30, inList = false)
 	@Widget(type = WidgetType.MULTISELECT)
-	private Set<Role> roles;
-
-	@ManyToMany(mappedBy="users")
-	@Show(order = 40, inList = false)
-	@Widget(type = WidgetType.MULTISELECT)
-	private Set<RoleGroup> groups;
+	private Set<User> users;
 
 	public Integer getId() {
 		return id;
@@ -62,14 +57,6 @@ public class User {
 		this.name = name;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public Set<Role> getRoles() {
 		return roles;
 	}
@@ -78,12 +65,12 @@ public class User {
 		this.roles = roles;
 	}
 
-	public Set<RoleGroup> getGroups() {
-		return groups;
+	public Set<User> getUsers() {
+		return users;
 	}
 
-	public void setGroups(Set<RoleGroup> groups) {
-		this.groups = groups;
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 	@Override
@@ -96,6 +83,7 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -107,12 +95,19 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		RoleGroup other = (RoleGroup) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
 		return true;
 	}
+
+	
 }

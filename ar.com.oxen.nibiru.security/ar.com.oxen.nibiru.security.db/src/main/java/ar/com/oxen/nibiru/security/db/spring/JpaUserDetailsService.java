@@ -1,7 +1,7 @@
 package ar.com.oxen.nibiru.security.db.spring;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import ar.com.oxen.nibiru.security.db.domain.RoleGroup;
 import ar.com.oxen.nibiru.security.db.domain.Role;
 import ar.com.oxen.nibiru.security.db.domain.User;
 
@@ -31,11 +32,16 @@ public class JpaUserDetailsService implements UserDetailsService {
 			query.setParameter(1, username);
 			User user = (User) query.getSingleResult();
 
-			Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(
+			Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>(
 					user.getRoles().size());
 
 			for (Role role : user.getRoles()) {
 				authorities.add(new SimpleGrantedAuthority(role.getName()));
+			}
+			for (RoleGroup group: user.getGroups()) {
+				for (Role role : group.getRoles()) {
+					authorities.add(new SimpleGrantedAuthority(role.getName()));
+				}
 			}
 
 			return new org.springframework.security.core.userdetails.User(
