@@ -10,7 +10,6 @@
 	</parent>
 	<groupId>ar.com.oxen.nibiru.application</groupId>
 	<artifactId>ar.com.oxen.nibiru.application.generic.service</artifactId>
-	<version>0.2-SNAPSHOT</version>
 	<name>ar.com.oxen.nibiru.application.generic.service</name>
 	<url>http://maven.apache.org</url>
 	<properties>

@@ -10,7 +10,6 @@
 	</parent>
 	<groupId>ar.com.oxen.nibiru.session</groupId>
 	<artifactId>ar.com.oxen.nibiru.session.spring.http.service</artifactId>
-	<version>0.2-SNAPSHOT</version>
 	<name>ar.com.oxen.nibiru.session.http.service</name>
 	<url>http://maven.apache.org</url>
 	<properties>

@@ -10,7 +10,6 @@
 	</parent>
 	<groupId>ar.com.oxen.nibiru.ui</groupId>
 	<artifactId>ar.com.oxen.nibiru.ui.utils</artifactId>
-	<version>0.2-SNAPSHOT</version>
 	<name>ar.com.oxen.nibiru.ui.utils</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>

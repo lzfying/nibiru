@@ -10,7 +10,6 @@
 	</parent>
 	<groupId>ar.com.oxen.nibiru.sample</groupId>
 	<artifactId>ar.com.oxen.nibiru.sample.module</artifactId>
-	<version>0.2-SNAPSHOT</version>
 	<name>ar.com.oxen.nibiru.sample.module</name>
 	<url>http://maven.apache.org</url>
 	<properties>
