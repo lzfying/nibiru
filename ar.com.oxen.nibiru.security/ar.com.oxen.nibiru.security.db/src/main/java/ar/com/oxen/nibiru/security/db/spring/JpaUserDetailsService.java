@@ -31,6 +31,8 @@ public class JpaUserDetailsService implements UserDetailsService {
 					.createQuery("from User where name = ?");
 			query.setParameter(1, username);
 			User user = (User) query.getSingleResult();
+			
+			this.entityManager.refresh(user); // Damn Hibernate cache
 
 			Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>(
 					user.getRoles().size());
