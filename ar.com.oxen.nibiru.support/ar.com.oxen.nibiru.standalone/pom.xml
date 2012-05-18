@@ -20,87 +20,87 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.ui</groupId>
 			<artifactId>ar.com.oxen.nibiru.ui.vaadin</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.session</groupId>
 			<artifactId>ar.com.oxen.nibiru.session.spring.http</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.session</groupId>
 			<artifactId>ar.com.oxen.nibiru.session.spring.scope</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.conversation</groupId>
 			<artifactId>ar.com.oxen.nibiru.conversation.generic</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.ui</groupId>
 			<artifactId>ar.com.oxen.nibiru.ui.vaadin.fragment</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.i18n</groupId>
 			<artifactId>ar.com.oxen.nibiru.i18n.generic</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.i18n</groupId>
 			<artifactId>ar.com.oxen.nibiru.i18n.session</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.application</groupId>
 			<artifactId>ar.com.oxen.nibiru.application.generic</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.application</groupId>
 			<artifactId>ar.com.oxen.nibiru.application.generic.presenter</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.application</groupId>
 			<artifactId>ar.com.oxen.nibiru.application.generic.view</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.extensionpoint</groupId>
 			<artifactId>ar.com.oxen.nibiru.extensionpoint.generic</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.security</groupId>
 			<artifactId>ar.com.oxen.nibiru.security.spring</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.security</groupId>
 			<artifactId>ar.com.oxen.nibiru.security.db</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.crud</groupId>
 			<artifactId>ar.com.oxen.nibiru.crud.ui.generic.presenter</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.crud</groupId>
 			<artifactId>ar.com.oxen.nibiru.crud.ui.generic.view</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.support</groupId>
 			<artifactId>ar.com.oxen.nibiru.jpa.spring</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.support</groupId>
 			<artifactId>ar.com.oxen.nibiru.transaction.spring</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>

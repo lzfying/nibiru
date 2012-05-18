@@ -18,12 +18,12 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.i18n</groupId>
 			<artifactId>ar.com.oxen.nibiru.i18n.api</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.session</groupId>
 			<artifactId>ar.com.oxen.nibiru.session.api</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 	</dependencies>
 </project>

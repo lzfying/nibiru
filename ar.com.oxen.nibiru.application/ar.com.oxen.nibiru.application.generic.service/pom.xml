@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.application</groupId>
 			<artifactId>ar.com.oxen.nibiru.application.generic</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 	</dependencies>
 </project>

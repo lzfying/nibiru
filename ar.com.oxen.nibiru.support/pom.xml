@@ -8,7 +8,6 @@
 	</parent>
 	<groupId>ar.com.oxen.nibiru</groupId>
 	<artifactId>ar.com.oxen.nibiru.support</artifactId>
-	<version>0.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>ar.com.oxen.nibiru.support</name>
 	<url>http://maven.apache.org</url>

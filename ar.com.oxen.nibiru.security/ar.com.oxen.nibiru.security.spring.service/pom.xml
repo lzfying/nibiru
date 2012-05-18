@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.security</groupId>
 			<artifactId>ar.com.oxen.nibiru.security.spring</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>

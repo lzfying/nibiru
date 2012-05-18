@@ -17,12 +17,12 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.session</groupId>
 			<artifactId>ar.com.oxen.nibiru.session.api</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.conversation</groupId>
 			<artifactId>ar.com.oxen.nibiru.conversation.api</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.persistence</groupId>

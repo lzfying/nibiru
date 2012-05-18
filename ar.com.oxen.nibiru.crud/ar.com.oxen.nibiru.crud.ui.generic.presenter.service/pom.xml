@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.crud</groupId>
 			<artifactId>ar.com.oxen.nibiru.crud.ui.generic.presenter</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 	</dependencies>
 </project>

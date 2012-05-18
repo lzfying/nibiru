@@ -20,52 +20,52 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.crud</groupId>
 			<artifactId>ar.com.oxen.nibiru.crud.bean</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.crud</groupId>
 			<artifactId>ar.com.oxen.nibiru.crud.manager.jpa</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.security</groupId>
 			<artifactId>ar.com.oxen.nibiru.security.api</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.crud</groupId>
 			<artifactId>ar.com.oxen.nibiru.crud.manager.api</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.support</groupId>
 			<artifactId>ar.com.oxen.nibiru.module.utils</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.crud</groupId>
 			<artifactId>ar.com.oxen.nibiru.crud.ui.api</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.crud</groupId>
 			<artifactId>ar.com.oxen.nibiru.crud.utils</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.ui</groupId>
 			<artifactId>ar.com.oxen.nibiru.ui.utils</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.extensionpoint</groupId>
 			<artifactId>ar.com.oxen.nibiru.extensionpoint.api</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.validation</groupId>
 			<artifactId>ar.com.oxen.nibiru.validation.generic</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.persistence</groupId>

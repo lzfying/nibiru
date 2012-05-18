@@ -20,7 +20,7 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.extensionpoint</groupId>
 			<artifactId>ar.com.oxen.nibiru.extensionpoint.api</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.googlecode.guava-osgi</groupId>

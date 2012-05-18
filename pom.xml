@@ -7,6 +7,9 @@
 	<version>0.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Nibiru</name>
+	<properties>
+		<nibiru-version>0.2-SNAPSHOT</nibiru-version>
+	</properties>
 	<repositories>
 		<repository>
 			<id>repo1.maven.org</id>

@@ -9,7 +9,6 @@
 	</parent>
 	<groupId>ar.com.oxen.nibiru</groupId>
 	<artifactId>ar.com.oxen.nibiru.sample</artifactId>
-	<version>0.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Nibiru Sample</name>
 	<modules>

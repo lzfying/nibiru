@@ -17,37 +17,37 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.crud</groupId>
 			<artifactId>ar.com.oxen.nibiru.crud.ui.api</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.crud</groupId>
 			<artifactId>ar.com.oxen.nibiru.crud.manager.api</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.conversation</groupId>
 			<artifactId>ar.com.oxen.nibiru.conversation.api</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.ui</groupId>
 			<artifactId>ar.com.oxen.nibiru.ui.api</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.ui</groupId>
 			<artifactId>ar.com.oxen.nibiru.ui.utils</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.extensionpoint</groupId>
 			<artifactId>ar.com.oxen.nibiru.extensionpoint.api</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.validation</groupId>
 			<artifactId>ar.com.oxen.nibiru.validation.api</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.commons</groupId>

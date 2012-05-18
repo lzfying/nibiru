@@ -18,34 +18,34 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.sample</groupId>
 			<artifactId>ar.com.oxen.nibiru.sample.module</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.sample</groupId>
 			<artifactId>ar.com.oxen.nibiru.sample.datasource.fragment</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.sample</groupId>
 			<artifactId>ar.com.oxen.nibiru.sample.jpa.fragment</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<!-- Core Nibiru target platform and dependencies -->
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.support</groupId>
 			<artifactId>ar.com.oxen.nibiru.targetplatform</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<!-- Non-core Nibiru dependencies -->
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.security</groupId>
 			<artifactId>ar.com.oxen.nibiru.security.spring.service</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.security</groupId>
 			<artifactId>ar.com.oxen.nibiru.security.db.service</artifactId>
-			<version>0.2-SNAPSHOT</version>
+			<version>${nibiru-version}</version>
 		</dependency>
 	</dependencies>
 	<properties>
