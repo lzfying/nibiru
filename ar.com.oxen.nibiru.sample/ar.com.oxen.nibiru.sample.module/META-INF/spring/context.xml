@@ -35,6 +35,9 @@
 
 	<osgi:reference id="wrapperFactory"
 		interface="ar.com.oxen.commons.bean.api.WrapperFactory" />
+		
+	<osgi:reference id="authorizationService"
+		interface="ar.com.oxen.nibiru.security.api.AuthorizationService" />
 
 	<!-- TX and JPA support -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">

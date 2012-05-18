@@ -58,5 +58,6 @@
 	<bean name="studentCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
 		<property name="persistentClass" value="ar.com.oxen.nibiru.sample.domain.Student" />
 		<property name="wrapperFactory" ref="wrapperFactory" />
+		<property name="authorizationService" ref="authorizationService" />
 	</bean>
 </beans>

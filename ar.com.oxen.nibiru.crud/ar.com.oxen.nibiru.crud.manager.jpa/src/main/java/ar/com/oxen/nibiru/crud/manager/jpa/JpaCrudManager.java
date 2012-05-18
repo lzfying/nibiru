@@ -17,6 +17,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
+import org.mvel2.MVEL;
+
 import ar.com.oxen.commons.bean.api.PropertyDescriptor;
 import ar.com.oxen.commons.bean.api.WrapperFactory;
 import ar.com.oxen.nibiru.crud.bean.annotation.Action;
@@ -32,7 +34,7 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.crud.manager.api.WidgetType;
 import ar.com.oxen.nibiru.crud.utils.SimpleCrudAction;
 import ar.com.oxen.nibiru.crud.utils.SimpleCrudField;
-import org.mvel2.MVEL;
+import ar.com.oxen.nibiru.security.api.AuthorizationService;
 
 public class JpaCrudManager<T> implements CrudManager<T>,
 		CrudActionExtension<T> {
@@ -42,6 +44,7 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 	private WrapperFactory wrapperFactory;
 	private String pkName;
 	private String filter;
+	private AuthorizationService authorizationService;
 
 	@Override
 	public String getEntityTypeName() {
@@ -170,9 +173,10 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 		sb.append(field);
 		sb.append(" = :field");
 
-		if (this.filter != null) {
-			sb.append(" and");
-			this.appendFilter(sb);
+		String computedFilter = this.computeFilter();
+		if (computedFilter != null) {
+			sb.append(" and ");
+			sb.append(computedFilter);
 		}
 
 		Query query = this.entityManager.createQuery(sb.toString());
@@ -234,20 +238,32 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 		sb.append("from ");
 		sb.append(type.getName());
 
-		if (this.filter != null) {
-			sb.append(" where");
-			this.appendFilter(sb);
+		String computedFilter = this.computeFilter();
+		if (computedFilter != null) {
+			sb.append(" where ");
+			sb.append(computedFilter);
 		}
 
 		Query query = this.entityManager.createQuery(sb.toString());
 		return this.refresh(query.getResultList());
 	}
 
-	private void appendFilter(StringBuilder sb) {
-		sb.append(" ");
-		Map<String, Object> environment = new HashMap<String, Object>();
-		environment.put("entity", this);
-		sb.append(MVEL.evalToString(this.filter, environment));
+	private String computeFilter() {
+		if (this.filter != null) {
+			Map<String, Object> environment = new HashMap<String, Object>();
+			environment.put("authz", this.authorizationService);
+
+			Object computedFilter = MVEL.eval(this.filter, environment);
+
+			if (computedFilter == null
+					|| computedFilter.toString().trim().equals("")) {
+				return null;
+			} else {
+				return computedFilter.toString();
+			}
+		} else {
+			return null;
+		}
 	}
 
 	// TODO: estos dos metodos es un workaround feo, pero el cacheo
@@ -310,6 +326,11 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 
 	public void setWrapperFactory(WrapperFactory wrapperFactory) {
 		this.wrapperFactory = wrapperFactory;
+	}
+
+	public void setAuthorizationService(
+			AuthorizationService authorizationService) {
+		this.authorizationService = authorizationService;
 	}
 
 	private interface ShowValidator {

@@ -28,6 +28,11 @@
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>ar.com.oxen.nibiru.security</groupId>
+			<artifactId>ar.com.oxen.nibiru.security.api</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>ar.com.oxen.commons</groupId>
 			<artifactId>ar.com.oxen.commons</artifactId>
 			<version>1.0</version>

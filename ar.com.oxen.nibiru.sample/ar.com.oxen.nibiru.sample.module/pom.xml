@@ -24,6 +24,16 @@
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.crud</groupId>
+			<artifactId>ar.com.oxen.nibiru.crud.jpa</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.security</groupId>
+			<artifactId>ar.com.oxen.nibiru.security.api</artifactId>
+			<version>0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.crud</groupId>
 			<artifactId>ar.com.oxen.nibiru.crud.manager.api</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
