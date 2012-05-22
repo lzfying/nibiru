@@ -158,6 +158,8 @@
 		<property name="userCrudActionExtension" ref="userCrudManager" />
 		<property name="roleCrudManager" ref="roleCrudManager" />
 		<property name="roleCrudActionExtension" ref="roleCrudManager" />
+		<property name="groupCrudManager" ref="roleGroupCrudManager" />
+		<property name="groupCrudActionExtension" ref="roleGroupCrudManager" />
 	</bean>
 
 	<bean name="userCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
@@ -167,6 +169,11 @@
 
 	<bean name="roleCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
 		<property name="persistentClass" value="ar.com.oxen.nibiru.security.db.domain.Role" />
+		<property name="wrapperFactory" ref="wrapperFactory" />
+	</bean>
+
+	<bean name="roleGroupCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
+		<property name="persistentClass" value="ar.com.oxen.nibiru.security.db.domain.RoleGroup" />
 		<property name="wrapperFactory" ref="wrapperFactory" />
 	</bean>
 
