@@ -107,6 +107,7 @@
 		<property name="eventBus" ref="eventBus" />
 		<property name="extensionPointManager" ref="extensionPointManager" />
 		<property name="conversationFactory" ref="conversationManager" />
+		<property name="authorizationService" ref="authorizationService" />
 	</bean>
 
 	<bean id="crudViewFactory"
