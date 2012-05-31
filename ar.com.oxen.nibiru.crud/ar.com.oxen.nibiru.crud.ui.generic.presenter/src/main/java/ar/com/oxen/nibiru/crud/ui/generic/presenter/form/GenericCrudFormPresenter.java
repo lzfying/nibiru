@@ -21,8 +21,10 @@ public class GenericCrudFormPresenter extends
 
 	public GenericCrudFormPresenter(CrudManager<?> crudManager,
 			EventBus eventBus, Conversation conversation, CrudEntity<?> entity,
-			ExtensionPointManager extensionPointManager, AuthorizationService authorizationService) {
-		super(crudManager, eventBus, conversation, extensionPointManager, authorizationService);
+			ExtensionPointManager extensionPointManager,
+			AuthorizationService authorizationService) {
+		super(crudManager, eventBus, conversation, extensionPointManager,
+				authorizationService);
 		this.entity = entity;
 	}
 
@@ -85,7 +87,7 @@ public class GenericCrudFormPresenter extends
 		for (final CrudAction action : extension.getActions()) {
 			if (action.isVisibleInForm()) {
 				this.getView().addEntityAction(action.getName(),
-						new ClickHandler() {
+						action.isConfirmationRequired(), new ClickHandler() {
 							@Override
 							public void onClick() {
 								if (getView().isValid()) {

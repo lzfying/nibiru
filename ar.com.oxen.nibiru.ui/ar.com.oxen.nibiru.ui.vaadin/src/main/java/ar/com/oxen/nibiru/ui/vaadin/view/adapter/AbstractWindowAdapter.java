@@ -49,4 +49,14 @@ public abstract class AbstractWindowAdapter extends AbstractAdapter<Window>
 			}
 		});
 	}
+
+	@Override
+	public boolean isModal() {
+		return this.getAdapted().isModal();
+	}
+
+	@Override
+	public void setModal(boolean modal) {
+		this.getAdapted().setModal(modal);
+	}
 }

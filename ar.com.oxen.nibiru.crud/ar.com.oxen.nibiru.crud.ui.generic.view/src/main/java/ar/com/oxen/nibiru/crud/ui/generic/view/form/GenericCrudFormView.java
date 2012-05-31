@@ -7,9 +7,9 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudEntity;
 import ar.com.oxen.nibiru.crud.manager.api.CrudField;
 import ar.com.oxen.nibiru.crud.ui.api.CrudViewFactory;
 import ar.com.oxen.nibiru.crud.ui.api.form.CrudFormView;
+import ar.com.oxen.nibiru.crud.ui.generic.view.AbstractCrudView;
 import ar.com.oxen.nibiru.i18n.api.MessageSource;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
-import ar.com.oxen.nibiru.ui.api.view.Button;
 import ar.com.oxen.nibiru.ui.api.view.ComboBox;
 import ar.com.oxen.nibiru.ui.api.view.FormField;
 import ar.com.oxen.nibiru.ui.api.view.FormPanel;
@@ -19,13 +19,11 @@ import ar.com.oxen.nibiru.ui.api.view.PasswordField;
 import ar.com.oxen.nibiru.ui.api.view.TextArea;
 import ar.com.oxen.nibiru.ui.api.view.TextField;
 import ar.com.oxen.nibiru.ui.api.view.ViewFactory;
-import ar.com.oxen.nibiru.ui.api.view.Window;
-import ar.com.oxen.nibiru.ui.utils.view.AbstractWindowViewAdapter;
 import ar.com.oxen.nibiru.validation.api.ValidationException;
 import ar.com.oxen.nibiru.validation.api.Validator;
 
-public class GenericCrudFormView extends AbstractWindowViewAdapter<Window>
-		implements CrudFormView {
+public class GenericCrudFormView extends AbstractCrudView implements
+		CrudFormView {
 	private Panel fieldsTabPanel;
 	private Map<String, FormPanel> fieldsPanels;
 	private Panel actionsPanel;
@@ -166,12 +164,10 @@ public class GenericCrudFormView extends AbstractWindowViewAdapter<Window>
 	}
 
 	@Override
-	public void addEntityAction(String label, ClickHandler clickHandler) {
-		Button button = this.getViewFactory().buildButton();
-		button.setValue(this.getMessageSource().getMessage(
-				CrudViewFactory.I18N_ACTION_PREFIX + label));
-		button.setClickHandler(clickHandler);
-		this.actionsPanel.addComponent(button);
+	public void addEntityAction(String label, boolean requiresConfirmation,
+			ClickHandler clickHandler) {
+		this.actionsPanel.addComponent(this.createActionButton(label,
+				requiresConfirmation, clickHandler));
 	}
 
 	@SuppressWarnings("unchecked")

@@ -13,14 +13,15 @@ public interface CrudFormView extends View, HasCloseWidget {
 	void addField(CrudField crudField, CrudEntity<?> crudEntity);
 
 	void setFieldValue(String fieldName, Object value);
-	
+
 	Object getFieldValue(String fieldName);
-	
-	void addEntityAction(String label, ClickHandler clickHandler);
+
+	void addEntityAction(String label, boolean requiresConfirmation,
+			ClickHandler clickHandler);
 
 	void addValidator(String name, Validator<?> validator);
 
 	void removeValidator(String name, Validator<?> validator);
-	
+
 	boolean isValid();
 }

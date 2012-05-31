@@ -29,14 +29,15 @@ public abstract class AbstractGenericCrudListPresenter extends
 			EventBus eventBus, Conversation conversation,
 			ExtensionPointManager extensionPointManager,
 			AuthorizationService authorizationService) {
-		super(crudManager, eventBus, conversation, extensionPointManager, authorizationService);
+		super(crudManager, eventBus, conversation, extensionPointManager,
+				authorizationService);
 	}
 
 	private boolean isAllowedRole(String[] roles) {
 		if (roles == null || roles.length == 0) {
 			return true;
 		}
-		for (String role : roles){
+		for (String role : roles) {
 			if (getAuthorizationService().isCallerInRole(role)) {
 				return true;
 			}
@@ -57,7 +58,7 @@ public abstract class AbstractGenericCrudListPresenter extends
 					public void onRegister(CrudActionExtension<?> extension) {
 						String[] roles = extension.getAllowedRoles();
 						if (isAllowedRole(roles)) {
-							addActions(extension);							
+							addActions(extension);
 						}
 					}
 
@@ -79,7 +80,7 @@ public abstract class AbstractGenericCrudListPresenter extends
 
 		this.getEventBus().addHandler(ModifiedCrudEntityEvent.class,
 				this.modifiedEventHandler, this.getTopic());
-		
+
 		this.customGo();
 	}
 
@@ -157,20 +158,23 @@ public abstract class AbstractGenericCrudListPresenter extends
 	private void addActions(final CrudActionExtension<?> extension) {
 		for (final CrudAction action : extension.getActions()) {
 			String[] roles = action.getAllowedRoles();
-			if(isAllowedRole(roles)) {
+			if (isAllowedRole(roles)) {
 				if (action.isVisibleInList()) {
 					if (action.isEntityRequired()) {
 						this.getView().addEntityAction(action.getName(),
+								action.isConfirmationRequired(),
 								new ClickHandler() {
 									@Override
 									public void onClick() {
-										performAction(action, entities
-												.get(getView().getSelectedRow()),
+										performAction(action,
+												entities.get(getView()
+														.getSelectedRow()),
 												extension);
 									}
 								});
 					} else {
 						this.getView().addGlobalAction(action.getName(),
+								action.isConfirmationRequired(),
 								new ClickHandler() {
 									@Override
 									public void onClick() {

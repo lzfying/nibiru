@@ -8,17 +8,19 @@ import ar.com.oxen.nibiru.ui.api.mvp.View;
 public interface CrudListView extends View, HasCloseWidget {
 	void setEntityName(String entityName);
 
-	void addGlobalAction(String label, ClickHandler clickHandler);
+	void addGlobalAction(String label, boolean requiresConfirmation,
+			ClickHandler clickHandler);
 
-	void addEntityAction(String label, ClickHandler clickHandler);
+	void addEntityAction(String label, boolean requiresConfirmation,
+			ClickHandler clickHandler);
 
 	void clearTable();
 
 	void addColumn(String name, Class<?> type, int width);
 
 	void addRow(Object[] values);
-	
+
 	int getSelectedRow();
-	
+
 	HasCloseHandler getCloseHander();
 }

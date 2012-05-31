@@ -7,4 +7,8 @@ public interface Window extends HasValue<String>, ComponentContainer, HasCloseHa
 	void show();
 
 	void close();
+	
+	boolean isModal();
+	
+	void setModal(boolean modal);
 }

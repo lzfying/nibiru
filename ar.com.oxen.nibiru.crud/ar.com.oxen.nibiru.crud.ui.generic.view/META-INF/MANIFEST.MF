@@ -12,5 +12,6 @@ Import-Package: ar.com.oxen.nibiru.crud.manager.api,
  ar.com.oxen.nibiru.i18n.api,
  ar.com.oxen.nibiru.ui.api.mvp,
  ar.com.oxen.nibiru.ui.api.view,
+ ar.com.oxen.nibiru.ui.utils.dialog,
  ar.com.oxen.nibiru.ui.utils.view,
  ar.com.oxen.nibiru.validation.api

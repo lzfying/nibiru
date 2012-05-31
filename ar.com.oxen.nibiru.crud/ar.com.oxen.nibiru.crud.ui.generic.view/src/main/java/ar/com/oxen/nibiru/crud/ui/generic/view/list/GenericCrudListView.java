@@ -2,19 +2,17 @@ package ar.com.oxen.nibiru.crud.ui.generic.view.list;
 
 import ar.com.oxen.nibiru.crud.ui.api.CrudViewFactory;
 import ar.com.oxen.nibiru.crud.ui.api.list.CrudListView;
+import ar.com.oxen.nibiru.crud.ui.generic.view.AbstractCrudView;
 import ar.com.oxen.nibiru.i18n.api.MessageSource;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
 import ar.com.oxen.nibiru.ui.api.mvp.HasCloseHandler;
-import ar.com.oxen.nibiru.ui.api.view.Button;
 import ar.com.oxen.nibiru.ui.api.view.MenuItem;
 import ar.com.oxen.nibiru.ui.api.view.Panel;
 import ar.com.oxen.nibiru.ui.api.view.Table;
 import ar.com.oxen.nibiru.ui.api.view.ViewFactory;
-import ar.com.oxen.nibiru.ui.api.view.Window;
-import ar.com.oxen.nibiru.ui.utils.view.AbstractWindowViewAdapter;
 
-public class GenericCrudListView extends AbstractWindowViewAdapter<Window>
-		implements CrudListView {
+public class GenericCrudListView extends AbstractCrudView implements
+		CrudListView {
 	private Table table;
 	private Panel globalActionsPanel;
 
@@ -44,19 +42,19 @@ public class GenericCrudListView extends AbstractWindowViewAdapter<Window>
 	}
 
 	@Override
-	public void addGlobalAction(String label, ClickHandler clickHandler) {
-		Button button = this.getViewFactory().buildButton();
-		button.setValue(this.getMessageSource().getMessage(
-				CrudViewFactory.I18N_ACTION_PREFIX + label));
-		button.setClickHandler(clickHandler);
-		this.globalActionsPanel.addComponent(button);
+	public void addGlobalAction(String label, boolean requiresConfirmation,
+			ClickHandler clickHandler) {
+		this.globalActionsPanel.addComponent(createActionButton(label,
+				requiresConfirmation, clickHandler));
 	}
 
 	@Override
-	public void addEntityAction(String label, ClickHandler clickHandler) {
-		MenuItem menu = this.table.addMenuItem(this.getMessageSource()
-				.getMessage(CrudViewFactory.I18N_ACTION_PREFIX + label), 999);
-		menu.setClickHandler(clickHandler);
+	public void addEntityAction(String label, boolean requiresConfirmation,
+			ClickHandler clickHandler) {
+		String action = this.i18nAction(label);
+		MenuItem menu = this.table.addMenuItem(action, 999);
+		menu.setClickHandler(this.addConfirmation(action, requiresConfirmation,
+				clickHandler));
 	}
 
 	@Override
