@@ -2,8 +2,10 @@ package ar.com.oxen.nibiru.mail.javamail;
 
 import java.util.Properties;
 
+import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
@@ -28,9 +30,9 @@ public class JavaMailService implements MailService {
 			}
 			mimeMessage.setSubject(message.getSubject());
 			mimeMessage.setText(message.getBody());
-			
+
 			Transport.send(mimeMessage);
-			
+
 		} catch (AddressException e) {
 			throw new MailException(e);
 		} catch (MessagingException e) {
@@ -38,7 +40,15 @@ public class JavaMailService implements MailService {
 		}
 	}
 
-	public void setMailProperties(Properties mailProperties) {
-		this.session = Session.getDefaultInstance(mailProperties, null);
+	public void setMailProperties(final Properties mailProperties) {
+		this.session = Session.getDefaultInstance(mailProperties,
+				new Authenticator() {
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(
+								(String) mailProperties.get("mail.smtp.user"),
+								(String) mailProperties
+										.get("mail.smtp.password"));
+					}
+				});
 	}
 }
