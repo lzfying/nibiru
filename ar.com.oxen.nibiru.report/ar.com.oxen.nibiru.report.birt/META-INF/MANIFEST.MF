@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: BIRT report implementation
+Bundle-SymbolicName: ar.com.oxen.nibiru.report.birt
+Bundle-Version: 0.2.0
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
