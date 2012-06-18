@@ -25,7 +25,8 @@
 		<dependency>
 			<groupId>org.eclipse.birt.runtime</groupId>
 			<artifactId>org.eclipse.birt.runtime</artifactId>
-			<version>3.7.2.v20120214-1408</version>
+			<version>3.7.2</version>
+			<classifier>osgi</classifier>
 		</dependency>
 	</dependencies>
 </project>

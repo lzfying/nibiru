@@ -51,11 +51,6 @@
 			<artifactId>ar.com.oxen.nibiru.mail.javamail.service</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
-		<dependency>
-			<groupId>ar.com.oxen.nibiru.report</groupId>
-			<artifactId>ar.com.oxen.nibiru.report.birt</artifactId>
-			<version>${nibiru-version}</version>
-		</dependency>
 	</dependencies>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

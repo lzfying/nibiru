@@ -62,7 +62,7 @@ public class SpringExtensionPointManager implements ExtensionPointManager,
 					+ ") (extensionPoint=" + extensionName + "))";
 			this.bundleContext.addServiceListener(serviceListener, filter);
 			ServiceReference[] references = this.bundleContext
-					.getServiceReferences(null, filter);
+					.getServiceReferences((String)null, filter);
 			if (references != null) {
 				for (ServiceReference serviceReference : references) {
 					serviceListener.serviceChanged(new ServiceEvent(

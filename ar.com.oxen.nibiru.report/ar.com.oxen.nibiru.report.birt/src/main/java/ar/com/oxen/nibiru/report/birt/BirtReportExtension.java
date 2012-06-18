@@ -37,10 +37,10 @@ public class BirtReportExtension implements ReportExtension {
 	public byte[] render(String format) {
 		try {
 			IReportEngine engine = new ReportEngine(new EngineConfig());
-			
-			ClassLoader classLoader =Thread
-					.currentThread().getContextClassLoader();
-			
+
+			ClassLoader classLoader = Thread.currentThread()
+					.getContextClassLoader();
+
 			// Open the report design
 			final IReportRunnable design = engine.openReportDesign(classLoader
 					.getResourceAsStream(this.file));
@@ -48,11 +48,10 @@ public class BirtReportExtension implements ReportExtension {
 			// Create task to run and render the report,
 			final IRunAndRenderTask task = engine
 					.createRunAndRenderTask(design);
-			
+
 			// Set parent classloader for engine
 			task.getAppContext().put(
-					EngineConstants.APPCONTEXT_CLASSLOADER_KEY,
-					classLoader);
+					EngineConstants.APPCONTEXT_CLASSLOADER_KEY, classLoader);
 
 			final IRenderOption options = new RenderOption();
 			options.setOutputFormat(format);
@@ -87,9 +86,9 @@ public class BirtReportExtension implements ReportExtension {
 			task.run();
 
 			task.close();
-			
+
 			return output.toByteArray();
-			
+
 		} catch (EngineException e) {
 			throw new RuntimeException(e);
 		}
