@@ -18,6 +18,5 @@
 	<modules>
 		<module>ar.com.oxen.nibiru.report.api</module>
 		<module>ar.com.oxen.nibiru.report.birt</module>
-		<module>ar.com.oxen.nibiru.report.birt.service</module>
 	</modules>
 </project>

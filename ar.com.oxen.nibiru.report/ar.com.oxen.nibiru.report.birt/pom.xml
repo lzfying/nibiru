@@ -22,5 +22,10 @@
 			<artifactId>ar.com.oxen.nibiru.report.api</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.birt.runtime</groupId>
+			<artifactId>org.eclipse.birt.runtime</artifactId>
+			<version>3.7.2.v20120214-1408</version>
+		</dependency>
 	</dependencies>
 </project>
