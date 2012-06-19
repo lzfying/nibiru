@@ -19,7 +19,7 @@ import ar.com.oxen.nibiru.extensionpoint.api.ExtensionTracker;
 public class SpringExtensionPointManager implements ExtensionPointManager,
 		BundleContextAware {
 	private BundleContext bundleContext;
-	private Map<Object, ServiceRegistration> registrations = new HashMap<Object, ServiceRegistration>();
+	private Map<Object, ServiceRegistration<?>> registrations = new HashMap<Object, ServiceRegistration<?>>();
 
 	@Override
 	public <K> void registerExtension(K extension, String extensionPointName,
@@ -61,10 +61,10 @@ public class SpringExtensionPointManager implements ExtensionPointManager,
 			filter = "(&(objectclass=" + extensionInterface.getName()
 					+ ") (extensionPoint=" + extensionName + "))";
 			this.bundleContext.addServiceListener(serviceListener, filter);
-			ServiceReference[] references = this.bundleContext
+			ServiceReference<?>[] references = this.bundleContext
 					.getServiceReferences((String)null, filter);
 			if (references != null) {
-				for (ServiceReference serviceReference : references) {
+				for (ServiceReference<?> serviceReference : references) {
 					serviceListener.serviceChanged(new ServiceEvent(
 							ServiceEvent.REGISTERED, serviceReference));
 				}

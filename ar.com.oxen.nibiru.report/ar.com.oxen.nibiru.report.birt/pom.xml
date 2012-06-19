@@ -23,10 +23,19 @@
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.eclipse.birt.runtime</groupId>
-			<artifactId>org.eclipse.birt.runtime</artifactId>
-			<version>3.7.2</version>
-			<classifier>osgi</classifier>
+			<groupId>org.eclipse.birt.report</groupId>
+			<artifactId>engine</artifactId>
+			<version>3.7.2-v20120213</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.birt.report.engine.emitter</groupId>
+			<artifactId>html</artifactId>
+			<version>3.7.2-v20120213</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.birt.report.engine.emitter</groupId>
+			<artifactId>pdf</artifactId>
+			<version>3.7.2-v20120213</version>
 		</dependency>
 	</dependencies>
 </project>

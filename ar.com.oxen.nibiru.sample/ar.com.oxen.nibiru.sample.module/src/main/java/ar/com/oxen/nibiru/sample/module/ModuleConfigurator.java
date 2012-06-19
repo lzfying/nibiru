@@ -53,7 +53,7 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 		// Prueba con reportes
 		ReportExtension report = new BirtReportExtension("myReport",
 				"/ar/com/oxen/nibiru/sample/report/myReport.rptdesign");
-		System.out.println(report.render("html"));
+		System.out.println(new String(report.render("html")));
 	}
 
 	public void setSubjectCrudManager(CrudManager<Subject> subjectCrudManager) {
