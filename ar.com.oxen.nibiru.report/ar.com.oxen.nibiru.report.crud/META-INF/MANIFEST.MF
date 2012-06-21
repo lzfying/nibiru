@@ -8,3 +8,4 @@ Import-Package: ar.com.oxen.nibiru.crud.manager.api,
  ar.com.oxen.nibiru.crud.utils,
  ar.com.oxen.nibiru.extensionpoint.api,
  ar.com.oxen.nibiru.report.api
+Export-Package: ar.com.oxen.nibiru.report.crud

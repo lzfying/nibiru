@@ -22,6 +22,11 @@
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
+			<groupId>ar.com.oxen.nibiru.report</groupId>
+			<artifactId>ar.com.oxen.nibiru.report.crud</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>ar.com.oxen.nibiru.support</groupId>
 			<artifactId>ar.com.oxen.nibiru.module.utils</artifactId>
 			<version>${nibiru-version}</version>
@@ -29,6 +34,11 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.ui</groupId>
 			<artifactId>ar.com.oxen.nibiru.ui.utils</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.crud</groupId>
+			<artifactId>ar.com.oxen.nibiru.crud.manager.api</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>

@@ -121,6 +121,10 @@ public abstract class AbstractModuleConfigurator<VF, PF> {
 		this.presenterFactory = presenterFactory;
 	}
 
+	protected ExtensionPointManager getExtensionPointManager() {
+		return extensionPointManager;
+	}
+
 	public void setExtensionPointManager(
 			ExtensionPointManager extensionPointManager) {
 		this.extensionPointManager = extensionPointManager;
