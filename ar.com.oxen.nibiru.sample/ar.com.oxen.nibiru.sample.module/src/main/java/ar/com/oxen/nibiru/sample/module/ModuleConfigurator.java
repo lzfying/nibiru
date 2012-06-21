@@ -3,8 +3,8 @@ package ar.com.oxen.nibiru.sample.module;
 import ar.com.oxen.nibiru.crud.manager.api.CrudActionExtension;
 import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.crud.utils.AbstractCrudModuleConfigurator;
-import ar.com.oxen.nibiru.report.api.ReportExtension;
-import ar.com.oxen.nibiru.report.birt.BirtReportExtension;
+import ar.com.oxen.nibiru.report.api.Report;
+import ar.com.oxen.nibiru.report.birt.BirtReport;
 import ar.com.oxen.nibiru.sample.domain.Course;
 import ar.com.oxen.nibiru.sample.domain.Student;
 import ar.com.oxen.nibiru.sample.domain.Subject;
@@ -13,8 +13,6 @@ import ar.com.oxen.nibiru.ui.utils.extension.SimpleSubMenuExtension;
 import ar.com.oxen.nibiru.validation.api.Validator;
 import ar.com.oxen.nibiru.validation.generic.NotEmptyValidator;
 import ar.com.oxen.nibiru.validation.generic.RegexpValidator;
-//import org.eclipse.birt.report.engine.api.EngineException;
-
 
 public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 	private static final String MENU_EXTENSION = "ar.com.oxen.nibiru.menu.sample.crud";
@@ -43,17 +41,18 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 
 		this.addCrudWithMenu("sample.crud.student", MENU_EXTENSION,
 				this.studentCrudManager, this.studentCrudActionExtension);
-		
-		this.registerExtension(new RegexpValidator("^Mat.*", "subjectBeginning"),
+
+		this.registerExtension(
+				new RegexpValidator("^Mat.*", "subjectBeginning"),
 				Subject.class.getName() + ".name", Validator.class);
-		
-		this.registerExtension(new NotEmptyValidator(),
-				Subject.class.getName() + ".description", Validator.class);
-		
+
+		this.registerExtension(new NotEmptyValidator(), Subject.class.getName()
+				+ ".description", Validator.class);
+
 		// Prueba con reportes
-		ReportExtension report = new BirtReportExtension("myReport",
-				"/ar/com/oxen/nibiru/sample/report/myReport.rptdesign");
-		System.out.println(new String(report.render("html")));
+		registerExtension(new BirtReport(
+				"/ar/com/oxen/nibiru/sample/report/myReport.rptdesign"),
+				Report.EXTENSION_POINT_NAME, Report.class);
 	}
 
 	public void setSubjectCrudManager(CrudManager<Subject> subjectCrudManager) {

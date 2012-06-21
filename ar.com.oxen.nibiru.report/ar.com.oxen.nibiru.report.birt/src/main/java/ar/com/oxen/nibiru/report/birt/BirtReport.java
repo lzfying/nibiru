@@ -2,8 +2,6 @@ package ar.com.oxen.nibiru.report.birt;
 
 import java.io.ByteArrayOutputStream;
 
-import ar.com.oxen.nibiru.report.api.ReportExtension;
-
 import org.eclipse.birt.report.engine.api.EngineConfig;
 import org.eclipse.birt.report.engine.api.EngineConstants;
 import org.eclipse.birt.report.engine.api.EngineException;
@@ -17,36 +15,43 @@ import org.eclipse.birt.report.engine.api.PDFRenderOption;
 import org.eclipse.birt.report.engine.api.RenderOption;
 import org.eclipse.birt.report.engine.api.ReportEngine;
 
-public class BirtReportExtension implements ReportExtension {
-	private String name;
-	private String file;
+import ar.com.oxen.nibiru.report.api.Report;
 
-	public BirtReportExtension(String name, String file) {
+public class BirtReport implements Report {
+	private IReportRunnable design;
+
+	public BirtReport(String file) {
 		super();
-		this.name = name;
-		this.file = file;
-	}
-
-	@Override
-	public String getName() {
-		return this.name;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public byte[] render(String format) {
 		try {
+			// TODO: se podria compartir el engine no? Pero como le inyecto un
+			// servicio?
 			IReportEngine engine = new ReportEngine(new EngineConfig());
 
 			ClassLoader classLoader = Thread.currentThread()
 					.getContextClassLoader();
 
 			// Open the report design
-			final IReportRunnable design = engine.openReportDesign(classLoader
-					.getResourceAsStream(this.file));
+			this.design = engine.openReportDesign(classLoader
+					.getResourceAsStream(file));
+		} catch (EngineException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public String getName() {
+		return this.design.getReportName();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public byte[] render(String format) {
+		try {
+			ClassLoader classLoader = Thread.currentThread()
+					.getContextClassLoader();
 
 			// Create task to run and render the report,
-			final IRunAndRenderTask task = engine
+			IRunAndRenderTask task = design.getReportEngine()
 					.createRunAndRenderTask(design);
 
 			// Set parent classloader for engine
@@ -88,7 +93,6 @@ public class BirtReportExtension implements ReportExtension {
 			task.close();
 
 			return output.toByteArray();
-
 		} catch (EngineException e) {
 			throw new RuntimeException(e);
 		}
