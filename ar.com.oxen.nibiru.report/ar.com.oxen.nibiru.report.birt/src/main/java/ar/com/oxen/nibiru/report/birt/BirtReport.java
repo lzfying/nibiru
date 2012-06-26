@@ -1,13 +1,19 @@
 package ar.com.oxen.nibiru.report.birt;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import org.eclipse.birt.report.engine.api.EngineConfig;
 import org.eclipse.birt.report.engine.api.EngineConstants;
 import org.eclipse.birt.report.engine.api.EngineException;
 import org.eclipse.birt.report.engine.api.HTMLRenderOption;
 import org.eclipse.birt.report.engine.api.IPDFRenderOption;
+import org.eclipse.birt.report.engine.api.IParameterDefn;
 import org.eclipse.birt.report.engine.api.IRenderOption;
 import org.eclipse.birt.report.engine.api.IReportEngine;
 import org.eclipse.birt.report.engine.api.IReportRunnable;
@@ -19,15 +25,14 @@ import org.eclipse.birt.report.engine.api.ReportEngine;
 import ar.com.oxen.nibiru.report.api.Report;
 
 public class BirtReport implements Report {
+	// TODO: etsa manera de compartir el engine es medio trucha... la otra seria
+	// hacer un servicio e inyectarlo
+	private static IReportEngine engine = new ReportEngine(new EngineConfig());
 	private IReportRunnable design;
 
 	public BirtReport(String file) {
 		super();
 		try {
-			// TODO: se podria compartir el engine no? Pero como le inyecto un
-			// servicio?
-			IReportEngine engine = new ReportEngine(new EngineConfig());
-
 			ClassLoader classLoader = Thread.currentThread()
 					.getContextClassLoader();
 
@@ -49,9 +54,25 @@ public class BirtReport implements Report {
 		return Arrays.asList(new String[] { "pdf", "html" });
 	}
 
+	@Override
+	public Iterable<ParameterDefinition> getParameterDefinitions() {
+		@SuppressWarnings("unchecked")
+		Collection<IParameterDefn> parameterDefns = engine
+				.createGetParameterDefinitionTask(design).getParameterDefns(
+						false);
+		List<ParameterDefinition> parameters = new ArrayList<Report.ParameterDefinition>(
+				parameterDefns.size());
+
+		for (IParameterDefn parameterDefn : parameterDefns) {
+			parameters.add(new IParameterDefnAdapter(parameterDefn));
+		}
+
+		return parameters;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public byte[] render(String format) {
+	public byte[] render(String format, Map<String, Object> parameters) {
 		try {
 			ClassLoader classLoader = Thread.currentThread()
 					.getContextClassLoader();
@@ -63,6 +84,10 @@ public class BirtReport implements Report {
 			// Set parent classloader for engine
 			task.getAppContext().put(
 					EngineConstants.APPCONTEXT_CLASSLOADER_KEY, classLoader);
+
+			for (Map.Entry<String, Object> entry : parameters.entrySet()) {
+				task.setParameterValue(entry.getKey(), entry.getValue());
+			}
 
 			final IRenderOption options = new RenderOption();
 			options.setOutputFormat(format);
@@ -101,6 +126,41 @@ public class BirtReport implements Report {
 			return output.toByteArray();
 		} catch (EngineException e) {
 			throw new RuntimeException(e);
+		}
+	}
+
+	private static class IParameterDefnAdapter implements ParameterDefinition {
+		private IParameterDefn parameterDefn;
+
+		public IParameterDefnAdapter(IParameterDefn parameterDefn) {
+			super();
+			this.parameterDefn = parameterDefn;
+		}
+
+		@Override
+		public String getName() {
+			return this.parameterDefn.getName();
+		}
+
+		@Override
+		public Class<?> getType() {
+			switch (this.parameterDefn.getDataType()) {
+			case IParameterDefn.TYPE_BOOLEAN:
+				return Boolean.class;
+			case IParameterDefn.TYPE_DATE:
+			case IParameterDefn.TYPE_TIME:
+			case IParameterDefn.TYPE_DATE_TIME:
+				return Date.class;
+			case IParameterDefn.TYPE_DECIMAL:
+				return Double.class;
+			case IParameterDefn.TYPE_FLOAT:
+				return Float.class;
+			case IParameterDefn.TYPE_STRING:
+				return String.class;
+			default:
+				throw new IllegalStateException("Invalid parameter type: "
+						+ this.parameterDefn.getDataType());
+			}
 		}
 	}
 }

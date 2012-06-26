@@ -1,5 +1,7 @@
 package ar.com.oxen.nibiru.report.api;
 
+import java.util.Map;
+
 public interface Report {
 	String EXTENSION_POINT_NAME = "ar.com.oxen.nibiru.reports";
 
@@ -7,5 +9,13 @@ public interface Report {
 
 	Iterable<String> getFormats();
 
-	byte[] render(String format);
+	Iterable<ParameterDefinition> getParameterDefinitions();
+
+	byte[] render(String format, Map<String, Object> parameters);
+
+	interface ParameterDefinition {
+		String getName();
+
+		Class<?> getType();
+	}
 }

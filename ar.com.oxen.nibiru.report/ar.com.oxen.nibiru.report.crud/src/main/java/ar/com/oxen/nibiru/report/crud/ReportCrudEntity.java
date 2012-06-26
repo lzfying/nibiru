@@ -1,7 +1,9 @@
 package ar.com.oxen.nibiru.report.crud;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import ar.com.oxen.nibiru.crud.manager.api.CrudEntity;
 import ar.com.oxen.nibiru.crud.manager.api.CrudField;
@@ -9,16 +11,19 @@ import static ar.com.oxen.nibiru.crud.manager.api.CrudField.FormInfo.GENERAL_TAB
 import ar.com.oxen.nibiru.crud.manager.api.WidgetType;
 import ar.com.oxen.nibiru.crud.utils.SimpleCrudField;
 import ar.com.oxen.nibiru.report.api.Report;
+import ar.com.oxen.nibiru.report.api.Report.ParameterDefinition;
 
 class ReportCrudEntity implements CrudEntity<Report> {
 	final static String REPORT_NAME_FIELD = "reportName";
 	final static String REPORT_FORMAT_FIELD = "reportFormat";
 	private Report report;
 	private String format;
+	private Map<String, Object> parameters;
 
 	public ReportCrudEntity(Report report) {
 		super();
 		this.report = report;
+		this.parameters = new HashMap<String, Object>();
 	}
 
 	@Override
@@ -35,7 +40,12 @@ class ReportCrudEntity implements CrudEntity<Report> {
 				null, new SimpleCrudField.SimpleFormInfo(WidgetType.COMBO_BOX,
 						false, 0, GENERAL_TAB)));
 
-		// TODO Generar los campso en funcion de los parametros del reporte
+		/* Parameter fields */
+		for (Report.ParameterDefinition paramDef : this.report
+				.getParameterDefinitions()) {
+			formFields.add(new ParameterDefinitionAdapter(paramDef));
+		}
+
 		return formFields;
 	}
 
@@ -51,8 +61,7 @@ class ReportCrudEntity implements CrudEntity<Report> {
 		} else if (REPORT_FORMAT_FIELD.equals(fieldName)) {
 			return this.format;
 		} else {
-			throw new IllegalArgumentException("Invalid field name: "
-					+ fieldName);
+			return this.parameters.get(fieldName);
 		}
 	}
 
@@ -69,8 +78,7 @@ class ReportCrudEntity implements CrudEntity<Report> {
 		} else if (REPORT_FORMAT_FIELD.equals(fieldName)) {
 			this.format = (String) value;
 		} else {
-			throw new IllegalArgumentException("Invalid field name: "
-					+ fieldName);
+			this.parameters.put(fieldName, value);
 		}
 	}
 
@@ -99,4 +107,33 @@ class ReportCrudEntity implements CrudEntity<Report> {
 		}
 	}
 
+	private static class ParameterDefinitionAdapter implements CrudField {
+		private Report.ParameterDefinition paramDef;
+
+		public ParameterDefinitionAdapter(ParameterDefinition paramDef) {
+			super();
+			this.paramDef = paramDef;
+		}
+
+		@Override
+		public String getName() {
+			return this.paramDef.getName();
+		}
+
+		@Override
+		public Class<?> getType() {
+			return this.paramDef.getType();
+		}
+
+		@Override
+		public ListInfo getListInfo() {
+			return null;
+		}
+
+		@Override
+		public FormInfo getFormInfo() {
+			return new SimpleCrudField.SimpleFormInfo(WidgetType.TEXT_FIELD,
+					false, 9999, GENERAL_TAB);
+		}
+	}
 }

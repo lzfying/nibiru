@@ -1,7 +1,9 @@
 package ar.com.oxen.nibiru.report.crud;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import ar.com.oxen.commons.eventbus.api.EventBus;
 import ar.com.oxen.nibiru.crud.manager.api.CrudAction;
@@ -38,7 +40,16 @@ public class ReportCrudActionExtension implements CrudActionExtension<Report> {
 		} else if (action.getName().equals(RUN_REPORT)) {
 			String format = (String) entity
 					.getValue(ReportCrudEntity.REPORT_FORMAT_FIELD);
-			byte[] data = entity.getEntity().render(format);
+
+			Map<String, Object> parameters = new HashMap<String, Object>();
+
+			for (Report.ParameterDefinition parameterDef : entity.getEntity()
+					.getParameterDefinitions()) {
+				parameters.put(parameterDef.getName(),
+						entity.getValue(parameterDef.getName()));
+			}
+
+			byte[] data = entity.getEntity().render(format, parameters);
 
 			this.eventBus.fireEvent(new ReportExecutedEvent(entity.getEntity(),
 					format, data));
