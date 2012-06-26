@@ -146,11 +146,18 @@ public interface ViewFactory {
 	 * @return The panel.
 	 */
 	FormPanel buildFormPanel();
-	
+
 	/**
 	 * Builds a tabbed panel.
 	 * 
 	 * @return The panel
 	 */
 	Panel buildTabPanel();
+
+	/**
+	 * Builds an embedded.
+	 * 
+	 * @return The embedded
+	 */
+	Embedded buildEmbedded();
 }

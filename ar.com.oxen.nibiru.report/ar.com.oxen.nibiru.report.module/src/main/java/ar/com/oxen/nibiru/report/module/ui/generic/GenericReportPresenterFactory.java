@@ -9,8 +9,8 @@ public class GenericReportPresenterFactory implements ReportPresenterFactory {
 	private EventBus eventBus;
 
 	@Override
-	public Presenter<ReportView> buildReportPresenter() {
-		return new GenericReportPresenter(this.eventBus);
+	public Presenter<ReportView> buildReportPresenter(byte[] data) {
+		return new GenericReportPresenter(this.eventBus, data);
 	}
 
 	public void setEventBus(EventBus eventBus) {

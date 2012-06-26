@@ -5,16 +5,15 @@ import ar.com.oxen.nibiru.report.module.ui.ReportView;
 import ar.com.oxen.nibiru.ui.utils.mvp.AbstractPresenter;
 
 public class GenericReportPresenter extends AbstractPresenter<ReportView> {
-	public GenericReportPresenter(EventBus eventBus) {
+	private byte[] data;
+	public GenericReportPresenter(EventBus eventBus, byte[] data) {
 		super(eventBus);
+		this.data = data;
 	}
 
 	@Override
 	public void go() {
-		
+		this.getView().showReport(this.data);
 		this.configureClose(this.getView());
-		// TODO Auto-generated method stub
-		
 	}
-
 }

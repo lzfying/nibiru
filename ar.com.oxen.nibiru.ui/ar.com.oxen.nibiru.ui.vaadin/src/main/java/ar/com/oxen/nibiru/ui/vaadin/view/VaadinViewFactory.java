@@ -6,6 +6,7 @@ import ar.com.oxen.nibiru.ui.api.view.Button;
 import ar.com.oxen.nibiru.ui.api.view.CheckBox;
 import ar.com.oxen.nibiru.ui.api.view.ComboBox;
 import ar.com.oxen.nibiru.ui.api.view.DateField;
+import ar.com.oxen.nibiru.ui.api.view.Embedded;
 import ar.com.oxen.nibiru.ui.api.view.FormPanel;
 import ar.com.oxen.nibiru.ui.api.view.Label;
 import ar.com.oxen.nibiru.ui.api.view.ListSelect;
@@ -22,6 +23,7 @@ import ar.com.oxen.nibiru.ui.vaadin.view.adapter.ButtonAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.CheckBoxAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.ComboBoxAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.DateFieldAdapter;
+import ar.com.oxen.nibiru.ui.vaadin.view.adapter.EmbeddedAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.FormPanelAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.LabelAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.LayoutPanelAdapter;
@@ -144,4 +146,8 @@ public class VaadinViewFactory implements ViewFactory {
 		this.vaadinApplication = vaadinApplication;
 	}
 
+	@Override
+	public Embedded buildEmbedded() {
+		return new EmbeddedAdapter(new com.vaadin.ui.Embedded(), this.vaadinApplication);
+	}
 }

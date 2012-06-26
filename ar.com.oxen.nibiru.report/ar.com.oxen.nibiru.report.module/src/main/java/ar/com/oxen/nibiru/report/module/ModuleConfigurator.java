@@ -29,7 +29,8 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 	@EventHandlerMethod
 	public void onReportExecutedEvent(ReportExecutedEvent event) {
 		this.activate(this.reportViewFactory.buildReportView(),
-				this.reportPresenterFactory.buildReportPresenter());
+				this.reportPresenterFactory.buildReportPresenter(event
+						.getData()));
 	}
 
 	public void setReportPresenterFactory(
