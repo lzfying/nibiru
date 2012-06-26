@@ -15,11 +15,11 @@ public class EmbeddedAdapter extends AbstractComponentAdapter<Embedded>
 	public EmbeddedAdapter(Embedded embedded, Application application) {
 		super(embedded);
 		this.application = application;
-		this.getAdapted().setType(Embedded.TYPE_OBJECT);
+		this.getAdapted().setType(Embedded.TYPE_BROWSER);
 	}
 
 	@Override
-	public void setData(final byte[] data) {
+	public void setData(final byte[] data, String format) {
 		this.getAdapted().setSource(new StreamResource(new StreamSource() {
 			private static final long serialVersionUID = -5506151038490088459L;
 
@@ -27,18 +27,6 @@ public class EmbeddedAdapter extends AbstractComponentAdapter<Embedded>
 			public InputStream getStream() {
 				return new ByteArrayInputStream(data);
 			}
-		}, "dummy.txt", this.application));
-
-	}
-
-	@Override
-	public void setMimeType(String mimeType) {
-		this.getAdapted().setMimeType(mimeType);
-
-	}
-
-	@Override
-	public String getMimeType() {
-		return this.getAdapted().getMimeType();
+		}, "dummy." + format, this.application));
 	}
 }

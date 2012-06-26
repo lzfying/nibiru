@@ -6,14 +6,17 @@ import ar.com.oxen.nibiru.ui.utils.mvp.AbstractPresenter;
 
 public class GenericReportPresenter extends AbstractPresenter<ReportView> {
 	private byte[] data;
-	public GenericReportPresenter(EventBus eventBus, byte[] data) {
+	private String format;
+
+	public GenericReportPresenter(EventBus eventBus, byte[] data, String format) {
 		super(eventBus);
 		this.data = data;
+		this.format = format;
 	}
 
 	@Override
 	public void go() {
-		this.getView().showReport(this.data);
+		this.getView().showReport(this.data, this.format);
 		this.configureClose(this.getView());
 	}
 }

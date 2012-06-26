@@ -29,8 +29,7 @@ public class GenericReportView extends AbstractWindowViewAdapter<Window>
 	}
 
 	@Override
-	public void showReport(byte[] data) {
-		this.report.setMimeType("text/html");
-		this.report.setData(data);
+	public void showReport(byte[] data, String format) {
+		this.report.setData(data, format);
 	}
 }
