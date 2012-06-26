@@ -28,13 +28,6 @@ public interface CrudManager<T> {
 	List<CrudField> getListFields();
 
 	/**
-	 * Gets the fields to be shown in the entity form.
-	 * 
-	 * @return A list with the fields
-	 */
-	List<CrudField> getFormFields();
-
-	/**
 	 * Reads all the entities.
 	 * 
 	 * @return A list with the entities

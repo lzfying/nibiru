@@ -27,4 +27,10 @@
 	<osgi:reference id="crudPresenterFactory"
 		interface="ar.com.oxen.nibiru.crud.ui.api.CrudPresenterFactory" />
 
+	<osgi:reference id="viewFactory"
+		interface="ar.com.oxen.nibiru.ui.api.view.ViewFactory" />
+
+	<osgi:reference id="nibiruMessageSource"
+		interface="ar.com.oxen.nibiru.i18n.api.MessageSource" />
+
 </beans>

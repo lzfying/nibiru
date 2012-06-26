@@ -1,5 +1,7 @@
 package ar.com.oxen.nibiru.crud.manager.api;
 
+import java.util.List;
+
 /**
  * Represents an entity instance. This interface is used in order to hide entity
  * implementation. This way, CRUD engine could work over Java beans, BPM
@@ -14,6 +16,14 @@ public interface CrudEntity<T> {
 	 * @return The id
 	 */
 	Object getId();
+	
+	/**
+	 * Gets the fields to be shown in the entity form.
+	 * 
+	 * @return A list with the fields
+	 */
+	List<CrudField> getFormFields();
+
 
 	/**
 	 * Reads a field value.
@@ -79,7 +89,7 @@ public interface CrudEntity<T> {
 	 *            The field
 	 * @return An iterable for the values
 	 */
-	Iterable<Object> getAvailableValues(CrudField field);
+	Iterable<?> getAvailableValues(CrudField field);
 
 	/**
 	 * Returns the available values for a given field (for example, for using in
@@ -89,5 +99,5 @@ public interface CrudEntity<T> {
 	 *            The field name
 	 * @return An iterable for the values
 	 */
-	Iterable<Object> getAvailableValues(String fieldName);
+	Iterable<?> getAvailableValues(String fieldName);
 }

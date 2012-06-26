@@ -50,7 +50,7 @@ public class GenericCrudFormPresenter extends
 
 				}, this.getTopic(), CrudActionExtension.class);
 
-		for (final CrudField field : this.getCrudManager().getFormFields()) {
+		for (final CrudField field : this.entity.getFormFields()) {
 			Object value = this.entity.getValue(field);
 
 			/* Readonly and null fields (i.e. IDs) are not shown */
@@ -91,7 +91,7 @@ public class GenericCrudFormPresenter extends
 							@Override
 							public void onClick() {
 								if (getView().isValid()) {
-									for (CrudField field : getCrudManager()
+									for (CrudField field : entity
 											.getFormFields()) {
 										if (!field.getFormInfo().isReadonly()) {
 											Object value = getView()

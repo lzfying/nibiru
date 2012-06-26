@@ -61,8 +61,7 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 		});
 	}
 
-	@Override
-	public List<CrudField> getFormFields() {
+	private List<CrudField> getFormFields() {
 		return this.fieldNamesToCrudFields(new ShowValidator() {
 			@Override
 			public boolean mustShow(Show show) {
@@ -103,7 +102,7 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 			boolean readonly = false;
 			int maxLength = -1;
 			WidgetType widgetType = null;
-			String tab = "general";
+			String tab = CrudField.FormInfo.GENERAL_TAB;
 
 			Show show = descriptor.getAnnotation(Show.class);
 			Widget crudWidget = descriptor.getAnnotation(Widget.class);
@@ -209,7 +208,7 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 		if (CrudAction.NEW.equals(action.getName())) {
 			return new JpaCrudEntity<T>(
 					this.wrapperFactory.wrapNewBean(this.persistentClass),
-					this.entityManager, this.pkName);
+					this.entityManager, this.pkName, this.getFormFields());
 		} else if (CrudAction.EDIT.equals(action.getName())) {
 			return entity;
 		} else if (CrudAction.UPDATE.equals(action.getName())) {
@@ -304,7 +303,7 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 
 	private <K> CrudEntity<K> beanToCrudEntity(K bean) {
 		return new JpaCrudEntity<K>(this.wrapperFactory.wrapBean(bean),
-				this.entityManager, this.pkName);
+				this.entityManager, this.pkName, this.getFormFields());
 	}
 
 	/* Setters */

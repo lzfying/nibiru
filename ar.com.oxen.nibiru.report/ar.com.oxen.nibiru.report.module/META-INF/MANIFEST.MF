@@ -15,5 +15,8 @@ Import-Package: ar.com.oxen.commons.eventbus.api,
  ar.com.oxen.nibiru.report.crud,
  ar.com.oxen.nibiru.ui.api.extension,
  ar.com.oxen.nibiru.ui.api.mvp,
+ ar.com.oxen.nibiru.ui.api.view,
  ar.com.oxen.nibiru.ui.utils.extension,
+ ar.com.oxen.nibiru.ui.utils.mvp,
+ ar.com.oxen.nibiru.ui.utils.view,
  org.springframework.beans.factory.config;version="3.0.6.RELEASE"

@@ -1,6 +1,7 @@
 package ar.com.oxen.nibiru.crud.bean.manager;
 
 import java.util.Collection;
+import java.util.List;
 
 import ar.com.oxen.commons.bean.api.BeanWrapper;
 import ar.com.oxen.nibiru.crud.manager.api.CrudEntity;
@@ -9,11 +10,19 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudField;
 public abstract class AbstractBeanCrudEntity<T> implements CrudEntity<T> {
 	private BeanWrapper<T> bean;
 	private String pkName;
+	private List<CrudField> formFields;
 
-	public AbstractBeanCrudEntity(BeanWrapper<T> bean, String pkName) {
+	public AbstractBeanCrudEntity(BeanWrapper<T> bean, String pkName,
+			List<CrudField> formFields) {
 		super();
 		this.bean = bean;
 		this.pkName = pkName;
+		this.formFields = formFields;
+	}
+
+	@Override
+	public List<CrudField> getFormFields() {
+		return this.formFields;
 	}
 
 	@Override
@@ -64,7 +73,7 @@ public abstract class AbstractBeanCrudEntity<T> implements CrudEntity<T> {
 	}
 
 	@Override
-	public Iterable<Object> getAvailableValues(CrudField field) {
+	public Iterable<?> getAvailableValues(CrudField field) {
 		return this.getAvailableValues(field.getName());
 	}
 

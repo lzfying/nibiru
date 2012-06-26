@@ -14,17 +14,19 @@ import ar.com.oxen.commons.bean.api.BeanWrapper;
 import ar.com.oxen.commons.bean.api.PropertyDescriptor;
 import ar.com.oxen.nibiru.crud.bean.annotation.Widget;
 import ar.com.oxen.nibiru.crud.bean.manager.AbstractBeanCrudEntity;
+import ar.com.oxen.nibiru.crud.manager.api.CrudField;
 
 public class JpaCrudEntity<T> extends AbstractBeanCrudEntity<T> {
 	private EntityManager entityManager;
 
-	public JpaCrudEntity(BeanWrapper<T> bean, EntityManager entityManager, String pkName) {
-		super(bean, pkName);
+	public JpaCrudEntity(BeanWrapper<T> bean, EntityManager entityManager,
+			String pkName, List<CrudField> formFields) {
+		super(bean, pkName, formFields);
 		this.entityManager = entityManager;
 	}
 
 	@Override
-	public Iterable<Object> getAvailableValues(String fieldName) {
+	public Iterable<?> getAvailableValues(String fieldName) {
 		Iterable<Object> availableValues = null;
 
 		PropertyDescriptor descriptor = this.getBean().getPropertyDescriptor(
@@ -41,8 +43,8 @@ public class JpaCrudEntity<T> extends AbstractBeanCrudEntity<T> {
 					: "";
 
 			if (Collection.class.isAssignableFrom(descriptor.getType())) {
-				availableValues = this.findByFilter(this
-						.getCollectionType(descriptor.getName()), filter);
+				availableValues = this.findByFilter(
+						this.getCollectionType(descriptor.getName()), filter);
 			} else {
 				availableValues = this.findByFilter(descriptor.getType(),
 						filter);
@@ -61,8 +63,8 @@ public class JpaCrudEntity<T> extends AbstractBeanCrudEntity<T> {
 
 	private Class<?> getCollectionType(String fieldName) {
 		try {
-			Field field = this.getEntity().getClass().getDeclaredField(
-					fieldName);
+			Field field = this.getEntity().getClass()
+					.getDeclaredField(fieldName);
 			ParameterizedType parametrizedType = (ParameterizedType) field
 					.getGenericType();
 			return (Class<?>) parametrizedType.getActualTypeArguments()[0];

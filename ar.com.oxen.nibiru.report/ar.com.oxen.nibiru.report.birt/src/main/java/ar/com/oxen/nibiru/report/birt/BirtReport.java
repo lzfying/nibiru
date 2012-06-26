@@ -1,6 +1,7 @@
 package ar.com.oxen.nibiru.report.birt;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Arrays;
 
 import org.eclipse.birt.report.engine.api.EngineConfig;
 import org.eclipse.birt.report.engine.api.EngineConstants;
@@ -40,7 +41,12 @@ public class BirtReport implements Report {
 
 	@Override
 	public String getName() {
-		return this.design.getReportName();
+		return this.design.getDesignInstance().getDisplayName();
+	}
+
+	@Override
+	public Iterable<String> getFormats() {
+		return Arrays.asList(new String[] { "pdf", "html" });
 	}
 
 	@SuppressWarnings("unchecked")

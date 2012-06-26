@@ -42,6 +42,8 @@ public interface CrudField {
 	 * Information for showing the field in a form.
 	 */
 	interface FormInfo {
+		String GENERAL_TAB = "general";
+
 		/**
 		 * Determines how the field should be represented (for example, in a
 		 * form).
