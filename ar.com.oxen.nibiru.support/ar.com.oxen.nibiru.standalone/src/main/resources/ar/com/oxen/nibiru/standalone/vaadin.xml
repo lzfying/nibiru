@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+    http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<!-- Vaadin application and view factory -->
+	<bean name="applicationAccessor"
+		class="ar.com.oxen.nibiru.ui.vaadin.application.SimpleApplicationAccessor">
+		<property name="application" ref="vaadinApplication" />
+	</bean>
+
+	<bean name="vaadinApplication" scope="nibiruSession"
+		class="ar.com.oxen.nibiru.ui.vaadin.application.NibiruApplication">
+		<property name="eventBus" ref="eventBus" />
+		<property name="localeHolder" ref="localeHolder" />
+		<aop:scoped-proxy />
+	</bean>
+
+	<bean id="viewFactory" class="ar.com.oxen.nibiru.ui.vaadin.view.VaadinViewFactory">
+		<property name="vaadinApplication" ref="vaadinApplication" />
+	</bean>
+</beans>

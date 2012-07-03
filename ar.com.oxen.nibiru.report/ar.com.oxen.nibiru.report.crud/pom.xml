@@ -22,11 +22,6 @@
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>ar.com.oxen.commons.eventbus</groupId>
-			<artifactId>ar.com.oxen.commons.eventbus.api</artifactId>
-			<version>${nibiru-version}</version>
-		</dependency>
-		<dependency>
 			<groupId>ar.com.oxen.nibiru.crud</groupId>
 			<artifactId>ar.com.oxen.nibiru.crud.manager.api</artifactId>
 			<version>${nibiru-version}</version>
@@ -40,6 +35,11 @@
 			<groupId>ar.com.oxen.nibiru.extensionpoint</groupId>
 			<artifactId>ar.com.oxen.nibiru.extensionpoint.api</artifactId>
 			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.commons</groupId>
+			<artifactId>ar.com.oxen.commons</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 </project>
