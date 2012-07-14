@@ -341,6 +341,7 @@ Utilizando estas tecnologías, los componentes compartidos son expuestos
 De cualquier modo, casi todos los componentes son independientes de OSGi
  y de Spring, gracias al patrón IoC (salvo los que implementan funcionalidades
  específicas de Spring).
+ De esta manera, Nibiru puede ser desplegado también en ambientes sin OSGi.
 \end_layout
 
 \begin_layout Section
@@ -2258,7 +2259,51 @@ TODO: Es necesario un servicio de log? o simplemente con commons loggin
  o SLF4J alcanza? OSGi tiene un servicio de log, se podría hacer un adaptador
  para SLF4J.
  Y seguir la misma lógic que con transacciones, JPA y DataSource.
- 
+\end_layout
+
+\begin_layout Section
+Soporte para ambientes sin OSGi
+\end_layout
+
+\begin_layout Standard
+El soporte para entornos sin OSGi se proporciona a través del proyecto ar.com.oxen.
+nibiru.standalone.
+ Dicho proyecto contiene las dependencias necesarias para ejecutar el framework,
+ de manera similar a cómo se hace en el proyecto ar.com.oxen.nibiru.targetplatform.
+ Sin embargo, en este caso, su objetivo es que sea utilizado en un entorno
+ Java estándar, tal como un contenedor de servlets.
+\end_layout
+
+\begin_layout Standard
+El proyecto también contiene archivos de configuración de Spring para todos
+ los módulos de Nibiru.
+ El archivo ar/com/oxen/nibiru/standalone/context.xml consolida los archivos
+ de configuraciónnecesarios para una aplicación típica.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.support/ar.com.oxen.nibiru.standalone/src/main/resou
+rces/ar/com/oxen/nibiru/standalone/context.xml}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sin embargo, no todos los módulos están incluidos en este archivo.
+ Para explorar las configuraciones disponibles, vaya al paquete ar.com.oxen.nibiru.s
+tandalone.
 \end_layout
 
 \begin_layout Part
