@@ -862,6 +862,13 @@ Se debe definir un nombre de punto de extensión para cada menú.
 \end_layout
 
 \begin_layout Standard
+El método getAllowedRoles indica los roles necesarios para ejecutar el menú.
+ Estos roles se validan contra los servicios de seguridad.
+ Si no se especifican los roles (o si se devuelve null), no se lleva a cabo
+ la validación (de modo que todo el mundo puede ejecutar el menú).
+\end_layout
+
+\begin_layout Standard
 Vale la pena notar que en el bundle ar.com.oxen.nibiru.ui.utils hay implementaciones
  simples de estas interfaces.
 \end_layout
@@ -1808,12 +1815,6 @@ La funcionalidad de este módulo está distribuida entre varios bundles.
  La misma puede agruparse en 2 capas.
 \end_layout
 
-\begin_layout Standard
-
-\emph on
-TODO: pensar cómo integrar seguridad al generador de ABMS.
-\end_layout
-
 \begin_layout Subsection
 Servicios de persistencia
 \end_layout
@@ -1960,6 +1961,13 @@ rechazar
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+El método getAllowedRoles indica los roles necesarios para ejecutar la acción.
+ Estos roles se validan contra los servicios de seguridad.
+ Si no se especifican los roles (o si se devuelve null), no se lleva a cabo
+ la validación (de modo que todo el mundo puede ejecutar la acción).
 \end_layout
 
 \begin_layout Standard

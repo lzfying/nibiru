@@ -836,6 +836,14 @@ You must define an extension point name for each menu.
 \end_layout
 
 \begin_layout Standard
+The getAllowedRoles method indicates the required roles in order to execute
+ the menu.
+ Such roles are validated against security services.
+ If no role is specified (or null is returned), no validation is done (so
+ everybody can execute the menu).
+\end_layout
+
+\begin_layout Standard
 It is worth noting that the ar.com.oxen.nibiru.ui.utils bundle contains simple
  implementations of these interfaces.
 \end_layout
@@ -1766,12 +1774,6 @@ The functionality of this module is distributed across multiple bundles.
  It can be grouped into 2 layers.
 \end_layout
 
-\begin_layout Standard
-
-\emph on
-TODO: pensar cómo integrar seguridad al generador de ABMS.
-\end_layout
-
 \begin_layout Subsection
 Persistence services
 \end_layout
@@ -1899,6 +1901,14 @@ In this way the actions are not limited to create, read, update and delete,
  but they are extensible.
  A workflow engine could, for example, display actions such as "approve"
  or "reject."
+\end_layout
+
+\begin_layout Standard
+The getAllowedRoles method indicates the required roles in order to execute
+ the action.
+ Such roles are validated against security services.
+ If no role is specified (or null is returned), no validation is done (so
+ everybody can execute the action).
 \end_layout
 
 \begin_layout Standard
