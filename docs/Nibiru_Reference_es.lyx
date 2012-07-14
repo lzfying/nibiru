@@ -69,6 +69,15 @@ Referencia Nibiru
 \end_layout
 
 \begin_layout Standard
+\begin_inset Graphics
+	filename logo.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset CommandInset href
 LatexCommand href
 target "http://nibiru.googlecode.com"
@@ -586,8 +595,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.application.api/src/main/java/ar/com/oxen/nibiru/
-application/api/ApplicationPresenterFactory.java}
+lstinputlisting{../ar.com.oxen.nibiru.application/ar.com.oxen.nibiru.application.api/src/ma
+in/java/ar/com/oxen/nibiru/application/api/ApplicationPresenterFactory.java}
 \end_layout
 
 \end_inset
@@ -607,8 +616,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.application.api/src/main/java/ar/com/oxen/nibiru/
-application/api/ApplicationViewFactory.java}
+lstinputlisting{../ar.com.oxen.nibiru.application/ar.com.oxen.nibiru.application.api/src/ma
+in/java/ar/com/oxen/nibiru/application/api/ApplicationViewFactory.java}
 \end_layout
 
 \end_inset
@@ -653,8 +662,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.extensionpoint.api/src/main/java/ar/com/oxen/nibi
-ru/extensionpoint/api/ExtensionTracker.java}
+lstinputlisting{../ar.com.oxen.nibiru.extensionpoint/ar.com.oxen.nibiru.extensionpoint.api/
+src/main/java/ar/com/oxen/nibiru/extensionpoint/api/ExtensionTracker.java}
 \end_layout
 
 \end_inset
@@ -676,8 +685,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.extensionpoint.api/src/main/java/ar/com/oxen/nibi
-ru/extensionpoint/api/ExtensionPointManager.java}
+lstinputlisting{../ar.com.oxen.nibiru.extensionpoint/ar.com.oxen.nibiru.extensionpoint.api/
+src/main/java/ar/com/oxen/nibiru/extensionpoint/api/ExtensionPointManager.java}
 \end_layout
 
 \end_inset
@@ -766,8 +775,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.module.utils/src/main/java/ar/com/oxen/nibiru/mod
-ule/utils/AbstractModuleConfigurator.java}
+lstinputlisting{../ar.com.oxen.nibiru.support/ar.com.oxen.nibiru.module.utils/src/main/java
+/ar/com/oxen/nibiru/module/utils/AbstractModuleConfigurator.java}
 \end_layout
 
 \end_inset
@@ -816,8 +825,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.ui.api/src/main/java/ar/com/oxen/nibiru/ui/api/ex
-tension/MenuItemExtension.java}
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.api/src/main/java/ar/com/oxe
+n/nibiru/ui/api/extension/MenuItemExtension.java}
 \end_layout
 
 \end_inset
@@ -837,8 +846,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.ui.api/src/main/java/ar/com/oxen/nibiru/ui/api/ex
-tension/SubMenuExtension.java}
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.api/src/main/java/ar/com/oxe
+n/nibiru/ui/api/extension/SubMenuExtension.java}
 \end_layout
 
 \end_inset
@@ -882,8 +891,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.session.api/src/main/java/ar/com/oxen/nibiru/sess
-ion/api/Session.java}
+lstinputlisting{../ar.com.oxen.nibiru.session/ar.com.oxen.nibiru.session.api/src/main/java/
+ar/com/oxen/nibiru/session/api/Session.java}
 \end_layout
 
 \end_inset
@@ -1067,8 +1076,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.conversation.api/src/main/java/ar/com/oxen/nibiru
-/conversation/api/Conversation.java}
+lstinputlisting{../ar.com.oxen.nibiru.conversation/ar.com.oxen.nibiru.conversation.api/src/
+main/java/ar/com/oxen/nibiru/conversation/api/Conversation.java}
 \end_layout
 
 \end_inset
@@ -1102,8 +1111,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.conversation.api/src/main/java/ar/com/oxen/nibiru
-/conversation/api/ConversationFactory.java}
+lstinputlisting{../ar.com.oxen.nibiru.conversation/ar.com.oxen.nibiru.conversation.api/src/
+main/java/ar/com/oxen/nibiru/conversation/api/ConversationFactory.java}
 \end_layout
 
 \end_inset
@@ -1125,8 +1134,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.conversation.api/src/main/java/ar/com/oxen/nibiru
-/conversation/api/ConversationCallback.java}
+lstinputlisting{../ar.com.oxen.nibiru.conversation/ar.com.oxen.nibiru.conversation.api/src/
+main/java/ar/com/oxen/nibiru/conversation/api/ConversationCallback.java}
 \end_layout
 
 \end_inset
@@ -1152,8 +1161,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.conversation.api/src/main/java/ar/com/oxen/nibiru
-/conversation/api/ConversationAccessor.java}
+lstinputlisting{../ar.com.oxen.nibiru.conversation/ar.com.oxen.nibiru.conversation.api/src/
+main/java/ar/com/oxen/nibiru/conversation/api/ConversationAccessor.java}
 \end_layout
 
 \end_inset
@@ -1177,8 +1186,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.conversation.api/src/main/java/ar/com/oxen/nibiru
-/conversation/api/ConversationTracker.java}
+lstinputlisting{../ar.com.oxen.nibiru.conversation/ar.com.oxen.nibiru.conversation.api/src/
+main/java/ar/com/oxen/nibiru/conversation/api/ConversationTracker.java}
 \end_layout
 
 \end_inset
@@ -1373,8 +1382,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.ui.api/src/main/java/ar/com/oxen/nibiru/ui/api/mv
-p/Presenter.java}
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.api/src/main/java/ar/com/oxe
+n/nibiru/ui/api/mvp/Presenter.java}
 \end_layout
 
 \end_inset
@@ -1394,8 +1403,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.ui.api/src/main/java/ar/com/oxen/nibiru/ui/api/mv
-p/View.java}
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.api/src/main/java/ar/com/oxe
+n/nibiru/ui/api/mvp/View.java}
 \end_layout
 
 \end_inset
@@ -1422,8 +1431,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.ui.api/src/main/java/ar/com/oxen/nibiru/ui/api/vi
-ew/ViewFactory.java}
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.api/src/main/java/ar/com/oxe
+n/nibiru/ui/api/view/ViewFactory.java}
 \end_layout
 
 \end_inset
@@ -1476,8 +1485,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.security.api/src/main/java/ar/com/oxen/nibiru/sec
-urity/api/AuthenticationService.java}
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.api/src/main/jav
+a/ar/com/oxen/nibiru/security/api/AuthenticationService.java}
 \end_layout
 
 \end_inset
@@ -1497,8 +1506,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.security.api/src/main/java/ar/com/oxen/nibiru/sec
-urity/api/AuthorizationService.java}
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.api/src/main/jav
+a/ar/com/oxen/nibiru/security/api/AuthorizationService.java}
 \end_layout
 
 \end_inset
@@ -1717,8 +1726,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.i18n.api/src/main/java/ar/com/oxen/nibiru/i18n/ap
-i/LocaleHolder.java}
+lstinputlisting{../ar.com.oxen.nibiru.i18n/ar.com.oxen.nibiru.i18n.api/src/main/java/ar/com
+/oxen/nibiru/i18n/api/LocaleHolder.java}
 \end_layout
 
 \end_inset
@@ -1738,8 +1747,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.i18n.api/src/main/java/ar/com/oxen/nibiru/i18n/ap
-i/MessageSource.java}
+lstinputlisting{../ar.com.oxen.nibiru.i18n/ar.com.oxen.nibiru.i18n.api/src/main/java/ar/com
+/oxen/nibiru/i18n/api/MessageSource.java}
 \end_layout
 
 \end_inset
@@ -1759,8 +1768,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.i18n.api/src/main/java/ar/com/oxen/nibiru/i18n/ap
-i/MessageProvider.java}
+lstinputlisting{../ar.com.oxen.nibiru.i18n/ar.com.oxen.nibiru.i18n.api/src/main/java/ar/com
+/oxen/nibiru/i18n/api/MessageProvider.java}
 \end_layout
 
 \end_inset
@@ -1828,8 +1837,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
-crud/manager/api/CrudManager.java}
+lstinputlisting{../ar.com.oxen.nibiru.crud/ar.com.oxen.nibiru.crud.manager.api/src/main/java
+/ar/com/oxen/nibiru/crud/manager/api/CrudManager.java}
 \end_layout
 
 \end_inset
@@ -1862,8 +1871,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
-crud/manager/api/CrudEntity.java}
+lstinputlisting{../ar.com.oxen.nibiru.crud/ar.com.oxen.nibiru.crud.manager.api/src/main/java
+/ar/com/oxen/nibiru/crud/manager/api/CrudEntity.java}
 \end_layout
 
 \end_inset
@@ -1879,8 +1888,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
-crud/manager/api/CrudField.java}
+lstinputlisting{../ar.com.oxen.nibiru.crud/ar.com.oxen.nibiru.crud.manager.api/src/main/java
+/ar/com/oxen/nibiru/crud/manager/api/CrudField.java}
 \end_layout
 
 \end_inset
@@ -1902,8 +1911,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
-crud/manager/api/WidgetType.java}
+lstinputlisting{../ar.com.oxen.nibiru.crud/ar.com.oxen.nibiru.crud.manager.api/src/main/java
+/ar/com/oxen/nibiru/crud/manager/api/WidgetType.java}
 \end_layout
 
 \end_inset
@@ -1925,8 +1934,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
-crud/manager/api/CrudAction.java}
+lstinputlisting{../ar.com.oxen.nibiru.crud/ar.com.oxen.nibiru.crud.manager.api/src/main/java
+/ar/com/oxen/nibiru/crud/manager/api/CrudAction.java}
 \end_layout
 
 \end_inset
@@ -1968,8 +1977,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
-crud/manager/api/CrudActionExtension.java}
+lstinputlisting{../ar.com.oxen.nibiru.crud/ar.com.oxen.nibiru.crud.manager.api/src/main/java
+/ar/com/oxen/nibiru/crud/manager/api/CrudActionExtension.java}
 \end_layout
 
 \end_inset
@@ -2012,8 +2021,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
-crud/manager/api/ManageCrudEntitiesEvent.java}
+lstinputlisting{../ar.com.oxen.nibiru.crud/ar.com.oxen.nibiru.crud.manager.api/src/main/java
+/ar/com/oxen/nibiru/crud/manager/api/ManageCrudEntitiesEvent.java}
 \end_layout
 
 \end_inset
@@ -2036,8 +2045,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
-crud/manager/api/EditCrudEntityEvent.java}
+lstinputlisting{../ar.com.oxen.nibiru.crud/ar.com.oxen.nibiru.crud.manager.api/src/main/java
+/ar/com/oxen/nibiru/crud/manager/api/EditCrudEntityEvent.java}
 \end_layout
 
 \end_inset
@@ -2062,8 +2071,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
-crud/manager/api/ModifiedCrudEntityEvent.java}
+lstinputlisting{../ar.com.oxen.nibiru.crud/ar.com.oxen.nibiru.crud.manager.api/src/main/java
+/ar/com/oxen/nibiru/crud/manager/api/ModifiedCrudEntityEvent.java}
 \end_layout
 
 \end_inset
@@ -2086,8 +2095,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.crud.manager.api/src/main/java/ar/com/oxen/nibiru/
-crud/manager/api/ManageChildCrudEntitiesEvent.java}
+lstinputlisting{../ar.com.oxen.nibiru.crud/ar.com.oxen.nibiru.crud.manager.api/src/main/java
+/ar/com/oxen/nibiru/crud/manager/api/ManageChildCrudEntitiesEvent.java}
 \end_layout
 
 \end_inset
@@ -2117,8 +2126,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.crud.ui.api/src/main/java/ar/com/oxen/nibiru/crud/
-ui/api/CrudPresenterFactory.java}
+lstinputlisting{../ar.com.oxen.nibiru.crud/ar.com.oxen.nibiru.crud.ui.api/src/main/java/ar/c
+om/oxen/nibiru/crud/ui/api/CrudPresenterFactory.java}
 \end_layout
 
 \end_inset
@@ -2138,8 +2147,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.crud.ui.api/src/main/java/ar/com/oxen/nibiru/crud/
-ui/api/CrudViewFactory.java}
+lstinputlisting{../ar.com.oxen.nibiru.crud/ar.com.oxen.nibiru.crud.ui.api/src/main/java/ar/c
+om/oxen/nibiru/crud/ui/api/CrudViewFactory.java}
 \end_layout
 
 \end_inset
@@ -2201,8 +2210,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.crud.utils/src/main/java/ar/com/oxen/nibiru/crud/
-utils/AbstractCrudModuleConfigurator.java}
+lstinputlisting{../ar.com.oxen.nibiru.crud/ar.com.oxen.nibiru.crud.utils/src/main/java/ar/c
+om/oxen/nibiru/crud/utils/AbstractCrudModuleConfigurator.java}
 \end_layout
 
 \end_inset
@@ -2236,152 +2245,6 @@ Workflow
 
 \emph on
 TODO: Definir este módulo.
-\end_layout
-
-\begin_layout Section
-Bundles dinámicos
-\end_layout
-
-\begin_layout Standard
-El objetivo del mecanismo de bundles dinámicos es proveer, en conjunto con
- el mecanismo de puntos de extensión, una forma de agregar o personalizar
- funcionalidad al sistema mientras éste esté corriendo.
-\end_layout
-
-\begin_layout Standard
-OSGi ya provee un servicio para instalar bundles de manera dinámica.
- La idea del módulo provisto por Nibiru es brindar un mecanismo para que
- dichos bundles puedan ser almacenados en la base de datos y administrados
- desde la misma aplicación.
- Vale la pena notar que el servicio de Nibiru no es genérico, sino que está
- pensado concretamente para OSGi.
-\end_layout
-
-\begin_layout Standard
-En conjunto con los distintos motores de scripting, es posible agregar funcional
-idad sin recompilar ningún bundle.
-\end_layout
-
-\begin_layout Subsection
-Persistencia
-\end_layout
-
-\begin_layout Standard
-El bundle ar.com.oxen.nibiru.dynamicbundle.domain contiene las clases de dominio
- utilizadas para persistir bundles.
- El bundle ar.com.oxen.nibiru.dynamicbundle.dao.api provee un 
-\begin_inset CommandInset href
-LatexCommand href
-name "DAO"
-target "http://es.wikipedia.org/wiki/Data_Access_Object"
-
-\end_inset
-
- para leer y escribir dichas clases de dominio.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-lstinputlisting{../ar.com.oxen.nibiru.dynamicbundle.dao.api/src/main/java/ar/com/oxen/ni
-biru/dynamicbundle/dao/api/DynamicBundleDao.java}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Actualmente hay una implementación JPA de dicho DAO: ar.com.oxen.nibiru.dynamicbundl
-e.dao.jpa.
-\end_layout
-
-\begin_layout Standard
-
-\emph on
-TODO: definir mejor el modelo de datos de bundles dinámicos.
- Por ejemplo, sólo tiene dependencias por bundle, cuando en realidad es
- mejor poner dependencias por paquete.
- O también se podría pensar cómo hacer para que además de tener archivos
- de Spring pueda tener código Java compilado (binario).
-\end_layout
-
-\begin_layout Standard
-
-\emph on
-TODO: La persistencia no se podría hacer por el manager del módulo de ABMs?
- Actualmente, para lo único que se está usando el DynamicBundleDao, desde
- SpringDynamicBundleManager, es para leer todos los bundles e inicializarlos
- al arrancar.
-\end_layout
-
-\begin_layout Subsection
-Negocio
-\end_layout
-
-\begin_layout Standard
-El proyecto ar.com.oxen.nibiru.dynamicbundle.manager.api provee la interfaz DynamicBun
-dleManager, que permite operar sobre bundles.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-lstinputlisting{../ar.com.oxen.nibiru.dynamicbundle.manager.api/src/main/java/ar/com/oxe
-n/nibiru/dynamicbundle/manager/api/DynamicBundleManager.java}
-\end_layout
-
-\end_inset
-
-En ar.com.oxen.nibiru.dynamicbundle.manager.spring hay una implementación que
- se basa en Spring DM para acceder al BundleContext.
-\end_layout
-
-\begin_layout Standard
-Para iniciar y detener servicios se utiliza el esquema de extensiones de
- acciones provisto por el módulo de ABM.
- La clase DynamicBundleStatusExtension del bundle ar.com.oxen.nibiru.dynamicbundle.mo
-dule provee CrudActions para iniciar y detener un servicio dado (delegando
- en DynamicBundleManager).
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-lstinputlisting{../ar.com.oxen.nibiru.dynamicbundle.module/src/main/java/ar/com/oxen/ni
-biru/dynamicbundle/module/DynamicBundleStatusExtension.java}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection
-Interfaz de usuario
-\end_layout
-
-\begin_layout Standard
-En el bundle ar.com.oxen.nibiru.dynamicbundle.module se configuran los eventos
- que activan los distintos presentadores y vistas.
- No hay un proyecto específico para UI ya que se basa en los servicios de
- UI provistos por el módulo de ABMs.
 \end_layout
 
 \begin_layout Section
