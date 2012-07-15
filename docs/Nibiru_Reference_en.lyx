@@ -65,7 +65,7 @@
 \begin_body
 
 \begin_layout Title
-Nibiru Reference
+Nibiru 0.2 Reference
 \end_layout
 
 \begin_layout Standard
@@ -464,18 +464,10 @@ Run the OSGi application launch called "Nibiru Sample".
 \end_layout
 
 \begin_layout Standard
-If you don't want to download the full source code, you can run it downloading
- a precompiled sample app: 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://nibiru.googlecode.com/files/sampleapp.zip"
-
-\end_inset
-
-.
- Although the sample app is packaged, you must build the target platform
- from the project, as explained before.
- After that, just import the existing Eclipse project.
+You can run the sample inside a non-OSGi environment.
+ The ar.com.oxen.nibiru.sample.springwebapp project does this.
+ It runs as an standard WAR into a servlet container.
+ Download its binaries from here (TODO: put the link).
 \end_layout
 
 \begin_layout Subsection
@@ -612,14 +604,11 @@ in/java/ar/com/oxen/nibiru/application/api/ApplicationViewFactory.java}
 \end_layout
 
 \begin_layout Standard
-
-\emph on
-TODO: Los presentadores y las vistas deberían ir en módulos separados.
-\end_layout
-
-\begin_layout Standard
 The ar.com.oxen.nibiru.application.generic bundle provides a generic implementation
  of basic application components.
+ The ar.com.oxen.nibiru.application.generic.presenter and ar.com.oxen.nibiru.application.ge
+neric.view bundles provide, respectively, generic implementations for application
+ presenters and views.
 \end_layout
 
 \begin_layout Section
@@ -2156,12 +2145,56 @@ om/oxen/nibiru/crud/utils/AbstractCrudModuleConfigurator.java}
 
 \end_layout
 
+\begin_layout Subsection
+Bean-based CRUDs
+\end_layout
+
 \begin_layout Standard
 The ar.com.oxen.nibiru.crud.bean project contains utility classes for CRUD implementa
 tions that use beans, like an implementation of CrudEntity that delegates
- to a bean (through BeanWrapper of Java Oxen Commons).
+ to a bean (through BeanWrapper from Java Oxen Commons).
  Also, it contains annotations which are useful in order to to parametrize
  the CRUD directly on the bean.
+\end_layout
+
+\begin_layout Standard
+For example, the following class shows some bean annotations:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.module/src/main/java
+/ar/com/oxen/nibiru/sample/domain/Student.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+@Actions/@Action: Defines which actions can be performed on the entity or
+ just on the CRUD window.
+\end_layout
+
+\begin_layout Itemize
+@Filter: Allows an arbitrary filtering expression, wich can be evaluated
+ and passed to the CrudManager (for example, for using in a JPA query).
+ This is useful, for example, when defining row-level security.
+\end_layout
+
+\begin_layout Itemize
+@Show: Determines how and where the field is shown.
+\end_layout
+
+\begin_layout Itemize
+@Widget: Provides information about how the UI widget must be generated.
 \end_layout
 
 \begin_layout Section

@@ -65,7 +65,7 @@
 \begin_body
 
 \begin_layout Title
-Referencia Nibiru
+Referencia Nibiru 0.2
 \end_layout
 
 \begin_layout Standard
@@ -486,18 +486,10 @@ Nibiru Sample
 \end_layout
 
 \begin_layout Standard
-Si no quiere descargar los fuentes completos, puede ejecutar desde los binarios
- descargando la aplicación de ejemplo precompilada: 
-\begin_inset CommandInset href
-LatexCommand href
-target "http://nibiru.googlecode.com/files/sampleapp.zip"
-
-\end_inset
-
-.
- Aunque la aplicación ya esté empaquetada, se debe crear el target platform
- desde el proyecto mismo.
- Después de eso, simplemente hay que importar el proyecto Eclipse.
+Puede ejecutar el ejemplo dentro de un entorno no-OSGi.
+ El proyecto ar.com.oxen.nibiru.sample.springwebapp hace esto.
+ Se ejecuta como un WAR convencional en un contenedor de servlets.
+ Puede descargar los binarios de aquí (POR HACER: poner el enlace).
 \end_layout
 
 \begin_layout Subsection
@@ -627,14 +619,11 @@ in/java/ar/com/oxen/nibiru/application/api/ApplicationViewFactory.java}
 \end_layout
 
 \begin_layout Standard
-
-\emph on
-TODO: Los presentadores y las vistas deberían ir en módulos separados.
-\end_layout
-
-\begin_layout Standard
 El bundle ar.com.oxen.nibiru.application.generic provee una implementación genérica
  de los componentes base de la aplicación.
+ Los bundles ar.com.oxen.nibiru.application.generic.presenter y ar.com.oxen.nibiru.applica
+tion.generic.view proveen, respectivamente, las implementaciones genéricas
+ para los presentadores y vistas de la aplicación.
 \end_layout
 
 \begin_layout Section
@@ -2228,12 +2217,60 @@ om/oxen/nibiru/crud/utils/AbstractCrudModuleConfigurator.java}
 
 \end_layout
 
+\begin_layout Subsection
+ABMs basados en beans
+\end_layout
+
 \begin_layout Standard
 El proyecto ar.com.oxen.nibiru.crud.bean contiene clases de utilidad para implementac
 iones de ABM que utilicen beans, como por ejemplo una implementación de
  CrudEntity que delega en un bean (a través de BeanWrapper, de Oxen Java
  Commons).
  También tiene anotaciones para parametrizar el ABM directamente en el bean.
+\end_layout
+
+\begin_layout Standard
+Por ejemplo, la siguiente clase muestra algunas anotaciones de beans:
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.module/src/main/java
+/ar/com/oxen/nibiru/sample/domain/Student.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+@Actions/@Action: Define qué acciones pueden realizarse sobre la entidad
+ o sobre la ventana de ABM.
+\end_layout
+
+\begin_layout Itemize
+@Filter: Permite una expresión de filtrado arbitraria, la cual puede ser
+ evaluada y pasada al CrudManager (por ejemplo, para ser usada en una consulta
+ JPA).
+ Esto resulta útil, por ejemplo, para definir seguridad a nivel de fila.
+\end_layout
+
+\begin_layout Itemize
+@Show: Determina cómo y cuándo se muestra el campo.
+\end_layout
+
+\begin_layout Itemize
+@Widget: Provee información acerca de cómo se generará el widget de interfaz
+ de usuario donde se mostrará el campo.
 \end_layout
 
 \begin_layout Section
