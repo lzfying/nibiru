@@ -2980,9 +2980,167 @@ Reportes
 \end_layout
 
 \begin_layout Standard
+El proyecto ar.com.oxen.nibiru.report.api define el API de reportes.
+ El mismo incluye sólo una interfaz:
+\end_layout
 
-\emph on
-TODO: Definir este módulo.
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.report/ar.com.oxen.nibiru.report.api/src/main/java/ar
+/com/oxen/nibiru/report/api/Report.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dicha interfaz debe ser implementada por cualquier reporte, más allá del
+ motor utilizado.
+\end_layout
+
+\begin_layout Standard
+Dado que el reporte usualmente se expondrá como una extensión, se provee
+ también un nombre para el punto de extensión correspondiente.
+\end_layout
+
+\begin_layout Subsection
+Implementación BIRT
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.report.birt provee una implementación basada en
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "BIRT"
+target "http://www.eclipse.org/birt"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.report/ar.com.oxen.nibiru.report.birt/src/main/java/a
+r/com/oxen/nibiru/report/birt/BirtReport.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La misma obtiene toda la información de reporte desde un archivo de reporte
+ BIRT.
+\end_layout
+
+\begin_layout Subsection
+Integración con ABM
+\end_layout
+
+\begin_layout Standard
+La integración con el módulo de ABMs puede hacerse con las clases del proyecto
+ ar.com.oxen.nibiru.report.crud.
+ El mismo provee:
+\end_layout
+
+\begin_layout Itemize
+Un CrudManager para reportes:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.report/ar.com.oxen.nibiru.report.crud/src/main/java/a
+r/com/oxen/nibiru/report/crud/ReportCrudManager.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Un CrudEntity que encapsula un reporte:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.report/ar.com.oxen.nibiru.report.crud/src/main/java/a
+r/com/oxen/nibiru/report/crud/ReportCrudEntity.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Un CrudActionExtension que permite abrir y ejecutar un reporte:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.report/ar.com.oxen.nibiru.report.crud/src/main/java/a
+r/com/oxen/nibiru/report/crud/ReportCrudActionExtension.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Módulo de reportes
+\end_layout
+
+\begin_layout Standard
+El bundle ar.com.oxen.nibiru.report.module provee un módulo de reportes genérico,
+ que usa el módulo de ABM para generar la interfaz de usuario responsable
+ de ejecutar los reportes.
+\end_layout
+
+\begin_layout Standard
+Además provee una vista genérica que muestra el reporte ejecutado.
 \end_layout
 
 \begin_layout Section
@@ -2993,6 +3151,10 @@ Workflow
 
 \emph on
 TODO: Definir este módulo.
+\end_layout
+
+\begin_layout Section
+Correo electrónico
 \end_layout
 
 \begin_layout Part

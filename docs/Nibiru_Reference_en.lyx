@@ -2898,9 +2898,161 @@ Reports
 \end_layout
 
 \begin_layout Standard
+The report API is defined in the ar.com.oxen.nibiru.report.api project.
+ It includes just one interface:
+\end_layout
 
-\emph on
-TODO: Definir este módulo.
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.report/ar.com.oxen.nibiru.report.api/src/main/java/ar
+/com/oxen/nibiru/report/api/Report.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Such interface must be implemented by any report, regardless the used engine.
+ As the report will be usually exposed as an extension, a name for the correspon
+ding extension point is provided.
+\end_layout
+
+\begin_layout Subsection
+BIRT implementation
+\end_layout
+
+\begin_layout Standard
+The ar.com.oxen.nibiru.report.birt project provides a report implementation using
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "BIRT"
+target "http://www.eclipse.org/birt"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.report/ar.com.oxen.nibiru.report.birt/src/main/java/a
+r/com/oxen/nibiru/report/birt/BirtReport.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It extracts all the report information from BIRT file.
+\end_layout
+
+\begin_layout Subsection
+CRUD integration
+\end_layout
+
+\begin_layout Standard
+CRUD integration can be done using classes from ar.com.oxen.nibiru.report.crud
+ project.
+ It provides:
+\end_layout
+
+\begin_layout Itemize
+A CrudManager for reports:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.report/ar.com.oxen.nibiru.report.crud/src/main/java/a
+r/com/oxen/nibiru/report/crud/ReportCrudManager.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+A CrudEntity that wraps a report:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.report/ar.com.oxen.nibiru.report.crud/src/main/java/a
+r/com/oxen/nibiru/report/crud/ReportCrudEntity.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+A CrudActionExtension which allows opening and runing a report:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.report/ar.com.oxen.nibiru.report.crud/src/main/java/a
+r/com/oxen/nibiru/report/crud/ReportCrudActionExtension.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Report module
+\end_layout
+
+\begin_layout Standard
+The ar.com.oxen.nibiru.report.module bundle provides a generic report module,
+ which uses CRUD for providing report execution user interface.
+\end_layout
+
+\begin_layout Standard
+It also provides a generic view which shows the executed report.
 \end_layout
 
 \begin_layout Section
@@ -2911,6 +3063,10 @@ Workflow
 
 \emph on
 TODO: Definir este módulo.
+\end_layout
+
+\begin_layout Section
+Mail
 \end_layout
 
 \begin_layout Part

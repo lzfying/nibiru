@@ -25,8 +25,8 @@ import org.eclipse.birt.report.engine.api.ReportEngine;
 import ar.com.oxen.nibiru.report.api.Report;
 
 public class BirtReport implements Report {
-	// TODO: etsa manera de compartir el engine es medio trucha... la otra seria
-	// hacer un servicio e inyectarlo
+	// TODO: esta manera de compartir el engine no es la mejor...
+	// habria que hacer un servicio e inyectarlo
 	private static IReportEngine engine = new ReportEngine(new EngineConfig());
 	private IReportRunnable design;
 
