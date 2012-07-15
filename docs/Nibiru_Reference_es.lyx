@@ -192,61 +192,6 @@ ones para los componentes más comunes.
 \end_layout
 
 \begin_layout Subsection
-División entre API e implementación
-\end_layout
-
-\begin_layout Standard
-A fin de facilitar el desacoplamiento entre implementaciones de distintos
- módulos, se definieron dos tipos de módulos:
-\end_layout
-
-\begin_layout Itemize
-API: Contienen interfaces de componentes a ser expuestos a otros componentes.
- Por convención de nombre, finalizan en 
-\begin_inset Quotes eld
-\end_inset
-
-.api
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-Implementación: Contienen implementaciones de las APIs.
- Por convención de nombres tienen el mismo nombre del API que implementan
- pero cambiando el 
-\begin_inset Quotes eld
-\end_inset
-
-.api
-\begin_inset Quotes erd
-\end_inset
-
- final por algo descriptivo de la implementación.
-\end_layout
-
-\begin_layout Standard
-En general, cualquier módulo sólo puede acceder a otro a través de un API.
- La excepción a esta regla son los módulos con utilidades, que no exponen
- servicios en sí, sino que sólo exportan clases de uso general.
-\end_layout
-
-\begin_layout Standard
-Por convención de nombres, las implementaciones de APIs que no dependan
- de una tecnología en particular tendrán el sufijo 
-\begin_inset Quotes eld
-\end_inset
-
-.generic
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsection
 Puntos de extensión
 \end_layout
 
@@ -549,7 +494,178 @@ target "http://code.google.com/p/peaberry/"
 )
 \end_layout
 
+\begin_layout Enumerate
+
+\emph on
+Crear un DSL con Builders
+\end_layout
+
 \begin_layout Part
+Estructura del proyecto
+\end_layout
+
+\begin_layout Section
+Subproyectos principales
+\end_layout
+
+\begin_layout Standard
+La estrcutrua del proyecto Nibiru está organizada de una forma jerárquica.
+ Dentro de esta estructura, los bundles principales son:
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.application
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.conversation
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.crud
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.extensionpoint
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.i18n
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.mail
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.report
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.security
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.session
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.support
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.ui
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.validation
+\end_layout
+
+\begin_layout Section
+Proyecto de ejemplo
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.sample contiene una aplicación de ejemplo.
+\end_layout
+
+\begin_layout Section
+Categorización
+\end_layout
+
+\begin_layout Subsection
+División entre API e implementación
+\end_layout
+
+\begin_layout Standard
+A fin de facilitar el desacoplamiento entre implementaciones de distintos
+ módulos, se definieron dos tipos de módulos:
+\end_layout
+
+\begin_layout Itemize
+API: Contienen interfaces de componentes a ser expuestos a otros componentes.
+ Por convención de nombre, finalizan en 
+\begin_inset Quotes eld
+\end_inset
+
+.api
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Implementación: Contienen implementaciones de las APIs.
+ Por convención de nombres tienen el mismo nombre del API que implementan
+ pero cambiando el 
+\begin_inset Quotes eld
+\end_inset
+
+.api
+\begin_inset Quotes erd
+\end_inset
+
+ final por algo descriptivo de la implementación.
+\end_layout
+
+\begin_layout Standard
+En general, cualquier módulo sólo puede acceder a otro a través de un API.
+ La excepción a esta regla son los módulos con utilidades, que no exponen
+ servicios en sí, sino que sólo exportan clases de uso general.
+\end_layout
+
+\begin_layout Standard
+Por convención de nombres, las implementaciones de APIs que no dependan
+ de una tecnología en particular tendrán el sufijo 
+\begin_inset Quotes eld
+\end_inset
+
+.generic
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+División entre clases y servicios
+\end_layout
+
+\begin_layout Standard
+El XML para exponer instancias de clases como servicios se encuentra en
+ un bundle separado.
+ De esta manera, se pueden exponer servicios de una manera diferente simplemente
+ instalando otro bundle de servicio, con un XML personalizado (o incluso
+ usando otra tecnología, como por ejemplo 
+\begin_inset CommandInset href
+LatexCommand href
+name "Peaberry"
+target "http://code.google.com/p/peaberry/"
+
+\end_inset
+
+).
+ Y se pueden reutilizar las clases del bundle principal en la medida en
+ la que esto sea necesario.
+\end_layout
+
+\begin_layout Standard
+Los bundles que exportan servicio se llaman igual que el bundle que contiene
+ la clase que lo implementa, pero con un sufijo 
+\begin_inset Quotes eld
+\end_inset
+
+.service
+\begin_inset Quotes erd
+\end_inset
+
+ en el nombre.
+\end_layout
+
+\begin_layout Part
+
+\lang english
 Módulos
 \end_layout
 

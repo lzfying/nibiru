@@ -195,37 +195,6 @@ Also, the concept of abstracting the view was taken a step further, creating
 \end_layout
 
 \begin_layout Subsection
-API / implementation separation
-\end_layout
-
-\begin_layout Standard
-We define two kind of modules, in order to facilitate the decoupling among
- different modules implementations:
-\end_layout
-
-\begin_layout Itemize
-API: Contains interfaces to be exposed to other components.
- By convention the name ends with ".api".
-\end_layout
-
-\begin_layout Itemize
-Implementation: Contains API implementations.
- By convention the names are almost equals to the implemented API name,
- but changing ".api" suffix by something descriptive of the implementation.
-\end_layout
-
-\begin_layout Standard
-In general, any module can only access another module through an API.
- The exception to this rule are modules with utility classes that do not
- expose services.
-\end_layout
-
-\begin_layout Standard
-Another naming convention is that implementations of APIs that are not dependent
- on a particular technology will have a ".generic" suffix.
-\end_layout
-
-\begin_layout Subsection
 Extension points
 \end_layout
 
@@ -540,6 +509,149 @@ target "http://code.google.com/p/peaberry/"
 \end_inset
 
 )
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Crear un DSL con Builders
+\end_layout
+
+\begin_layout Part
+Project Structure
+\end_layout
+
+\begin_layout Section
+Main subprojects
+\end_layout
+
+\begin_layout Standard
+The structure for Nibiru project is arranged in an hierarchical way.
+ In this structure, the bundles are arranged into the following main groups:
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.application
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.conversation
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.crud
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.extensionpoint
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.i18n
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.mail
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.report
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.security
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.session
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.support
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.ui
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.validation
+\end_layout
+
+\begin_layout Section
+Sample project
+\end_layout
+
+\begin_layout Standard
+A sample application can be found in the ar.com.oxen.nibiru.sample project.
+\end_layout
+
+\begin_layout Section
+Categorization
+\end_layout
+
+\begin_layout Subsection
+API / implementation separation
+\end_layout
+
+\begin_layout Standard
+We define two kind of modules, in order to facilitate the decoupling among
+ different modules implementations:
+\end_layout
+
+\begin_layout Itemize
+API: Contains interfaces to be exposed to other components.
+ By convention the name ends with ".api".
+\end_layout
+
+\begin_layout Itemize
+Implementation: Contains API implementations.
+ By convention the names are almost equals to the implemented API name,
+ but changing ".api" suffix by something descriptive of the implementation.
+\end_layout
+
+\begin_layout Standard
+In general, any module can only access another module through an API.
+ The exception to this rule are modules with utility classes that do not
+ expose services.
+\end_layout
+
+\begin_layout Standard
+Another naming convention is that implementations of APIs that are not dependent
+ on a particular technology will have a ".generic" suffix.
+\end_layout
+
+\begin_layout Subsection
+Division between classes and services
+\end_layout
+
+\begin_layout Standard
+XML for exposing class instances as a services is stored in a separated
+ bundle.
+ This way, you can export services in a custom way simply by installing
+ a different bundle, with a custom XML configuration (or even using another
+ technology, such as 
+\begin_inset CommandInset href
+LatexCommand href
+name "Peaberry"
+target "http://code.google.com/p/peaberry/"
+
+\end_inset
+
+).
+ An you can reuse the classes from the main bundle as you want.
+\end_layout
+
+\begin_layout Standard
+Bundles with service exporting definitions are suffixed with 
+\begin_inset Quotes eld
+\end_inset
+
+.service
+\begin_inset Quotes erd
+\end_inset
+
+ on the name.
 \end_layout
 
 \begin_layout Part

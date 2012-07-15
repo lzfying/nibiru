@@ -58,8 +58,8 @@
 		<module>ar.com.oxen.nibiru.support</module>
 		<module>ar.com.oxen.nibiru.ui</module>
 		<module>ar.com.oxen.nibiru.validation</module>
-    <module>ar.com.oxen.nibiru.mail</module>
-    <module>ar.com.oxen.nibiru.report</module>
+    	<module>ar.com.oxen.nibiru.mail</module>
+    	<module>ar.com.oxen.nibiru.report</module>
   </modules>
 	<build>
 		<resources>
