@@ -1414,6 +1414,10 @@ target "http://vaadin.com"
 .
 \end_layout
 
+\begin_layout Subsection
+UI utilities
+\end_layout
+
 \begin_layout Standard
 The ar.com.oxen.nibiru.ui.utils project contains generic classes for use in the
  user interface.
@@ -1422,6 +1426,224 @@ The ar.com.oxen.nibiru.ui.utils project contains generic classes for use in the
  But also contains decorators and generic use classes.
 \end_layout
 
+\begin_layout Itemize
+ar.com.oxen.nibiru.ui.utils.dialog: Contains classes for handling dialogs.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+For example, the DialogBuilder class allows creating a custom-made modal
+ window:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.utils/src/main/java/ar/com/o
+xen/nibiru/ui/utils/dialog/DialogBuilder.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+ar.com.oxen.nibiru.ui.utils.extension: Provides common UI extension implementations.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+SimpleMenuItemExtension is an implementation for menu items:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.utils/src/main/java/ar/com/o
+xen/nibiru/ui/utils/extension/SimpleMenuItemExtension.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+SimpleSubMenuExtension, in a similar way, implements a sub-menu extension:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.utils/src/main/java/ar/com/o
+xen/nibiru/ui/utils/extension/SimpleSubMenuExtension.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+ar.com.oxen.nibiru.ui.utils.mvp: Contains utility classes for implementing the
+ MVP pattern.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+AbstractEventBusClickHandler is a base class for click handlers which fires
+ events on the bus:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.utils/src/main/java/ar/com/o
+xen/nibiru/ui/utils/mvp/AbstractEventBusClickHandler.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+AbstractPresenter is a base class for any presenter:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.utils/src/main/java/ar/com/o
+xen/nibiru/ui/utils/mvp/AbstractPresenter.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+HasValueI18nDecorator is a wrapper for HasValue<String> instances, which
+ performs translation on the text using i18n services:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.utils/src/main/java/ar/com/o
+xen/nibiru/ui/utils/mvp/HasValueI18nDecorator.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+SimpleEventBusClickHandler is an event handler that fires an event on the
+ bus with the specified class and topic:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.utils/src/main/java/ar/com/o
+xen/nibiru/ui/utils/mvp/SimpleEventBusClickHandler.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+ar.com.oxen.nibiru.ui.utils.view: Provides base classes for defining views.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+AbstractAdapter represents a generic view adapter:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.utils/src/main/java/ar/com/o
+xen/nibiru/ui/utils/view/AbstractAdapter.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+AbstractWindowViewAdapter is a base class for window-based views:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.utils/src/main/java/ar/com/o
+xen/nibiru/ui/utils/view/AbstractAdapter.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \begin_layout Section
 Security
 \end_layout
