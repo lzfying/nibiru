@@ -1513,6 +1513,10 @@ n/nibiru/ui/api/view/ViewFactory.java}
 
 \end_layout
 
+\begin_layout Subsection
+Vaadin implementation
+\end_layout
+
 \begin_layout Standard
 The ar.com.oxen.nibiru.ui.vaadin project contains a factory and its associated
  adapters required in order to implement ar.com.oxen.nibiru.ui.api.view interfaces
@@ -1525,6 +1529,76 @@ target "http://vaadin.com"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+It also provides an specific Vaadin application for Nibiru:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.vaadin/src/main/java/ar/com/
+oxen/nibiru/ui/vaadin/application/NibiruApplication.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As you can see, if you want to change the Vaadin theme, you can do it by
+ firing an ApplicationThemeChangeEvent on the event bus.
+\end_layout
+
+\begin_layout Standard
+Since Vaadin application can't be exposed as an OSGi service (OSGi services
+ are exposed using Java interfaces, while Vaadin application is a concrete
+ class), Nibiru provides an interface for accessing such component:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.vaadin/src/main/java/ar/com/
+oxen/nibiru/ui/vaadin/api/ApplicationAccessor.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+And, as expected, a simple implementation:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.ui/ar.com.oxen.nibiru.ui.vaadin/src/main/java/ar/com/
+oxen/nibiru/ui/vaadin/application/SimpleApplicationAccessor.java}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
