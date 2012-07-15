@@ -1331,7 +1331,8 @@ is used for persistence.
 \end_layout
 
 \begin_layout Standard
-Since JPA is an API itself, no Nibiru-specific API was defined.
+Since JPA is an API itself, no Nibiru-specific API was defined for object
+ persistence.
  On the other hand, an instance of javax.persistence.EntityManagerFactory,
  from JPA specification, is exposed as a service.
  The ar.com.oxen.nibiru.jpa.spring bundle provides 2 implementations of such
@@ -2189,6 +2190,125 @@ The ar.com.oxen.nibiru.i18n.session project has a LocaleHolder implementation
 \end_layout
 
 \begin_layout Section
+Validation
+\end_layout
+
+\begin_layout Standard
+The ar.com.oxen.nibiru.validation.api project defines the validation API.
+ It includes two main interfaces.
+\end_layout
+
+\begin_layout Itemize
+Validator, which represents a component that can perform a validation:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.validation/ar.com.oxen.nibiru.validation.api/src/main
+/java/ar/com/oxen/nibiru/validation/api/Validator.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Validatable, representing a component which can have validators associated
+ to it:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.validation/ar.com.oxen.nibiru.validation.api/src/main
+/java/ar/com/oxen/nibiru/validation/api/Validatable.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Generic validators
+\end_layout
+
+\begin_layout Standard
+The ar.com.oxen.nibiru.validation.generic project provides validators that can
+ be reused among projects.
+\end_layout
+
+\begin_layout Itemize
+NotEmptyValidator, that checks against null or 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ value:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.validation/ar.com.oxen.nibiru.validation.generic/src/
+main/java/ar/com/oxen/nibiru/validation/generic/NotEmptyValidator.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+RegexpValidator, which checks the value against a regular expression:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.validation/ar.com.oxen.nibiru.validation.generic/src/
+main/java/ar/com/oxen/nibiru/validation/generic/RegexpValidator.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Section
 CRUD
 \end_layout
 
@@ -2636,6 +2756,63 @@ lstinputlisting{../ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.module/sr
 @Widget: Provides information about how the UI widget must be generated.
 \end_layout
 
+\begin_layout Subsection
+Validation
+\end_layout
+
+\begin_layout Standard
+Validation over CRUD fields can be done by exposing a Validator as an extension.
+\end_layout
+
+\begin_layout Standard
+The extension point name must be built with the entiy name, appending a
+ dot and the name of the field to be validated.
+ For example:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+this.registerExtension(new NotEmptyValidator(),
+\end_layout
+
+\begin_layout Plain Layout
+
+                       Subject.class.getName() +".description",
+\end_layout
+
+\begin_layout Plain Layout
+
+                       Validator.class);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Reports
 \end_layout
@@ -2654,20 +2831,6 @@ Workflow
 
 \emph on
 TODO: Definir este módulo.
-\end_layout
-
-\begin_layout Section
-Log
-\end_layout
-
-\begin_layout Standard
-
-\emph on
-TODO: Es necesario un servicio de log? o simplemente con commons loggin
- o SLF4J alcanza? OSGi tiene un servicio de log, se podría hacer un adaptador
- para SLF4J.
- Y seguir la misma lógica que con transacciones, JPA y DataSource.
- 
 \end_layout
 
 \begin_layout Section

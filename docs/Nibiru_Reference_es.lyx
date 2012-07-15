@@ -2236,6 +2236,125 @@ El proyecto ar.com.oxen.nibiru.i18n.session tiene una implementación de LocaleH
 \end_layout
 
 \begin_layout Section
+Validación
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.validation.api define el API de validación.
+ incluye 2 interfaces principales.
+\end_layout
+
+\begin_layout Itemize
+Validator, la cual representa un componente que puede realizar una validación:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.validation/ar.com.oxen.nibiru.validation.api/src/main
+/java/ar/com/oxen/nibiru/validation/api/Validator.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Validatable, que representa un componente al cual se le pueden asociar validador
+es:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.validation/ar.com.oxen.nibiru.validation.api/src/main
+/java/ar/com/oxen/nibiru/validation/api/Validatable.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Validadores genéricos
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.validation.generic provee validadores que pueden
+ reutilizarse en distintos proyectos.
+\end_layout
+
+\begin_layout Itemize
+NotEmptyValidator, que verifica que el dato no sea nulo o 
+\begin_inset Quotes eld
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.validation/ar.com.oxen.nibiru.validation.generic/src/
+main/java/ar/com/oxen/nibiru/validation/generic/NotEmptyValidator.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+RegexpValidator, el cual verifica el dato contra una expresión regular:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.validation/ar.com.oxen.nibiru.validation.generic/src/
+main/java/ar/com/oxen/nibiru/validation/generic/RegexpValidator.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Section
 ABM
 \end_layout
 
@@ -2718,6 +2837,64 @@ lstinputlisting{../ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.module/sr
  de usuario donde se mostrará el campo.
 \end_layout
 
+\begin_layout Subsection
+Validación
+\end_layout
+
+\begin_layout Standard
+La validación de campos de CRUD se puede realizar exponiendo un Validator
+ como extensión.
+\end_layout
+
+\begin_layout Standard
+El nombre del punto de extensión debe armarse concatenando el nombre de
+ la entidad, un punto y el nombre del campo a validad.
+ Por ejemplo:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+this.registerExtension(new NotEmptyValidator(),
+\end_layout
+
+\begin_layout Plain Layout
+
+                       Subject.class.getName() +".description",
+\end_layout
+
+\begin_layout Plain Layout
+
+                       Validator.class);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Reportes
 \end_layout
@@ -2736,19 +2913,6 @@ Workflow
 
 \emph on
 TODO: Definir este módulo.
-\end_layout
-
-\begin_layout Section
-Log
-\end_layout
-
-\begin_layout Standard
-
-\emph on
-TODO: Es necesario un servicio de log? o simplemente con commons loggin
- o SLF4J alcanza? OSGi tiene un servicio de log, se podría hacer un adaptador
- para SLF4J.
- Y seguir la misma lógic que con transacciones, JPA y DataSource.
 \end_layout
 
 \begin_layout Section
