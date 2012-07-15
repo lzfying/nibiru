@@ -2156,10 +2156,11 @@ MessageProvider: Utilizado para proveer mensajes consultando por clave y
 Las 3 interfaces son muy simples, como se puede ver.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 LocaleHolder:
 \end_layout
 
+\begin_deeper
 \begin_layout Standard
 \begin_inset ERT
 status open
@@ -2177,10 +2178,12 @@ lstinputlisting{../ar.com.oxen.nibiru.i18n/ar.com.oxen.nibiru.i18n.api/src/main/
 
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Itemize
 MessageSource:
 \end_layout
 
+\begin_deeper
 \begin_layout Standard
 \begin_inset ERT
 status open
@@ -2198,10 +2201,12 @@ lstinputlisting{../ar.com.oxen.nibiru.i18n/ar.com.oxen.nibiru.i18n.api/src/main/
 
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Itemize
 MessageProvider:
 \end_layout
 
+\begin_deeper
 \begin_layout Standard
 \begin_inset ERT
 status open
@@ -2219,6 +2224,7 @@ lstinputlisting{../ar.com.oxen.nibiru.i18n/ar.com.oxen.nibiru.i18n.api/src/main/
 
 \end_layout
 
+\end_deeper
 \begin_layout Standard
 El proyecto ar.com.oxen.nibiru.i18n.generic contiene una implementación genérica
  de MessageSource al cual se le inyecta el LocaleHolder y una lista de MessagePr
@@ -2915,8 +2921,147 @@ Workflow
 TODO: Definir este módulo.
 \end_layout
 
+\begin_layout Part
+Despliegue
+\end_layout
+
+\begin_layout Standard
+Una de las ventajas de desarrollar bajo el framework Nibiru es que se puede
+ desplegar, de manera indistinta, en ambientes con o sin OSGi.
+\end_layout
+
 \begin_layout Section
-Soporte para ambientes sin OSGi
+Despliegue ambientes OSGi
+\end_layout
+
+\begin_layout Standard
+A fin de desplegar en ambientes OSGi, se debería partir la aplicación en
+ bundles.
+ Más allá de eso, hay algunos bundles específicos que podría ser necesario
+ implementar.
+ Los mismos son explicados en las siguientes secciones.
+\end_layout
+
+\begin_layout Subsection
+Proyecto aplicación Web
+\end_layout
+
+\begin_layout Standard
+Se debe crear al menos un proyecto webapp, a fin de que dicha aplicación
+ sea publicada.
+ Por supuesto, si la aplicación está dividida en varios módulos, usualmente
+ ellos compartirán la misma webapp.
+\end_layout
+
+\begin_layout Standard
+Dentro de este proyecto, se puede personalizar la aplicación web.
+ Por ejemplo, se puede cambiar el context path:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.webapp/META-INF/MANI
+FEST.MF}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La implementación actual usa Vaadin.
+ Por este motivo, se deberían crear dos archivos dentro del directorio WEB-INF:
+\end_layout
+
+\begin_layout Itemize
+web.xml:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.webapp/WEB-INF/web.xm
+l}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+applicationContext.xml:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.webapp/WEB-INF/appli
+cationContext.xml}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Fragmento Datasource
+\end_layout
+
+\begin_layout Standard
+Este bundle provee la información necesaria para la conexión a la base de
+ datos, agregando un archivo database.properties al bundle que provee el
+ DataSource (por ejemplo, ar.com.oxen.nibiru.datasource.dbcp).
+ Este fragmento debe agregar también dependencias a las clases del controlador
+ de base de datos, de modo que el classloader del bundle que expone el DataSourc
+e pueda verlas.
+\end_layout
+
+\begin_layout Subsection
+Fragmento JPA
+\end_layout
+
+\begin_layout Standard
+Este bundle agrega el archivo META-INF/persistence.xml al bundle JPA (por
+ ejemplo, ar.com.oxen.nibiru.jpa.spring).
+ También debe agregar dependencia con las clases de dominio, para que el
+ class loader de JPA pueda verlas.
+\end_layout
+
+\begin_layout Subsection
+Fragmento ODA
+\end_layout
+
+\begin_layout Standard
+Si su proyecto usa reportes BIRT basados en Open Data Access, se debe agregar
+ este fragmento a fin de hacer que las clases del dirver de conexión a base
+ de datos sean visibles para el bundle org.eclipse.birt.report.data.oda.jdbc.
+\end_layout
+
+\begin_layout Section
+Despliegue ambientes sin OSGi
 \end_layout
 
 \begin_layout Standard

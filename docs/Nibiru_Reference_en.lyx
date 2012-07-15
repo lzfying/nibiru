@@ -2111,10 +2111,11 @@ MessageProvider: Used to provide message querying using a key and a Locale.
 The 3 interfaces are very simple, as you can see.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 LocaleHolder:
 \end_layout
 
+\begin_deeper
 \begin_layout Standard
 \begin_inset ERT
 status open
@@ -2132,10 +2133,12 @@ lstinputlisting{../ar.com.oxen.nibiru.i18n/ar.com.oxen.nibiru.i18n.api/src/main/
 
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Itemize
 MessageSource:
 \end_layout
 
+\begin_deeper
 \begin_layout Standard
 \begin_inset ERT
 status open
@@ -2153,10 +2156,12 @@ lstinputlisting{../ar.com.oxen.nibiru.i18n/ar.com.oxen.nibiru.i18n.api/src/main/
 
 \end_layout
 
-\begin_layout Standard
+\end_deeper
+\begin_layout Itemize
 MessageProvider:
 \end_layout
 
+\begin_deeper
 \begin_layout Standard
 \begin_inset ERT
 status open
@@ -2174,6 +2179,7 @@ lstinputlisting{../ar.com.oxen.nibiru.i18n/ar.com.oxen.nibiru.i18n.api/src/main/
 
 \end_layout
 
+\end_deeper
 \begin_layout Standard
 The ar.com.oxen.nibiru.i18n.generic project contains an generic MessageSource
  implementation which is injected with LocaleHolder and a list of MessageProvide
@@ -2833,8 +2839,146 @@ Workflow
 TODO: Definir este módulo.
 \end_layout
 
+\begin_layout Part
+Deployment
+\end_layout
+
+\begin_layout Standard
+One of the advantages when developing under Nibiru framework is that your
+ application can be deployed on both, OSGi and non-OSGi environments.
+\end_layout
+
 \begin_layout Section
-Non-OSGi support
+OSGi deployment
+\end_layout
+
+\begin_layout Standard
+In order to deploy under an OSGi environment, you should break your application
+ into OSGi bundles.
+ However, there is some specific bundles and fragments that you may need
+ to implement.
+ They are explained in the following sections.
+\end_layout
+
+\begin_layout Subsection
+Webapp project
+\end_layout
+
+\begin_layout Standard
+At least one webapp project must be created in order to publish a web applicatio
+n.
+ However, if your applications is divided into many modules, usually they
+ will share the same webapp.
+\end_layout
+
+\begin_layout Standard
+Inside this project, you can customize the web application.
+ For example, you can change the context path:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.webapp/META-INF/MANI
+FEST.MF}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The current implementation uses Vaddin.
+ Because of this, you should create two files inside the WEB-INF directory:
+\end_layout
+
+\begin_layout Itemize
+web.xml:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.webapp/WEB-INF/web.xm
+l}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+applicationContext.xml:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.webapp/WEB-INF/appli
+cationContext.xml}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Datasource fragment
+\end_layout
+
+\begin_layout Standard
+This bundle provides database connection information, by adding a database.proper
+ties file to the bundle exposing the DataSource (ar.com.oxen.nibiru.datasource.dbcp
+ for example).
+ Also, dependencies to database driver must be added, in order to make them
+ visible to DataSource bundle.
+\end_layout
+
+\begin_layout Subsection
+JPA fragment
+\end_layout
+
+\begin_layout Standard
+This bundle adds the META-INF/persistence.xml to the JPA bundle (for example,
+ ar.com.oxen.nibiru.jpa.spring).
+ It also must add dependency to domain classes, so JPA class loader can
+ see them.
+\end_layout
+
+\begin_layout Subsection
+ODA fragment
+\end_layout
+
+\begin_layout Standard
+If your project uses BIRT reports based on Open Data Access, you must add
+ a fragment in order to make driver classes visibles to org.eclipse.birt.report.data.
+oda.jdbc bundle.
+\end_layout
+
+\begin_layout Section
+Non-OSGi deployment
 \end_layout
 
 \begin_layout Standard
