@@ -1736,20 +1736,125 @@ a/ar/com/oxen/nibiru/security/api/AuthorizationService.java}
 
 \end_layout
 
-\begin_layout Standard
-
-\emph on
-TODO: Habría que pensar bien el esquema de autorización.
- Si los módulos se van a desarrollar de forma independiente, cómo se evita
- la colisión de roles? Depende de la implementación asociar los roles específico
-s de cada módulo a un rol general? (como en EJB) O simplemente que cada
- modulo le ponga un prefijo al rol? (como se está haciendo con la internacionali
-zacion).
+\begin_layout Subsection
+Implementación de prueba
 \end_layout
 
 \begin_layout Standard
-Hasta el momento no se ha hecho ninguna implementación de seguridad, sólo
- hay un bundle que da un servicio dummy (ar.com.oxen.nibiru.security.dummy).
+Existe una implementación específica para pruebas.
+ La misma se encuentra en el proyecto ar.com.oxen.nibiru.security.dummy.
+\end_layout
+
+\begin_layout Subsection
+Implementación basada en Spring Security
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.security.spring provee implementaciones de los
+ componentes de seguridad basándose en el 
+\begin_inset CommandInset href
+LatexCommand href
+name "framework Spring Security"
+target "http://static.springsource.org/spring-security/site/"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+La clase SpringAuthenticationService realiza la autenticación delegando
+ en la clase AuthenticationManager de Spring Security:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.spring/src/main/
+java/ar/com/oxen/nibiru/security/spring/SpringAuthenticationService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por supuesto, se debería inyectar una instancia de AuthenticationManager
+ en las instancias esta clase.
+\end_layout
+
+\begin_layout Standard
+Ya que SpringAuthenticationService almacena la información de autenticación
+ en la sesión de Nibiru, la clase SpringAuthorizationService simplemente
+ lee las authorities desde tal sesión:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.spring/src/main/
+java/ar/com/oxen/nibiru/security/spring/SpringAuthorizationService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Módulo seguridad
+\end_layout
+
+\begin_layout Standard
+El bundle ar.com.oxen.nibiru.security.db bundle provee una implementación de
+ seguridad con:
+\end_layout
+
+\begin_layout Itemize
+Un modelo de dominio basado en usuarios, roles y grupos.
+\end_layout
+
+\begin_layout Itemize
+Administración sobre esas entidades utilizando el módulo de ABM.
+\end_layout
+
+\begin_layout Itemize
+Una implementación de UserDetailsService de Spring Security.
+ La misma es inyectada a un AuthenticationManager, y este último es expuesto
+ a fin de ser inyectado en un SpringAuthenticationService del módulo ar.com.oxen.ni
+biru.security.spring.
+\end_layout
+
+\begin_layout Standard
+El siguiente archivo de ocnfiguración muestra cómo se conectan los componentes:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.db.service/META-I
+NF/spring/context.xml}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
