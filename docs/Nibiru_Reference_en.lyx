@@ -3069,6 +3069,75 @@ TODO: Definir este módulo.
 Mail
 \end_layout
 
+\begin_layout Standard
+The ar.com.oxen.nibiru.mail.api bundle provides the API for sending e-mails.
+ An e-mail is represented using the MailMessage class:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.mail/ar.com.oxen.nibiru.mail.api/src/main/java/ar/com
+/oxen/nibiru/mail/api/MailMessage.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These messages can be sent using a MailService instance:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.mail/ar.com.oxen.nibiru.mail.api/src/main/java/ar/com
+/oxen/nibiru/mail/api/MailService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+JavaMail implementation
+\end_layout
+
+\begin_layout Standard
+The ar.com.oxen.nibiru.mail.javamail project provides a JavaMail based MailService
+ implementation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.mail/ar.com.oxen.nibiru.mail.javamail/src/main/java/a
+r/com/oxen/nibiru/mail/javamail/JavaMailService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Part
 Deployment
 \end_layout
