@@ -715,11 +715,18 @@ in/java/ar/com/oxen/nibiru/application/api/ApplicationViewFactory.java}
 
 \end_layout
 
+\begin_layout Subsection
+Generic implementation
+\end_layout
+
 \begin_layout Standard
 The ar.com.oxen.nibiru.application.generic bundle provides a generic implementation
  of basic application components.
- The ar.com.oxen.nibiru.application.generic.presenter and ar.com.oxen.nibiru.application.ge
-neric.view bundles provide, respectively, generic implementations for application
+\end_layout
+
+\begin_layout Standard
+The ar.com.oxen.nibiru.application.generic.presenter and ar.com.oxen.nibiru.application.gen
+eric.view bundles provide, respectively, generic implementations for application
  presenters and views.
 \end_layout
 
@@ -785,13 +792,29 @@ The ExtensionPointManager also provides methods for registering new extensions
  and unregistering a existing one.
 \end_layout
 
+\begin_layout Subsection
+Spring DM implementation
+\end_layout
+
 \begin_layout Standard
 The ar.com.oxen.nibiru.extensionpoint.spring bundle has an extension point implementa
 tion based on Spring DM and OSGi services.
- Under this implementation, each extension point is simply implemented using
+\end_layout
+
+\begin_layout Standard
+Under this implementation, each extension point is simply implemented using
  an OSGi service with a property called "extensionPoint".
  Such property is used to determine the name of the extension point where
  functionality should be added.
+\end_layout
+
+\begin_layout Subsection
+Generic implementation
+\end_layout
+
+\begin_layout Standard
+The ar.com.oxen.nibiru.extensionpoint.generic bundle provides a generic extension
+ point implementation which can be used on non-OSGi environments.
 \end_layout
 
 \begin_layout Section
@@ -984,10 +1007,18 @@ ar/com/oxen/nibiru/session/api/Session.java}
 
 \end_layout
 
+\begin_layout Subsection
+HTTP implementation
+\end_layout
+
 \begin_layout Standard
 The ar.com.oxen.nibiru.session.spring.http project provides access to the HTTP
  session using Spring components (Servlet filters that provide session access
  through a ThreadLocal).
+\end_layout
+
+\begin_layout Subsection
+Spring integration
 \end_layout
 
 \begin_layout Standard
@@ -1297,20 +1328,56 @@ target "http://seamframework.org/"
  interface unification, without providing benefits.
 \end_layout
 
+\begin_layout Subsection
+Generic impementation
+\end_layout
+
 \begin_layout Standard
 The ar.com.oxen.nibiru.conversation.generic module contains generic conversation
  services implementations.
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
 
-\emph on
-TODO: Las conversaciones pueden hacer que sea practicamente imposible serializar
- la sesión.
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.conversation/ar.com.oxen.nibiru.conversation.generic/
+src/main/java/ar/com/oxen/nibiru/conversation/generic/GenericConversation.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.conversation/ar.com.oxen.nibiru.conversation.generic/
+src/main/java/ar/com/oxen/nibiru/conversation/generic/GenericConversationManager.
+java}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
 Persistence
+\end_layout
+
+\begin_layout Subsection
+JPA
 \end_layout
 
 \begin_layout Standard
@@ -1360,6 +1427,10 @@ Because JPA requires you to specify in the META-INF/persistence.xml file
  This has the disadvantage that the file should include all the classes
  to be persisted by different modules.
  The project ar.com.oxen.nibiru.sample.jpa.fragment is an example of this.
+\end_layout
+
+\begin_layout Subsection
+Database
 \end_layout
 
 \begin_layout Standard
@@ -2254,6 +2325,10 @@ lstinputlisting{../ar.com.oxen.nibiru.i18n/ar.com.oxen.nibiru.i18n.api/src/main/
 \end_layout
 
 \end_deeper
+\begin_layout Subsection
+Generic implementation
+\end_layout
+
 \begin_layout Standard
 The ar.com.oxen.nibiru.i18n.generic project contains an generic MessageSource
  implementation which is injected with LocaleHolder and a list of MessageProvide
@@ -2262,6 +2337,10 @@ rs.
  according to the availability of new instances of these services.
  This project also contains a MessageProvider implementation based on ResoruceBu
 ndle.
+\end_layout
+
+\begin_layout Subsection
+Session integration
 \end_layout
 
 \begin_layout Standard

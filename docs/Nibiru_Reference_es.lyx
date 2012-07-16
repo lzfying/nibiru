@@ -734,11 +734,18 @@ in/java/ar/com/oxen/nibiru/application/api/ApplicationViewFactory.java}
 
 \end_layout
 
+\begin_layout Subsection
+Implementación genérica
+\end_layout
+
 \begin_layout Standard
 El bundle ar.com.oxen.nibiru.application.generic provee una implementación genérica
  de los componentes base de la aplicación.
- Los bundles ar.com.oxen.nibiru.application.generic.presenter y ar.com.oxen.nibiru.applica
-tion.generic.view proveen, respectivamente, las implementaciones genéricas
+\end_layout
+
+\begin_layout Standard
+Los bundles ar.com.oxen.nibiru.application.generic.presenter y ar.com.oxen.nibiru.applicat
+ion.generic.view proveen, respectivamente, las implementaciones genéricas
  para los presentadores y vistas de la aplicación.
 \end_layout
 
@@ -805,10 +812,17 @@ La interfaz ExtensionPointManager también provee métodos para registrar
  nuevas extensiones y dar de baja extensiones existentes.
 \end_layout
 
+\begin_layout Subsection
+Implementación Spring DM
+\end_layout
+
 \begin_layout Standard
 El bundle ar.com.oxen.nibiru.extensionpoint.spring tiene una implementación basada
  en Spring DM y servicios OSGi de los puntos de extensión.
- Bajo esta implementación, cada punto de extensión simplemente se implementa
+\end_layout
+
+\begin_layout Standard
+Bajo esta implementación, cada punto de extensión simplemente se implementa
  mediante un servicio OSGi con una propiedad llamada 
 \begin_inset Quotes eld
 \end_inset
@@ -819,6 +833,16 @@ extensionPoint
 
  utilizada para indicar el nombre del punto de extensión sobre el cual se
  agregará la funcionalidad.
+\end_layout
+
+\begin_layout Subsection
+Implementación genérica
+\end_layout
+
+\begin_layout Standard
+El bundle ar.com.oxen.nibiru.extensionpoint.generic provee una implementación
+ genérica del servicio de puntos de extensión que puede ser utilizada en
+ ambientes que no soporten OSGi.
 \end_layout
 
 \begin_layout Section
@@ -1013,10 +1037,18 @@ ar/com/oxen/nibiru/session/api/Session.java}
 
 \end_layout
 
+\begin_layout Subsection
+Implementación HTTP
+\end_layout
+
 \begin_layout Standard
 El proyecto ar.com.oxen.nibiru.session.spring.http provee acceso a la sesión HTTP
  utilizando componentes de Spring (filtros de Servlet que brindan acceso
  a la sesión a través de un ThreadLocal).
+\end_layout
+
+\begin_layout Subsection
+Integración con Spring
 \end_layout
 
 \begin_layout Standard
@@ -1328,20 +1360,56 @@ target "http://seamframework.org/"
  una unificación poco elegante de interfaces, sin aportar beneficios.
 \end_layout
 
-\begin_layout Standard
-El módulo ar.com.oxen.nibiru.conversation.Overfull  genérica de los servicios
- de conversación.
+\begin_layout Subsection
+Implementación genérica
 \end_layout
 
 \begin_layout Standard
+El módulo ar.com.oxen.nibiru.conversation.generic provee una implementación 
+ genérica de los servicios de conversación.
+\end_layout
 
-\emph on
-TODO: Las conversaciones pueden hacer que sea practicamente imposible serializar
- la sesión.
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.conversation/ar.com.oxen.nibiru.conversation.generic/
+src/main/java/ar/com/oxen/nibiru/conversation/generic/GenericConversation.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.conversation/ar.com.oxen.nibiru.conversation.generic/
+src/main/java/ar/com/oxen/nibiru/conversation/generic/GenericConversationManager.
+java}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
 Persistencia
+\end_layout
+
+\begin_layout Subsection
+JPA
 \end_layout
 
 \begin_layout Standard
@@ -1390,6 +1458,10 @@ ml las clases a persistir, deben crearse fragmentos OSGi para agregar dicho
  Esto tiene como inconveniente que en dicho archivo se deben incluir las
  clases a persistir por los diferentes módulos.
  Ver proyecto ar.com.oxen.nibiru.sample.jpa.fragment para tomar como ejemplo.
+\end_layout
+
+\begin_layout Subsection
+Base de datos
 \end_layout
 
 \begin_layout Standard
@@ -2299,6 +2371,10 @@ lstinputlisting{../ar.com.oxen.nibiru.i18n/ar.com.oxen.nibiru.i18n.api/src/main/
 \end_layout
 
 \end_deeper
+\begin_layout Subsection
+Implementación genérica
+\end_layout
+
 \begin_layout Standard
 El proyecto ar.com.oxen.nibiru.i18n.generic contiene una implementación genérica
  de MessageSource al cual se le inyecta el LocaleHolder y una lista de MessagePr
@@ -2308,6 +2384,10 @@ ider que se actualice dinámicamente ante la disponibilidad de nuevas instancias
  de dichos servicios.
  Este proyecto también contiene una implementación basada en ResoruceBundle
  de MessageProvider.
+\end_layout
+
+\begin_layout Subsection
+Integración con la sesión
 \end_layout
 
 \begin_layout Standard
