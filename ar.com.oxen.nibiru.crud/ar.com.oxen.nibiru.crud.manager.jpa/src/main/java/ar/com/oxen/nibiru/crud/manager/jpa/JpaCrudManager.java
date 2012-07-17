@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
@@ -72,13 +73,18 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 
 	private List<CrudField> fieldNamesToCrudFields(ShowValidator showValidator) {
 		List<PropertyDescriptor> descriptors = new LinkedList<PropertyDescriptor>();
-
-		for (PropertyDescriptor descriptor : this.wrapperFactory.wrapClass(
-				this.persistentClass).getPropertyDescriptors()) {
-			Show show = descriptor.getAnnotation(Show.class);
-			if (show != null && showValidator.mustShow(show)) {
-				descriptors.add(descriptor);
+		
+		Class<?> currentClass = this.persistentClass;
+		while (currentClass != null
+				&& currentClass.isAnnotationPresent(Entity.class)) {
+			for (PropertyDescriptor descriptor : this.wrapperFactory.wrapClass(
+					currentClass).getPropertyDescriptors()) {
+				Show show = descriptor.getAnnotation(Show.class);
+				if (show != null && showValidator.mustShow(show)) {
+					descriptors.add(descriptor);
+				}
 			}
+			currentClass = currentClass.getSuperclass();
 		}
 
 		Collections.sort(descriptors, new Comparator<PropertyDescriptor>() {
