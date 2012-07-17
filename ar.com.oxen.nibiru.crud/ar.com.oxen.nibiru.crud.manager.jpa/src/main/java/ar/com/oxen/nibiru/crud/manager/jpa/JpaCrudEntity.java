@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.mvel2.MVEL;
@@ -63,14 +64,28 @@ public class JpaCrudEntity<T> extends AbstractBeanCrudEntity<T> {
 
 	private Class<?> getCollectionType(String fieldName) {
 		try {
-			Field field = this.getEntity().getClass()
-					.getDeclaredField(fieldName);
-			ParameterizedType parametrizedType = (ParameterizedType) field
-					.getGenericType();
-			return (Class<?>) parametrizedType.getActualTypeArguments()[0];
+			Class<?> currentClass = this.getEntity().getClass();
+			Field field = null;
+
+			while (field == null && currentClass != null
+					&& currentClass.isAnnotationPresent(Entity.class)) {
+				try {
+					field = currentClass.getDeclaredField(fieldName);
+				} catch (NoSuchFieldException e) {
+				}
+				currentClass = currentClass.getSuperclass();
+			}
+
+			if (field != null) {
+				ParameterizedType parametrizedType = (ParameterizedType) field
+						.getGenericType();
+
+				return (Class<?>) parametrizedType.getActualTypeArguments()[0];
+			} else {
+				throw new IllegalArgumentException("Field not found:"
+						+ fieldName);
+			}
 		} catch (SecurityException e) {
-			throw new IllegalArgumentException(fieldName, e);
-		} catch (NoSuchFieldException e) {
 			throw new IllegalArgumentException(fieldName, e);
 		}
 	}
