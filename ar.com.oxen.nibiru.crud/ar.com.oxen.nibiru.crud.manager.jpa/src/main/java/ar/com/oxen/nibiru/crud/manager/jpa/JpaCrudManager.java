@@ -1,6 +1,5 @@
 package ar.com.oxen.nibiru.crud.manager.jpa;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -71,20 +70,28 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 		});
 	}
 
-	private List<CrudField> fieldNamesToCrudFields(ShowValidator showValidator) {
+	private List<PropertyDescriptor> getPersistentProperties() {
 		List<PropertyDescriptor> descriptors = new LinkedList<PropertyDescriptor>();
-		
 		Class<?> currentClass = this.persistentClass;
 		while (currentClass != null
 				&& currentClass.isAnnotationPresent(Entity.class)) {
-			for (PropertyDescriptor descriptor : this.wrapperFactory.wrapClass(
-					currentClass).getPropertyDescriptors()) {
-				Show show = descriptor.getAnnotation(Show.class);
-				if (show != null && showValidator.mustShow(show)) {
-					descriptors.add(descriptor);
-				}
-			}
+			Collections.addAll(descriptors,
+					this.wrapperFactory.wrapClass(currentClass)
+							.getPropertyDescriptors());
 			currentClass = currentClass.getSuperclass();
+		}
+
+		return descriptors;
+	}
+
+	private List<CrudField> fieldNamesToCrudFields(ShowValidator showValidator) {
+		List<PropertyDescriptor> descriptors = new LinkedList<PropertyDescriptor>();
+
+		for (PropertyDescriptor descriptor : this.getPersistentProperties()) {
+			Show show = descriptor.getAnnotation(Show.class);
+			if (show != null && showValidator.mustShow(show)) {
+				descriptors.add(descriptor);
+			}
 		}
 
 		Collections.sort(descriptors, new Comparator<PropertyDescriptor>() {
@@ -315,13 +322,7 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 	/* Setters */
 	public void setPersistentClass(Class<T> persistentClass) {
 		this.persistentClass = persistentClass;
-
-		for (Field field : persistentClass.getDeclaredFields()) {
-			if (field.isAnnotationPresent(Id.class)) {
-				this.pkName = field.getName();
-				break;
-			}
-		}
+		this.updatePkName();
 
 		Filter filterAnnotation = persistentClass.getAnnotation(Filter.class);
 		if (filterAnnotation != null) {
@@ -331,6 +332,19 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 
 	public void setWrapperFactory(WrapperFactory wrapperFactory) {
 		this.wrapperFactory = wrapperFactory;
+		this.updatePkName();
+	}
+	
+	private void updatePkName() {
+		if (this.pkName == null && this.wrapperFactory != null
+				&& this.persistentClass != null) {
+			for (PropertyDescriptor descriptor : this.getPersistentProperties()) {
+				if (descriptor.getAnnotation(Id.class) != null) {
+					this.pkName = descriptor.getName();
+					break;
+				}
+			}
+		}
 	}
 
 	public void setAuthorizationService(
