@@ -1,13 +1,15 @@
 package ar.com.oxen.nibiru.report.crud;
 
+import java.io.InputStream;
+
 import ar.com.oxen.nibiru.report.api.Report;
 
 public class ReportExecutedEvent {
 	private Report report;
 	private String format;
-	private byte[] data;
+	private InputStream data;
 
-	public ReportExecutedEvent(Report report, String format, byte[] data) {
+	public ReportExecutedEvent(Report report, String format, InputStream data) {
 		super();
 		this.report = report;
 		this.format = format;
@@ -22,7 +24,7 @@ public class ReportExecutedEvent {
 		return format;
 	}
 
-	public byte[] getData() {
+	public InputStream getData() {
 		return data;
 	}
 }

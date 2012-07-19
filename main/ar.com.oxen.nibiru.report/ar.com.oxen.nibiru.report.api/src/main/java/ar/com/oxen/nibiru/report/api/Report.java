@@ -1,5 +1,6 @@
 package ar.com.oxen.nibiru.report.api;
 
+import java.io.InputStream;
 import java.util.Map;
 
 public interface Report {
@@ -11,7 +12,7 @@ public interface Report {
 
 	Iterable<ParameterDefinition> getParameterDefinitions();
 
-	byte[] render(String format, Map<String, Object> parameters);
+	InputStream render(String format, Map<String, Object> parameters);
 
 	interface ParameterDefinition {
 		String getName();

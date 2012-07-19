@@ -1,6 +1,10 @@
 package ar.com.oxen.nibiru.report.birt;
 
-import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -25,18 +29,16 @@ import org.eclipse.birt.report.engine.api.ReportEngine;
 import ar.com.oxen.nibiru.report.api.Report;
 
 public class BirtReport implements Report {
-	// TODO: esta manera de compartir el engine no es la mejor...
-	// habria que hacer un servicio e inyectarlo
-	private static IReportEngine engine = new ReportEngine(new EngineConfig());
+	private IReportEngine engine;
 	private IReportRunnable design;
 
 	public BirtReport(String file) {
 		super();
 		try {
+			engine = new ReportEngine(new EngineConfig());
 			ClassLoader classLoader = Thread.currentThread()
 					.getContextClassLoader();
 
-			// Open the report design
 			this.design = engine.openReportDesign(classLoader
 					.getResourceAsStream(file));
 		} catch (EngineException e) {
@@ -70,18 +72,38 @@ public class BirtReport implements Report {
 		return parameters;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public byte[] render(String format, Map<String, Object> parameters) {
+	public InputStream render(final String format,
+			final Map<String, Object> parameters) {
 		try {
-			ClassLoader classLoader = Thread.currentThread()
+			final PipedOutputStream output = new PipedOutputStream();
+			InputStream input = new PipedInputStream(output);
+
+			final ClassLoader classLoader = Thread.currentThread()
 					.getContextClassLoader();
 
-			// Create task to run and render the report,
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					render(format, parameters, output, classLoader);
+				}
+			}).start();
+
+			return input;
+		} catch (IOException e) {
+			throw new BirtReportException(e);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	private void render(String format, Map<String, Object> parameters,
+			OutputStream output, ClassLoader classLoader) {
+		try {
+			/* Create task to run and render the report */
 			IRunAndRenderTask task = design.getReportEngine()
 					.createRunAndRenderTask(design);
 
-			// Set parent classloader for engine
+			/* Set parent classloader for engine */
 			task.getAppContext().put(
 					EngineConstants.APPCONTEXT_CLASSLOADER_KEY, classLoader);
 
@@ -92,7 +114,6 @@ public class BirtReport implements Report {
 			final IRenderOption options = new RenderOption();
 			options.setOutputFormat(format);
 
-			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			options.setOutputStream(output);
 
 			if (options.getOutputFormat().equalsIgnoreCase("html")) {
@@ -103,11 +124,6 @@ public class BirtReport implements Report {
 				htmlOptions.setHtmlRtLFlag(false);
 				htmlOptions.setEmbeddable(false);
 				htmlOptions.setSupportedImageFormats("PNG");
-
-				// set this if you want your image source url to be altered
-				// If using the setBaseImageURL, make sure to set image handler
-				// to HTMLServerImageHandler
-				// htmlOptions.setBaseImageURL("http://myhost/prependme?image=");
 			} else if (options.getOutputFormat().equalsIgnoreCase("pdf")) {
 				final PDFRenderOption pdfOptions = new PDFRenderOption(options);
 				pdfOptions.setOption(IPDFRenderOption.PAGE_OVERFLOW,
@@ -123,9 +139,11 @@ public class BirtReport implements Report {
 
 			task.close();
 
-			return output.toByteArray();
+			output.flush();
 		} catch (EngineException e) {
-			throw new RuntimeException(e);
+			throw new BirtReportException(e);
+		} catch (IOException e) {
+			throw new BirtReportException(e);
 		}
 	}
 

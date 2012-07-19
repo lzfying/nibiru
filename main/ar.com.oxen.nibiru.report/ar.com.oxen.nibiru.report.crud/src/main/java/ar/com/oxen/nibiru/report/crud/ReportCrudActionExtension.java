@@ -1,5 +1,6 @@
 package ar.com.oxen.nibiru.report.crud;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +50,7 @@ public class ReportCrudActionExtension implements CrudActionExtension<Report> {
 						entity.getValue(parameterDef.getName()));
 			}
 
-			byte[] data = entity.getEntity().render(format, parameters);
+			InputStream data = entity.getEntity().render(format, parameters);
 
 			this.eventBus.fireEvent(new ReportExecutedEvent(entity.getEntity(),
 					format, data));

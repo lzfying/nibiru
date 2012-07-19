@@ -1,5 +1,7 @@
 package ar.com.oxen.nibiru.report.module.ui.generic;
 
+import java.io.InputStream;
+
 import ar.com.oxen.nibiru.i18n.api.MessageSource;
 import ar.com.oxen.nibiru.report.module.ui.ReportView;
 import ar.com.oxen.nibiru.ui.api.view.Embedded;
@@ -29,7 +31,7 @@ public class GenericReportView extends AbstractWindowViewAdapter<Window>
 	}
 
 	@Override
-	public void showReport(byte[] data, String format) {
+	public void showReport(InputStream data, String format) {
 		this.report.setData(data, format);
 	}
 }
