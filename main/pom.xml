@@ -52,7 +52,6 @@
 		<module>ar.com.oxen.nibiru.crud</module>
 		<module>ar.com.oxen.nibiru.extensionpoint</module>
 		<module>ar.com.oxen.nibiru.i18n</module>
-		<module>ar.com.oxen.nibiru.sample</module>
 		<module>ar.com.oxen.nibiru.security</module>
 		<module>ar.com.oxen.nibiru.session</module>
 		<module>ar.com.oxen.nibiru.support</module>
