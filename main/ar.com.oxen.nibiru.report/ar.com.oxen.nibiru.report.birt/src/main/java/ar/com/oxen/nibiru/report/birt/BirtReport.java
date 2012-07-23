@@ -36,13 +36,10 @@ public class BirtReport implements Report {
 		super();
 		try {
 			engine = new ReportEngine(new EngineConfig());
-			ClassLoader classLoader = Thread.currentThread()
-					.getContextClassLoader();
-
-			this.design = engine.openReportDesign(classLoader
-					.getResourceAsStream(file));
+			this.design = engine.openReportDesign(this
+					.getReporFileInputStream(file));
 		} catch (EngineException e) {
-			throw new RuntimeException(e);
+			throw new BirtReportException(e);
 		}
 	}
 
@@ -144,6 +141,26 @@ public class BirtReport implements Report {
 			throw new BirtReportException(e);
 		} catch (IOException e) {
 			throw new BirtReportException(e);
+		}
+	}
+
+	private InputStream getReporFileInputStream(String file) {
+		try {
+			InputStream reportInputStream = this.getClass()
+					.getResourceAsStream(file);
+			if (reportInputStream.available() == 0) {
+				reportInputStream = Thread.currentThread()
+						.getContextClassLoader().getResourceAsStream(file);
+			}
+			if (reportInputStream.available() == 0) {
+				throw new IllegalArgumentException("Invalid report file: "
+						+ file);
+			}
+
+			return reportInputStream;
+		} catch (IOException e) {
+			throw new IllegalArgumentException("Invalid report file: " + file,
+					e);
 		}
 	}
 

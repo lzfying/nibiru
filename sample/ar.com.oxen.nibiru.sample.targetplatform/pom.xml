@@ -56,9 +56,16 @@
 			<artifactId>ar.com.oxen.nibiru.security.db.service</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.mail</groupId>
 			<artifactId>ar.com.oxen.nibiru.mail.javamail.service</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		 -->
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.report</groupId>
+			<artifactId>ar.com.oxen.nibiru.report.module</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
 	</dependencies>

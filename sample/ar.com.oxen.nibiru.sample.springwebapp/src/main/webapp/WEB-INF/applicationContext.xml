@@ -11,6 +11,7 @@
     http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 	<import resource="classpath:/ar/com/oxen/nibiru/standalone/context.xml" />
+	<import resource="classpath:/ar/com/oxen/nibiru/standalone/report.xml" />
 	<import resource="classpath:/ar/com/oxen/nibiru/sample/module/context.xml" />
 
 	<bean name="messageProviders" class="java.util.ArrayList">
@@ -19,6 +20,7 @@
 				<ref bean="sampleMessageProvider" />
 				<ref bean="applicationMessageProvider" />
 				<ref bean="securityMessageProvider" />
+				<ref bean="reportMessageProvider" />
 			</list>
 		</constructor-arg>
 	</bean>

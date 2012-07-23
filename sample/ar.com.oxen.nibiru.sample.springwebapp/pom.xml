@@ -23,6 +23,11 @@
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
+			<groupId>ar.com.oxen.nibiru.report</groupId>
+			<artifactId>ar.com.oxen.nibiru.report.module</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>ar.com.oxen.nibiru.sample</groupId>
 			<artifactId>ar.com.oxen.nibiru.sample.module</artifactId>
 			<version>${nibiru-version}</version>
