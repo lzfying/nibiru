@@ -137,6 +137,7 @@ public class BirtReport implements Report {
 			task.close();
 
 			output.flush();
+			output.close();
 		} catch (EngineException e) {
 			throw new BirtReportException(e);
 		} catch (IOException e) {
@@ -145,23 +146,17 @@ public class BirtReport implements Report {
 	}
 
 	private InputStream getReporFileInputStream(String file) {
-		try {
-			InputStream reportInputStream = this.getClass()
+		InputStream reportInputStream = this.getClass().getResourceAsStream(
+				file);
+		if (reportInputStream == null) {
+			reportInputStream = Thread.currentThread().getContextClassLoader()
 					.getResourceAsStream(file);
-			if (reportInputStream.available() == 0) {
-				reportInputStream = Thread.currentThread()
-						.getContextClassLoader().getResourceAsStream(file);
-			}
-			if (reportInputStream.available() == 0) {
-				throw new IllegalArgumentException("Invalid report file: "
-						+ file);
-			}
-
-			return reportInputStream;
-		} catch (IOException e) {
-			throw new IllegalArgumentException("Invalid report file: " + file,
-					e);
 		}
+		if (reportInputStream == null) {
+			throw new IllegalArgumentException("Invalid report file: " + file);
+		}
+
+		return reportInputStream;
 	}
 
 	private static class IParameterDefnAdapter implements ParameterDefinition {
