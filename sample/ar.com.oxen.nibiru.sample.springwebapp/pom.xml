@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>ar.com.oxen.nibiru.sample</artifactId>
 		<groupId>ar.com.oxen.nibiru</groupId>
-		<version>0.2-SNAPSHOT</version>
+		<version>0.2</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru.sample</groupId>
 	<artifactId>ar.com.oxen.nibiru.sample.springwebapp</artifactId>

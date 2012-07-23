@@ -3,6 +3,7 @@ package ar.com.oxen.nibiru.crud.ui.generic.view.list;
 import ar.com.oxen.nibiru.crud.ui.api.CrudViewFactory;
 import ar.com.oxen.nibiru.crud.ui.api.list.CrudListView;
 import ar.com.oxen.nibiru.crud.ui.generic.view.AbstractCrudView;
+import ar.com.oxen.nibiru.i18n.api.LocaleHolder;
 import ar.com.oxen.nibiru.i18n.api.MessageSource;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
 import ar.com.oxen.nibiru.ui.api.mvp.HasCloseHandler;
@@ -17,8 +18,9 @@ public class GenericCrudListView extends AbstractCrudView implements
 	private Panel globalActionsPanel;
 
 	public GenericCrudListView(ViewFactory viewFactory,
-			MessageSource messageSource) {
-		super(viewFactory.buildWindow(), viewFactory, messageSource);
+			MessageSource messageSource, LocaleHolder localeHolder) {
+		super(viewFactory.buildWindow(), viewFactory, messageSource,
+				localeHolder);
 
 		this.table = this.getViewFactory().buildTable();
 		this.getAdapted().addComponent(table);
@@ -34,11 +36,11 @@ public class GenericCrudListView extends AbstractCrudView implements
 
 	@Override
 	public void setEntityName(String entityName) {
-		String translatedEntityName = this.getMessageSource().getMessage(
-				CrudViewFactory.I18N_ENTITY_PREFIX + entityName);
+		String translatedEntityName = this
+				.getMessage(CrudViewFactory.I18N_ENTITY_PREFIX + entityName);
 		this.getAdapted().setValue(
-				this.getMessageSource().getMessage(
-						"ar.com.oxen.nibiru.app.manage", translatedEntityName));
+				this.getMessage("ar.com.oxen.nibiru.app.manage",
+						translatedEntityName));
 	}
 
 	@Override
@@ -64,8 +66,8 @@ public class GenericCrudListView extends AbstractCrudView implements
 
 	@Override
 	public void addColumn(String name, Class<?> type, int width) {
-		String label = this.getMessageSource().getMessage(
-				CrudViewFactory.I18N_FIELD_PREFIX + name);
+		String label = this
+				.getMessage(CrudViewFactory.I18N_FIELD_PREFIX + name);
 
 		if (width >= 0) {
 			this.table.addColumn(label, type, width);

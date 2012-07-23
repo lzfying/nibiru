@@ -17,9 +17,13 @@
 	<osgi:reference id="nibiruMessageSource"
 		interface="ar.com.oxen.nibiru.i18n.api.MessageSource" />
 
+	<osgi:reference id="localeHolder"
+		interface="ar.com.oxen.nibiru.i18n.api.LocaleHolder" />
+
 	<bean id="crudViewFactory"
 		class="ar.com.oxen.nibiru.crud.ui.generic.view.GenericCrudViewFactory">
 		<property name="viewFactory" ref="viewFactory" />
 		<property name="messageSource" ref="nibiruMessageSource" />
+		<property name="localeHolder" ref="localeHolder" />
 	</bean>
 </beans>

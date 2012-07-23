@@ -1,25 +1,29 @@
 package ar.com.oxen.nibiru.crud.ui.generic.view;
 
+import java.util.Locale;
+
 import ar.com.oxen.nibiru.crud.ui.api.CrudViewFactory;
+import ar.com.oxen.nibiru.i18n.api.LocaleHolder;
 import ar.com.oxen.nibiru.i18n.api.MessageSource;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
 import ar.com.oxen.nibiru.ui.api.view.Button;
 import ar.com.oxen.nibiru.ui.api.view.ViewFactory;
 import ar.com.oxen.nibiru.ui.api.view.Window;
-import ar.com.oxen.nibiru.ui.utils.view.AbstractWindowViewAdapter;
 import ar.com.oxen.nibiru.ui.utils.dialog.DialogBuilder;
+import ar.com.oxen.nibiru.ui.utils.view.AbstractWindowViewAdapter;
 
 public abstract class AbstractCrudView extends
 		AbstractWindowViewAdapter<Window> {
+	private Locale locale;
 
 	public AbstractCrudView(Window adapted, ViewFactory viewFactory,
-			MessageSource messageSource) {
+			MessageSource messageSource, LocaleHolder localeHolder) {
 		super(adapted, viewFactory, messageSource);
+		this.locale = localeHolder.getLocale();
 	}
 
 	protected String i18nAction(String action) {
-		return this.getMessageSource().getMessage(
-				CrudViewFactory.I18N_ACTION_PREFIX + action);
+		return this.getMessage(CrudViewFactory.I18N_ACTION_PREFIX + action);
 	}
 
 	protected Button createActionButton(String label,
@@ -40,22 +44,23 @@ public abstract class AbstractCrudView extends
 				@Override
 				public void onClick() {
 					new DialogBuilder(getViewFactory())
-							.title(getMessageSource().getMessage(
-									"ar.com.oxen.nibiru.app.confirmation"))
+							.title(getMessage("ar.com.oxen.nibiru.app.confirmation"))
 							.message(
-									getMessageSource()
-											.getMessage(
-													"ar.com.oxen.nibiru.app.areYouSure",
-													action.toLowerCase()))
-							.button(getMessageSource().getMessage(
-									"ar.com.oxen.nibiru.app.ok"), clickHandler)
-							.button(getMessageSource().getMessage(
-									"ar.com.oxen.nibiru.app.cancel")).build()
-							.show();
+									getMessage(
+											"ar.com.oxen.nibiru.app.areYouSure",
+											action.toLowerCase()))
+							.button(getMessage("ar.com.oxen.nibiru.app.ok"),
+									clickHandler)
+							.button(getMessage("ar.com.oxen.nibiru.app.cancel"))
+							.build().show();
 				}
 			};
 		} else {
 			return clickHandler;
 		}
+	}
+
+	protected String getMessage(String key, Object... params) {
+		return this.getMessageSource().getMessage(key, locale, params);
 	}
 }

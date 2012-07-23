@@ -8,6 +8,7 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudField;
 import ar.com.oxen.nibiru.crud.ui.api.CrudViewFactory;
 import ar.com.oxen.nibiru.crud.ui.api.form.CrudFormView;
 import ar.com.oxen.nibiru.crud.ui.generic.view.AbstractCrudView;
+import ar.com.oxen.nibiru.i18n.api.LocaleHolder;
 import ar.com.oxen.nibiru.i18n.api.MessageSource;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
 import ar.com.oxen.nibiru.ui.api.view.ComboBox;
@@ -30,8 +31,9 @@ public class GenericCrudFormView extends AbstractCrudView implements
 	private Map<String, FormField<Object>> fieldToValue;
 
 	public GenericCrudFormView(ViewFactory viewFactory,
-			MessageSource messageSource) {
-		super(viewFactory.buildWindow(), viewFactory, messageSource);
+			MessageSource messageSource, LocaleHolder localeHolder) {
+		super(viewFactory.buildWindow(), viewFactory, messageSource,
+				localeHolder);
 
 		this.fieldsTabPanel = viewFactory.buildTabPanel();
 		this.fieldsTabPanel.setWidth(400);
@@ -51,11 +53,11 @@ public class GenericCrudFormView extends AbstractCrudView implements
 
 	@Override
 	public void setEntityName(String entityName) {
-		String translatedEntityName = this.getMessageSource().getMessage(
-				CrudViewFactory.I18N_ENTITY_PREFIX + entityName);
+		String translatedEntityName = this
+				.getMessage(CrudViewFactory.I18N_ENTITY_PREFIX + entityName);
 		this.getAdapted().setValue(
-				this.getMessageSource().getMessage(
-						"ar.com.oxen.nibiru.app.edit", translatedEntityName));
+				this.getMessage("ar.com.oxen.nibiru.app.edit",
+						translatedEntityName));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -134,8 +136,8 @@ public class GenericCrudFormView extends AbstractCrudView implements
 					+ formInfo.getWidgetType());
 		}
 
-		field.setCaption(this.getMessageSource().getMessage(
-				CrudViewFactory.I18N_FIELD_PREFIX + crudField.getName()));
+		field.setCaption(this.getMessage(CrudViewFactory.I18N_FIELD_PREFIX
+				+ crudField.getName()));
 		field.setReadOnly(formInfo.isReadonly());
 
 		String tabName = crudField.getFormInfo().getTab();
@@ -143,8 +145,8 @@ public class GenericCrudFormView extends AbstractCrudView implements
 
 		if (fieldsPanel == null) {
 			fieldsPanel = this.getViewFactory().buildFormPanel();
-			fieldsPanel.setValue(this.getMessageSource().getMessage(
-					CrudViewFactory.I18N_TAB_PREFIX + tabName));
+			fieldsPanel.setValue(this
+					.getMessage(CrudViewFactory.I18N_TAB_PREFIX + tabName));
 			this.fieldsTabPanel.addComponent(fieldsPanel);
 			this.fieldsPanels.put(tabName, fieldsPanel);
 		}
@@ -209,8 +211,8 @@ public class GenericCrudFormView extends AbstractCrudView implements
 		StringBuilder sb = new StringBuilder();
 
 		for (String errorCode : errorCodes) {
-			sb.append(this.getMessageSource().getMessage(
-					CrudViewFactory.I18N_ERROR_PREFIX + errorCode));
+			sb.append(this.getMessage(CrudViewFactory.I18N_ERROR_PREFIX
+					+ errorCode));
 			sb.append("\n");
 		}
 

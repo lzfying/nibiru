@@ -6,11 +6,11 @@
 	<parent>
 		<artifactId>ar.com.oxen.nibiru.report</artifactId>
 		<groupId>ar.com.oxen.nibiru</groupId>
-		<version>0.2-SNAPSHOT</version>
+		<version>0.2</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru.report</groupId>
 	<artifactId>ar.com.oxen.nibiru.report.birt</artifactId>
-	<version>0.2-SNAPSHOT</version>
+	<version>0.2</version>
 	<name>ar.com.oxen.nibiru.report.birt</name>
 	<url>http://maven.apache.org</url>
 	<properties>
