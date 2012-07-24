@@ -434,7 +434,15 @@ Nibiru Sample
 Puede ejecutar el ejemplo dentro de un entorno no-OSGi.
  El proyecto ar.com.oxen.nibiru.sample.springwebapp hace esto.
  Se ejecuta como un WAR convencional en un contenedor de servlets.
- Puede descargar los binarios de aquí (POR HACER: poner el enlace).
+ Puede descargar los binarios de 
+\begin_inset CommandInset href
+LatexCommand href
+name "aquí"
+target "http://servidor.oxen.com.ar/artifactory/libs-release-local/ar/com/oxen/nibiru/sample/ar.com.oxen.nibiru.sample.springwebapp/0.2/ar.com.oxen.nibiru.sample.springwebapp-0.2.war"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -561,12 +569,33 @@ ar.com.oxen.nibiru.ui
 ar.com.oxen.nibiru.validation
 \end_layout
 
+\begin_layout Standard
+Los mismos se encuentran en el directorio 
+\begin_inset Quotes eld
+\end_inset
+
+main
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Section
 Proyecto de ejemplo
 \end_layout
 
 \begin_layout Standard
 El proyecto ar.com.oxen.nibiru.sample contiene una aplicación de ejemplo.
+ El mismo se encuentra en el directorio 
+\begin_inset Quotes eld
+\end_inset
+
+sample
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
@@ -664,8 +693,6 @@ Los bundles que exportan servicio se llaman igual que el bundle que contiene
 \end_layout
 
 \begin_layout Part
-
-\lang english
 Módulos
 \end_layout
 
@@ -2967,8 +2994,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.module/src/main/java
-/ar/com/oxen/nibiru/sample/domain/Student.java}
+lstinputlisting{../../sample/ar.com.oxen.nibiru.sample.module/src/main/java/ar/com/oxen/n
+ibiru/sample/domain/Student.java}
 \end_layout
 
 \end_inset
@@ -3351,8 +3378,7 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.webapp/META-INF/MANI
-FEST.MF}
+lstinputlisting{../../sample/ar.com.oxen.nibiru.sample.webapp/META-INF/MANIFEST.MF}
 \end_layout
 
 \end_inset
@@ -3378,8 +3404,7 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.webapp/WEB-INF/web.xm
-l}
+lstinputlisting{../../sample/ar.com.oxen.nibiru.sample.webapp/WEB-INF/web.xml}
 \end_layout
 
 \end_inset
@@ -3401,8 +3426,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.webapp/WEB-INF/appli
-cationContext.xml}
+lstinputlisting{../../sample/ar.com.oxen.nibiru.sample.webapp/WEB-INF/applicationContext.x
+ml}
 \end_layout
 
 \end_inset
