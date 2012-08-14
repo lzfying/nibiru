@@ -25,18 +25,12 @@
 
 	<bean name="applicationAccessor"
 		class="ar.com.oxen.nibiru.ui.vaadin.application.SimpleApplicationAccessor">
-		<property name="application" ref="vaadinApplication" />
-	</bean>
-
-	<bean name="vaadinApplication" scope="nibiruSession"
-		class="ar.com.oxen.nibiru.ui.vaadin.application.NibiruApplication">
 		<property name="eventBus" ref="eventBus" />
 		<property name="localeHolder" ref="localeHolder" />
-		<aop:scoped-proxy />
 	</bean>
 
 	<bean id="viewFactory" class="ar.com.oxen.nibiru.ui.vaadin.view.VaadinViewFactory">
-		<property name="vaadinApplication" ref="vaadinApplication" />
+		<property name="applicationAccessor" ref="applicationAccessor" />
 	</bean>
 
 	<!-- Spring scope -->

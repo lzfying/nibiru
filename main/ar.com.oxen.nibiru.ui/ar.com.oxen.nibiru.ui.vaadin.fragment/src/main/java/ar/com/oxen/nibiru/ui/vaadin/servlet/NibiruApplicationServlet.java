@@ -42,7 +42,7 @@ public class NibiruApplicationServlet extends AbstractApplicationServlet {
 		ApplicationAccessor accessor = (ApplicationAccessor) context
 				.getBean(beanName);
 		
-		return accessor.getApplication();
+		return accessor.createApplication();
 	}
 
 	@Override

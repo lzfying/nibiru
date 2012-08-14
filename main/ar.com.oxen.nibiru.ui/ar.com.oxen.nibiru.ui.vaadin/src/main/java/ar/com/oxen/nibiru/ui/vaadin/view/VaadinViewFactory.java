@@ -19,6 +19,7 @@ import ar.com.oxen.nibiru.ui.api.view.TextField;
 import ar.com.oxen.nibiru.ui.api.view.TimeField;
 import ar.com.oxen.nibiru.ui.api.view.ViewFactory;
 import ar.com.oxen.nibiru.ui.api.view.Window;
+import ar.com.oxen.nibiru.ui.vaadin.api.ApplicationAccessor;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.ButtonAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.CheckBoxAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.ComboBoxAdapter;
@@ -37,7 +38,6 @@ import ar.com.oxen.nibiru.ui.vaadin.view.adapter.TextFieldAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.TimeFieldAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.WindowAdapter;
 
-import com.vaadin.Application;
 import com.vaadin.data.util.ObjectProperty;
 import com.vaadin.ui.Form;
 import com.vaadin.ui.HorizontalLayout;
@@ -45,18 +45,18 @@ import com.vaadin.ui.TabSheet;
 import com.vaadin.ui.VerticalLayout;
 
 public class VaadinViewFactory implements ViewFactory {
-	private Application vaadinApplication;
+	private ApplicationAccessor applicationAccessor;
 
 	@Override
 	public MainWindow buildMainWindow() {
 		return new MainWindowAdapter(new com.vaadin.ui.Window(),
-				this.vaadinApplication);
+				this.applicationAccessor.getApplication());
 	}
 
 	@Override
 	public Window buildWindow() {
 		return new WindowAdapter(new com.vaadin.ui.Window(),
-				this.vaadinApplication.getMainWindow());
+				this.applicationAccessor.getApplication().getMainWindow());
 	}
 
 	@Override
@@ -119,7 +119,7 @@ public class VaadinViewFactory implements ViewFactory {
 	@Override
 	public Table buildTable() {
 		return new TableAdapter(new com.vaadin.ui.Table(),
-				this.vaadinApplication.getMainWindow());
+				this.applicationAccessor.getApplication().getMainWindow());
 	}
 
 	@Override
@@ -142,12 +142,13 @@ public class VaadinViewFactory implements ViewFactory {
 		return new TabSheetPanelAdapter(new TabSheet());
 	}
 
-	public void setVaadinApplication(Application vaadinApplication) {
-		this.vaadinApplication = vaadinApplication;
-	}
-
 	@Override
 	public Embedded buildEmbedded() {
-		return new EmbeddedAdapter(new com.vaadin.ui.Embedded(), this.vaadinApplication);
+		return new EmbeddedAdapter(new com.vaadin.ui.Embedded(),
+				this.applicationAccessor.getApplication());
+	}
+
+	public void setApplicationAccessor(ApplicationAccessor applicationAccessor) {
+		this.applicationAccessor = applicationAccessor;
 	}
 }

@@ -7,5 +7,7 @@ import com.vaadin.Application;
  * {@link Application} is not an interface, it can't be exposed as a service.
  */
 public interface ApplicationAccessor {
+	Application createApplication();
+
 	Application getApplication();
 }
