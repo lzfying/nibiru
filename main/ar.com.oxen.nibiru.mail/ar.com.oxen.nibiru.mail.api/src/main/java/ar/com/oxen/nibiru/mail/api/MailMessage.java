@@ -11,12 +11,19 @@ public class MailMessage {
 	private Collection<String> to;
 	private String subject;
 	private String body;
+	private String contentType;
 
 	public MailMessage(String from, String subject, String body) {
+		this(from, subject, body, "text/html");
+	}
+
+	public MailMessage(String from, String subject, String body,
+			String contentType) {
 		super();
 		this.from = from;
 		this.subject = subject;
 		this.body = body;
+		this.contentType = contentType;
 		this.to = new HashSet<String>();
 	}
 
@@ -34,6 +41,10 @@ public class MailMessage {
 
 	public String getBody() {
 		return body;
+	}
+
+	public String getContentType() {
+		return contentType;
 	}
 
 }

@@ -29,7 +29,14 @@ public class JavaMailService implements MailService {
 						new InternetAddress(recipient));
 			}
 			mimeMessage.setSubject(message.getSubject());
-			mimeMessage.setText(message.getBody());
+
+			if (message.getContentType() == null
+					| message.getContentType().equals("text/plain")) {
+				mimeMessage.setText(message.getBody());
+			} else {
+				mimeMessage.setContent(message.getBody(),
+						message.getContentType());
+			}
 
 			Transport.send(mimeMessage);
 
