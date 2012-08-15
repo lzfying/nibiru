@@ -35,7 +35,7 @@ public class NibiruApplication extends Application {
 
 	@Override
 	public void close() {
-		//this.eventBus.removeHandler(this.applicationThemeChangeEventHandler);
+		this.eventBus.removeHandler(this.applicationThemeChangeEventHandler);
 	}
 
 	public void setEventBus(EventBus eventBus) {
