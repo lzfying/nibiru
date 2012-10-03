@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Database security implementation
 Bundle-SymbolicName: ar.com.oxen.nibiru.security.db
-Bundle-Version: 0.2.0
+Bundle-Version: 0.3.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: ar.com.oxen.nibiru.security.db.domain,
  ar.com.oxen.nibiru.security.db.module;uses:="ar.com.oxen.nibiru.crud.utils,ar.com.oxen.nibiru.crud.manager.api",

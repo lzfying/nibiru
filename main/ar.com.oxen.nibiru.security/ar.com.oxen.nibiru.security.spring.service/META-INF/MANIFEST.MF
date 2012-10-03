@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Spring Security service
 Bundle-SymbolicName: ar.com.oxen.nibiru.security.spring.service
-Bundle-Version: 0.2.0
+Bundle-Version: 0.3.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: ar.com.oxen.nibiru.security.api,
  ar.com.oxen.nibiru.security.spring,

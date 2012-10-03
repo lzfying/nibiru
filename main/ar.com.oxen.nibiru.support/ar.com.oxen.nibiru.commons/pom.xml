@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>ar.com.oxen.nibiru.support</artifactId>
 		<groupId>ar.com.oxen.nibiru</groupId>
-		<version>0.2</version>
+		<version>0.3-SNAPSHOT</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru.support</groupId>
 	<artifactId>ar.com.oxen.nibiru.commons</artifactId>
@@ -17,7 +17,7 @@
 		<dependency>
 			<groupId>ar.com.oxen.commons</groupId>
 			<artifactId>ar.com.oxen.commons</artifactId>
-			<version>1.0</version>
+			<version>1.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

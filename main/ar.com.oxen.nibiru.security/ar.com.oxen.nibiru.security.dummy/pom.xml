@@ -4,11 +4,11 @@
 	<parent>
 		<artifactId>ar.com.oxen.nibiru.security</artifactId>
 		<groupId>ar.com.oxen.nibiru</groupId>
-		<version>0.2</version>
+		<version>0.3-SNAPSHOT</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru.security</groupId>
 	<artifactId>ar.com.oxen.nibiru.security.dummy</artifactId>
-	<version>0.2</version>
+	<version>0.3-SNAPSHOT</version>
 	<name>ar.com.oxen.nibiru.security.dummy</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -18,7 +18,7 @@
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.security</groupId>
 			<artifactId>ar.com.oxen.nibiru.security.api</artifactId>
-			<version>0.2</version>
+			<version>0.3-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

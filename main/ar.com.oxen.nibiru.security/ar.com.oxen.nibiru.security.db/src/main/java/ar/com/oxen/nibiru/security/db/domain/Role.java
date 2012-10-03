@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import ar.com.oxen.nibiru.crud.bean.annotation.Action;
 import ar.com.oxen.nibiru.crud.bean.annotation.Actions;
@@ -18,6 +19,7 @@ import ar.com.oxen.nibiru.crud.manager.api.WidgetType;
 		@Action(name = CrudAction.EDIT, requiresEntity = true, showInForm = false),
 		@Action(name = CrudAction.UPDATE, requiresEntity = true, showInList = false),
 		@Action(name = CrudAction.DELETE, requiresEntity = true, showInForm = false, requiresConfirmation = true) })
+@Table(name="NibiruRole")
 public class Role {
 	@Id
 	@GeneratedValue

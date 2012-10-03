@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Antlr fragment
 Bundle-SymbolicName: ar.com.oxen.nibiru.antlr.fragment
-Bundle-Version: 0.2.0
+Bundle-Version: 0.3.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Fragment-Host: com.springsource.antlr;bundle-version="2.7.6"
 Require-Bundle: com.springsource.org.hibernate;bundle-version="3.3.2"

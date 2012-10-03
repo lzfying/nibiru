@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ar.com.oxen.nibiru</groupId>
 	<artifactId>ar.com.oxen.nibiru</artifactId>
-	<version>0.2</version>
+	<version>0.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Nibiru</name>
 	<properties>
-		<nibiru-version>0.2</nibiru-version>
+		<nibiru-version>0.3-SNAPSHOT</nibiru-version>
 	</properties>
 	<repositories>
 		<repository>
@@ -59,6 +59,7 @@
 		<module>ar.com.oxen.nibiru.validation</module>
     	<module>ar.com.oxen.nibiru.mail</module>
     	<module>ar.com.oxen.nibiru.report</module>
+    <module>ar.com.oxen.nibiru.license</module>
   </modules>
 	<build>
 		<resources>
