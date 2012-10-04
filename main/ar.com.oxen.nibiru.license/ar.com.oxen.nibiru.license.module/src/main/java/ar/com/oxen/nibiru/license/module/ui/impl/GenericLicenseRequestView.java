@@ -4,9 +4,12 @@ import java.util.Date;
 
 import ar.com.oxen.nibiru.i18n.api.MessageSource;
 import ar.com.oxen.nibiru.license.module.ui.LicenseRequestView;
+import ar.com.oxen.nibiru.ui.api.mvp.HasClickHandler;
 import ar.com.oxen.nibiru.ui.api.mvp.HasValue;
 import ar.com.oxen.nibiru.ui.api.mvp.HasValueChangeHandler;
+import ar.com.oxen.nibiru.ui.api.view.Button;
 import ar.com.oxen.nibiru.ui.api.view.DateField;
+import ar.com.oxen.nibiru.ui.api.view.TextArea;
 import ar.com.oxen.nibiru.ui.api.view.TextField;
 import ar.com.oxen.nibiru.ui.api.view.ViewFactory;
 import ar.com.oxen.nibiru.ui.api.view.Window;
@@ -16,7 +19,9 @@ public class GenericLicenseRequestView extends
 		AbstractWindowViewAdapter<Window> implements LicenseRequestView {
 	private TextField<String> companyName;
 	private DateField expirationDate;
-	private TextField<String> licenseRequest;
+	private TextArea<String> licenseRequest;
+	private TextArea<String> licenseAuthorization;
+	private Button authorize;
 
 	public GenericLicenseRequestView(ViewFactory viewFactory,
 			MessageSource messageSource) {
@@ -36,10 +41,20 @@ public class GenericLicenseRequestView extends
 				.getMessage("ar.com.oxen.nibiru.license.expirationDate"));
 		this.getAdapted().addComponent(this.expirationDate);
 
-		this.licenseRequest = viewFactory.buildTextField(String.class);
+		this.licenseRequest = viewFactory.buildTextArea(String.class);
 		this.licenseRequest.setCaption(messageSource
 				.getMessage("ar.com.oxen.nibiru.license.licenseRequest"));
 		this.getAdapted().addComponent(this.licenseRequest);
+
+		this.licenseAuthorization = viewFactory.buildTextArea(String.class);
+		this.licenseAuthorization.setCaption(messageSource
+				.getMessage("ar.com.oxen.nibiru.license.licenseAuthorization"));
+		this.getAdapted().addComponent(this.licenseAuthorization);
+
+		this.authorize = viewFactory.buildButton();
+		this.authorize.setValue(messageSource
+				.getMessage("ar.com.oxen.nibiru.license.authorize"));
+		this.getAdapted().addComponent(this.authorize);
 
 		this.getAdapted().setModal(true);
 	}
@@ -67,5 +82,15 @@ public class GenericLicenseRequestView extends
 	@Override
 	public HasValue<String> getLicenseRequest() {
 		return this.licenseRequest;
+	}
+
+	@Override
+	public HasValue<String> getLicenseAuthorization() {
+		return this.licenseAuthorization;
+	}
+
+	@Override
+	public HasClickHandler getAuthorize() {
+		return this.authorize;
 	}
 }
