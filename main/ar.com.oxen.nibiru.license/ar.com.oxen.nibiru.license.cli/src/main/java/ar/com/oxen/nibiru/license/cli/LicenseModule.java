@@ -3,25 +3,17 @@ package ar.com.oxen.nibiru.license.cli;
 import ar.com.oxen.commons.converter.impl.DigestConverter;
 import ar.com.oxen.commons.license.api.HardwareIdProvider;
 import ar.com.oxen.commons.license.api.KeyStoreProvider;
-import ar.com.oxen.commons.license.api.LicenseAuthorizationValidator;
 import ar.com.oxen.commons.license.api.LicenseAuthorizer;
-import ar.com.oxen.commons.license.api.LicenseInfoValidator;
 import ar.com.oxen.commons.license.api.LicenseSerializer;
-import ar.com.oxen.commons.license.api.LicenseValidator;
 import ar.com.oxen.commons.license.api.PrivateKeyProvider;
-import ar.com.oxen.commons.license.api.PublicKeyProvider;
 import ar.com.oxen.commons.license.api.SignatureProvider;
 import ar.com.oxen.commons.license.impl.ConverterHardwareIdProvider;
 import ar.com.oxen.commons.license.impl.DefaultKeyStoreProvider;
-import ar.com.oxen.commons.license.impl.DefaultLicenseAuthorizationValidatorProvider;
 import ar.com.oxen.commons.license.impl.DefaultLicenseAuthorizerProvider;
 import ar.com.oxen.commons.license.impl.DefaultLicenseInfo;
-import ar.com.oxen.commons.license.impl.DefaultLicenseInfoValidator;
 import ar.com.oxen.commons.license.impl.DefaultLicenseSerializerProvider;
-import ar.com.oxen.commons.license.impl.DefaultLicenseValidator;
 import ar.com.oxen.commons.license.impl.DefaultSignatureProvider;
 import ar.com.oxen.commons.license.impl.KeyStorePrivateKeyProvider;
-import ar.com.oxen.commons.license.impl.KeyStorePublicKeyProvider;
 import ar.com.oxen.commons.license.impl.MacAddressHardwareIdProvider;
 
 import com.google.inject.AbstractModule;
@@ -51,8 +43,6 @@ public class LicenseModule extends AbstractModule {
         
         /* Public an private key configuration */
         KeyStoreProvider ksp = new DefaultKeyStoreProvider();
-        bind(PublicKeyProvider.class).toInstance(
-                        new KeyStorePublicKeyProvider(this.key, ksp));
         bind(PrivateKeyProvider.class).toInstance(
                         new KeyStorePrivateKeyProvider(this.key, this.password, ksp));
         
@@ -63,14 +53,6 @@ public class LicenseModule extends AbstractModule {
         /* Authorization configuration */
         bind(new TypeLiteral<LicenseAuthorizer<DefaultLicenseInfo>>() {})
                 .toProvider(new TypeLiteral<DefaultLicenseAuthorizerProvider<DefaultLicenseInfo>>() {});
-
-        /* Validation configuration */
-        bind(new TypeLiteral<LicenseValidator<DefaultLicenseInfo>>() {})
-                .to(new TypeLiteral<DefaultLicenseValidator<DefaultLicenseInfo>>() {});
-        bind(new TypeLiteral<LicenseAuthorizationValidator<DefaultLicenseInfo>>() {})
-                .toProvider(new TypeLiteral<DefaultLicenseAuthorizationValidatorProvider<DefaultLicenseInfo>>() {});
-        bind(new TypeLiteral<LicenseInfoValidator<DefaultLicenseInfo>>() {})
-                .to(DefaultLicenseInfoValidator.class);
 	}
 
 }

@@ -22,9 +22,24 @@
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
+			<groupId>ar.com.oxen.nibiru.ui</groupId>
+			<artifactId>ar.com.oxen.nibiru.ui.api</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.ui</groupId>
+			<artifactId>ar.com.oxen.nibiru.ui.utils</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>ar.com.oxen.commons</groupId>
 			<artifactId>ar.com.oxen.commons</artifactId>
 			<version>1.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>3.0</version>
 		</dependency>
 	</dependencies>
 </project>

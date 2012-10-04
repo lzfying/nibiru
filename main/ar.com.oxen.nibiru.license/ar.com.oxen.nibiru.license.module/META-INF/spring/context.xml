@@ -13,7 +13,7 @@
 	<import resource="classpath:/ar/com/oxen/nibiru/license/module/context.xml" />
 
 	<osgi:service interface="ar.com.oxen.nibiru.i18n.api.MessageProvider"
-		ref="reportMessageProvider" />
+		ref="licenseMessageProvider" />
 
 	<osgi:reference id="extensionPointManager"
 		interface="ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager" />

@@ -10,5 +10,7 @@ public class ModuleConfigurator extends
 
 	@EventHandlerMethod
 	public void onLicenseRequest(LicenseRequestEvent event) {
+		this.activate(this.getViewFactory().createLicenseRequestView(), this
+				.getPresenterFactory().createLicenseRequestPresenter());
 	}
 }

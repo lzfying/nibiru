@@ -38,6 +38,8 @@
 
 	<bean name="genericLicenseViewFactory"
 		class="ar.com.oxen.nibiru.license.module.ui.impl.GenericLicenseViewFactory">
+		<property name="viewFactory" ref="viewFactory" />
+		<property name="messageSource" ref="nibiruMessageSource" />
 	</bean>
 	
 	<bean name="genericLicensePresenterFactory"
