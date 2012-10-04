@@ -6,6 +6,7 @@ import ar.com.oxen.nibiru.i18n.api.MessageSource;
 import ar.com.oxen.nibiru.license.module.ui.LicenseRequestView;
 import ar.com.oxen.nibiru.ui.api.mvp.HasValue;
 import ar.com.oxen.nibiru.ui.api.mvp.HasValueChangeHandler;
+import ar.com.oxen.nibiru.ui.api.view.DateField;
 import ar.com.oxen.nibiru.ui.api.view.TextField;
 import ar.com.oxen.nibiru.ui.api.view.ViewFactory;
 import ar.com.oxen.nibiru.ui.api.view.Window;
@@ -14,7 +15,7 @@ import ar.com.oxen.nibiru.ui.utils.view.AbstractWindowViewAdapter;
 public class GenericLicenseRequestView extends
 		AbstractWindowViewAdapter<Window> implements LicenseRequestView {
 	private TextField<String> companyName;
-	private TextField<Date> expirationDate;
+	private DateField expirationDate;
 	private TextField<String> licenseRequest;
 
 	public GenericLicenseRequestView(ViewFactory viewFactory,
@@ -30,7 +31,7 @@ public class GenericLicenseRequestView extends
 				.getMessage("ar.com.oxen.nibiru.license.companyName"));
 		this.getAdapted().addComponent(this.companyName);
 
-		this.expirationDate = viewFactory.buildTextField(Date.class);
+		this.expirationDate = viewFactory.buildDateField();
 		this.expirationDate.setCaption(messageSource
 				.getMessage("ar.com.oxen.nibiru.license.expirationDate"));
 		this.getAdapted().addComponent(this.expirationDate);
