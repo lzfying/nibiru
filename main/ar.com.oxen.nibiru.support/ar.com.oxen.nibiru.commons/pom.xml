@@ -17,7 +17,7 @@
 		<dependency>
 			<groupId>ar.com.oxen.commons</groupId>
 			<artifactId>ar.com.oxen.commons</artifactId>
-			<version>1.1-SNAPSHOT</version>
+			<version>${commons-version}</version>
 		</dependency>
 	</dependencies>
 </project>

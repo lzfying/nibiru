@@ -39,6 +39,8 @@ public class GenericLicenseRequestView extends
 		this.licenseRequest.setCaption(messageSource
 				.getMessage("ar.com.oxen.nibiru.license.licenseRequest"));
 		this.getAdapted().addComponent(this.licenseRequest);
+
+		this.getAdapted().setModal(true);
 	}
 
 	@Override

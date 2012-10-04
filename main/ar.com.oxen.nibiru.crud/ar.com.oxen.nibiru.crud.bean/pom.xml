@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>ar.com.oxen.commons</groupId>
 			<artifactId>ar.com.oxen.commons</artifactId>
-			<version>1.0</version>
+			<version>${commons-version}</version>
 		</dependency>
 	</dependencies>
 	<properties>
