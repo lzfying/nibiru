@@ -9,8 +9,8 @@
 		<version>0.3-SNAPSHOT</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru.license</groupId>
-	<artifactId>ar.com.oxen.nibiru.license.module</artifactId>
-	<name>ar.com.oxen.nibiru.license.module</name>
+	<artifactId>ar.com.oxen.nibiru.license.store.jpa.service</artifactId>
+	<name>ar.com.oxen.nibiru.license.store.jpa.service</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,33 +18,28 @@
 	<dependencies>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.license</groupId>
-			<artifactId>ar.com.oxen.nibiru.license.store.api</artifactId>
+			<artifactId>ar.com.oxen.nibiru.license.store.jpa</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>ar.com.oxen.nibiru.support</groupId>
-			<artifactId>ar.com.oxen.nibiru.module.utils</artifactId>
-			<version>${nibiru-version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.orm</artifactId>
+			<version>3.0.6.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>ar.com.oxen.nibiru.ui</groupId>
-			<artifactId>ar.com.oxen.nibiru.ui.api</artifactId>
-			<version>${nibiru-version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.transaction</artifactId>
+			<version>3.0.6.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>ar.com.oxen.nibiru.ui</groupId>
-			<artifactId>ar.com.oxen.nibiru.ui.utils</artifactId>
-			<version>${nibiru-version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.aop</artifactId>
+			<version>3.0.6.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>ar.com.oxen.commons</groupId>
-			<artifactId>ar.com.oxen.commons</artifactId>
-			<version>${commons-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>guice</artifactId>
-			<version>3.0</version>
+			<groupId>org.aopalliance</groupId>
+			<artifactId>com.springsource.org.aopalliance</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
 </project>

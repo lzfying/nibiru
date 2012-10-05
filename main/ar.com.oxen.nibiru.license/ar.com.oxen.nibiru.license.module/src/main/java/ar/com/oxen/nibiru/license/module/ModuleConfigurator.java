@@ -8,7 +8,6 @@ import ar.com.oxen.nibiru.module.utils.AbstractModuleConfigurator;
 
 public class ModuleConfigurator extends
 		AbstractModuleConfigurator<LicenseViewFactory, LicensePresenterFactory> {
-
 	@EventHandlerMethod
 	public void onLicenseRequest(LicenseRequestEvent event) {
 		this.activate(this.getViewFactory().createLicenseRequestView(), this

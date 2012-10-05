@@ -11,7 +11,8 @@
 
 	<bean name="licenseMessageProvider"
 		class="ar.com.oxen.nibiru.i18n.generic.ResourceBundleMessageProvider">
-		<property name="baseName" value="ar.com.oxen.nibiru.license.module.ui.i18n.messages" />
+		<property name="baseName"
+			value="ar.com.oxen.nibiru.license.module.ui.i18n.messages" />
 		<property name="resourceClassLoader">
 			<bean
 				class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
@@ -41,9 +42,9 @@
 		<property name="viewFactory" ref="viewFactory" />
 		<property name="messageSource" ref="nibiruMessageSource" />
 	</bean>
-	
+
 	<bean name="genericLicensePresenterFactory"
 		class="ar.com.oxen.nibiru.license.module.ui.impl.GenericLicensePresenterFactory">
+		<property name="licenseStoreManager" ref="licenseStoreManager" />
 	</bean>
-	
 </beans>

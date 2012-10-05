@@ -10,8 +10,11 @@ import ar.com.oxen.commons.license.impl.DefaultLicenseInfo;
 import ar.com.oxen.nibiru.license.module.LicenseModule;
 import ar.com.oxen.nibiru.license.module.ui.LicensePresenterFactory;
 import ar.com.oxen.nibiru.license.module.ui.LicenseRequestPresenter;
+import ar.com.oxen.nibiru.license.store.api.LicenseStoreManager;
 
 public class GenericLicensePresenterFactory implements LicensePresenterFactory {
+	private LicenseStoreManager licenseStoreManager;
+
 	@Inject
 	private LicenseSerializer<DefaultLicenseInfo> licenseSerializer;
 
@@ -25,7 +28,11 @@ public class GenericLicensePresenterFactory implements LicensePresenterFactory {
 
 	@Override
 	public LicenseRequestPresenter createLicenseRequestPresenter() {
-		return new GenericLicenseRequestPresenter(this.licenseSerializer,
-				this.hardwareIdProvider);
+		return new GenericLicenseRequestPresenter(this.licenseStoreManager,
+				this.licenseSerializer, this.hardwareIdProvider);
+	}
+
+	public void setLicenseStoreManager(LicenseStoreManager licenseStoreManager) {
+		this.licenseStoreManager = licenseStoreManager;
 	}
 }

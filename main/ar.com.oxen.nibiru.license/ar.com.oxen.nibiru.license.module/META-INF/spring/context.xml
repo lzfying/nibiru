@@ -15,6 +15,9 @@
 	<osgi:service interface="ar.com.oxen.nibiru.i18n.api.MessageProvider"
 		ref="licenseMessageProvider" />
 
+	<osgi:reference id="licenseStoreManager"
+		interface="ar.com.oxen.nibiru.license.store.api.LicenseStoreManager" />
+
 	<osgi:reference id="extensionPointManager"
 		interface="ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager" />
 
