@@ -3,6 +3,7 @@ package ar.com.oxen.nibiru.license.store.jpa.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -12,6 +13,7 @@ public class License {
 	private String module;
 
 	@Column
+	@Lob
 	private String license;
 
 	public String getModule() {

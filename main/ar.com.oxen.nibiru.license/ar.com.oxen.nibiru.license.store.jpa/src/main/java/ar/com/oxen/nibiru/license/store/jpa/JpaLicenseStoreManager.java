@@ -27,8 +27,8 @@ public class JpaLicenseStoreManager implements LicenseStoreManager {
 		if (licenseEntity == null) {
 			licenseEntity = new License();
 			licenseEntity.setModule(module);
-			licenseEntity.setLicense(license);
 		}
+		licenseEntity.setLicense(license);
 		this.entityManager.persist(licenseEntity);
 	}
 }

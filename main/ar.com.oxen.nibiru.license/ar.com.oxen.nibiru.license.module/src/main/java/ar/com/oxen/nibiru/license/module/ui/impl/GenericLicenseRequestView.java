@@ -60,7 +60,7 @@ public class GenericLicenseRequestView extends
 	}
 
 	@Override
-	public HasValue<String> getComanyName() {
+	public HasValue<String> getCompanyName() {
 		return this.companyName;
 	}
 

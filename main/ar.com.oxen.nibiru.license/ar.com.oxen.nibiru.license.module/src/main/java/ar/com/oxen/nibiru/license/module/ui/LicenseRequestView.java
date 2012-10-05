@@ -8,7 +8,7 @@ import ar.com.oxen.nibiru.ui.api.mvp.HasValueChangeHandler;
 import ar.com.oxen.nibiru.ui.api.mvp.View;
 
 public interface LicenseRequestView extends View {
-	HasValue<String> getComanyName();
+	HasValue<String> getCompanyName();
 
 	HasValueChangeHandler getCompanyChangeHandler();
 

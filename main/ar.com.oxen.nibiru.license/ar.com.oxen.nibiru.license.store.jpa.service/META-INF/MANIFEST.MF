@@ -1,12 +1,15 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: JavaMail mail service
-Bundle-SymbolicName: ar.com.oxen.nibiru.mail.javamail.service
+Bundle-Name: JPA License Store service
+Bundle-SymbolicName: ar.com.oxen.nibiru.license.store.jpa.service
 Bundle-Version: 0.3.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: ar.com.oxen.nibiru.license.store.api,
  ar.com.oxen.nibiru.license.store.jpa,
  javax.persistence;version="1.0.0",
+ org.aopalliance.aop;version="1.0.0",
+ org.springframework.aop;version="3.0.6.RELEASE",
+ org.springframework.aop.framework;version="3.0.6.RELEASE",
  org.springframework.aop.framework.autoproxy;version="3.0.6.RELEASE",
  org.springframework.orm.jpa.support;version="3.0.6.RELEASE",
  org.springframework.transaction;version="3.0.6.RELEASE"

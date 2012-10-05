@@ -1,6 +1,7 @@
 package ar.com.oxen.nibiru.license.module.ui.impl;
 
 import ar.com.oxen.commons.license.api.HardwareIdProvider;
+import ar.com.oxen.commons.license.api.License;
 import ar.com.oxen.commons.license.api.LicenseSerializer;
 import ar.com.oxen.commons.license.impl.DefaultLicenseInfo;
 import ar.com.oxen.nibiru.license.module.ui.LicenseRequestPresenter;
@@ -35,10 +36,21 @@ public class GenericLicenseRequestPresenter extends
 		this.getView().getExpirationChangeHandler()
 				.setValueChangeHandler(chengeHandler);
 
-		String license = this.licenseStoreManager
+		String licenseString = this.licenseStoreManager
 				.loadLicense(LicenseStoreManager.GENERIC_MODULE);
-		if (license != null) {
-			this.getView().getLicenseAuthorization().setValue(license);
+
+		if (licenseString != null) {
+			this.getView().getLicenseAuthorization().setValue(licenseString);
+
+			try {
+				License<DefaultLicenseInfo> license = this.licenseSerializer
+						.deserializeLicence(licenseString);
+				this.getView().getCompanyName()
+						.setValue(license.getInfo().getCustomerName());
+				this.getView().getExpirationDate()
+						.setValue(license.getInfo().getExpirationDate());
+			} catch (Exception e) {
+			}
 		}
 
 		this.getView().getAuthorize().setClickHandler(new ClickHandler() {
@@ -47,6 +59,7 @@ public class GenericLicenseRequestPresenter extends
 				licenseStoreManager.saveLicense(
 						LicenseStoreManager.GENERIC_MODULE, getView()
 								.getLicenseAuthorization().getValue());
+				getView().close();
 			}
 		});
 	}
@@ -57,7 +70,7 @@ public class GenericLicenseRequestPresenter extends
 			getView().getLicenseRequest().setValue(
 					licenseSerializer
 							.serializeLicenceInfo(new DefaultLicenseInfo(
-									getView().getComanyName().getValue(),
+									getView().getCompanyName().getValue(),
 									getView().getExpirationDate().getValue(),
 									hardwareIdProvider.getHardwareId())));
 		}

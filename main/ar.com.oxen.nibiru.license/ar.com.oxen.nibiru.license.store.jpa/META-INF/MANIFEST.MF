@@ -7,4 +7,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: ar.com.oxen.nibiru.license.store.jpa,
  ar.com.oxen.nibiru.license.store.jpa.domain
 Import-Package: ar.com.oxen.nibiru.license.store.api,
- javax.persistence;version="1.0.0"
+ javassist.util.proxy;version="3.9.0.GA",
+ javax.persistence;version="1.0.0",
+ org.hibernate.proxy;version="3.3.2.GA"
