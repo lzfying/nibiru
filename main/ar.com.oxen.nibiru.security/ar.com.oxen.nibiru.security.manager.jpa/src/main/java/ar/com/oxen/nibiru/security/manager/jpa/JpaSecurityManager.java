@@ -38,6 +38,11 @@ public class JpaSecurityManager implements SecurityManager {
 	}
 
 	@Override
+	public String getPassword(String username) throws UserNotFoundException {
+		return this.findUserByUsername(username).getPassword();
+	}
+
+	@Override
 	public Iterable<String> getRoles(String username) {
 		User user = this.findUserByUsername(username);
 
@@ -67,4 +72,5 @@ public class JpaSecurityManager implements SecurityManager {
 			throw new UserNotFoundException();
 		}
 	}
+
 }

@@ -7,26 +7,20 @@
 	http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
     http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.0.xsd">
 
+	<import resource="classpath:/ar/com/oxen/nibiru/security/spring/context.xml" />
+
 	<osgi:service ref="authenticationService"
 		interface="ar.com.oxen.nibiru.security.api.AuthenticationService" />
 
 	<osgi:service ref="authorizationService"
 		interface="ar.com.oxen.nibiru.security.api.AuthorizationService" />
 
+	<osgi:service ref="hashService"
+		interface="ar.com.oxen.nibiru.security.api.HashService" />
+
 	<osgi:reference id="nibiruSession"
 		interface="ar.com.oxen.nibiru.session.api.Session" />
-
-	<osgi:reference id="authenticationManager"
-		interface="org.springframework.security.authentication.AuthenticationManager" />
-
-	<bean name="authenticationService"
-		class="ar.com.oxen.nibiru.security.spring.SpringAuthenticationService">
-		<property name="session" ref="nibiruSession" />
-		<property name="authenticationManager" ref="authenticationManager" />
-	</bean>
-
-	<bean name="authorizationService"
-		class="ar.com.oxen.nibiru.security.spring.SpringAuthorizationService">
-		<property name="session" ref="nibiruSession" />
-	</bean>
+		
+	<osgi:reference id="securityManager"
+		interface="ar.com.oxen.nibiru.security.manager.api.SecurityManager" />
 </beans>
