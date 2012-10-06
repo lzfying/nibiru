@@ -10,25 +10,9 @@
     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
+	<import resource="classpath:/ar/com/oxen/nibiru/security/db/context.xml" />
 
-	<osgi:service interface="ar.com.oxen.nibiru.i18n.api.MessageProvider">
-		<bean class="ar.com.oxen.nibiru.i18n.generic.ResourceBundleMessageProvider">
-			<property name="baseName" value="ar.com.oxen.nibiru.security.db.ui.i18n.messages"/>
-			<property name="resourceClassLoader">
-				<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-					<property name="targetObject">
-						<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-							<property name="staticMethod" value="java.lang.Thread.currentThread"/>
-							<property name="singleton" value="false"/>
-						</bean>
-					</property>
-					<property name="targetMethod" value="getContextClassLoader"/>
-					<property name="singleton" value="false"/>
-				</bean>
-			</property>
-		</bean>
-	</osgi:service>
-
+	<osgi:service interface="ar.com.oxen.nibiru.i18n.api.MessageProvider" ref="securityMessageProvider"/>
 
 	<osgi:service ref="authenticationManager"
 		interface="org.springframework.security.authentication.AuthenticationManager" />
@@ -53,60 +37,18 @@
 
 	<osgi:reference id="wrapperFactory"
 		interface="ar.com.oxen.commons.bean.api.WrapperFactory" />
+		
+	<osgi:reference id="viewFactory"
+		interface="ar.com.oxen.nibiru.ui.api.view.ViewFactory" />
 
-	<bean init-method="startup" destroy-method="shutdown"
-		class="ar.com.oxen.nibiru.security.db.module.ModuleConfigurator">
-		<property name="extensionPointManager" ref="extensionPointManager" />
-		<property name="eventBus" ref="eventBus" />
-		<property name="viewFactory" ref="crudViewFactory" />
-		<property name="presenterFactory" ref="crudPresenterFactory" />
-		<property name="userCrudManager" ref="userCrudManager" />
-		<property name="userCrudActionExtension" ref="userCrudManager" />
-		<property name="roleCrudManager" ref="roleCrudManager" />
-		<property name="roleCrudActionExtension" ref="roleCrudManager" />
-		<property name="groupCrudManager" ref="groupCrudManager" />
-		<property name="groupCrudActionExtension" ref="groupCrudManager" />
-	</bean>
-
-	<bean name="userCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
-		<property name="persistentClass" value="ar.com.oxen.nibiru.security.db.domain.User" />
-		<property name="wrapperFactory" ref="wrapperFactory" />
-	</bean>
-
-	<bean name="roleCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
-		<property name="persistentClass" value="ar.com.oxen.nibiru.security.db.domain.Role" />
-		<property name="wrapperFactory" ref="wrapperFactory" />
-	</bean>
-
-	<bean name="groupCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
-		<property name="persistentClass" value="ar.com.oxen.nibiru.security.db.domain.RoleGroup" />
-		<property name="wrapperFactory" ref="wrapperFactory" />
-	</bean>
-
-	<security:authentication-manager id="authenticationManager">
-		<security:authentication-provider
-			user-service-ref="userService">
-			<!-- <password-encoder hash="md5"/> -->
-		</security:authentication-provider>
-	</security:authentication-manager>
-
-	<bean name="userService"
-		class="ar.com.oxen.nibiru.security.db.spring.JpaUserDetailsService" />
-
-	<tx:advice id="txAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="loadUserByUsername" propagation="REQUIRED" />
-			<tx:method name="find*" propagation="REQUIRED" />
-			<tx:method name="performAction" propagation="REQUIRED" />
-		</tx:attributes>
-	</tx:advice>
-
+	<osgi:reference id="nibiruMessageSource"
+		interface="ar.com.oxen.nibiru.i18n.api.MessageSource" />
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
 	<bean
 		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
-		<property name="beanNames" value="userService,*CrudManager" />
-		<property name="interceptorNames" value="txAdvice" />
+		<property name="beanNames" value="userDao,*CrudManager" />
+		<property name="interceptorNames" value="dbTxAdvice" />
 	</bean>
 </beans>

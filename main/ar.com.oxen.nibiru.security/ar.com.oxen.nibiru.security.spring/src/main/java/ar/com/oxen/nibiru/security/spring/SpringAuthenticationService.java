@@ -20,7 +20,7 @@ public class SpringAuthenticationService implements AuthenticationService {
 		try {
 			Authentication authentication = this.authenticationManager
 					.authenticate(new UsernamePasswordAuthenticationToken(user,
-							password));
+							password != null ? password : ""));
 			this.session.put(AUTHENTICATION_KEY, authentication);
 		} catch (AuthenticationException e) {
 			throw new BadCredentialsException();
@@ -34,7 +34,8 @@ public class SpringAuthenticationService implements AuthenticationService {
 
 	@Override
 	public String getLoggedUserName() {
-		UsernamePasswordAuthenticationToken authentication = this.session.get(AUTHENTICATION_KEY);
+		UsernamePasswordAuthenticationToken authentication = this.session
+				.get(AUTHENTICATION_KEY);
 		return authentication.getName();
 	}
 
