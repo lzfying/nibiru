@@ -78,7 +78,12 @@
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.security</groupId>
-			<artifactId>ar.com.oxen.nibiru.security.db</artifactId>
+			<artifactId>ar.com.oxen.nibiru.security.manager.jpa.service</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.security</groupId>
+			<artifactId>ar.com.oxen.nibiru.security.module</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
