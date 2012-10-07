@@ -33,6 +33,7 @@
 	<bean name="userDetailsService"
 		class="ar.com.oxen.nibiru.security.spring.SecurityManagerUserDetailsService">
 		<property name="securityManager" ref="securityManager" />
+		<property name="hashService" ref="hashService" />
 	</bean>
 	
 	<bean name="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>

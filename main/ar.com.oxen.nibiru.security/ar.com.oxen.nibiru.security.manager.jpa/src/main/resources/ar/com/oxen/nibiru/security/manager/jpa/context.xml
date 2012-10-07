@@ -13,9 +13,15 @@
 	
 	<tx:advice id="securityManagerTxAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="getLicense" propagation="REQUIRED" />
-			<tx:method name="saveLicense" propagation="REQUIRED" />
+			<tx:method name="changePassword" propagation="REQUIRED" />
+			<tx:method name="getPassword" propagation="REQUIRED" />
+			<tx:method name="getRoles" propagation="REQUIRED" />
 		</tx:attributes>
 	</tx:advice>
 
+	<bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames" value="securityManager" />
+		<property name="interceptorNames" value="securityManagerTxAdvice" />
+	</bean>
 </beans>

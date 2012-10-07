@@ -20,10 +20,4 @@
 
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
-
-	<bean
-		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
-		<property name="beanNames" value="securityManager" />
-		<property name="interceptorNames" value="securityManagerTxAdvice" />
-	</bean>
 </beans>

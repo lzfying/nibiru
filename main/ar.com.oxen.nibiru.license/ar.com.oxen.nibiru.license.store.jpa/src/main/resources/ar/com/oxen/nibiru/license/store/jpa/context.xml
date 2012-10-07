@@ -18,4 +18,9 @@
 		</tx:attributes>
 	</tx:advice>
 
+	<bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames" value="licenseStoreManager" />
+		<property name="interceptorNames" value="licenseTxAdvice" />
+	</bean>
 </beans>
