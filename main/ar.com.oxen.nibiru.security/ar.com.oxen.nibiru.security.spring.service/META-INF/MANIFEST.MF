@@ -9,4 +9,7 @@ Import-Package: ar.com.oxen.nibiru.security.api,
  ar.com.oxen.nibiru.security.spring,
  ar.com.oxen.nibiru.session.api,
  org.springframework.security.authentication;version="3.1.0.RELEASE",
- org.springframework.security.authentication.encoding;version="3.1.0.RELEASE"
+ org.springframework.security.authentication.encoding;version="3.1.0.RELEASE",
+ org.springframework.security.config;version="3.1.0.RELEASE",
+ org.springframework.security.core;version="3.1.0.RELEASE",
+ org.springframework.security.core.authority;version="3.1.0.RELEASE"
