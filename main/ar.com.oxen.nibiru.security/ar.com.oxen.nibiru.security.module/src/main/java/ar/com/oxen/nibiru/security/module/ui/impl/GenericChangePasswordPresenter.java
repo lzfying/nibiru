@@ -46,8 +46,12 @@ public class GenericChangePasswordPresenter extends
 			if (newPassword == null) {
 				newPassword = "";
 			}
-			if (!newPassword.equals(getView().getPasswordConfirmation()
-					.getValue())) {
+			String passwordConfirmation = getView().getPasswordConfirmation()
+					.getValue();
+			if (passwordConfirmation == null) {
+				passwordConfirmation = "";
+			}
+			if (!newPassword.equals(passwordConfirmation)) {
 				getView().notifyPasswordMismatch();
 				return;
 			}
