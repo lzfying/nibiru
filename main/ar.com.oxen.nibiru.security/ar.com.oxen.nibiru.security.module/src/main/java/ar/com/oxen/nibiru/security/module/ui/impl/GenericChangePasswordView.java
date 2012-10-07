@@ -18,7 +18,6 @@ public class GenericChangePasswordView extends
 	private PasswordField<String> passwordConfirmation;
 	private Button changePassword;
 	private Label<String> errorLabel;
-	private MessageSource messageSource;
 
 	public GenericChangePasswordView(ViewFactory viewFactory,
 			MessageSource messageSource) {
@@ -85,7 +84,7 @@ public class GenericChangePasswordView extends
 	}
 
 	private void showError(String code) {
-		String message = this.messageSource.getMessage(code);
+		String message = this.getMessageSource().getMessage(code);
 		this.errorLabel.setValue(message);
 	}
 }
