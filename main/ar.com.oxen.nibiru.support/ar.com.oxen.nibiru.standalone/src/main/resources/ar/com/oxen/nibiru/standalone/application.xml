@@ -16,7 +16,6 @@
 		<property name="eventBus" ref="eventBus" />
 		<property name="viewFactory" ref="applicationViewFactory" />
 		<property name="presenterFactory" ref="applicationPresenterFactory" />
-		<property name="authenticationService" ref="authenticationService" />
 		<property name="extensionPointManager" ref="extensionPointManager" />
 	</bean>
 
@@ -44,7 +43,7 @@
 		class="ar.com.oxen.nibiru.application.generic.presenter.GenericApplicationPresenterFactory">
 		<property name="extensionPointManager" ref="extensionPointManager" />
 		<property name="authenticationService" ref="authenticationService" />
-		<property name="eventBus" ref="eventBus" />
+		<property name="authorizationService" ref="authorizationService" />
 	</bean>
 
 	<bean id="applicationViewFactory"

@@ -23,6 +23,16 @@
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
+			<groupId>ar.com.oxen.nibiru.license</groupId>
+			<artifactId>ar.com.oxen.nibiru.license.module</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.license</groupId>
+			<artifactId>ar.com.oxen.nibiru.license.store.jpa.service</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>ar.com.oxen.nibiru.report</groupId>
 			<artifactId>ar.com.oxen.nibiru.report.module</artifactId>
 			<version>${nibiru-version}</version>
