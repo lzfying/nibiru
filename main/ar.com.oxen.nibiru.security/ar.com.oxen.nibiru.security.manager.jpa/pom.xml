@@ -16,5 +16,25 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.security</groupId>
+			<artifactId>ar.com.oxen.nibiru.security.manager.api</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.crud</groupId>
+			<artifactId>ar.com.oxen.nibiru.crud.bean</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.ui</groupId>
+			<artifactId>ar.com.oxen.nibiru.ui.api</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>com.springsource.javax.persistence</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 </project>
