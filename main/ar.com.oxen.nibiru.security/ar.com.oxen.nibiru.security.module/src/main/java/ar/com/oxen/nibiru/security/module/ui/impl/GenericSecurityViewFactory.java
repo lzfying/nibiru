@@ -2,12 +2,18 @@ package ar.com.oxen.nibiru.security.module.ui.impl;
 
 import ar.com.oxen.nibiru.i18n.api.MessageSource;
 import ar.com.oxen.nibiru.security.module.ui.ChangePasswordView;
+import ar.com.oxen.nibiru.security.module.ui.LoginView;
 import ar.com.oxen.nibiru.security.module.ui.SecurityViewFactory;
 import ar.com.oxen.nibiru.ui.api.view.ViewFactory;
 
 public class GenericSecurityViewFactory implements SecurityViewFactory {
 	private ViewFactory viewFactory;
 	private MessageSource messageSource;
+
+	@Override
+	public LoginView createLoginView() {
+		return new GenericLoginView(this.viewFactory, this.messageSource);
+	}
 
 	@Override
 	public ChangePasswordView createChangePasswordView() {

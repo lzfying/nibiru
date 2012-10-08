@@ -1,9 +1,7 @@
 package ar.com.oxen.nibiru.application.generic.presenter;
 
-import ar.com.oxen.commons.eventbus.api.EventBus;
 import ar.com.oxen.nibiru.application.api.ApplicationPresenterFactory;
 import ar.com.oxen.nibiru.application.api.about.AboutView;
-import ar.com.oxen.nibiru.application.api.login.LoginView;
 import ar.com.oxen.nibiru.application.api.main.MainView;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
 import ar.com.oxen.nibiru.security.api.AuthenticationService;
@@ -15,13 +13,6 @@ public class GenericApplicationPresenterFactory implements
 	private ExtensionPointManager extensionPointManager;
 	private AuthenticationService authenticationService;
 	private AuthorizationService authorizationService;
-	private EventBus eventBus;
-
-	@Override
-	public Presenter<LoginView> buildLoginPresenter() {
-		return new GenericLoginPresenter(this.authenticationService,
-				this.eventBus);
-	}
 
 	@Override
 	public Presenter<MainView> buildMainPresenter() {
@@ -44,12 +35,7 @@ public class GenericApplicationPresenterFactory implements
 		this.authenticationService = authenticationService;
 	}
 
-	public void setEventBus(EventBus eventBus) {
-		this.eventBus = eventBus;
-	}
-
 	public void setAuthorizationService(AuthorizationService authorizationService) {
 		this.authorizationService = authorizationService;
 	}
-	
 }

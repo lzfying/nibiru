@@ -1,9 +1,12 @@
 package ar.com.oxen.nibiru.security.module;
 
 import ar.com.oxen.commons.eventbus.api.EventHandlerMethod;
+import ar.com.oxen.nibiru.application.api.ApplicationStartEvent;
 import ar.com.oxen.nibiru.crud.manager.api.CrudActionExtension;
 import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.crud.utils.AbstractCrudModuleConfigurator;
+import ar.com.oxen.nibiru.security.api.AuthenticationService;
+import ar.com.oxen.nibiru.security.api.SuccessfulLogoutEvent;
 import ar.com.oxen.nibiru.security.manager.jpa.domain.Role;
 import ar.com.oxen.nibiru.security.manager.jpa.domain.RoleGroup;
 import ar.com.oxen.nibiru.security.manager.jpa.domain.User;
@@ -17,6 +20,8 @@ import ar.com.oxen.nibiru.ui.utils.mvp.SimpleEventBusClickHandler;
 
 public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 	private static final String MENU_EXTENSION = "ar.com.oxen.nibiru.security.db";
+
+	private AuthenticationService authenticationService;
 
 	private SecurityPresenterFactory securityPresenterFactory;
 	private SecurityViewFactory securityViewFactory;
@@ -36,11 +41,6 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 				MENU_EXTENSION, 80), "ar.com.oxen.nibiru.menu",
 				SubMenuExtension.class);
 
-		this.registerExtension(new SimpleMenuItemExtension("security.changePassword", 100,
-				new SimpleEventBusClickHandler(this.getEventBus(),
-						ChangePasswordEvent.class, null)), MENU_EXTENSION,
-				MenuItemExtension.class);
-		
 		this.addCrudWithMenu("security.users", MENU_EXTENSION,
 				this.userCrudManager, this.userCrudActionExtension);
 
@@ -49,12 +49,34 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 
 		this.addCrudWithMenu("security.groups", MENU_EXTENSION,
 				this.groupCrudManager, this.groupCrudActionExtension);
+
+		this.registerExtension(new SimpleMenuItemExtension(
+				"security.changePassword", 100, new SimpleEventBusClickHandler(
+						this.getEventBus(), ChangePasswordEvent.class, null)),
+				MENU_EXTENSION, MenuItemExtension.class);
+
+		this.registerExtension(new SimpleMenuItemExtension("security.logout",
+				10, new LogoutClickHandler(this.getEventBus(),
+						this.authenticationService)), MENU_EXTENSION,
+				MenuItemExtension.class);
 	}
-	
+
+	@EventHandlerMethod
+	public void onApplicationStart(ApplicationStartEvent event) {
+		activate(this.securityViewFactory.createLoginView(),
+				this.securityPresenterFactory.createLoginPresenter());
+	}
+
 	@EventHandlerMethod
 	public void onChangePassword(ChangePasswordEvent event) {
 		this.activate(this.securityViewFactory.createChangePasswordView(),
 				this.securityPresenterFactory.createChangePasswordPresenter());
+	}
+
+	@EventHandlerMethod
+	public void onSuccessfulLogout(SuccessfulLogoutEvent event) {
+		activate(this.securityViewFactory.createLoginView(),
+				this.securityPresenterFactory.createLoginPresenter());
 	}
 
 	public void setUserCrudManager(CrudManager<User> userCrudManager) {
@@ -91,5 +113,10 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 
 	public void setSecurityViewFactory(SecurityViewFactory securityViewFactory) {
 		this.securityViewFactory = securityViewFactory;
+	}
+
+	public void setAuthenticationService(
+			AuthenticationService authenticationService) {
+		this.authenticationService = authenticationService;
 	}
 }

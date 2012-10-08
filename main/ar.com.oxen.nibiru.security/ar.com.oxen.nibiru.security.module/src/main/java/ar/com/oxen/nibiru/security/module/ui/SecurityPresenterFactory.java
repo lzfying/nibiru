@@ -1,5 +1,19 @@
 package ar.com.oxen.nibiru.security.module.ui;
 
+import ar.com.oxen.nibiru.ui.api.mvp.Presenter;
+
 public interface SecurityPresenterFactory {
-	ChangePasswordPresenter createChangePasswordPresenter();
+	/**
+	 * Builds the presenter for login window.
+	 * 
+	 * @return The presenter
+	 */
+	Presenter<LoginView> createLoginPresenter();
+
+	/**
+	 * Builds the presenter for change password window.
+	 * 
+	 * @return The presenter
+	 */
+	Presenter<ChangePasswordView> createChangePasswordPresenter();
 }

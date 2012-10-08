@@ -12,5 +12,4 @@ Export-Package: ar.com.oxen.nibiru.application.api;
    ar.com.oxen.nibiru.ui.api.mvp,
    ar.com.oxen.nibiru.application.api.login",
  ar.com.oxen.nibiru.application.api.about;uses:="ar.com.oxen.nibiru.ui.api.mvp",
- ar.com.oxen.nibiru.application.api.login;uses:="ar.com.oxen.nibiru.ui.api.mvp",
  ar.com.oxen.nibiru.application.api.main;uses:="ar.com.oxen.nibiru.ui.api.mvp,ar.com.oxen.nibiru.ui.api.view"

@@ -1,20 +1,12 @@
 package ar.com.oxen.nibiru.application.api;
 
 import ar.com.oxen.nibiru.application.api.about.AboutView;
-import ar.com.oxen.nibiru.application.api.login.LoginView;
 import ar.com.oxen.nibiru.application.api.main.MainView;
 
 /**
  * View factory for common application functionality.
  */
 public interface ApplicationViewFactory {
-	/**
-	 * Builds the view for login window.
-	 * 
-	 * @return The view
-	 */
-	LoginView buildLoginView();
-
 	/**
 	 * Builds the view for main window.
 	 * 

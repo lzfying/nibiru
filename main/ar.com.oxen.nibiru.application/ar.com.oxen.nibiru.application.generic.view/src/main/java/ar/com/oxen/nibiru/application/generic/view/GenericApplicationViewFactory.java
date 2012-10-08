@@ -2,7 +2,6 @@ package ar.com.oxen.nibiru.application.generic.view;
 
 import ar.com.oxen.nibiru.application.api.ApplicationViewFactory;
 import ar.com.oxen.nibiru.application.api.about.AboutView;
-import ar.com.oxen.nibiru.application.api.login.LoginView;
 import ar.com.oxen.nibiru.application.api.main.MainView;
 import ar.com.oxen.nibiru.i18n.api.LocaleHolder;
 import ar.com.oxen.nibiru.i18n.api.MessageSource;
@@ -12,11 +11,6 @@ public class GenericApplicationViewFactory implements ApplicationViewFactory {
 	private ViewFactory viewFactory;
 	private MessageSource messageSource;
 	private LocaleHolder localeHolder;
-
-	@Override
-	public LoginView buildLoginView() {
-		return new GenericLoginView(this.viewFactory, this.messageSource);
-	}
 
 	@Override
 	public MainView buildMainView() {

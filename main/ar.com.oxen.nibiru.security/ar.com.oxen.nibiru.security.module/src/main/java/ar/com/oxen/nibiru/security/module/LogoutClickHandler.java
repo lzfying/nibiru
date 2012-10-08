@@ -1,8 +1,8 @@
-package ar.com.oxen.nibiru.application.generic;
+package ar.com.oxen.nibiru.security.module;
 
 import ar.com.oxen.commons.eventbus.api.EventBus;
-import ar.com.oxen.nibiru.application.api.login.SuccessfulLogoutEvent;
 import ar.com.oxen.nibiru.security.api.AuthenticationService;
+import ar.com.oxen.nibiru.security.api.SuccessfulLogoutEvent;
 import ar.com.oxen.nibiru.ui.utils.mvp.AbstractEventBusClickHandler;
 
 public class LogoutClickHandler extends AbstractEventBusClickHandler {

@@ -31,6 +31,7 @@
 		class="ar.com.oxen.nibiru.security.module.ModuleConfigurator">
 		<property name="extensionPointManager" ref="extensionPointManager" />
 		<property name="eventBus" ref="eventBus" />
+		<property name="authenticationService" ref="authenticationService" />
 		<property name="viewFactory" ref="crudViewFactory" />
 		<property name="presenterFactory" ref="crudPresenterFactory" />
 		<property name="securityViewFactory" ref="securityViewFactory" />
@@ -49,6 +50,7 @@
 	</bean>
 
 	<bean name="securityPresenterFactory" class="ar.com.oxen.nibiru.security.module.ui.impl.GenericSecurityPresenterFactory">
+		<property name="eventBus" ref="eventBus" />
 		<property name="authenticationService" ref="authenticationService" />
 		<property name="securityManager" ref="securityManager" />
 		<property name="hashService" ref="hashService" />

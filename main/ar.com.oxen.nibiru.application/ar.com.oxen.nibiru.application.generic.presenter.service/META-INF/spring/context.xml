@@ -11,9 +11,6 @@
 	<osgi:service ref="applicationPresenterFactory"
 		interface="ar.com.oxen.nibiru.application.api.ApplicationPresenterFactory" />
  
-	<osgi:reference id="eventBus"
-		interface="ar.com.oxen.commons.eventbus.api.EventBus" />
-
 	<osgi:reference id="extensionPointManager"
 		interface="ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager" />
 
@@ -28,6 +25,5 @@
 		<property name="extensionPointManager" ref="extensionPointManager" />
 		<property name="authenticationService" ref="authenticationService" />
 		<property name="authorizationService" ref="authorizationService" />
-		<property name="eventBus" ref="eventBus" />
 	</bean>
 </beans>

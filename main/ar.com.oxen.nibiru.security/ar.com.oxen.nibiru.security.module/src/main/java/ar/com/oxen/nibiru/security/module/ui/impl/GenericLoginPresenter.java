@@ -1,12 +1,12 @@
-package ar.com.oxen.nibiru.application.generic.presenter;
+package ar.com.oxen.nibiru.security.module.ui.impl;
 
 import ar.com.oxen.commons.eventbus.api.EventBus;
-import ar.com.oxen.nibiru.application.api.login.SuccessfulLoginEvent;
-import ar.com.oxen.nibiru.application.api.login.LoginView;
-import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
-import ar.com.oxen.nibiru.ui.utils.mvp.AbstractPresenter;
 import ar.com.oxen.nibiru.security.api.AuthenticationService;
 import ar.com.oxen.nibiru.security.api.BadCredentialsException;
+import ar.com.oxen.nibiru.security.api.SuccessfulLoginEvent;
+import ar.com.oxen.nibiru.security.module.ui.LoginView;
+import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
+import ar.com.oxen.nibiru.ui.utils.mvp.AbstractPresenter;
 
 public class GenericLoginPresenter extends AbstractPresenter<LoginView> {
 	private AuthenticationService authenticationService;

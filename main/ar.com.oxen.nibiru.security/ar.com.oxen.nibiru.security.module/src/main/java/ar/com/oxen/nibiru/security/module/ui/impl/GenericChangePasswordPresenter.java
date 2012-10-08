@@ -4,14 +4,14 @@ import ar.com.oxen.nibiru.security.api.AuthenticationService;
 import ar.com.oxen.nibiru.security.api.HashService;
 import ar.com.oxen.nibiru.security.manager.api.InvalidOldPassword;
 import ar.com.oxen.nibiru.security.manager.api.SecurityManager;
-import ar.com.oxen.nibiru.security.module.ui.ChangePasswordPresenter;
 import ar.com.oxen.nibiru.security.module.ui.ChangePasswordView;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
+import ar.com.oxen.nibiru.ui.api.mvp.Presenter;
 import ar.com.oxen.nibiru.ui.utils.mvp.AbstractPresenter;
 
 public class GenericChangePasswordPresenter extends
 		AbstractPresenter<ChangePasswordView> implements
-		ChangePasswordPresenter {
+		Presenter<ChangePasswordView> {
 	private AuthenticationService authenticationService;
 	private SecurityManager securityManager;
 	private HashService hashService;

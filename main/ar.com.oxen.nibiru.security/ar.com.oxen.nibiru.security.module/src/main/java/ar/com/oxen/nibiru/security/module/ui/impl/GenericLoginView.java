@@ -1,7 +1,7 @@
-package ar.com.oxen.nibiru.application.generic.view;
+package ar.com.oxen.nibiru.security.module.ui.impl;
 
-import ar.com.oxen.nibiru.application.api.login.LoginView;
 import ar.com.oxen.nibiru.i18n.api.MessageSource;
+import ar.com.oxen.nibiru.security.module.ui.LoginView;
 import ar.com.oxen.nibiru.ui.api.mvp.HasClickHandler;
 import ar.com.oxen.nibiru.ui.api.mvp.HasValue;
 import ar.com.oxen.nibiru.ui.api.view.Button;
@@ -28,14 +28,16 @@ public class GenericLoginView extends AbstractWindowViewAdapter<MainWindow>
 		String appName = messageSource
 				.getMessage("ar.com.oxen.nibiru.app.name");
 		if (appName != null) {
-			titleLabel.setValue(appName + " - "
-					+ messageSource.getMessage("ar.com.oxen.nibiru.app.login"));
-			
+			titleLabel.setValue(appName
+					+ " - "
+					+ messageSource
+							.getMessage("ar.com.oxen.nibiru.security.login"));
+
 			/* Set main window title */
 			getAdapted().setValue(appName);
 		} else {
 			titleLabel.setValue(messageSource
-					.getMessage("ar.com.oxen.nibiru.app.login"));
+					.getMessage("ar.com.oxen.nibiru.security.login"));
 		}
 		this.getAdapted().addComponent(titleLabel);
 
@@ -43,19 +45,17 @@ public class GenericLoginView extends AbstractWindowViewAdapter<MainWindow>
 
 		this.userField = viewFactory.buildTextField(String.class);
 		this.userField.setCaption(messageSource
-				.getMessage("ar.com.oxen.nibiru.app.user")
-				+ ":");
+				.getMessage("ar.com.oxen.nibiru.app.user") + ":");
 		panel.addComponent(userField);
 
 		this.passwordField = viewFactory.buildPasswordField(String.class);
 		this.passwordField.setCaption(messageSource
-				.getMessage("ar.com.oxen.nibiru.app.password")
-				+ ":");
+				.getMessage("ar.com.oxen.nibiru.app.password") + ":");
 		panel.addComponent(passwordField);
 
 		this.loginButton = viewFactory.buildButton();
 		this.loginButton.setValue(messageSource
-				.getMessage("ar.com.oxen.nibiru.app.login"));
+				.getMessage("ar.com.oxen.nibiru.security.login"));
 		panel.addComponent(loginButton);
 
 		this.errorLabel = viewFactory.buildLabel(String.class);
@@ -81,7 +81,7 @@ public class GenericLoginView extends AbstractWindowViewAdapter<MainWindow>
 
 	@Override
 	public HasValue<String> getErrorMessage() {
-		return new HasValueI18nDecorator(this.errorLabel, this
-				.getMessageSource());
+		return new HasValueI18nDecorator(this.errorLabel,
+				this.getMessageSource());
 	}
 }

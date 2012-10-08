@@ -1,4 +1,4 @@
-package ar.com.oxen.nibiru.application.api.login;
+package ar.com.oxen.nibiru.security.module.ui;
 
 import ar.com.oxen.nibiru.ui.api.mvp.HasClickHandler;
 import ar.com.oxen.nibiru.ui.api.mvp.HasValue;
