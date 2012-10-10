@@ -19,7 +19,8 @@ public interface LicenseRequestView extends View {
 	HasValue<String> getLicenseRequest();
 
 	HasValue<String> getLicenseAuthorization();
-	
+
 	HasClickHandler getAuthorize();
 
+	void showInvalidLicenseMessage();
 }

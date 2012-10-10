@@ -10,7 +10,10 @@ public class ModuleConfigurator extends
 		AbstractModuleConfigurator<LicenseViewFactory, LicensePresenterFactory> {
 	@EventHandlerMethod
 	public void onLicenseRequest(LicenseRequestEvent event) {
-		this.activate(this.getViewFactory().createLicenseRequestView(), this
-				.getPresenterFactory().createLicenseRequestPresenter());
+		this.activate(
+				this.getViewFactory().createLicenseRequestView(),
+				this.getPresenterFactory().createLicenseRequestPresenter(
+						event.getShowInvalidLicenseMessage(),
+						event.getCallbackEvent()));
 	}
 }

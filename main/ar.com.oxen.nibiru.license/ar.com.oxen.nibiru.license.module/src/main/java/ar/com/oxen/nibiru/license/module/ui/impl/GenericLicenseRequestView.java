@@ -9,6 +9,7 @@ import ar.com.oxen.nibiru.ui.api.mvp.HasValue;
 import ar.com.oxen.nibiru.ui.api.mvp.HasValueChangeHandler;
 import ar.com.oxen.nibiru.ui.api.view.Button;
 import ar.com.oxen.nibiru.ui.api.view.DateField;
+import ar.com.oxen.nibiru.ui.api.view.Label;
 import ar.com.oxen.nibiru.ui.api.view.TextArea;
 import ar.com.oxen.nibiru.ui.api.view.TextField;
 import ar.com.oxen.nibiru.ui.api.view.ViewFactory;
@@ -22,6 +23,7 @@ public class GenericLicenseRequestView extends
 	private TextArea<String> licenseRequest;
 	private TextArea<String> licenseAuthorization;
 	private Button authorize;
+	private Label<String> errorLabel;
 
 	public GenericLicenseRequestView(ViewFactory viewFactory,
 			MessageSource messageSource) {
@@ -55,6 +57,9 @@ public class GenericLicenseRequestView extends
 		this.authorize.setValue(messageSource
 				.getMessage("ar.com.oxen.nibiru.license.authorize"));
 		this.getAdapted().addComponent(this.authorize);
+
+		this.errorLabel = viewFactory.buildLabel(String.class);
+		this.getAdapted().addComponent(this.errorLabel);
 
 		this.getAdapted().setModal(true);
 	}
@@ -92,5 +97,11 @@ public class GenericLicenseRequestView extends
 	@Override
 	public HasClickHandler getAuthorize() {
 		return this.authorize;
+	}
+
+	@Override
+	public void showInvalidLicenseMessage() {
+		this.errorLabel.setValue(this.getMessageSource().getMessage(
+				"ar.com.oxen.nibiru.license.invalidLicense"));
 	}
 }

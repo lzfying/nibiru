@@ -46,5 +46,6 @@
 	<bean name="genericLicensePresenterFactory"
 		class="ar.com.oxen.nibiru.license.module.ui.impl.GenericLicensePresenterFactory">
 		<property name="licenseStoreManager" ref="licenseStoreManager" />
+		<property name="eventBus" ref="eventBus" />
 	</bean>
 </beans>
