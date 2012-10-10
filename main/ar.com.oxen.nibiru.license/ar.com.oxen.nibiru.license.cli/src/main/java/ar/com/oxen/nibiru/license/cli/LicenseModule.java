@@ -42,7 +42,7 @@ public class LicenseModule extends AbstractModule {
                         new DefaultSignatureProvider("DSA"));
         
         /* Public an private key configuration */
-        KeyStoreProvider ksp = new DefaultKeyStoreProvider();
+        KeyStoreProvider ksp = new DefaultKeyStoreProvider(null);
         bind(PrivateKeyProvider.class).toInstance(
                         new KeyStorePrivateKeyProvider(this.key, this.password, ksp));
         
