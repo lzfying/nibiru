@@ -20,15 +20,17 @@ public class GenericLicenseRequestPresenter extends
 	private LicenseSerializer<DefaultLicenseInfo> licenseSerializer;
 	private HardwareIdProvider hardwareIdProvider;
 	private Object callbackEvent;
+	private String callbackTopic;
 
 	public GenericLicenseRequestPresenter(boolean showInvalidLicenseMessage,
-			Object callbackEvent, EventBus eventBus,
+			Object callbackEvent, String callbackTopic, EventBus eventBus,
 			LicenseStoreManager licenseStoreManager,
 			LicenseSerializer<DefaultLicenseInfo> licenseSerializer,
 			HardwareIdProvider hardwareIdProvider) {
 		super(eventBus);
 		this.showInvalidLicenseMessage = showInvalidLicenseMessage;
 		this.callbackEvent = callbackEvent;
+		this.callbackTopic = callbackTopic;
 		this.licenseStoreManager = licenseStoreManager;
 		this.licenseSerializer = licenseSerializer;
 		this.hardwareIdProvider = hardwareIdProvider;
@@ -67,7 +69,7 @@ public class GenericLicenseRequestPresenter extends
 								.getLicenseAuthorization().getValue());
 				getView().close();
 				if (callbackEvent != null) {
-					getEventBus().fireEvent(callbackEvent);
+					getEventBus().fireEvent(callbackEvent, callbackTopic);
 				}
 			}
 		});

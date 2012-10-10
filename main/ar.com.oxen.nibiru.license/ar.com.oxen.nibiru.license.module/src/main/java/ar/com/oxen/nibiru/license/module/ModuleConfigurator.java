@@ -14,6 +14,6 @@ public class ModuleConfigurator extends
 				this.getViewFactory().createLicenseRequestView(),
 				this.getPresenterFactory().createLicenseRequestPresenter(
 						event.getShowInvalidLicenseMessage(),
-						event.getCallbackEvent()));
+						event.getCallbackEvent(), event.getCallbackTopic()));
 	}
 }

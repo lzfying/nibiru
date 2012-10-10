@@ -31,10 +31,12 @@ public class GenericLicensePresenterFactory implements LicensePresenterFactory {
 
 	@Override
 	public Presenter<LicenseRequestView> createLicenseRequestPresenter(
-			boolean showInvalidLicenseMessage, Object callbackEvent) {
+			boolean showInvalidLicenseMessage, Object callbackEvent,
+			String callbackTopic) {
 		return new GenericLicenseRequestPresenter(showInvalidLicenseMessage,
-				callbackEvent, this.eventBus, this.licenseStoreManager,
-				this.licenseSerializer, this.hardwareIdProvider);
+				callbackEvent, callbackTopic, this.eventBus,
+				this.licenseStoreManager, this.licenseSerializer,
+				this.hardwareIdProvider);
 	}
 
 	public void setLicenseStoreManager(LicenseStoreManager licenseStoreManager) {
