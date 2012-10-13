@@ -41,6 +41,16 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 				MENU_EXTENSION, 80), "ar.com.oxen.nibiru.menu",
 				SubMenuExtension.class);
 
+		this.registerExtension(new SimpleMenuItemExtension("security.logout",
+				-20, new LogoutClickHandler(this.getEventBus(),
+						this.authenticationService)), MENU_EXTENSION,
+				MenuItemExtension.class);
+
+		this.registerExtension(new SimpleMenuItemExtension(
+				"security.changePassword", -10, new SimpleEventBusClickHandler(
+						this.getEventBus(), ChangePasswordEvent.class, null)),
+				MENU_EXTENSION, MenuItemExtension.class);
+
 		this.addCrudWithMenu("security.users", MENU_EXTENSION,
 				this.userCrudManager, this.userCrudActionExtension);
 
@@ -50,15 +60,6 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 		this.addCrudWithMenu("security.groups", MENU_EXTENSION,
 				this.groupCrudManager, this.groupCrudActionExtension);
 
-		this.registerExtension(new SimpleMenuItemExtension(
-				"security.changePassword", 100, new SimpleEventBusClickHandler(
-						this.getEventBus(), ChangePasswordEvent.class, null)),
-				MENU_EXTENSION, MenuItemExtension.class);
-
-		this.registerExtension(new SimpleMenuItemExtension("security.logout",
-				10, new LogoutClickHandler(this.getEventBus(),
-						this.authenticationService)), MENU_EXTENSION,
-				MenuItemExtension.class);
 	}
 
 	@EventHandlerMethod

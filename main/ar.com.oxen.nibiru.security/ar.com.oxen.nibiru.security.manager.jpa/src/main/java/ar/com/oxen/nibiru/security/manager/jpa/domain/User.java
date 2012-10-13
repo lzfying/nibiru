@@ -22,7 +22,7 @@ import ar.com.oxen.nibiru.crud.manager.api.WidgetType;
 		@Action(name = CrudAction.EDIT, requiresEntity = true, showInForm = false),
 		@Action(name = CrudAction.UPDATE, requiresEntity = true, showInList = false),
 		@Action(name = CrudAction.DELETE, requiresEntity = true, showInForm = false, requiresConfirmation = true) })
-@Table(name="NibiruUser")
+@Table(name = "NibiruUser")
 public class User {
 	@Id
 	@GeneratedValue
@@ -35,7 +35,7 @@ public class User {
 
 	@Column
 	@Show(order = 20, inList = false)
-	@Widget(type = WidgetType.PASSWORD_FIELD, maxLength = 50)
+	@Widget(type = WidgetType.PASSWORD_FIELD, readonly = true, maxLength = 50)
 	private String password;
 
 	@ManyToMany
@@ -43,7 +43,7 @@ public class User {
 	@Widget(type = WidgetType.MULTISELECT)
 	private Set<Role> roles;
 
-	@ManyToMany(mappedBy="users")
+	@ManyToMany(mappedBy = "users")
 	@Show(order = 40, inList = false)
 	@Widget(type = WidgetType.MULTISELECT)
 	private Set<RoleGroup> groups;

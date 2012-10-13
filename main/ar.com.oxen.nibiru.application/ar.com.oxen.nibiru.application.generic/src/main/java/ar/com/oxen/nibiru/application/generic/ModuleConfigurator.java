@@ -16,16 +16,17 @@ import ar.com.oxen.nibiru.ui.utils.mvp.SimpleEventBusClickHandler;
 public class ModuleConfigurator
 		extends
 		AbstractModuleConfigurator<ApplicationViewFactory, ApplicationPresenterFactory> {
+	private final static String ABOUT_MENU = "ar.com.oxen.nibiru.menu.about";
+
 	@Override
 	protected void configure() {
-		this.registerExtension(new SimpleSubMenuExtension("help",
-				"ar.com.oxen.nibiru.menu.help", 99), "ar.com.oxen.nibiru.menu",
-				SubMenuExtension.class);
+		this.registerExtension(new SimpleSubMenuExtension("about", ABOUT_MENU,
+				99), "ar.com.oxen.nibiru.menu", SubMenuExtension.class);
 
 		this.registerExtension(new SimpleMenuItemExtension("aboutNibiru", 20,
 				new SimpleEventBusClickHandler(this.getEventBus(),
-						AboutEvent.class, null)),
-				"ar.com.oxen.nibiru.menu.help", MenuItemExtension.class);
+						AboutEvent.class, null)), ABOUT_MENU,
+				MenuItemExtension.class);
 	}
 
 	@EventHandlerMethod
