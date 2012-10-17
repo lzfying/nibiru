@@ -19,7 +19,7 @@ import ar.com.oxen.nibiru.crud.manager.api.WidgetType;
 		@Action(name = CrudAction.EDIT, requiresEntity = true, showInForm = false),
 		@Action(name = CrudAction.UPDATE, requiresEntity = true, showInList = false),
 		@Action(name = CrudAction.DELETE, requiresEntity = true, showInForm = false, requiresConfirmation = true) })
-@Table(name="NibiruRole")
+@Table(name="_Role")
 public class Role {
 	@Id
 	@GeneratedValue
