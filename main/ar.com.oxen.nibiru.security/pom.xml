@@ -23,5 +23,10 @@
 		<module>ar.com.oxen.nibiru.security.module</module>
 		<module>ar.com.oxen.nibiru.security.manager.jpa.service</module>
     <module>ar.com.oxen.nibiru.security.autologin</module>
+    <module>ar.com.oxen.nibiru.security.ui.api</module>
+    <module>ar.com.oxen.nibiru.security.ui.generic.presenter</module>
+    <module>ar.com.oxen.nibiru.security.ui.generic.presenter.service</module>
+    <module>ar.com.oxen.nibiru.security.ui.generic.view</module>
+    <module>ar.com.oxen.nibiru.security.ui.generic.view.service</module>
   </modules>
 </project>

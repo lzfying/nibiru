@@ -12,16 +12,17 @@
 
 	<import resource="classpath:/ar/com/oxen/nibiru/security/module/context.xml" />
 
-	<osgi:service interface="ar.com.oxen.nibiru.i18n.api.MessageProvider" ref="securityMessageProvider"/>
+	<osgi:service interface="ar.com.oxen.nibiru.i18n.api.MessageProvider"
+		ref="securityMessageProvider" />
 
 	<osgi:reference id="authenticationService"
 		interface="ar.com.oxen.nibiru.security.api.AuthenticationService" />
 
-	<osgi:reference id="securityManager"
-		interface="ar.com.oxen.nibiru.security.manager.api.SecurityManager" />
+	<osgi:reference id="securityViewFactory"
+		interface="ar.com.oxen.nibiru.security.ui.api.SecurityViewFactory" />
 
-	<osgi:reference id="hashService"
-		interface="ar.com.oxen.nibiru.security.api.HashService" />
+	<osgi:reference id="securityPresenterFactory"
+		interface="ar.com.oxen.nibiru.security.ui.api.SecurityPresenterFactory" />
 
 	<osgi:reference id="entityManagerFactory"
 		interface="javax.persistence.EntityManagerFactory" />
@@ -43,13 +44,7 @@
 
 	<osgi:reference id="wrapperFactory"
 		interface="ar.com.oxen.commons.bean.api.WrapperFactory" />
-		
-	<osgi:reference id="viewFactory"
-		interface="ar.com.oxen.nibiru.ui.api.view.ViewFactory" />
 
-	<osgi:reference id="nibiruMessageSource"
-		interface="ar.com.oxen.nibiru.i18n.api.MessageSource" />
-		
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 

@@ -44,18 +44,6 @@
 		<property name="groupCrudActionExtension" ref="groupCrudManager" />
 	</bean>
 
-	<bean name="securityViewFactory" class="ar.com.oxen.nibiru.security.module.ui.impl.GenericSecurityViewFactory">
-		<property name="viewFactory" ref="viewFactory" />
-		<property name="messageSource" ref="nibiruMessageSource" />
-	</bean>
-
-	<bean name="securityPresenterFactory" class="ar.com.oxen.nibiru.security.module.ui.impl.GenericSecurityPresenterFactory">
-		<property name="eventBus" ref="eventBus" />
-		<property name="authenticationService" ref="authenticationService" />
-		<property name="securityManager" ref="securityManager" />
-		<property name="hashService" ref="hashService" />
-	</bean>
-
 	<bean name="userCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
 		<property name="persistentClass" value="ar.com.oxen.nibiru.security.manager.jpa.domain.User" />
 		<property name="wrapperFactory" ref="wrapperFactory" />
