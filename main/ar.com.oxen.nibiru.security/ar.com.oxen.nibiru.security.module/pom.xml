@@ -53,7 +53,7 @@
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.crud</groupId>
-			<artifactId>ar.com.oxen.nibiru.crud.manager.api</artifactId>
+			<artifactId>ar.com.oxen.nibiru.crud.manager.jpa</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
