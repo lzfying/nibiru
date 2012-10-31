@@ -22,6 +22,7 @@
 		<module>ar.com.oxen.nibiru.transaction.spring</module>
 		<module>ar.com.oxen.nibiru.module.utils</module>
 		<module>ar.com.oxen.nibiru.targetplatform</module>
-    <module>ar.com.oxen.nibiru.standalone</module>
+        <module>ar.com.oxen.nibiru.standalone</module>
+        <module>ar.com.oxen.nibiru.datasource.c3p0</module>
   </modules>
 </project>
