@@ -28,5 +28,6 @@
     <module>ar.com.oxen.nibiru.security.ui.generic.presenter.service</module>
     <module>ar.com.oxen.nibiru.security.ui.generic.view</module>
     <module>ar.com.oxen.nibiru.security.ui.generic.view.service</module>
+    <module>ar.com.oxen.nibiru.security.rpc</module>
   </modules>
 </project>

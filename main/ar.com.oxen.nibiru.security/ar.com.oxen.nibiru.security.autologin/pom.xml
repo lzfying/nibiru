@@ -10,7 +10,6 @@
 	</parent>
 	<groupId>ar.com.oxen.nibiru.security</groupId>
 	<artifactId>ar.com.oxen.nibiru.security.autologin</artifactId>
-	<version>1.0-SNAPSHOT</version>
 	<name>ar.com.oxen.nibiru.security.autologin</name>
 	<url>http://maven.apache.org</url>
 	<properties>
