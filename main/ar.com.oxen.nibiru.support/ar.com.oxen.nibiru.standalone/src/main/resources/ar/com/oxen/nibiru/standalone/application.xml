@@ -42,7 +42,7 @@
 	<bean id="applicationPresenterFactory"
 		class="ar.com.oxen.nibiru.application.generic.presenter.GenericApplicationPresenterFactory">
 		<property name="extensionPointManager" ref="extensionPointManager" />
-		<property name="authenticationService" ref="authenticationService" />
+		<property name="profile" ref="profile" />
 		<property name="authorizationService" ref="authorizationService" />
 	</bean>
 
