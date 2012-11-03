@@ -7,22 +7,32 @@ import org.springframework.security.core.AuthenticationException;
 
 import ar.com.oxen.nibiru.security.api.AuthenticationService;
 import ar.com.oxen.nibiru.security.api.BadCredentialsException;
+import ar.com.oxen.nibiru.security.manager.api.SecurityManager;
+import ar.com.oxen.nibiru.security.manager.api.UserData;
 import ar.com.oxen.nibiru.session.api.Session;
 
 public class SpringAuthenticationService implements AuthenticationService {
 	private Session session;
 	final static String AUTHENTICATION_KEY = "ar.com.oxen.nibiru.security.spring.authentication";
 	private AuthenticationManager authenticationManager;
+	private SecurityManager securityManager;
+	private SessionProfile profile;
 
 	@Override
-	public void login(String user, String password)
+	public void login(String username, String password)
 			throws BadCredentialsException {
 		try {
 			Authentication authentication = this.authenticationManager
-					.authenticate(new UsernamePasswordAuthenticationToken(user,
-							password != null ? password : ""));
+					.authenticate(new UsernamePasswordAuthenticationToken(
+							username, password != null ? password : ""));
 			this.session.put(AUTHENTICATION_KEY, authentication);
+
+			UserData userData = this.securityManager.getUserData(username);
+			this.profile.activate(userData.getUsername(),
+					userData.getFirstName(), userData.getLastName());
+
 		} catch (AuthenticationException e) {
+			this.profile.deactivate();
 			throw new BadCredentialsException();
 		}
 	}
@@ -46,5 +56,13 @@ public class SpringAuthenticationService implements AuthenticationService {
 	public void setAuthenticationManager(
 			AuthenticationManager authenticationManager) {
 		this.authenticationManager = authenticationManager;
+	}
+
+	public void setSecurityManager(SecurityManager securityManager) {
+		this.securityManager = securityManager;
+	}
+
+	public void setProfile(SessionProfile profile) {
+		this.profile = profile;
 	}
 }

@@ -1,8 +1,5 @@
 package ar.com.oxen.nibiru.security.manager.jpa;
 
-import java.util.Collection;
-import java.util.HashSet;
-
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -11,9 +8,8 @@ import javax.persistence.Query;
 
 import ar.com.oxen.nibiru.security.manager.api.InvalidOldPassword;
 import ar.com.oxen.nibiru.security.manager.api.SecurityManager;
+import ar.com.oxen.nibiru.security.manager.api.UserData;
 import ar.com.oxen.nibiru.security.manager.api.UserNotFoundException;
-import ar.com.oxen.nibiru.security.manager.jpa.domain.Role;
-import ar.com.oxen.nibiru.security.manager.jpa.domain.RoleGroup;
 import ar.com.oxen.nibiru.security.manager.jpa.domain.User;
 
 public class JpaSecurityManager implements SecurityManager {
@@ -38,31 +34,14 @@ public class JpaSecurityManager implements SecurityManager {
 	}
 
 	@Override
-	public String getPassword(String username) throws UserNotFoundException {
-		return this.findUserByUsername(username).getPassword();
-	}
-
-	@Override
-	public Iterable<String> getRoles(String username) {
-		User user = this.findUserByUsername(username);
-
-		Collection<String> roles = new HashSet<String>();
-		for (Role role : user.getRoles()) {
-			roles.add(role.getName());
-		}
-		for (RoleGroup group : user.getGroups()) {
-			for (Role role : group.getRoles()) {
-				roles.add(role.getName());
-			}
-		}
-
-		return roles;
+	public UserData getUserData(String username) throws UserNotFoundException {
+		return new UserAdapter(this.findUserByUsername(username));
 	}
 
 	private User findUserByUsername(String username) {
 		try {
 			Query query = this.entityManager
-					.createQuery("from User where name = ?");
+					.createQuery("from User where username = ?");
 			query.setParameter(1, username);
 			User user = (User) query.getSingleResult();
 
@@ -72,5 +51,4 @@ public class JpaSecurityManager implements SecurityManager {
 			throw new UserNotFoundException();
 		}
 	}
-
 }

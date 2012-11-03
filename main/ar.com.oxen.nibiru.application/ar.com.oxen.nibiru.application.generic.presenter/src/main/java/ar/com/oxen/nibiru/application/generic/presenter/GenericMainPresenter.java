@@ -6,32 +6,32 @@ import java.util.Map;
 import ar.com.oxen.nibiru.application.api.main.MainView;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionTracker;
+import ar.com.oxen.nibiru.security.api.AuthorizationService;
+import ar.com.oxen.nibiru.security.api.Profile;
 import ar.com.oxen.nibiru.ui.api.extension.MenuItemExtension;
 import ar.com.oxen.nibiru.ui.api.extension.SubMenuExtension;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
 import ar.com.oxen.nibiru.ui.api.view.HasMenuItems;
 import ar.com.oxen.nibiru.ui.api.view.MenuItem;
 import ar.com.oxen.nibiru.ui.utils.mvp.AbstractPresenter;
-import ar.com.oxen.nibiru.security.api.AuthenticationService;
-import ar.com.oxen.nibiru.security.api.AuthorizationService;
 
 public class GenericMainPresenter extends AbstractPresenter<MainView> {
 	private ExtensionPointManager extensionPointManager;
-	private AuthenticationService authenticationService;
+	private Profile profile;
 	private AuthorizationService authorizationService;
 
 	public GenericMainPresenter(ExtensionPointManager extensionPointManager,
-			AuthenticationService authenticationService, AuthorizationService authorizationService) {
+			Profile profile, AuthorizationService authorizationService) {
 		super(null);
 		this.extensionPointManager = extensionPointManager;
-		this.authenticationService = authenticationService;
+		this.profile = profile;
 		this.authorizationService = authorizationService;
 	}
 
 	@Override
 	public void go() {
 		this.getView().setUserName(
-				this.authenticationService.getLoggedUserName());
+				this.profile.getFirstName() + " " + this.profile.getLastName());
 
 		this.poulateMenuItem(this.getView().getMainMenu(),
 				"ar.com.oxen.nibiru.menu");
@@ -41,13 +41,14 @@ public class GenericMainPresenter extends AbstractPresenter<MainView> {
 		if (roles == null || roles.length == 0) {
 			return true;
 		}
-		for (String role : roles){
+		for (String role : roles) {
 			if (authorizationService.isCallerInRole(role)) {
 				return true;
 			}
 		}
 		return false;
 	}
+
 	private void poulateMenuItem(final HasMenuItems barMenuItem,
 			String extensionName) {
 
@@ -65,8 +66,8 @@ public class GenericMainPresenter extends AbstractPresenter<MainView> {
 								subMenuExtension.getName(), barMenuItem,
 								subMenuExtension.getPosition());
 						this.items.put(subMenuExtension, menuItem);
-						poulateMenuItem(menuItem, subMenuExtension
-								.getExtensionPoint());
+						poulateMenuItem(menuItem,
+								subMenuExtension.getExtensionPoint());
 					}
 
 					@Override

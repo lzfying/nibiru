@@ -11,10 +11,16 @@
 		class="ar.com.oxen.nibiru.security.spring.SpringAuthenticationService">
 		<property name="session" ref="nibiruSession" />
 		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="securityManager" ref="securityManager" />
+		<property name="profile" ref="profile" />
 	</bean>
 
 	<bean name="authorizationService"
 		class="ar.com.oxen.nibiru.security.spring.SpringAuthorizationService">
+		<property name="session" ref="nibiruSession" />
+	</bean>
+
+	<bean name="profile" class="ar.com.oxen.nibiru.security.spring.SessionProfile">
 		<property name="session" ref="nibiruSession" />
 	</bean>
 	

@@ -4,20 +4,20 @@ import ar.com.oxen.nibiru.application.api.ApplicationPresenterFactory;
 import ar.com.oxen.nibiru.application.api.about.AboutView;
 import ar.com.oxen.nibiru.application.api.main.MainView;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
-import ar.com.oxen.nibiru.security.api.AuthenticationService;
 import ar.com.oxen.nibiru.security.api.AuthorizationService;
+import ar.com.oxen.nibiru.security.api.Profile;
 import ar.com.oxen.nibiru.ui.api.mvp.Presenter;
 
 public class GenericApplicationPresenterFactory implements
 		ApplicationPresenterFactory {
 	private ExtensionPointManager extensionPointManager;
-	private AuthenticationService authenticationService;
+	private Profile profile;
 	private AuthorizationService authorizationService;
 
 	@Override
 	public Presenter<MainView> buildMainPresenter() {
 		return new GenericMainPresenter(this.extensionPointManager,
-				this.authenticationService, this.authorizationService);
+				this.profile, this.authorizationService);
 	}
 
 	@Override
@@ -30,12 +30,12 @@ public class GenericApplicationPresenterFactory implements
 		this.extensionPointManager = extensionPointManager;
 	}
 
-	public void setAuthenticationService(
-			AuthenticationService authenticationService) {
-		this.authenticationService = authenticationService;
+	public void setProfile(Profile profile) {
+		this.profile = profile;
 	}
 
-	public void setAuthorizationService(AuthorizationService authorizationService) {
+	public void setAuthorizationService(
+			AuthorizationService authorizationService) {
 		this.authorizationService = authorizationService;
 	}
 }

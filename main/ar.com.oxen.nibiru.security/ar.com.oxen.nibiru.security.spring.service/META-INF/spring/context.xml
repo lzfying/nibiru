@@ -15,6 +15,9 @@
 	<osgi:service ref="authorizationService"
 		interface="ar.com.oxen.nibiru.security.api.AuthorizationService" />
 
+	<osgi:service ref="profile"
+		interface="ar.com.oxen.nibiru.security.api.Profile" />
+
 	<osgi:service ref="hashService"
 		interface="ar.com.oxen.nibiru.security.api.HashService" />
 

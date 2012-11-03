@@ -28,23 +28,33 @@ public class User {
 	@GeneratedValue
 	private Integer id;
 
-	@Column(unique = true)
+	@Column
 	@Show(order = 10)
 	@Widget(type = WidgetType.TEXT_FIELD, maxLength = 50)
-	private String name;
+	private String firstName;
 
 	@Column
-	@Show(order = 20, inList = false)
+	@Show(order = 20)
+	@Widget(type = WidgetType.TEXT_FIELD, maxLength = 50)
+	private String lastName;
+
+	@Column(unique = true)
+	@Show(order = 30)
+	@Widget(type = WidgetType.TEXT_FIELD, maxLength = 50)
+	private String username;
+
+	@Column
+	@Show(order = 40, inList = false)
 	@Widget(type = WidgetType.PASSWORD_FIELD, readonly = true, maxLength = 50)
 	private String password;
 
 	@ManyToMany
-	@Show(order = 30, inList = false)
+	@Show(order = 50, inList = false)
 	@Widget(type = WidgetType.MULTISELECT)
 	private Set<Role> roles;
 
 	@ManyToMany(mappedBy = "users")
-	@Show(order = 40, inList = false)
+	@Show(order = 60, inList = false)
 	@Widget(type = WidgetType.MULTISELECT)
 	private Set<RoleGroup> groups;
 
@@ -56,12 +66,28 @@ public class User {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -90,7 +116,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return this.name;
+		return this.username;
 	}
 
 	@Override

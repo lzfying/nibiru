@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import ar.com.oxen.nibiru.security.api.HashService;
 import ar.com.oxen.nibiru.security.manager.api.SecurityManager;
+import ar.com.oxen.nibiru.security.manager.api.UserData;
 import ar.com.oxen.nibiru.security.manager.api.UserNotFoundException;
 
 public class SecurityManagerUserDetailsService implements UserDetailsService {
@@ -22,13 +23,15 @@ public class SecurityManagerUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		try {
+			UserData userData = this.securityManager.getUserData(username);
+			
 			Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
 
-			for (String role : this.securityManager.getRoles(username)) {
+			for (String role : userData.getRoles()) {
 				authorities.add(new SimpleGrantedAuthority(role));
 			}
 
-			String password = this.securityManager.getPassword(username);
+			String password = userData.getPassword();
 
 			if (password == null || password.equals("")) {
 				password = this.hashService.hash("");

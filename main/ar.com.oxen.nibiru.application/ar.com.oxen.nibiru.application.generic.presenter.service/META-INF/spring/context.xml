@@ -14,8 +14,8 @@
 	<osgi:reference id="extensionPointManager"
 		interface="ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager" />
 
-	<osgi:reference id="authenticationService"
-		interface="ar.com.oxen.nibiru.security.api.AuthenticationService" />
+	<osgi:reference id="profile"
+		interface="ar.com.oxen.nibiru.security.api.Profile" />
 		
 	<osgi:reference id="authorizationService"
 		interface="ar.com.oxen.nibiru.security.api.AuthorizationService" />
@@ -23,7 +23,7 @@
 	<bean id="applicationPresenterFactory"
 		class="ar.com.oxen.nibiru.application.generic.presenter.GenericApplicationPresenterFactory">
 		<property name="extensionPointManager" ref="extensionPointManager" />
-		<property name="authenticationService" ref="authenticationService" />
+		<property name="profile" ref="profile" />
 		<property name="authorizationService" ref="authorizationService" />
 	</bean>
 </beans>

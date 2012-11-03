@@ -7,14 +7,14 @@ public interface AuthenticationService {
 	/**
 	 * Performs an user log-on.
 	 * 
-	 * @param user
+	 * @param username
 	 *            The user name
 	 * @param password
 	 *            The password
 	 * @throws BadCredentialsException
 	 *             If the user name and/or the password is not valid
 	 */
-	void login(String user, String password) throws BadCredentialsException;
+	void login(String username, String password) throws BadCredentialsException;
 
 	/**
 	 * Performs an user log-off.
