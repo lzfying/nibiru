@@ -65,7 +65,7 @@
 \begin_body
 
 \begin_layout Title
-Referencia Nibiru 0.2
+Referencia Nibiru 0.3
 \end_layout
 
 \begin_layout Standard
@@ -207,17 +207,6 @@ target "http://www.eclipse.org/"
 \end_inset
 
 , pero intentando armar un mecanismo más simple.
-\end_layout
-
-\begin_layout Subsection
-Extensión mediante scripting
-\end_layout
-
-\begin_layout Standard
-El framework permite la personalización mediante scripting.
- Esto, en combinación con el mecanismo de puntos de extensión, permite que
- el usuario agregue funcionalidad al sistema desde la administración del
- mismo, sin necesidad de compilar, empaquetar o instalar nada.
 \end_layout
 
 \begin_layout Subsection
@@ -2137,8 +2126,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.db.service/META-I
-NF/spring/context.xml}
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.module/META-INF/
+spring/context.xml}
 \end_layout
 
 \end_inset

@@ -65,7 +65,7 @@
 \begin_body
 
 \begin_layout Title
-Nibiru 0.2 Reference
+Nibiru 0.3 Reference
 \end_layout
 
 \begin_layout Standard
@@ -210,19 +210,6 @@ target "http://www.eclipse.org/"
 \end_inset
 
  platform, but trying to take a simpler approach.
-\end_layout
-
-\begin_layout Subsection
-Extension using scripting
-\end_layout
-
-\begin_layout Standard
-The framework allows customization through scripting.
- This, combined with the extension point mechanism allows the user to add
- functionality to the system without the need to compile, package or install
- anything.
- The same application can provide a module for administering such extra
- extensions.
 \end_layout
 
 \begin_layout Subsection
@@ -2096,8 +2083,8 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.db.service/META-I
-NF/spring/context.xml}
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.module/META-INF/
+spring/context.xml}
 \end_layout
 
 \end_inset
