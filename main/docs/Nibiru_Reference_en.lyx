@@ -3233,6 +3233,127 @@ r/com/oxen/nibiru/mail/javamail/JavaMailService.java}
 
 \end_layout
 
+\begin_layout Section
+Licensing
+\end_layout
+
+\begin_layout Standard
+This module provides product license management.
+ It relies on 
+\begin_inset CommandInset href
+LatexCommand href
+name "Oxen Java Commons license module"
+target "https://code.google.com/p/oxenjavacommons/wiki/License"
+
+\end_inset
+
+.
+ However, Oxen Java Commons classes just provide components for license
+ request, authorization and validation.
+ Extra functionality, such storing and UI for requesting licences is required
+ in order to integrate it with Nibiru.
+ Such functionality is provided by this module and it is explained in the
+ following sections.
+\end_layout
+
+\begin_layout Subsection
+License store
+\end_layout
+
+\begin_layout Standard
+Once a license is received, it should be saved into a persistent store.
+ This is what the ar.com.oxen.nibiru.license.store.api module provides.
+\end_layout
+
+\begin_layout Standard
+The interface for storing and retreiving licenses is LicenseStoreManager:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.license/ar.com.oxen.nibiru.license.store.api/src/main/
+java/ar/com/oxen/nibiru/license/store/api/LicenseStoreManager.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The ar.com.oxen.nibiru.license.store.jpa contains a JPA-based implementation for
+ this API.
+\end_layout
+
+\begin_layout Subsection
+License module
+\end_layout
+
+\begin_layout Standard
+The ar.com.oxen.nibiru.license.module package provides the UI for requesting
+ a license.
+ You can interact with this module by using the following event:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.license/ar.com.oxen.nibiru.license.module/src/main/ja
+va/ar/com/oxen/nibiru/license/module/event/LicenseRequestEvent.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Typically, you'll check the license using Oxen Java Commons classes (after
+ retrieving it using the License store API).
+ If no valid license is found, you can fire this event in order to display
+ a window requesting a valid license.
+ After a license is entered, the event/topic specified as callback are fired,
+ so the licensed functionality can be executed again.
+\end_layout
+
+\begin_layout Standard
+This module provides presenters and views for ar.com.oxen.commons.license.impl.Default
+LicenseInfo.
+ However, if a custom license is used, tailor made presenter and views must
+ be created.
+\end_layout
+
+\begin_layout Standard
+TODO: Crear un proyecto service, para que se puedan personalizar los servicios
+ de vista y presenter
+\end_layout
+
+\begin_layout Subsection
+Command line interface
+\end_layout
+
+\begin_layout Standard
+In order to allow license authorization, a command line tool is provided.
+ It is included in the ar.com.oxen.nibiru.license.cli module.
+\end_layout
+
+\begin_layout Standard
+As before, it is based on ar.com.oxen.commons.license.impl.DefaultLicenseInfo
+ license information.
+ For a different license information, a custom authorizer must be created
+\end_layout
+
 \begin_layout Part
 Deployment
 \end_layout
