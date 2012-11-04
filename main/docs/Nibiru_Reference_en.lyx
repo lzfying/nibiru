@@ -3330,11 +3330,13 @@ Typically, you'll check the license using Oxen Java Commons classes (after
 \begin_layout Standard
 This module provides presenters and views for ar.com.oxen.commons.license.impl.Default
 LicenseInfo.
- However, if a custom license is used, tailor made presenter and views must
- be created.
+ However, if a custom license information, tailor made presenter and views
+ must be created.
 \end_layout
 
 \begin_layout Standard
+
+\emph on
 TODO: Crear un proyecto service, para que se puedan personalizar los servicios
  de vista y presenter
 \end_layout
@@ -3351,7 +3353,9 @@ In order to allow license authorization, a command line tool is provided.
 \begin_layout Standard
 As before, it is based on ar.com.oxen.commons.license.impl.DefaultLicenseInfo
  license information.
- For a different license information, a custom authorizer must be created
+ Also, and it identifies hardware using the MAC address.
+ For a different license information and/or hardware identification, a custom
+ authorizer must be created.
 \end_layout
 
 \begin_layout Part

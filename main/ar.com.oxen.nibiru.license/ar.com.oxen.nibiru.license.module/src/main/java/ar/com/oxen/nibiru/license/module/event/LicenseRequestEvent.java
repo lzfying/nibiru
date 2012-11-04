@@ -1,5 +1,8 @@
 package ar.com.oxen.nibiru.license.module.event;
 
+/**
+ * Event for requesting a license.
+ */
 public class LicenseRequestEvent {
 	private boolean showInvalidLicenseMessage;
 	private Object callbackEvent;
