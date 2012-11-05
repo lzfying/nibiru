@@ -1453,10 +1453,33 @@ Database
 Regarding database access, a javax.sql.DataSource service is exposed .
  In this case it was not necessary to define a specific Nibiru API.
  The ar.com.oxen.nibiru.datasource.dbcp bundle provides an implementation using
- DBCP.
- The database connection settings and JDBC driver visibility are also added
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "DBCP"
+target "http://commons.apache.org/dbcp/"
+
+\end_inset
+
+.
+ On the other hand, the ar.com.oxen.nibiru.datasource.c3p0 bundle provides a
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "c3p0"
+target "http://sourceforge.net/projects/c3p0/"
+
+\end_inset
+
+ implementation.
+\end_layout
+
+\begin_layout Standard
+The database connection settings and JDBC driver visibility are also added
  as OSGi fragments.
  Look at ar.com.oxen.nibiru.sample.datasource.fragment project for an example.
+ c3p0 implementatio requires an extra fragment, in order to make JDBC driver
+ class visible to c3p0 bundle.
 \end_layout
 
 \begin_layout Section
@@ -1969,15 +1992,6 @@ a/ar/com/oxen/nibiru/security/api/AuthorizationService.java}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-Dummy implementation
-\end_layout
-
-\begin_layout Standard
-For testing purposes, there is a dummy implementation.
- It can be found at the ar.com.oxen.nibiru.security.dummy project.
 \end_layout
 
 \begin_layout Subsection
@@ -3250,8 +3264,8 @@ target "https://code.google.com/p/oxenjavacommons/wiki/License"
 .
  However, Oxen Java Commons classes just provide components for license
  request, authorization and validation.
- Extra functionality, such storing and UI for requesting licences is required
- in order to integrate it with Nibiru.
+ Extra functionality, such as storing and UI for requesting licences is
+ required in order to integrate it with Nibiru.
  Such functionality is provided by this module and it is explained in the
  following sections.
 \end_layout
@@ -3287,8 +3301,8 @@ java/ar/com/oxen/nibiru/license/store/api/LicenseStoreManager.java}
 \end_layout
 
 \begin_layout Standard
-The ar.com.oxen.nibiru.license.store.jpa contains a JPA-based implementation for
- this API.
+The ar.com.oxen.nibiru.license.store.jpa project contains a JPA-based implementation
+ for this API.
 \end_layout
 
 \begin_layout Subsection
@@ -3296,7 +3310,7 @@ License module
 \end_layout
 
 \begin_layout Standard
-The ar.com.oxen.nibiru.license.module package provides the UI for requesting
+The ar.com.oxen.nibiru.license.module project provides the UI for requesting
  a license.
  You can interact with this module by using the following event:
 \end_layout
@@ -3328,8 +3342,8 @@ Typically, you'll check the license using Oxen Java Commons classes (after
 \end_layout
 
 \begin_layout Standard
-This module provides presenters and views for ar.com.oxen.commons.license.impl.Default
-LicenseInfo.
+This module provides both presenters and views for ar.com.oxen.commons.license.impl.De
+faultLicenseInfo.
  However, if a custom license information, tailor made presenter and views
  must be created.
 \end_layout

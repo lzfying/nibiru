@@ -1492,10 +1492,24 @@ target "http://commons.apache.org/dbcp/"
 
 \end_inset
 
+ y el bundle ar.com.oxen.nibiru.datasource.c3p0 provee una implementación con
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "c3p0"
+target "http://sourceforge.net/projects/c3p0/"
+
+\end_inset
+
 .
- La configuración de conexión a la base de datos, así como la visibilidad
+\end_layout
+
+\begin_layout Standard
+La configuración de conexión a la base de datos, así como la visibilidad
  del driver JDBC, se agregan también mediante fragmentos OSGi.
- Ver proyecto ar.com.oxen.nibiru.sample.datasource.fragment.
+ Para más información, ver el proyecto ar.com.oxen.nibiru.sample.datasource.fragment.
+ La implementación con c3p0 requiere de la creación de un fragmento extra,
+ para que c3p0 tenga visibilidad sobre la clase del driver JDBC usado.
 \end_layout
 
 \begin_layout Section
@@ -2012,15 +2026,6 @@ a/ar/com/oxen/nibiru/security/api/AuthorizationService.java}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-Implementación de prueba
-\end_layout
-
-\begin_layout Standard
-Existe una implementación específica para pruebas.
- La misma se encuentra en el proyecto ar.com.oxen.nibiru.security.dummy.
 \end_layout
 
 \begin_layout Subsection
@@ -3320,6 +3325,134 @@ r/com/oxen/nibiru/mail/javamail/JavaMailService.java}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Licenciamiento
+\end_layout
+
+\begin_layout Standard
+Este módulo permite gestionar la licencia del producto.
+ Se basa en el 
+\begin_inset CommandInset href
+LatexCommand href
+name "módulo de licencia de Oxen Java Commons"
+target "https://code.google.com/p/oxenjavacommons/wiki/License"
+
+\end_inset
+
+.
+ Sin embargo, las clases de Oxen Java Commons sólo proveen componentes para
+ requerimiento, autorización y validación de licencia.
+ Para integrarse con Nibiru, se necesita funcionalidad extra, como por ejemplo,
+ almacenamiento e interfaz de usuario.
+ Tal funcionalidad es provista por este módulo y la misma es explicada en
+ las siguientes secciones.
+\end_layout
+
+\begin_layout Subsection
+Almacenamiento de licencia
+\end_layout
+
+\begin_layout Standard
+Una vez que se recibe una licencia, la misma debería ser almacenada en un
+ medio persistente.
+ Esto es lo que provee el módulo ar.com.oxen.nibiru.license.store.api.
+\end_layout
+
+\begin_layout Standard
+La interfaz para leer y escribir licencias es LicenseStoreManager:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.license/ar.com.oxen.nibiru.license.store.api/src/main/
+java/ar/com/oxen/nibiru/license/store/api/LicenseStoreManager.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.license.store.jpa contiene una implementación basada
+ en JPA de esta API.
+\end_layout
+
+\begin_layout Subsection
+Módulo de licencia
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.license.module provee la interfaz gráfica para
+ requerir licenciamiento.
+ Se puede interactuar con ese módulo por medio del siguiente evento:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.license/ar.com.oxen.nibiru.license.module/src/main/ja
+va/ar/com/oxen/nibiru/license/module/event/LicenseRequestEvent.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Típicamente, se verificará la licencia utilizando las clases de Oxen Java
+ Commons (después de leerla utilizando el API de almacenamiento de licencias).
+ Si no se encuentra una licencia válida, se puede disparar este evento a
+ fin de mostrar una ventana para solicitar una licencia válida.
+ Después de que una licencia es ingresada, el evento con el tópico especificado
+ es disparado.
+ De este modo, la funcionalidad licenciada puede ejecutarse nuevamente.
+\end_layout
+
+\begin_layout Standard
+Este módulo provee tanto vistas como presentadores para ar.com.oxen.commons.license.i
+mpl.DefaultLicenseInfo.
+ Por supuesto, si se necesita información de licencia personalizada, se
+ deben crear vistas y presentadores para tal fin.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+TODO: Crear un proyecto service, para que se puedan personalizar los servicios
+ de vista y presenter
+\end_layout
+
+\begin_layout Subsection
+Interfaz de línea de comando
+\end_layout
+
+\begin_layout Standard
+Para permitir que las licencias sean autorizadas, se provee una herramienta
+ de línea de comando.
+ La misma está incluida en el módulo ar.com.oxen.nibiru.license.cli.
+\end_layout
+
+\begin_layout Standard
+Como en el caso anterior, esta herramienta se basa en información de licencia
+ contenida en ar.com.oxen.commons.license.impl.DefaultLicenseInfo.
+ Además, utiliza la dirección MAC para identificar el hardware.
+ Si se requiere información de licencia y/o mecanismo de identificación
+ diferentes, se debe crear un autorizador personalizado.
 \end_layout
 
 \begin_layout Part
