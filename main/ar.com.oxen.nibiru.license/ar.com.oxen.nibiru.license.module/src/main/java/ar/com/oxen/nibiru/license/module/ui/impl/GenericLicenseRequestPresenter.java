@@ -43,6 +43,8 @@ public class GenericLicenseRequestPresenter extends
 				.setValueChangeHandler(chengeHandler);
 		this.getView().getExpirationChangeHandler()
 				.setValueChangeHandler(chengeHandler);
+		this.getView().getCodeChangeHandler()
+				.setValueChangeHandler(chengeHandler);
 
 		String licenseString = this.licenseStoreManager
 				.loadLicense(LicenseStoreManager.GENERIC_MODULE);
@@ -87,6 +89,7 @@ public class GenericLicenseRequestPresenter extends
 							.serializeLicenceInfo(new DefaultLicenseInfo(
 									getView().getCompanyName().getValue(),
 									getView().getExpirationDate().getValue(),
+									getView().getCode().getValue(),
 									hardwareIdProvider.getHardwareId())));
 		}
 	}

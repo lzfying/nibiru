@@ -20,6 +20,7 @@ public class GenericLicenseRequestView extends
 		AbstractWindowViewAdapter<Window> implements LicenseRequestView {
 	private TextField<String> companyName;
 	private DateField expirationDate;
+	private TextField<String> code;
 	private TextArea<String> licenseRequest;
 	private TextArea<String> licenseAuthorization;
 	private Button authorize;
@@ -43,6 +44,11 @@ public class GenericLicenseRequestView extends
 				.getMessage("ar.com.oxen.nibiru.license.expirationDate"));
 		this.getAdapted().addComponent(this.expirationDate);
 
+		this.code = viewFactory.buildTextField(String.class);
+		this.code.setCaption(messageSource
+				.getMessage("ar.com.oxen.nibiru.license.code"));
+		this.getAdapted().addComponent(this.code);
+		
 		this.licenseRequest = viewFactory.buildTextArea(String.class);
 		this.licenseRequest.setCaption(messageSource
 				.getMessage("ar.com.oxen.nibiru.license.licenseRequest"));
@@ -82,6 +88,16 @@ public class GenericLicenseRequestView extends
 	@Override
 	public HasValueChangeHandler getExpirationChangeHandler() {
 		return this.expirationDate;
+	}
+
+	@Override
+	public HasValue<String> getCode() {
+		return this.code;
+	}
+
+	@Override
+	public HasValueChangeHandler getCodeChangeHandler() {
+		return this.code;
 	}
 
 	@Override

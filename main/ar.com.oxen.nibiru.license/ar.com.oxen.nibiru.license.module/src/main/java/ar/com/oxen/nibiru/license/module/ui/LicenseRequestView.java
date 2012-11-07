@@ -16,6 +16,10 @@ public interface LicenseRequestView extends View {
 
 	HasValueChangeHandler getExpirationChangeHandler();
 
+	HasValue<String> getCode();
+
+	HasValueChangeHandler getCodeChangeHandler();
+
 	HasValue<String> getLicenseRequest();
 
 	HasValue<String> getLicenseAuthorization();

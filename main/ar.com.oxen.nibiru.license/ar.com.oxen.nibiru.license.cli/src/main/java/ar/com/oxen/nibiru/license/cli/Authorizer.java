@@ -49,8 +49,10 @@ public class Authorizer {
 			}
 		}
 
+		String code = ask("Code", licenseInfo.getCode());
+
 		DefaultLicenseInfo newLicenseInfo = new DefaultLicenseInfo(
-				customerName, expirationDate, licenseInfo.getHardwareId());
+				customerName, expirationDate, code, licenseInfo.getHardwareId());
 		System.out.println("Generated license info: " + newLicenseInfo);
 
 		String license = this.licenseSerializer
