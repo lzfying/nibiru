@@ -30,11 +30,17 @@ public class GenericMainPresenter extends AbstractPresenter<MainView> {
 
 	@Override
 	public void go() {
-		this.getView().setUserName(
-				this.profile.getFirstName() + " " + this.profile.getLastName());
+		this.getView().setUserName(this.getUserName());
 
 		this.poulateMenuItem(this.getView().getMainMenu(),
 				"ar.com.oxen.nibiru.menu");
+	}
+
+	private String getUserName() {
+		String firstName = this.profile.getFirstName();
+		String lastName = this.profile.getLastName();
+		return firstName != null && lastName != null ? firstName + " "
+				+ lastName : this.profile.getUsername();
 	}
 
 	private boolean isAllowedRole(String[] roles) {
