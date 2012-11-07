@@ -34,6 +34,9 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 
 	private CrudManager<RoleGroup> groupCrudManager;
 	private CrudActionExtension<RoleGroup> groupCrudActionExtension;
+	
+	private final static String[] OPERATOR_ROLES = { "ar.com.oxen.nibiru.security.role.Operator" };
+	private final static String[] ADMINISTRATOR_ROLES = { "ar.com.oxen.nibiru.security.role.Administrator" };
 
 	@Override
 	protected void configure() {
@@ -48,17 +51,20 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 
 		this.registerExtension(new SimpleMenuItemExtension(
 				"security.changePassword", -10, new SimpleEventBusClickHandler(
-						this.getEventBus(), ChangePasswordEvent.class, null)),
-				MENU_EXTENSION, MenuItemExtension.class);
+						this.getEventBus(), ChangePasswordEvent.class, null),
+				OPERATOR_ROLES), MENU_EXTENSION, MenuItemExtension.class);
 
 		this.addCrudWithMenu("security.users", MENU_EXTENSION,
-				this.userCrudManager, this.userCrudActionExtension);
+				this.userCrudManager, this.userCrudActionExtension,
+				ADMINISTRATOR_ROLES);
 
 		this.addCrudWithMenu("security.roles", MENU_EXTENSION,
-				this.roleCrudManager, this.roleCrudActionExtension);
+				this.roleCrudManager, this.roleCrudActionExtension,
+				ADMINISTRATOR_ROLES);
 
 		this.addCrudWithMenu("security.groups", MENU_EXTENSION,
-				this.groupCrudManager, this.groupCrudActionExtension);
+				this.groupCrudManager, this.groupCrudActionExtension,
+				ADMINISTRATOR_ROLES);
 
 	}
 
