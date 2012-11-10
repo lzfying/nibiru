@@ -136,7 +136,22 @@ Arquitectura
 \end_layout
 
 \begin_layout Standard
-En esta sección se explican las decisiones de arquitectura tomadas.
+En esta sección se explican conceptos generales y decisiones de arquitectura
+ tomadas.
+\end_layout
+
+\begin_layout Subsection
+Diagrama de alto nivel
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename architecture.png
+	scale 50
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
