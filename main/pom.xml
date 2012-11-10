@@ -9,6 +9,8 @@
 	<properties>
 		<nibiru-version>0.3-SNAPSHOT</nibiru-version>
 		<commons-version>1.1-SNAPSHOT</commons-version>
+		<spring-version>3.0.6.RELEASE</spring-version>
+		<spring-security-version>3.1.0.RELEASE</spring-security-version>
 	</properties>
 	<repositories>
 		<repository>
