@@ -22,8 +22,7 @@ public class TableAdapter extends AbstractComponentAdapter<Table> implements
 	public TableAdapter(Table adapted, Window mainWindow) {
 		super(adapted);
 		final ContextMenu contextMenu = new ContextMenu();
-		this.menu = new ContextMenuAdapter(contextMenu);
-		mainWindow.addComponent(contextMenu);
+		this.menu = new ContextMenuAdapter(contextMenu, mainWindow);
 
 		adapted.addListener(new ItemClickEvent.ItemClickListener() {
 			private static final long serialVersionUID = 31566034779814726L;

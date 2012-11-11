@@ -72,7 +72,7 @@ public class GenericCrudListView extends AbstractCrudView implements
 					actionDefinition.getClickHandler()));
 
 		}
-		contextMenu.show(0, 0);
+		contextMenu.show(100, 100);
 	}
 
 	@Override

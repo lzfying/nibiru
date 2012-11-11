@@ -157,6 +157,7 @@ public class VaadinViewFactory implements ViewFactory {
 	@Override
 	public ContextMenu buildContextMenu() {
 		return new ContextMenuAdapter(
-				new org.vaadin.peter.contextmenu.ContextMenu());
+				new org.vaadin.peter.contextmenu.ContextMenu(),
+				this.applicationAccessor.getApplication().getMainWindow());
 	}
 }

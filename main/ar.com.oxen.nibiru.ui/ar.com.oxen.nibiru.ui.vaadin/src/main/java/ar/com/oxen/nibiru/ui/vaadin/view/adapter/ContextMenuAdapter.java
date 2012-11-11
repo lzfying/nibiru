@@ -4,6 +4,8 @@ import org.vaadin.peter.contextmenu.ContextMenu;
 import org.vaadin.peter.contextmenu.ContextMenu.ClickEvent;
 import org.vaadin.peter.contextmenu.ContextMenu.ContextMenuItem;
 
+import com.vaadin.ui.Window;
+
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
 import ar.com.oxen.nibiru.ui.api.view.MenuItem;
 
@@ -11,9 +13,10 @@ public class ContextMenuAdapter implements
 		ar.com.oxen.nibiru.ui.api.view.ContextMenu {
 	private ContextMenu contextMenu;
 
-	public ContextMenuAdapter(ContextMenu contextMenu) {
+	public ContextMenuAdapter(ContextMenu contextMenu, Window mainWindow) {
 		super();
 		this.contextMenu = contextMenu;
+		mainWindow.addComponent(contextMenu);
 	}
 
 	@Override
