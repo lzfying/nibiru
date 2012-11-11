@@ -24,7 +24,12 @@ public class ReportCrudActionExtension implements CrudActionExtension<Report> {
 	}
 
 	@Override
-	public List<CrudAction> getActions() {
+	public List<CrudAction> getGlobalActions() {
+		return new ArrayList<CrudAction>();
+	}
+
+	@Override
+	public List<CrudAction> getEntityActions(CrudEntity<Report> entity) {
 		List<CrudAction> actions = new ArrayList<CrudAction>(2);
 		actions.add(new SimpleCrudAction(OPEN_REPORT, true, false, true, false,
 				null));
@@ -34,7 +39,12 @@ public class ReportCrudActionExtension implements CrudActionExtension<Report> {
 	}
 
 	@Override
-	public CrudEntity<Report> performAction(CrudAction action,
+	public CrudEntity<?> performGlobalAction(CrudAction action) {
+		throw new IllegalArgumentException("Invalid action: " + action);
+	}
+
+	@Override
+	public CrudEntity<?> performEntityAction(CrudAction action,
 			CrudEntity<Report> entity) {
 		if (action.getName().equals(OPEN_REPORT)) {
 			return entity;
@@ -57,7 +67,7 @@ public class ReportCrudActionExtension implements CrudActionExtension<Report> {
 
 			return null;
 		} else {
-			throw new IllegalArgumentException("Invlaid action: " + action);
+			throw new IllegalArgumentException("Invalid action: " + action);
 		}
 	}
 

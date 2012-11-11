@@ -15,12 +15,12 @@ import ar.com.oxen.nibiru.security.api.AuthorizationService;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
 import ar.com.oxen.nibiru.validation.api.Validator;
 
-public class GenericCrudFormPresenter extends
-		AbstractGenericCrudPresenter<CrudFormView> {
-	private CrudEntity<?> entity;
+public class GenericCrudFormPresenter<T> extends
+		AbstractGenericCrudPresenter<CrudFormView, T> {
+	private CrudEntity<T> entity;
 
-	public GenericCrudFormPresenter(CrudManager<?> crudManager,
-			EventBus eventBus, Conversation conversation, CrudEntity<?> entity,
+	public GenericCrudFormPresenter(CrudManager<T> crudManager,
+			EventBus eventBus, Conversation conversation, CrudEntity<T> entity,
 			ExtensionPointManager extensionPointManager,
 			AuthorizationService authorizationService) {
 		super(crudManager, eventBus, conversation, extensionPointManager,
@@ -35,20 +35,19 @@ public class GenericCrudFormPresenter extends
 		this.configureClose(this.getView());
 
 		// TOOD: Falta des-registrar el tracker cuando se cierra el presenter!!
-		this.getExtensionPointManager().registerTracker(
-				new ExtensionTracker<CrudActionExtension<?>>() {
+		this.registerExtensionTracker(new ExtensionTracker<CrudActionExtension<T>>() {
 
-					@Override
-					public void onRegister(CrudActionExtension<?> extension) {
-						addActions(extension);
-					}
+			@Override
+			public void onRegister(CrudActionExtension<T> extension) {
+				addActions(extension);
+			}
 
-					@Override
-					public void onUnregister(CrudActionExtension<?> extension) {
-						// TODO remover acciones
-					}
+			@Override
+			public void onUnregister(CrudActionExtension<T> extension) {
+				// TODO remover acciones
+			}
 
-				}, this.getTopic(), CrudActionExtension.class);
+		});
 
 		for (final CrudField field : this.entity.getFormFields()) {
 			Object value = this.entity.getValue(field);
@@ -83,8 +82,8 @@ public class GenericCrudFormPresenter extends
 		}
 	}
 
-	private void addActions(final CrudActionExtension<?> extension) {
-		for (final CrudAction action : extension.getActions()) {
+	private void addActions(final CrudActionExtension<T> extension) {
+		for (final CrudAction action : extension.getEntityActions(this.entity)) {
 			if (action.isVisibleInForm()) {
 				this.getView().addEntityAction(action.getName(),
 						action.isConfirmationRequired(), new ClickHandler() {
@@ -101,7 +100,7 @@ public class GenericCrudFormPresenter extends
 										}
 									}
 
-									performAction(action, entity, extension);
+									performEntityAction(action, entity, extension);
 
 									getView().close();
 								}

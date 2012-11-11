@@ -23,8 +23,10 @@ public class ManageChildrenCrudActionExtension<T> implements
 			String parentField, String topic, EventBus eventBus) {
 		this(actionName, parentField, topic, eventBus, null);
 	}
+
 	public ManageChildrenCrudActionExtension(String actionName,
-			String parentField, String topic, EventBus eventBus, String[] allowedRoles) {
+			String parentField, String topic, EventBus eventBus,
+			String[] allowedRoles) {
 		super();
 		this.actionName = actionName;
 		this.parentField = parentField;
@@ -38,14 +40,30 @@ public class ManageChildrenCrudActionExtension<T> implements
 	}
 
 	@Override
-	public List<CrudAction> getActions() {
+	public List<CrudAction> getGlobalActions() {
+		return new ArrayList<CrudAction>();
+	}
+
+	@Override
+	public List<CrudAction> getEntityActions(CrudEntity<T> entity) {
 		return this.actions;
 	}
 
 	@Override
-	public CrudEntity<T> performAction(CrudAction action, CrudEntity<T> entity) {
-		this.eventBus.fireEvent(new ManageChildCrudEntitiesEvent(
-				this.parentField, entity.getEntity()), topic);
+	public CrudEntity<T> performGlobalAction(CrudAction action) {
+		throw new IllegalArgumentException("Invalid action:" + action.getName());
+	}
+
+	@Override
+	public CrudEntity<T> performEntityAction(CrudAction action,
+			CrudEntity<T> entity) {
+		if (this.actionName.equals(action.getName())) {
+			this.eventBus.fireEvent(new ManageChildCrudEntitiesEvent(
+					this.parentField, entity.getEntity()), topic);
+		} else {
+			throw new IllegalArgumentException("Invalid action:"
+					+ action.getName());
+		}
 		return null;
 	}
 

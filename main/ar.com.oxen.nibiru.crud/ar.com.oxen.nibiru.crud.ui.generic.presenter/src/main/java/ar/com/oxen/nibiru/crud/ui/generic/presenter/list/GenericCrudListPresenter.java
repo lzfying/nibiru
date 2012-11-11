@@ -11,9 +11,9 @@ import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
 import ar.com.oxen.nibiru.security.api.AuthorizationService;
 import ar.com.oxen.nibiru.ui.api.mvp.CloseHandler;
 
-public class GenericCrudListPresenter extends AbstractGenericCrudListPresenter {
+public class GenericCrudListPresenter<T> extends AbstractGenericCrudListPresenter<T> {
 
-	public GenericCrudListPresenter(CrudManager<?> crudManager,
+	public GenericCrudListPresenter(CrudManager<T> crudManager,
 			EventBus eventBus, Conversation conversation,
 			ExtensionPointManager extensionPointManager,
 			AuthorizationService authorizationService) {
@@ -21,15 +21,14 @@ public class GenericCrudListPresenter extends AbstractGenericCrudListPresenter {
 	}
 
 	@Override
-	protected <K> List<CrudEntity<K>> findEntities() {
+	protected List<CrudEntity<T>> findEntities() {
 		return this.getConversation().execute(
-				new ConversationCallback<List<CrudEntity<K>>>() {
+				new ConversationCallback<List<CrudEntity<T>>>() {
 
-					@SuppressWarnings("unchecked")
 					@Override
-					public List<CrudEntity<K>> doInConversation(
+					public List<CrudEntity<T>> doInConversation(
 							Conversation conversation) throws Exception {
-						return ((CrudManager<K>) getCrudManager()).findAll();
+						return getCrudManager().findAll();
 					}
 				});
 

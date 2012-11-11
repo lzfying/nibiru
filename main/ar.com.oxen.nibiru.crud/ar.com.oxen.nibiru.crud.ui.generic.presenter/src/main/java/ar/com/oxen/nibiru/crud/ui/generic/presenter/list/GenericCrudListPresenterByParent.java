@@ -10,12 +10,12 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
 import ar.com.oxen.nibiru.security.api.AuthorizationService;
 
-public class GenericCrudListPresenterByParent extends
-		AbstractGenericCrudListPresenter {
+public class GenericCrudListPresenterByParent<T> extends
+		AbstractGenericCrudListPresenter<T> {
 	private String parentField;
 	private Object parent;
 
-	public GenericCrudListPresenterByParent(CrudManager<?> crudManager,
+	public GenericCrudListPresenterByParent(CrudManager<T> crudManager,
 			EventBus eventBus, Conversation conversation,
 			ExtensionPointManager extensionPointManager, String parentField,
 			Object parent, AuthorizationService authorizationService) {
@@ -26,14 +26,13 @@ public class GenericCrudListPresenterByParent extends
 	}
 
 	@Override
-	protected <K> List<CrudEntity<K>> findEntities() {
+	protected List<CrudEntity<T>> findEntities() {
 		return this.getConversation().execute(
-				new ConversationCallback<List<CrudEntity<K>>>() {
-					@SuppressWarnings("unchecked")
+				new ConversationCallback<List<CrudEntity<T>>>() {
 					@Override
-					public List<CrudEntity<K>> doInConversation(
+					public List<CrudEntity<T>> doInConversation(
 							Conversation conversation) throws Exception {
-						return ((CrudManager<K>) getCrudManager()).findByfield(
+						return getCrudManager().findByfield(
 								parentField, parent);
 					}
 				});

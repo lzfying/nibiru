@@ -1,5 +1,8 @@
 package ar.com.oxen.nibiru.crud.ui.generic.view.list;
 
+
+import java.util.List;
+
 import ar.com.oxen.nibiru.crud.ui.api.CrudViewFactory;
 import ar.com.oxen.nibiru.crud.ui.api.list.CrudListView;
 import ar.com.oxen.nibiru.crud.ui.generic.view.AbstractCrudView;
@@ -7,6 +10,7 @@ import ar.com.oxen.nibiru.i18n.api.LocaleHolder;
 import ar.com.oxen.nibiru.i18n.api.MessageSource;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
 import ar.com.oxen.nibiru.ui.api.mvp.HasCloseHandler;
+import ar.com.oxen.nibiru.ui.api.view.ContextMenu;
 import ar.com.oxen.nibiru.ui.api.view.MenuItem;
 import ar.com.oxen.nibiru.ui.api.view.Panel;
 import ar.com.oxen.nibiru.ui.api.view.Table;
@@ -51,12 +55,24 @@ public class GenericCrudListView extends AbstractCrudView implements
 	}
 
 	@Override
-	public void addEntityAction(String label, boolean requiresConfirmation,
-			ClickHandler clickHandler) {
-		String action = this.i18nAction(label);
-		MenuItem menu = this.table.addMenuItem(action, 999);
-		menu.setClickHandler(this.addConfirmation(action, requiresConfirmation,
-				clickHandler));
+	public void setEntitySelectedHandler(ClickHandler entitySelectedHandler) {
+		this.table.setRowSelectionHandler(entitySelectedHandler);
+	}
+
+	@Override
+	public void showEntityActions(List<EntityActionDefinition> actionDefinitions) {
+		ContextMenu contextMenu = this.getViewFactory().buildContextMenu();
+
+		for (EntityActionDefinition actionDefinition : actionDefinitions) {
+			String action = this.i18nAction(actionDefinition.getLabel());
+
+			MenuItem menu = contextMenu.addMenuItem(action, 999);
+			menu.setClickHandler(this.addConfirmation(action,
+					actionDefinition.isRequiresConfirmation(),
+					actionDefinition.getClickHandler()));
+
+		}
+		contextMenu.show(0, 0);
 	}
 
 	@Override

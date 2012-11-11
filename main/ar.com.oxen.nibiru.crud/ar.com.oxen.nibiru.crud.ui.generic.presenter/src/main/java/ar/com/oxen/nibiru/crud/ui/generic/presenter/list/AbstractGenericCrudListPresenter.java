@@ -14,18 +14,19 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudField;
 import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.crud.manager.api.ModifiedCrudEntityEvent;
 import ar.com.oxen.nibiru.crud.ui.api.list.CrudListView;
+import ar.com.oxen.nibiru.crud.ui.api.list.CrudListView.EntityActionDefinition;
 import ar.com.oxen.nibiru.crud.ui.generic.presenter.AbstractGenericCrudPresenter;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionTracker;
 import ar.com.oxen.nibiru.security.api.AuthorizationService;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
 
-public abstract class AbstractGenericCrudListPresenter extends
-		AbstractGenericCrudPresenter<CrudListView> {
+public abstract class AbstractGenericCrudListPresenter<T> extends
+		AbstractGenericCrudPresenter<CrudListView, T> {
 	private EventHandler<ModifiedCrudEntityEvent> modifiedEventHandler;
-	private List<CrudEntity<?>> entities = new LinkedList<CrudEntity<?>>();
+	private List<CrudEntity<T>> entities = new LinkedList<CrudEntity<T>>();
 
-	public AbstractGenericCrudListPresenter(CrudManager<?> crudManager,
+	public AbstractGenericCrudListPresenter(CrudManager<T> crudManager,
 			EventBus eventBus, Conversation conversation,
 			ExtensionPointManager extensionPointManager,
 			AuthorizationService authorizationService) {
@@ -51,23 +52,22 @@ public abstract class AbstractGenericCrudListPresenter extends
 
 		this.configureClose(this.getView());
 
-		this.getExtensionPointManager().registerTracker(
-				new ExtensionTracker<CrudActionExtension<?>>() {
+		this.registerExtensionTracker(new ExtensionTracker<CrudActionExtension<T>>() {
 
-					@Override
-					public void onRegister(CrudActionExtension<?> extension) {
-						String[] roles = extension.getAllowedRoles();
-						if (isAllowedRole(roles)) {
-							addActions(extension);
-						}
-					}
+			@Override
+			public void onRegister(CrudActionExtension<T> extension) {
+				String[] roles = extension.getAllowedRoles();
+				if (isAllowedRole(roles)) {
+					addActions(extension);
+				}
+			}
 
-					@Override
-					public void onUnregister(CrudActionExtension<?> extension) {
-						// TODO remover acciones
-					}
+			@Override
+			public void onUnregister(CrudActionExtension<T> extension) {
+				// TODO remover acciones
+			}
 
-				}, this.getTopic(), CrudActionExtension.class);
+		});
 
 		this.refreshData();
 
@@ -87,7 +87,7 @@ public abstract class AbstractGenericCrudListPresenter extends
 	private void refreshData() {
 		this.entities.clear();
 
-		for (CrudEntity<?> entity : this.findEntities()) {
+		for (CrudEntity<T> entity : this.findEntities()) {
 			this.entities.add(entity);
 		}
 
@@ -96,11 +96,11 @@ public abstract class AbstractGenericCrudListPresenter extends
 
 	private void refreshEntity(final Object id) {
 		if (id != null) {
-			CrudEntity<?> entity = this.getConversation().execute(
-					new ConversationCallback<CrudEntity<?>>() {
+			CrudEntity<T> entity = this.getConversation().execute(
+					new ConversationCallback<CrudEntity<T>>() {
 
 						@Override
-						public CrudEntity<?> doInConversation(
+						public CrudEntity<T> doInConversation(
 								Conversation conversation) throws Exception {
 							return getCrudManager().findById(id);
 						}
@@ -151,40 +151,67 @@ public abstract class AbstractGenericCrudListPresenter extends
 
 	}
 
-	protected abstract <K> List<CrudEntity<K>> findEntities();
+	protected abstract List<CrudEntity<T>> findEntities();
 
 	protected abstract void customGo();
 
-	private void addActions(final CrudActionExtension<?> extension) {
-		for (final CrudAction action : extension.getActions()) {
-			String[] roles = action.getAllowedRoles();
-			if (isAllowedRole(roles)) {
-				if (action.isVisibleInList()) {
-					if (action.isEntityRequired()) {
-						this.getView().addEntityAction(action.getName(),
-								action.isConfirmationRequired(),
-								new ClickHandler() {
-									@Override
-									public void onClick() {
-										performAction(action,
-												entities.get(getView()
-														.getSelectedRow()),
-												extension);
-									}
-								});
-					} else {
-						this.getView().addGlobalAction(action.getName(),
-								action.isConfirmationRequired(),
-								new ClickHandler() {
-									@Override
-									public void onClick() {
-										performAction(action, null, extension);
-									}
-								});
-					}
-				}
-			}
+	private void addActions(final CrudActionExtension<T> extension) {
+		for (final CrudAction action : extension.getGlobalActions()) {
+			this.addGlobalAction(action, extension);
 		}
 
+		this.getView().setEntitySelectedHandler(new ClickHandler() {
+			@Override
+			public void onClick() {
+				final CrudEntity<T> selectedEntity = entities.get(getView()
+						.getSelectedRow());
+				List<EntityActionDefinition> actionDefinitions = new LinkedList<EntityActionDefinition>();
+
+				for (final CrudAction action : extension
+						.getEntityActions(selectedEntity)) {
+					addEntityAction(action, actionDefinitions, selectedEntity,
+							extension);
+				}
+				
+				getView().showEntityActions(actionDefinitions);
+			}
+		});
+	}
+
+	private void addGlobalAction(final CrudAction action,
+			final CrudActionExtension<T> extension) {
+		String[] roles = action.getAllowedRoles();
+		if (isAllowedRole(roles)) {
+			if (action.isVisibleInList()) {
+				this.getView().addGlobalAction(action.getName(),
+						action.isConfirmationRequired(), new ClickHandler() {
+							@Override
+							public void onClick() {
+								performGlobalAction(action, extension);
+							}
+						});
+			}
+		}
+	}
+
+	private void addEntityAction(final CrudAction action,
+			List<EntityActionDefinition> actionDefinitions,
+			final CrudEntity<T> selectedEntity,
+			final CrudActionExtension<T> extension) {
+		String[] roles = action.getAllowedRoles();
+		if (isAllowedRole(roles)) {
+			if (action.isVisibleInList()) {
+				actionDefinitions.add(new EntityActionDefinition(action
+						.getName(), action.isConfirmationRequired(),
+						new ClickHandler() {
+							@Override
+							public void onClick() {
+								performEntityAction(action, selectedEntity,
+										extension);
+							}
+						}));
+
+			}
+		}
 	}
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 import ar.com.oxen.nibiru.ui.api.view.Button;
 import ar.com.oxen.nibiru.ui.api.view.CheckBox;
 import ar.com.oxen.nibiru.ui.api.view.ComboBox;
+import ar.com.oxen.nibiru.ui.api.view.ContextMenu;
 import ar.com.oxen.nibiru.ui.api.view.DateField;
 import ar.com.oxen.nibiru.ui.api.view.Embedded;
 import ar.com.oxen.nibiru.ui.api.view.FormPanel;
@@ -23,6 +24,7 @@ import ar.com.oxen.nibiru.ui.vaadin.api.ApplicationAccessor;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.ButtonAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.CheckBoxAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.ComboBoxAdapter;
+import ar.com.oxen.nibiru.ui.vaadin.view.adapter.ContextMenuAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.DateFieldAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.EmbeddedAdapter;
 import ar.com.oxen.nibiru.ui.vaadin.view.adapter.FormPanelAdapter;
@@ -150,5 +152,11 @@ public class VaadinViewFactory implements ViewFactory {
 
 	public void setApplicationAccessor(ApplicationAccessor applicationAccessor) {
 		this.applicationAccessor = applicationAccessor;
+	}
+
+	@Override
+	public ContextMenu buildContextMenu() {
+		return new ContextMenuAdapter(
+				new org.vaadin.peter.contextmenu.ContextMenu());
 	}
 }
