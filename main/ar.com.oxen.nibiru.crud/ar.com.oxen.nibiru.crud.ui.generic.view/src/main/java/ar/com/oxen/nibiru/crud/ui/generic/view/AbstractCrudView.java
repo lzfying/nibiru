@@ -48,7 +48,7 @@ public abstract class AbstractCrudView extends
 							.message(
 									getMessage(
 											"ar.com.oxen.nibiru.app.areYouSure",
-											action.toLowerCase()))
+											action))
 							.button(getMessage("ar.com.oxen.nibiru.app.ok"),
 									clickHandler)
 							.button(getMessage("ar.com.oxen.nibiru.app.cancel"))
