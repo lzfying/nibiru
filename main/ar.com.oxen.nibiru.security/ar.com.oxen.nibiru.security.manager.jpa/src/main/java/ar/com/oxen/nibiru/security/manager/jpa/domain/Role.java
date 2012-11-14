@@ -19,16 +19,21 @@ import ar.com.oxen.nibiru.crud.manager.api.WidgetType;
 		@Action(name = CrudAction.EDIT, requiresEntity = true, showInForm = false),
 		@Action(name = CrudAction.UPDATE, requiresEntity = true, showInList = false),
 		@Action(name = CrudAction.DELETE, requiresEntity = true, showInForm = false, requiresConfirmation = true) })
-@Table(name="SecurityRole")
+@Table(name = "SecurityRole")
 public class Role {
 	@Id
 	@GeneratedValue
 	private Integer id;
 
 	@Column(unique = true)
-	@Show(order = 10)
+	@Show(order = 10, inList = false)
 	@Widget(type = WidgetType.TEXT_FIELD, maxLength = 50)
 	private String name;
+
+	@Column(unique = true)
+	@Show(order = 20)
+	@Widget(type = WidgetType.TEXT_FIELD, maxLength = 50)
+	private String description;
 
 	public Integer getId() {
 		return id;
@@ -46,9 +51,21 @@ public class Role {
 		this.name = name;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	@Override
 	public String toString() {
-		return this.name;
+		if (this.description != null) {
+			return this.description;
+		} else {
+			return this.name;
+		}
 	}
 
 	@Override
