@@ -521,7 +521,7 @@ Subproyectos principales
 \end_layout
 
 \begin_layout Standard
-La estrcutrua del proyecto Nibiru está organizada de una forma jerárquica.
+La estrcutura del proyecto Nibiru está organizada de una forma jerárquica.
  Dentro de esta estructura, los bundles principales son:
 \end_layout
 
@@ -543,6 +543,10 @@ ar.com.oxen.nibiru.extensionpoint
 
 \begin_layout Itemize
 ar.com.oxen.nibiru.i18n
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.license
 \end_layout
 
 \begin_layout Itemize
@@ -1190,12 +1194,12 @@ status open
 
 \begin_layout Plain Layout
 
-<bean name="vaadinApplication" scope="nibiruSession" 
+<bean name="miBean" scope="nibiruSession" 
 \end_layout
 
 \begin_layout Plain Layout
 
-    class="ar.com.oxen.nibiru.ui.vaadin.application.NibiruApplication">
+    class="ar.com.oxen.nibiru.MiBean">
 \end_layout
 
 \begin_layout Plain Layout
@@ -1994,6 +1998,10 @@ xen/nibiru/ui/utils/view/AbstractAdapter.java}
 Seguridad
 \end_layout
 
+\begin_layout Subsection
+API de seguridad
+\end_layout
+
 \begin_layout Standard
 Las interfaces para acceder a los servicios de seguridad (autenticación
  y autorización) se encuentran en el proyecto ar.com.oxen.nibiru.security.api.
@@ -2043,7 +2051,55 @@ a/ar/com/oxen/nibiru/security/api/AuthorizationService.java}
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Standard
+La información de perfil, como por ejemplo el nombre y el apellido, pueden
+ ser accedida por medio de la siguiente interfaz:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.api/src/main/jav
+a/ar/com/oxen/nibiru/security/api/Profile.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Simplemente se debe inyectar la misma en el componente deseado.
+\end_layout
+
+\begin_layout Standard
+Para hashing (por ejemplo, para generar el hash de la clave del usuario),
+ se provee un servicio para tal fin:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.api/src/main/jav
+a/ar/com/oxen/nibiru/security/api/HashService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
 Implementación basada en Spring Security
 \end_layout
 
@@ -2110,8 +2166,92 @@ java/ar/com/oxen/nibiru/security/spring/SpringAuthorizationService.java}
 
 \end_layout
 
+\begin_layout Standard
+Se provee un adaptador a PasswordEncoder de Spring Security a fin de brindar
+ una implementación del servicio de hashing:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.spring/src/main/
+java/ar/com/oxen/nibiru/security/spring/PasswordEncoderHashService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
-Módulo seguridad
+API de gestión de seguridad
+\end_layout
+
+\begin_layout Standard
+El API de gestión de seguridad provee funcionalidad que no está vinculada
+ de forma directa a las tareas de autenticación y autorización.
+ En cambio, se enfoca en la gestión de los datos que soportan dichas actividades.
+ Por ejemplo, permite acceder a la información del usuario.
+\end_layout
+
+\begin_layout Standard
+SecurityManager es la interfaz principal de este módulo:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.manager.api/src/m
+ain/java/ar/com/oxen/nibiru/security/manager/api/SecurityManager.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Implementación JPA
+\end_layout
+
+\begin_layout Standard
+El módulo ar.com.oxen.nibiru.security.manager.jpa provee una implementación JPA
+ de SecurityManager:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.manager.jpa/src/m
+ain/java/ar/com/oxen/nibiru/security/manager/jpa/JpaSecurityManager.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Módulos de seguridad
+\end_layout
+
+\begin_layout Subsubsection
+Módulo por defecto
 \end_layout
 
 \begin_layout Standard
@@ -2127,13 +2267,6 @@ Un modelo de dominio basado en usuarios, roles y grupos.
 Administración sobre esas entidades utilizando el módulo de ABM.
 \end_layout
 
-\begin_layout Itemize
-Una implementación de UserDetailsService de Spring Security.
- La misma es inyectada a un AuthenticationManager, y este último es expuesto
- a fin de ser inyectado en un SpringAuthenticationService del módulo ar.com.oxen.ni
-biru.security.spring.
-\end_layout
-
 \begin_layout Standard
 El siguiente archivo de ocnfiguración muestra cómo se conectan los componentes:
 \end_layout
@@ -2146,13 +2279,29 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.module/META-INF/
-spring/context.xml}
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.module/src/main/
+resources/ar/com/oxen/nibiru/security/module/context.xml}
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+Módulo de login automático
+\end_layout
+
+\begin_layout Standard
+Si su aplicación no tiene requerimientos de seguridad, se puede utilizar
+ el módulo ar.com.oxen.nibiru.security.autologin.
+ El mismo realiza un login automático y provee implementaciones ficticias
+ de los servicios de seguridad.
+\end_layout
+
+\begin_layout Standard
+Simplemente se debe incluir este módulo en lugar del módulo por defecto
+ y las implementaciones basadas en Spring Security y JPA.
 \end_layout
 
 \begin_layout Section
