@@ -1,7 +1,9 @@
 package ar.com.oxen.nibiru.crud.ui.generic.presenter.list;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import ar.com.oxen.commons.eventbus.api.EventBus;
 import ar.com.oxen.commons.eventbus.api.EventHandler;
@@ -25,6 +27,7 @@ public abstract class AbstractGenericCrudListPresenter<T> extends
 		AbstractGenericCrudPresenter<CrudListView, T> {
 	private EventHandler<ModifiedCrudEntityEvent> modifiedEventHandler;
 	private List<CrudEntity<T>> entities = new LinkedList<CrudEntity<T>>();
+	private Set<CrudActionExtension<T>> actionExtensions = new HashSet<CrudActionExtension<T>>();
 
 	public AbstractGenericCrudListPresenter(CrudManager<T> crudManager,
 			EventBus eventBus, Conversation conversation,
@@ -58,16 +61,20 @@ public abstract class AbstractGenericCrudListPresenter<T> extends
 			public void onRegister(CrudActionExtension<T> extension) {
 				String[] roles = extension.getAllowedRoles();
 				if (isAllowedRole(roles)) {
+					actionExtensions.add(extension);
 					addActions(extension);
 				}
 			}
 
 			@Override
 			public void onUnregister(CrudActionExtension<T> extension) {
+				actionExtensions.remove(extension);
 				// TODO remover acciones
 			}
 
 		});
+
+		this.configureEntityActions();
 
 		this.refreshData();
 
@@ -159,7 +166,9 @@ public abstract class AbstractGenericCrudListPresenter<T> extends
 		for (final CrudAction action : extension.getGlobalActions()) {
 			this.addGlobalAction(action, extension);
 		}
+	}
 
+	private void configureEntityActions() {
 		this.getView().setEntitySelectedHandler(new ClickHandler() {
 			@Override
 			public void onClick() {
@@ -167,15 +176,18 @@ public abstract class AbstractGenericCrudListPresenter<T> extends
 						.getSelectedRow());
 				List<EntityActionDefinition> actionDefinitions = new LinkedList<EntityActionDefinition>();
 
-				for (final CrudAction action : extension
-						.getEntityActions(selectedEntity)) {
-					addEntityAction(action, actionDefinitions, selectedEntity,
-							extension);
+				for (CrudActionExtension<T> extension : actionExtensions) {
+					for (final CrudAction action : extension
+							.getEntityActions(selectedEntity)) {
+						addEntityAction(action, actionDefinitions,
+								selectedEntity, extension);
+					}
 				}
-				
+
 				getView().showEntityActions(actionDefinitions);
 			}
 		});
+
 	}
 
 	private void addGlobalAction(final CrudAction action,
