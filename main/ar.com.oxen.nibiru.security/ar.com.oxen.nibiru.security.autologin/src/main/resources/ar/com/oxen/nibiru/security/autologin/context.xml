@@ -14,6 +14,12 @@
 	<bean id="authorizationService"
 		class="ar.com.oxen.nibiru.security.autologin.AutologinAuthorizationService" />
 
+	<bean id="hashService"
+		class="ar.com.oxen.nibiru.security.autologin.AutologinHashService" />
+
+	<bean id="profile"
+		class="ar.com.oxen.nibiru.security.autologin.AutologinProfile" />
+
 	<bean init-method="startup" destroy-method="shutdown"
 		class="ar.com.oxen.nibiru.security.autologin.ModuleConfigurator">
 		<property name="eventBus" ref="eventBus" />

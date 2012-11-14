@@ -16,6 +16,6 @@ public class AutologinAuthenticationService implements AuthenticationService {
 
 	@Override
 	public String getLoggedUserName() {
-		return "Nibiru";
+		return AutologinProfile.USERNAME;
 	}
 }

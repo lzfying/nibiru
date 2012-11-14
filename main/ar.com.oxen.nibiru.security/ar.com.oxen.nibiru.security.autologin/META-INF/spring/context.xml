@@ -16,6 +16,12 @@
 	<osgi:service ref="authorizationService"
 		interface="ar.com.oxen.nibiru.security.api.AuthorizationService" />
 
+	<osgi:service ref="hashService"
+		interface="ar.com.oxen.nibiru.security.api.HashService" />
+
+	<osgi:service ref="profile"
+		interface="ar.com.oxen.nibiru.security.api.Profile" />
+
 	<osgi:reference id="eventBus"
 		interface="ar.com.oxen.commons.eventbus.api.EventBus" />
 </beans>
