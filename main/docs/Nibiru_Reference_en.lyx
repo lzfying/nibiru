@@ -2269,6 +2269,36 @@ Just include this module instead of default module and Spring Security /
  JPA implementations.
 \end_layout
 
+\begin_layout Subsection
+Remote access
+\end_layout
+
+\begin_layout Standard
+The ar.com.oxen.nibiru.security.rpc module provides classes for exposing security
+ services over a network.
+\end_layout
+
+\begin_layout Standard
+The RpcAuthenticationService allows exposing a remote authentication service:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.rpc/src/main/jav
+a/ar/com/oxen/nibiru/security/rpc/RpcAuthenticationService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Transaction management
 \end_layout
