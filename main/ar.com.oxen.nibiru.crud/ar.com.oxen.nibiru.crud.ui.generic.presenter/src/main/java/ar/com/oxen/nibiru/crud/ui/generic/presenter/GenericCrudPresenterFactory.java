@@ -38,7 +38,7 @@ public class GenericCrudPresenterFactory implements CrudPresenterFactory {
 
 	@Override
 	public <T> Presenter<CrudFormView> buildFormPresenter(
-			CrudManager<T> crudManager, EditCrudEntityEvent event) {
+			CrudManager<T> crudManager, EditCrudEntityEvent<T> event) {
 		return new GenericCrudFormPresenter<T>(crudManager, this.eventBus, 
 				event.getConversation(), event.getCrudEntity(),
 				this.extensionPointManager, authorizationService);

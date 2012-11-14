@@ -41,5 +41,5 @@ public interface CrudPresenterFactory {
 	 * @return The presenter
 	 */
 	<T> Presenter<CrudFormView> buildFormPresenter(CrudManager<T> crudManager,
-			EditCrudEntityEvent event);
+			EditCrudEntityEvent<T> event);
 }
