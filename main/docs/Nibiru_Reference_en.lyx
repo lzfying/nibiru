@@ -560,6 +560,10 @@ ar.com.oxen.nibiru.i18n
 \end_layout
 
 \begin_layout Itemize
+ar.com.oxen.nibiru.license
+\end_layout
+
+\begin_layout Itemize
 ar.com.oxen.nibiru.mail
 \end_layout
 
@@ -1159,12 +1163,12 @@ status open
 
 \begin_layout Plain Layout
 
-<bean name="vaadinApplication" scope="nibiruSession" 
+<bean name="myBean" scope="nibiruSession" 
 \end_layout
 
 \begin_layout Plain Layout
 
-    class="ar.com.oxen.nibiru.ui.vaadin.application.NibiruApplication">
+    class="ar.com.oxen.nibiru.MyBean">
 \end_layout
 
 \begin_layout Plain Layout
@@ -1959,6 +1963,10 @@ xen/nibiru/ui/utils/view/AbstractAdapter.java}
 Security
 \end_layout
 
+\begin_layout Subsection
+Security API
+\end_layout
+
 \begin_layout Standard
 The interfaces required for accessing security services (authentication
  and authorization) are found in the ar.com.oxen.nibiru.security.api project
@@ -2008,7 +2016,55 @@ a/ar/com/oxen/nibiru/security/api/AuthorizationService.java}
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Standard
+Profile information, such as first and last name, can be accessed through
+ the following interface:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.api/src/main/jav
+a/ar/com/oxen/nibiru/security/api/Profile.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+You can simply inject it into your component.
+\end_layout
+
+\begin_layout Standard
+Finally, for hashing purposes (such as storing the user password hash),
+ a hash service is provided:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.api/src/main/jav
+a/ar/com/oxen/nibiru/security/api/HashService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
 Spring Security implementation
 \end_layout
 
@@ -2075,8 +2131,92 @@ java/ar/com/oxen/nibiru/security/spring/SpringAuthorizationService.java}
 
 \end_layout
 
+\begin_layout Standard
+Hashing service is implemented by providing an adapter to Spring Security
+ PasswordEncoder:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.spring/src/main/
+java/ar/com/oxen/nibiru/security/spring/PasswordEncoderHashService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
-Security module
+Security management API
+\end_layout
+
+\begin_layout Standard
+Security management API provides functionality which is not directly related
+ to authentication/authorization issues.
+ Instead, it focuses on data management for supporting these activities.
+ For example, it allows accessing user information.
+\end_layout
+
+\begin_layout Standard
+The main interface for this module is SecurityManager:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.manager.api/src/m
+ain/java/ar/com/oxen/nibiru/security/manager/api/SecurityManager.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+JPA implementation
+\end_layout
+
+\begin_layout Standard
+The ar.com.oxen.nibiru.security.manager.jpa module provides a JPA implementation
+ for SecurityManager:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.manager.jpa/src/m
+ain/java/ar/com/oxen/nibiru/security/manager/jpa/JpaSecurityManager.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Security modules
+\end_layout
+
+\begin_layout Subsubsection
+Default module
 \end_layout
 
 \begin_layout Standard
@@ -2092,13 +2232,6 @@ A user - role - group domain model.
 Administration over these entities using the CRUD module.
 \end_layout
 
-\begin_layout Itemize
-A Spring Security UserDetailsService implementation using JPA.
- It is injected into an AuthenticationManager, and this one is exposed in
- order to be injected into SpringAuthenticationService from ar.com.oxen.nibiru.secur
-ity.spring module.
-\end_layout
-
 \begin_layout Standard
 The following configuration file show how the components are wired:
 \end_layout
@@ -2111,13 +2244,29 @@ status open
 
 
 \backslash
-lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.module/META-INF/
-spring/context.xml}
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.module/src/main/
+resources/ar/com/oxen/nibiru/security/module/context.xml}
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+Automatic login module
+\end_layout
+
+\begin_layout Standard
+If your application doesn't have security requirements, you can use the
+ ar.com.oxen.nibiru.security.autologin module.
+ It performs automatic login and provides dummy implementation for security
+ services.
+\end_layout
+
+\begin_layout Standard
+Just include this module instead of default module and Spring Security /
+ JPA implementations.
 \end_layout
 
 \begin_layout Section
