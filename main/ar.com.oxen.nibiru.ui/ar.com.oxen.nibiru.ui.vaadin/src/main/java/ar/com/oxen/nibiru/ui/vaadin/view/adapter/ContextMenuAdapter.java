@@ -12,6 +12,13 @@ import ar.com.oxen.nibiru.ui.api.view.MenuItem;
 public class ContextMenuAdapter implements
 		ar.com.oxen.nibiru.ui.api.view.ContextMenu {
 	private ContextMenu contextMenu;
+	private static ThreadLocal<Integer> lastX = new ThreadLocal<Integer>();
+	private static ThreadLocal<Integer> lastY = new ThreadLocal<Integer>();
+
+	public static void setLastCoordinates(int x, int y) {
+		lastX.set(x);
+		lastY.set(y);
+	}
 
 	public ContextMenuAdapter(ContextMenu contextMenu, Window mainWindow) {
 		super();
@@ -20,8 +27,8 @@ public class ContextMenuAdapter implements
 	}
 
 	@Override
-	public void show(int left, int top) {
-		this.contextMenu.show(left, top);
+	public void show() {
+		this.contextMenu.show(lastX.get(), lastY.get());
 	}
 
 	@Override

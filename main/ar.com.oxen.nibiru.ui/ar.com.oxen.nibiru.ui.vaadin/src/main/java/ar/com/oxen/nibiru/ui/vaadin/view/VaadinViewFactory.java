@@ -121,7 +121,7 @@ public class VaadinViewFactory implements ViewFactory {
 	@Override
 	public Table buildTable() {
 		return new TableAdapter(new com.vaadin.ui.Table(),
-				this.applicationAccessor.getApplication().getMainWindow());
+				this.buildContextMenu());
 	}
 
 	@Override
