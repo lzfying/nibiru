@@ -8,24 +8,20 @@ import java.util.Map;
 
 import ar.com.oxen.commons.eventbus.api.EventBus;
 import ar.com.oxen.nibiru.crud.manager.api.CrudAction;
-import ar.com.oxen.nibiru.crud.manager.api.CrudActionExtension;
 import ar.com.oxen.nibiru.crud.manager.api.CrudEntity;
+import ar.com.oxen.nibiru.crud.utils.AbstractCrudActionExtension;
 import ar.com.oxen.nibiru.crud.utils.SimpleCrudAction;
 import ar.com.oxen.nibiru.report.api.Report;
 
-public class ReportCrudActionExtension implements CrudActionExtension<Report> {
+public class ReportCrudActionExtension extends
+		AbstractCrudActionExtension<Report> {
 	private final static String OPEN_REPORT = "openReport";
 	private final static String RUN_REPORT = "runReport";
 	private EventBus eventBus;
 
 	public ReportCrudActionExtension(EventBus eventBus) {
-		super();
+		super(null);
 		this.eventBus = eventBus;
-	}
-
-	@Override
-	public List<CrudAction> getGlobalActions() {
-		return new ArrayList<CrudAction>();
 	}
 
 	@Override
@@ -36,11 +32,6 @@ public class ReportCrudActionExtension implements CrudActionExtension<Report> {
 		actions.add(new SimpleCrudAction(RUN_REPORT, true, true, false, true,
 				null));
 		return actions;
-	}
-
-	@Override
-	public CrudEntity<?> performGlobalAction(CrudAction action) {
-		throw new IllegalArgumentException("Invalid action: " + action);
 	}
 
 	@Override
@@ -69,10 +60,5 @@ public class ReportCrudActionExtension implements CrudActionExtension<Report> {
 		} else {
 			throw new IllegalArgumentException("Invalid action: " + action);
 		}
-	}
-
-	@Override
-	public String[] getAllowedRoles() {
-		return null;
 	}
 }

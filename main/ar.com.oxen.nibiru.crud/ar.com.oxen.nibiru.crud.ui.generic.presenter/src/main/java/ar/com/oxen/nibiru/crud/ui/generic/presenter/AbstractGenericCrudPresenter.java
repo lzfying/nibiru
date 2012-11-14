@@ -62,7 +62,11 @@ public abstract class AbstractGenericCrudPresenter<V extends View, T> extends
 					}
 				});
 
-		if (entity != null) {
+		/*
+		 * If the returned entity is the same of original entity, it is still
+		 * being modified.
+		 */
+		if (entity != null && !entity.equals(returnedEntity)) {
 			this.getEventBus().fireEvent(
 					new ModifiedCrudEntityEvent(entity.getId()),
 					this.crudManager.getEntityTypeName());
@@ -87,7 +91,6 @@ public abstract class AbstractGenericCrudPresenter<V extends View, T> extends
 		this.getExtensionPointManager().registerTracker(tracker,
 				this.getTopic(), CrudActionExtension.class);
 	}
-	
 
 	protected abstract <K> void onReturnedEntity(CrudEntity<K> returnedEntity);
 
