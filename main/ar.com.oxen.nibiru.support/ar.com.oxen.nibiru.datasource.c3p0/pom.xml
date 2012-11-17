@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>ar.com.oxen.nibiru</groupId>
 		<artifactId>ar.com.oxen.nibiru.support</artifactId>
-		<version>0.3-SNAPSHOT</version>
+		<version>0.3</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru.support</groupId>
 	<artifactId>ar.com.oxen.nibiru.datasource.c3p0</artifactId>

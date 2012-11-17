@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>ar.com.oxen.nibiru.session</artifactId>
 		<groupId>ar.com.oxen.nibiru</groupId>
-		<version>0.3-SNAPSHOT</version>
+		<version>0.3</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru.session</groupId>
 	<artifactId>ar.com.oxen.nibiru.session.api</artifactId>

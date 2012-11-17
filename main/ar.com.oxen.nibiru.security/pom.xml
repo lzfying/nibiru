@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>ar.com.oxen.nibiru</artifactId>
 		<groupId>ar.com.oxen.nibiru</groupId>
-		<version>0.3-SNAPSHOT</version>
+		<version>0.3</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru</groupId>
 	<artifactId>ar.com.oxen.nibiru.security</artifactId>
@@ -22,12 +22,12 @@
 		<module>ar.com.oxen.nibiru.security.manager.jpa</module>
 		<module>ar.com.oxen.nibiru.security.module</module>
 		<module>ar.com.oxen.nibiru.security.manager.jpa.service</module>
-    <module>ar.com.oxen.nibiru.security.autologin</module>
-    <module>ar.com.oxen.nibiru.security.ui.api</module>
-    <module>ar.com.oxen.nibiru.security.ui.generic.presenter</module>
-    <module>ar.com.oxen.nibiru.security.ui.generic.presenter.service</module>
-    <module>ar.com.oxen.nibiru.security.ui.generic.view</module>
-    <module>ar.com.oxen.nibiru.security.ui.generic.view.service</module>
-    <module>ar.com.oxen.nibiru.security.rpc</module>
+	    <module>ar.com.oxen.nibiru.security.autologin</module>
+	    <module>ar.com.oxen.nibiru.security.ui.api</module>
+	    <module>ar.com.oxen.nibiru.security.ui.generic.presenter</module>
+	    <module>ar.com.oxen.nibiru.security.ui.generic.presenter.service</module>
+	    <module>ar.com.oxen.nibiru.security.ui.generic.view</module>
+	    <module>ar.com.oxen.nibiru.security.ui.generic.view.service</module>
+	    <module>ar.com.oxen.nibiru.security.rpc</module>
   </modules>
 </project>
