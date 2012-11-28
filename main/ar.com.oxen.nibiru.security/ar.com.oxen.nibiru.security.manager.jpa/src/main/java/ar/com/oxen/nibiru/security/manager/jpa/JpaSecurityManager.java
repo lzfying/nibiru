@@ -3,7 +3,6 @@ package ar.com.oxen.nibiru.security.manager.jpa;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 import ar.com.oxen.nibiru.security.manager.api.InvalidOldPassword;
@@ -13,7 +12,7 @@ import ar.com.oxen.nibiru.security.manager.api.UserNotFoundException;
 import ar.com.oxen.nibiru.security.manager.jpa.domain.User;
 
 public class JpaSecurityManager implements SecurityManager {
-	@PersistenceContext(type = PersistenceContextType.EXTENDED)
+	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override

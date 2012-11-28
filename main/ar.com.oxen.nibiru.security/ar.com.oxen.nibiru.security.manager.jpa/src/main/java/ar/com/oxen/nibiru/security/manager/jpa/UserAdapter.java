@@ -1,7 +1,7 @@
 package ar.com.oxen.nibiru.security.manager.jpa;
 
-import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 import ar.com.oxen.nibiru.security.manager.api.UserData;
 import ar.com.oxen.nibiru.security.manager.jpa.domain.Role;
@@ -9,45 +9,51 @@ import ar.com.oxen.nibiru.security.manager.jpa.domain.RoleGroup;
 import ar.com.oxen.nibiru.security.manager.jpa.domain.User;
 
 class UserAdapter implements UserData {
-	private User user;
+	private String username;
+	private String password;
+	private String firstName;
+	private String lastName;
+	private Set<String> roles;
 
 	public UserAdapter(User user) {
 		super();
-		this.user = user;
-	}
-
-	@Override
-	public String getUsername() {
-		return this.user.getUsername();
-	}
-
-	@Override
-	public String getPassword() {
-		return this.user.getPassword();
-	}
-
-	@Override
-	public String getFirstName() {
-		return this.user.getFirstName();
-	}
-
-	@Override
-	public String getLastName() {
-		return this.user.getLastName();
-	}
-
-	@Override
-	public Iterable<String> getRoles() {
-		Collection<String> roles = new HashSet<String>();
-		for (Role role : this.user.getRoles()) {
+		this.username = user.getUsername();
+		this.password = user.getPassword();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.roles = new HashSet<String>();
+		for (Role role : user.getRoles()) {
 			roles.add(role.getName());
 		}
-		for (RoleGroup group : this.user.getGroups()) {
+		for (RoleGroup group : user.getGroups()) {
 			for (Role role : group.getRoles()) {
 				roles.add(role.getName());
 			}
 		}
+	}
 
-		return roles;
+	@Override
+	public String getUsername() {
+		return this.username;
+	}
+
+	@Override
+	public String getPassword() {
+		return this.password;
+	}
+
+	@Override
+	public String getFirstName() {
+		return this.firstName;
+	}
+
+	@Override
+	public String getLastName() {
+		return this.lastName;
+	}
+
+	@Override
+	public Iterable<String> getRoles() {
+		return this.roles;
 	}
 }

@@ -14,8 +14,7 @@
 	<tx:advice id="securityManagerTxAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="changePassword" propagation="REQUIRED" />
-			<tx:method name="getPassword" propagation="REQUIRED" />
-			<tx:method name="getRoles" propagation="REQUIRED" />
+			<tx:method name="getUserData" propagation="REQUIRED" />
 		</tx:attributes>
 	</tx:advice>
 
