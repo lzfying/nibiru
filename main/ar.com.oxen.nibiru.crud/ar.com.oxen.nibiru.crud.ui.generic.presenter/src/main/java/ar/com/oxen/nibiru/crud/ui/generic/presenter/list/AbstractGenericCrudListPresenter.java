@@ -19,6 +19,7 @@ import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionTracker;
 import ar.com.oxen.nibiru.security.api.AuthorizationService;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
+import ar.com.oxen.nibiru.ui.api.mvp.CloseHandler;
 
 public abstract class AbstractGenericCrudListPresenter extends
 		AbstractGenericCrudPresenter<CrudListView> {
@@ -80,10 +81,18 @@ public abstract class AbstractGenericCrudListPresenter extends
 
 		this.getEventBus().addHandler(ModifiedCrudEntityEvent.class,
 				this.modifiedEventHandler, this.getTopic());
+		
+		this.getView().getCloseHander().setCloseHandler(new CloseHandler() {
+			@Override
+			public void onClose() {
+				getEventBus().removeHandler(modifiedEventHandler);
+				AbstractGenericCrudListPresenter.this.onClose();
+			}
+		});
 
 		this.customGo();
 	}
-
+	
 	private void refreshData() {
 		this.entities.clear();
 
@@ -154,6 +163,8 @@ public abstract class AbstractGenericCrudListPresenter extends
 	protected abstract <K> List<CrudEntity<K>> findEntities();
 
 	protected abstract void customGo();
+
+	protected abstract void onClose();
 
 	private void addActions(final CrudActionExtension<?> extension) {
 		for (final CrudAction action : extension.getActions()) {

@@ -41,13 +41,10 @@ public class GenericCrudListPresenter extends AbstractGenericCrudListPresenter {
 
 	@Override
 	protected void customGo() {
-		this.getView().getCloseHander().setCloseHandler(new CloseHandler() {
-
-			@Override
-			public void onClose() {
-				getConversation().end();
-			}
-		});
 	}
-	
+
+	@Override
+	protected void onClose() {
+		getConversation().end();
+	}
 }

@@ -52,7 +52,9 @@ public class GenericCrudListPresenterByParent extends
 
 	@Override
 	protected void customGo() {
-		// TODO Auto-generated method stub
-		
+	}
+
+	@Override
+	protected void onClose() {
 	}
 }
