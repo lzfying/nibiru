@@ -9,7 +9,6 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudEntity;
 import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
 import ar.com.oxen.nibiru.security.api.AuthorizationService;
-import ar.com.oxen.nibiru.ui.api.mvp.CloseHandler;
 
 public class GenericCrudListPresenter extends AbstractGenericCrudListPresenter {
 
