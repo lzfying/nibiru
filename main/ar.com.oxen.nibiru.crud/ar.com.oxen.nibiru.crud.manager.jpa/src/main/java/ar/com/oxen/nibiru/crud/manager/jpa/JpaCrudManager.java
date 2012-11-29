@@ -14,7 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 import org.mvel2.MVEL;
@@ -38,7 +37,7 @@ import ar.com.oxen.nibiru.security.api.AuthorizationService;
 
 public class JpaCrudManager<T> implements CrudManager<T>,
 		CrudActionExtension<T> {
-	@PersistenceContext(type = PersistenceContextType.EXTENDED)
+	@PersistenceContext
 	private EntityManager entityManager;
 	private Class<T> persistentClass;
 	private WrapperFactory wrapperFactory;
@@ -165,8 +164,7 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 
 	@Override
 	public CrudEntity<T> findById(Object id) {
-		T bean = this
-				.refresh(this.entityManager.find(this.persistentClass, id));
+		T bean = this.entityManager.find(this.persistentClass, id);
 		if (bean != null) {
 			return this.beanToCrudEntity(bean);
 		} else {
@@ -193,7 +191,7 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 
 		Query query = this.entityManager.createQuery(sb.toString());
 		query.setParameter("field", value);
-		return this.beansToCrudEntities(this.refresh(query.getResultList()));
+		return this.beansToCrudEntities(query.getResultList());
 	}
 
 	@Override
@@ -257,7 +255,7 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 		}
 
 		Query query = this.entityManager.createQuery(sb.toString());
-		return this.refresh(query.getResultList());
+		return query.getResultList();
 	}
 
 	private String computeFilter() {
@@ -274,32 +272,6 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 				return computedFilter.toString();
 			}
 		} else {
-			return null;
-		}
-	}
-
-	// TODO: estos dos metodos es un workaround feo, pero el cacheo
-	private <K> List<K> refresh(List<K> beans) {
-		List<K> refreshedList = new ArrayList<K>(beans.size());
-		for (K bean : beans) {
-			K refreshedBean = this.refresh(bean);
-			if (refreshedBean != null) {
-				refreshedList.add(refreshedBean);
-			}
-		}
-		return refreshedList;
-	}
-
-	private <K> K refresh(K bean) {
-		try {
-			this.entityManager.refresh(bean);
-			return bean;
-		} catch (IllegalArgumentException e) {
-			/*
-			 * entityManager.refresh throws this exception if a previously
-			 * deleted entity is intended to be read. Since this is equivalent
-			 * to not finding the entity, null is returned.
-			 */
 			return null;
 		}
 	}
