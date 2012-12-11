@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Spring transaction
 Bundle-SymbolicName: ar.com.oxen.nibiru.transaction.spring
-Bundle-Version: 0.3.0
+Bundle-Version: 0.4.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: javax.persistence;version="1.0.0",
  org.springframework.orm.jpa;version="3.0.6.RELEASE",

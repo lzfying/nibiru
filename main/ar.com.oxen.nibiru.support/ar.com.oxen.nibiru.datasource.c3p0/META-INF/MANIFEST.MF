@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: DBCP datasourcce implementation
 Bundle-SymbolicName: ar.com.oxen.nibiru.datasource.c3p0
-Bundle-Version: 0.3.0
+Bundle-Version: 0.4.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: com.mchange.v2.c3p0,
  javax.sql,

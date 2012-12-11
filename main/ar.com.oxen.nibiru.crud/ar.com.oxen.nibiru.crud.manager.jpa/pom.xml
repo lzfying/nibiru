@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>ar.com.oxen.nibiru.crud</artifactId>
 		<groupId>ar.com.oxen.nibiru</groupId>
-		<version>0.3</version>
+		<version>0.4-SNAPSHOT</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru.crud</groupId>
 	<artifactId>ar.com.oxen.nibiru.crud.manager.jpa</artifactId>

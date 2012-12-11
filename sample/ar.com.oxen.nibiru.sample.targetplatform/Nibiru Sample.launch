@@ -10,7 +10,7 @@
 <booleanAttribute key="default" value="true"/>
 <booleanAttribute key="default_auto_start" value="true"/>
 <intAttribute key="default_start_level" value="4"/>
-<stringAttribute key="deselected_workspace_plugins" value="ar.com.oxen.nibiru.mail.api,ar.com.oxen.nibiru.mail.javamail,ar.com.oxen.nibiru.mail.javamail.service,ar.com.oxen.nibiru.sample.targetplatform,ar.com.oxen.nibiru.security.autologin"/>
+<stringAttribute key="deselected_workspace_plugins" value="ar.com.oxen.nibiru.sample.targetplatform,ar.com.oxen.nibiru.security.autologin"/>
 <booleanAttribute key="includeOptional" value="false"/>
 <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
 <listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>

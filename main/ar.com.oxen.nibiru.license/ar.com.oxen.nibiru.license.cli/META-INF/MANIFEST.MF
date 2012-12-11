@@ -3,7 +3,7 @@ Main-Class: ar.com.oxen.nibiru.license.cli.Authorizer
 Bundle-ManifestVersion: 2
 Bundle-Name: Command-line license utility
 Bundle-SymbolicName: ar.com.oxen.nibiru.license.cli
-Bundle-Version: 0.3.0
+Bundle-Version: 0.4.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: ar.com.oxen.commons.converter.impl,
  ar.com.oxen.commons.license.api,

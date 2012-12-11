@@ -5,7 +5,7 @@
   <parent>
     <groupId>ar.com.oxen.nibiru</groupId>
     <artifactId>ar.com.oxen.nibiru.security</artifactId>
-    <version>0.3</version>
+    <version>0.4-SNAPSHOT</version>
   </parent>
   <groupId>ar.com.oxen.nibiru.security</groupId>
   <artifactId>ar.com.oxen.nibiru.security.manager.jpa.service</artifactId>

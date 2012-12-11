@@ -34,6 +34,10 @@ public class Student {
 	@Show(order = 10)
 	private String name;
 
+	@Column
+	@Show(order = 15, inList=true)
+	private Boolean active;
+
 	@ManyToMany(mappedBy = "students")
 	@Show(order = 30, inList = false)
 	@Widget(type = WidgetType.MULTISELECT, tab = "courses")
@@ -45,6 +49,15 @@ public class Student {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 	public String getName() {
