@@ -28,9 +28,9 @@ public class ReportCrudActionExtension extends
 	public List<CrudAction> getEntityActions(CrudEntity<Report> entity) {
 		List<CrudAction> actions = new ArrayList<CrudAction>(2);
 		actions.add(new SimpleCrudAction(OPEN_REPORT, true, false, true, false,
-				null));
+				false, null));
 		actions.add(new SimpleCrudAction(RUN_REPORT, true, true, false, true,
-				null));
+				false, null));
 		return actions;
 	}
 

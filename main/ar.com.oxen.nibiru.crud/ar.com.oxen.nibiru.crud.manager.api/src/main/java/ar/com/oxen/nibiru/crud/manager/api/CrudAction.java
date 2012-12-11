@@ -52,5 +52,12 @@ public interface CrudAction {
 	 */
 	boolean isVisibleInForm();
 	
+	/**
+	 * Indicates if the action modifies the entity.
+	 * 
+	 * @return True if entity is modified
+	 */
+	boolean modifiesEntity();
+	
 	String[] getAllowedRoles();
 }

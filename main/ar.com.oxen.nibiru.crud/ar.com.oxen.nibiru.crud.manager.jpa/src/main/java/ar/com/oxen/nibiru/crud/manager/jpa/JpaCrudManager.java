@@ -212,10 +212,14 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 			crudActions = new ArrayList<CrudAction>(actions.value().length);
 			for (Action action : actions.value()) {
 				if (action.requiresEntity() == requiresEntity) {
+					boolean modifiesEntity = action.name().equals(
+							CrudAction.UPDATE)
+							|| action.name().equals(CrudAction.DELETE);
+					
 					crudActions.add(new SimpleCrudAction(action.name(), action
 							.requiresEntity(), action.requiresConfirmation(),
-							action.showInList(), action.showInForm(), action
-									.allowedRoles()));
+							action.showInList(), modifiesEntity, action
+									.showInForm(), action.allowedRoles()));
 				}
 			}
 		} else {

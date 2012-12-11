@@ -33,7 +33,7 @@ public class ManageChildrenCrudActionExtension<T> extends
 
 		this.actions = new ArrayList<CrudAction>(1);
 		this.actions.add(new SimpleCrudAction(this.actionName, true, false,
-				true, false, null));
+				true, false, false, null));
 	}
 
 	@Override

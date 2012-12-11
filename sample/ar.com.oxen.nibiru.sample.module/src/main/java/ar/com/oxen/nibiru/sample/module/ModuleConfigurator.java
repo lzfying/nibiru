@@ -64,7 +64,7 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 							String first = name.substring(0, 1);
 							if (first.equals(first.toLowerCase())) {
 								actions.add(new SimpleCrudAction("capitalize",
-										true, false, true, true, null));
+										true, false, true, true, true, null));
 							}
 						}
 

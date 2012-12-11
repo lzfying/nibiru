@@ -66,7 +66,8 @@ public abstract class AbstractGenericCrudPresenter<V extends View, T> extends
 		 * If the returned entity is the same of original entity, it is still
 		 * being modified.
 		 */
-		if (entity != null && !entity.equals(returnedEntity)) {
+		if (action.modifiesEntity() && entity != null
+				&& !entity.equals(returnedEntity)) {
 			this.getEventBus().fireEvent(
 					new ModifiedCrudEntityEvent(entity.getId()),
 					this.crudManager.getEntityTypeName());
