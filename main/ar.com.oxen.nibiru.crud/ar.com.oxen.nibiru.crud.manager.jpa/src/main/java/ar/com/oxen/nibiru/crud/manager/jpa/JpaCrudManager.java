@@ -195,32 +195,50 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 	}
 
 	@Override
-	public List<CrudAction> getActions() {
+	public List<CrudAction> getGlobalActions() {
+		return this.buildActionList(false);
+	}
+
+	@Override
+	public List<CrudAction> getEntityActions(CrudEntity<T> entity) {
+		return this.buildActionList(true);
+	}
+
+	private List<CrudAction> buildActionList(boolean requiresEntity) {
 		Actions actions = this.persistentClass.getAnnotation(Actions.class);
 		List<CrudAction> crudActions;
 
 		if (actions != null) {
 			crudActions = new ArrayList<CrudAction>(actions.value().length);
 			for (Action action : actions.value()) {
-				crudActions.add(new SimpleCrudAction(action.name(), action
-						.requiresEntity(), action.requiresConfirmation(),
-						action.showInList(), action.showInForm(), action
-								.allowedRoles()));
+				if (action.requiresEntity() == requiresEntity) {
+					crudActions.add(new SimpleCrudAction(action.name(), action
+							.requiresEntity(), action.requiresConfirmation(),
+							action.showInList(), action.showInForm(), action
+									.allowedRoles()));
+				}
 			}
 		} else {
 			crudActions = new ArrayList<CrudAction>(0);
 		}
 
 		return crudActions;
-	}
+	}	
 
 	@Override
-	public CrudEntity<T> performAction(CrudAction action, CrudEntity<T> entity) {
+	public CrudEntity<T> performGlobalAction(CrudAction action) {
 		if (CrudAction.NEW.equals(action.getName())) {
 			return new JpaCrudEntity<T>(
 					this.wrapperFactory.wrapNewBean(this.persistentClass),
 					this.entityManager, this.pkName, this.getFormFields());
-		} else if (CrudAction.EDIT.equals(action.getName())) {
+		} else {
+			throw new IllegalArgumentException("Invalid action: " + action);
+		}
+	}
+	
+	@Override
+	public CrudEntity<T> performEntityAction(CrudAction action, CrudEntity<T> entity) {
+		if (CrudAction.EDIT.equals(action.getName())) {
 			return entity;
 		} else if (CrudAction.UPDATE.equals(action.getName())) {
 			this.entityManager.merge(entity.getEntity());

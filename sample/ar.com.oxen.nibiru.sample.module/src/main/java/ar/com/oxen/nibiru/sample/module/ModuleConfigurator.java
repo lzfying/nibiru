@@ -1,8 +1,15 @@
 package ar.com.oxen.nibiru.sample.module;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ar.com.oxen.nibiru.crud.manager.api.CrudAction;
 import ar.com.oxen.nibiru.crud.manager.api.CrudActionExtension;
+import ar.com.oxen.nibiru.crud.manager.api.CrudEntity;
 import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
+import ar.com.oxen.nibiru.crud.utils.AbstractCrudActionExtension;
 import ar.com.oxen.nibiru.crud.utils.AbstractCrudModuleConfigurator;
+import ar.com.oxen.nibiru.crud.utils.SimpleCrudAction;
 import ar.com.oxen.nibiru.report.api.Report;
 import ar.com.oxen.nibiru.report.birt.BirtReport;
 import ar.com.oxen.nibiru.sample.domain.Course;
@@ -38,9 +45,43 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 		this.addChildCrudWithMenu("editCourses", this.subjectCrudManager,
 				"subject", this.courseCrudManager,
 				this.courseCrudActionExtension);
-
+		
 		this.addCrudWithMenu("sample.crud.student", MENU_EXTENSION,
 				this.studentCrudManager, this.studentCrudActionExtension);
+
+		// per-entity action example
+		this.registerActions(this.studentCrudManager,
+				new AbstractCrudActionExtension<Student>(null) {
+
+					@Override
+					public List<CrudAction> getEntityActions(
+							CrudEntity<Student> entity) {
+						List<CrudAction> actions = new ArrayList<CrudAction>(1);
+
+						String name = entity.getEntity().getName();
+
+						if (name.length() > 0) {
+							String first = name.substring(0, 1);
+							if (first.equals(first.toLowerCase())) {
+								actions.add(new SimpleCrudAction("capitalize",
+										true, false, true, true, null));
+							}
+						}
+
+						return actions;
+					}
+
+					@Override
+					public CrudEntity<?> performEntityAction(CrudAction action,
+							CrudEntity<Student> entity) {
+						Student student = entity.getEntity();
+						student.setName(student.getName().substring(0, 1)
+								.toUpperCase()
+								+ student.getName().substring(1));
+						return entity;
+					}
+
+				});
 
 		this.registerExtension(
 				new RegexpValidator("^Mat.*", "subjectBeginning"),

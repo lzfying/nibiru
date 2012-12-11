@@ -21,25 +21,25 @@ public class GenericCrudPresenterFactory implements CrudPresenterFactory {
 	private AuthorizationService authorizationService;
 
 	@Override
-	public Presenter<CrudListView> buildListPresenter(
-			CrudManager<?> crudManager) {
-		return new GenericCrudListPresenter(crudManager, this.eventBus, 
+	public <T> Presenter<CrudListView> buildListPresenter(
+			CrudManager<T> crudManager) {
+		return new GenericCrudListPresenter<T>(crudManager, this.eventBus, 
 				this.conversationFactory.buildConversation(),
 				this.extensionPointManager, authorizationService);
 	}
 
 	@Override
-	public Presenter<CrudListView> buildListPresenter(
-			CrudManager<?> crudManager, String parentField, Object parentValue) {
-		return new GenericCrudListPresenterByParent(crudManager, this.eventBus,
+	public <T> Presenter<CrudListView> buildListPresenter(
+			CrudManager<T> crudManager, String parentField, Object parentValue) {
+		return new GenericCrudListPresenterByParent<T>(crudManager, this.eventBus,
 				this.conversationFactory.buildConversation(),
 				this.extensionPointManager, parentField, parentValue, authorizationService);
 	}
 
 	@Override
-	public Presenter<CrudFormView> buildFormPresenter(
-			CrudManager<?> crudManager, EditCrudEntityEvent event) {
-		return new GenericCrudFormPresenter(crudManager, this.eventBus, 
+	public <T> Presenter<CrudFormView> buildFormPresenter(
+			CrudManager<T> crudManager, EditCrudEntityEvent<T> event) {
+		return new GenericCrudFormPresenter<T>(crudManager, this.eventBus, 
 				event.getConversation(), event.getCrudEntity(),
 				this.extensionPointManager, authorizationService);
 	}

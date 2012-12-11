@@ -4,16 +4,31 @@ import org.vaadin.peter.contextmenu.ContextMenu;
 import org.vaadin.peter.contextmenu.ContextMenu.ClickEvent;
 import org.vaadin.peter.contextmenu.ContextMenu.ContextMenuItem;
 
+import com.vaadin.ui.Window;
+
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
-import ar.com.oxen.nibiru.ui.api.view.HasMenuItems;
 import ar.com.oxen.nibiru.ui.api.view.MenuItem;
 
-public class ContextMenuAdapter implements HasMenuItems {
+public class ContextMenuAdapter implements
+		ar.com.oxen.nibiru.ui.api.view.ContextMenu {
 	private ContextMenu contextMenu;
+	private static ThreadLocal<Integer> lastX = new ThreadLocal<Integer>();
+	private static ThreadLocal<Integer> lastY = new ThreadLocal<Integer>();
 
-	public ContextMenuAdapter(ContextMenu contextMenu) {
+	public static void setLastCoordinates(int x, int y) {
+		lastX.set(x);
+		lastY.set(y);
+	}
+
+	public ContextMenuAdapter(ContextMenu contextMenu, Window mainWindow) {
 		super();
 		this.contextMenu = contextMenu;
+		mainWindow.addComponent(contextMenu);
+	}
+
+	@Override
+	public void show() {
+		this.contextMenu.show(lastX.get(), lastY.get());
 	}
 
 	@Override

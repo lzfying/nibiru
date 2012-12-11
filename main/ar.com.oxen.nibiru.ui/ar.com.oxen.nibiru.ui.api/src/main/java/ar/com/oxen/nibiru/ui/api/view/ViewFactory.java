@@ -160,4 +160,11 @@ public interface ViewFactory {
 	 * @return The embedded
 	 */
 	Embedded buildEmbedded();
+
+	/**
+	 * Builds a contextual menu.
+	 * 
+	 * @return The context menu.
+	 */
+	ContextMenu buildContextMenu();
 }

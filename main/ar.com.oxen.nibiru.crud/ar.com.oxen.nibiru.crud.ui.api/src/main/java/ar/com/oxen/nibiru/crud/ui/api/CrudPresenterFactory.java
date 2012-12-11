@@ -17,7 +17,7 @@ public interface CrudPresenterFactory {
 	 *            The CRUD manager
 	 * @return The presenter
 	 */
-	Presenter<CrudListView> buildListPresenter(CrudManager<?> crudManager);
+	<T> Presenter<CrudListView> buildListPresenter(CrudManager<T> crudManager);
 
 	/**
 	 * Builds a presenter for CRUD list which is filtered by a parent value.
@@ -30,7 +30,7 @@ public interface CrudPresenterFactory {
 	 *            The parent value.
 	 * @return The presenter
 	 */
-	Presenter<CrudListView> buildListPresenter(CrudManager<?> crudManager,
+	<T> Presenter<CrudListView> buildListPresenter(CrudManager<T> crudManager,
 			String parentField, Object parentValue);
 
 	/**
@@ -40,6 +40,6 @@ public interface CrudPresenterFactory {
 	 *            The CRUD manager
 	 * @return The presenter
 	 */
-	Presenter<CrudFormView> buildFormPresenter(CrudManager<?> crudManager,
-			EditCrudEntityEvent event);
+	<T> Presenter<CrudFormView> buildFormPresenter(CrudManager<T> crudManager,
+			EditCrudEntityEvent<T> event);
 }
