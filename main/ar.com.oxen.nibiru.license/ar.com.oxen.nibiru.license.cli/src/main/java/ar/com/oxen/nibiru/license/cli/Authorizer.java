@@ -41,11 +41,20 @@ public class Authorizer {
 
 		Date expirationDate = null;
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
-		while (expirationDate == null) {
+		boolean dateOk = false;
+		while (!dateOk) {
 			try {
-				expirationDate = df.parse(ask("Expiration date",
-						df.format(licenseInfo.getExpirationDate())));
+				String dateStr = ask(
+						"Expiration date",
+						licenseInfo.getExpirationDate() != null ? df
+								.format(licenseInfo.getExpirationDate())
+								: "");
+				if (dateStr != null && !dateStr.trim().equals("")) {
+					expirationDate = df.parse(dateStr);
+				}
+				dateOk = true;
 			} catch (ParseException e) {
+				dateOk = false;
 			}
 		}
 
@@ -64,7 +73,7 @@ public class Authorizer {
 	public static void main(String[] args) {
 		if (args.length == 1 && args[0].equals("-?")) {
 			System.out
-					.println("Format: authorize [alias=key alias] [password=key passowrd] [request=license info request string]}");
+					.println("Format: authorize [alias=key alias] [password=key passowrd] [keystorePassword=keystore password] [request=license info request string]}");
 			System.exit(0);
 		}
 
@@ -72,8 +81,11 @@ public class Authorizer {
 
 		String alias = ask("Key alias", "alias", argMap);
 		String password = ask("Key password", "password", argMap);
+		String keystorePassword = ask("Keystore password", "keystorePassword",
+				argMap);
 
-		Guice.createInjector(new LicenseModule(alias, password))
+		Guice.createInjector(
+				new LicenseModule(alias, password, keystorePassword))
 				.getInstance(Authorizer.class).authorize(argMap);
 	}
 

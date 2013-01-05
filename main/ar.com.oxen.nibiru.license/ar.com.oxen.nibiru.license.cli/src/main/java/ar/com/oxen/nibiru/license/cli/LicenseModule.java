@@ -22,11 +22,13 @@ import com.google.inject.TypeLiteral;
 public class LicenseModule extends AbstractModule {
 	private String key;
 	private String password;
+	private String keystorePassword;
 
-	public LicenseModule(String key, String password) {
+	public LicenseModule(String key, String password, String keystorePassword) {
 		super();
 		this.key = key;
 		this.password = password;
+		this.keystorePassword = keystorePassword;
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class LicenseModule extends AbstractModule {
                         new DefaultSignatureProvider("DSA"));
         
         /* Public an private key configuration */
-        KeyStoreProvider ksp = new DefaultKeyStoreProvider(null);
+        KeyStoreProvider ksp = new DefaultKeyStoreProvider(this.keystorePassword);
         bind(PrivateKeyProvider.class).toInstance(
                         new KeyStorePrivateKeyProvider(this.key, this.password, ksp));
         
