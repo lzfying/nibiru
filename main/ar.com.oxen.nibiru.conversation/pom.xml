@@ -18,6 +18,7 @@
 	<modules>
 		<module>ar.com.oxen.nibiru.conversation.api</module>
 		<module>ar.com.oxen.nibiru.conversation.generic</module>
-		<module>ar.com.oxen.nibiru.conversation.generic.service</module>
+		<module>ar.com.oxen.nibiru.conversation.generic.blueprint</module>
+		<module>ar.com.oxen.nibiru.conversation.generic.spring</module>
 	</modules>
 </project>
