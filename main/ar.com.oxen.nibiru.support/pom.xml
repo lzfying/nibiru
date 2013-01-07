@@ -17,8 +17,10 @@
 	<modules>
 		<module>ar.com.oxen.nibiru.antlr.fragment</module>
 		<module>ar.com.oxen.nibiru.commons</module>
-        <module>ar.com.oxen.nibiru.datasource.c3p0</module>
+        <module>ar.com.oxen.nibiru.datasource.c3p0.aries</module>
+        <module>ar.com.oxen.nibiru.datasource.c3p0.spring</module>
 		<module>ar.com.oxen.nibiru.datasource.dbcp.aries</module>
+		<module>ar.com.oxen.nibiru.datasource.dbcp.spring</module>
 		<module>ar.com.oxen.nibiru.jpa.spring</module>
 		<module>ar.com.oxen.nibiru.transaction.spring</module>
 		<module>ar.com.oxen.nibiru.module.utils</module>

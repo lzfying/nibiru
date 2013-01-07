@@ -9,14 +9,19 @@
 		<version>0.4-SNAPSHOT</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru.support</groupId>
-	<artifactId>ar.com.oxen.nibiru.datasource.dbcp.aries</artifactId>
-	<name>ar.com.oxen.nibiru.datasource.dbcp.aries</name>
+	<artifactId>ar.com.oxen.nibiru.datasource.dbcp.spring</artifactId>
+	<name>ar.com.oxen.nibiru.datasource.dbcp.spring</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>com.springsource.org.apache.commons.dbcp</artifactId>
 			<version>1.2.2.osgi</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.beans</artifactId>
+			<version>${spring-version}</version>
 		</dependency>
 	</dependencies>
 	<properties>
