@@ -4,5 +4,5 @@ Bundle-Name: Sample datasource configuration framgent
 Bundle-SymbolicName: ar.com.oxen.nibiru.sample.datasource.fragment
 Bundle-Version: 0.4.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Fragment-Host: ar.com.oxen.nibiru.datasource.dbcp;bundle-version="0.1.0"
+Fragment-Host: ar.com.oxen.nibiru.datasource.dbcp.aries;bundle-version="0.1.0"
 Import-Package: org.h2;version="1.0.71"
