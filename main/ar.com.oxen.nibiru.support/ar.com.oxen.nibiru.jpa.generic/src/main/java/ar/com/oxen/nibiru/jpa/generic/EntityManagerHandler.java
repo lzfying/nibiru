@@ -1,4 +1,4 @@
-package ar.com.oxen.nibiru.jpa.spring;
+package ar.com.oxen.nibiru.jpa.generic;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

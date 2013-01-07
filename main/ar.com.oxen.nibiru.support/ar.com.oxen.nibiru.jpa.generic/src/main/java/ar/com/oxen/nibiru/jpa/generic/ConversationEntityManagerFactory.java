@@ -1,4 +1,4 @@
-package ar.com.oxen.nibiru.jpa.spring;
+package ar.com.oxen.nibiru.jpa.generic;
 
 import java.util.Map;
 
@@ -9,7 +9,6 @@ import ar.com.oxen.nibiru.conversation.api.Conversation;
 import ar.com.oxen.nibiru.conversation.api.ConversationAccessor;
 import ar.com.oxen.nibiru.conversation.api.ConversationTracker;
 
-// TODO: esta clase es generica, no depende de Spring, podria ir en un modulo separado
 // TODO: No se si es correcto lo que hace esta clase, crea un proxy que no se cierra y lo cierra solo al cerrar la conversacion
 public class ConversationEntityManagerFactory implements EntityManagerFactory {
 	private EntityManagerFactory decorated;

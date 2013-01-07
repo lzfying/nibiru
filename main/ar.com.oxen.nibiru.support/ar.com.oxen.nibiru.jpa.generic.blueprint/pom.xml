@@ -9,29 +9,14 @@
 		<version>0.4-SNAPSHOT</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru.support</groupId>
-	<artifactId>ar.com.oxen.nibiru.jpa.spring</artifactId>
-	<name>ar.com.oxen.nibiru.jpa.spring</name>
+	<artifactId>ar.com.oxen.nibiru.jpa.generic.blueprint</artifactId>
+	<name>ar.com.oxen.nibiru.jpa.generic.blueprint</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
-			<groupId>ar.com.oxen.nibiru.session</groupId>
-			<artifactId>ar.com.oxen.nibiru.session.api</artifactId>
+			<groupId>ar.com.oxen.nibiru.support</groupId>
+			<artifactId>ar.com.oxen.nibiru.jpa.generic</artifactId>
 			<version>${nibiru-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ar.com.oxen.nibiru.conversation</groupId>
-			<artifactId>ar.com.oxen.nibiru.conversation.api</artifactId>
-			<version>${nibiru-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>com.springsource.javax.persistence</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.transaction</groupId>
-			<artifactId>com.springsource.javax.transaction</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>

@@ -1,7 +1,4 @@
-/**
- * 
- */
-package ar.com.oxen.nibiru.jpa.spring;
+package ar.com.oxen.nibiru.jpa.generic;
 
 import javax.persistence.EntityManager;
 
