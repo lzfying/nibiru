@@ -9,8 +9,8 @@
 		<version>0.4-SNAPSHOT</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru.license</groupId>
-	<artifactId>ar.com.oxen.nibiru.license.store.jpa.service</artifactId>
-	<name>ar.com.oxen.nibiru.license.store.jpa.service</name>
+	<artifactId>ar.com.oxen.nibiru.license.store.jpa.blueprint</artifactId>
+	<name>ar.com.oxen.nibiru.license.store.jpa.blueprint</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,6 +21,7 @@
 			<artifactId>ar.com.oxen.nibiru.license.store.jpa</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>org.springframework.orm</artifactId>
@@ -41,5 +42,6 @@
 			<artifactId>com.springsource.org.aopalliance</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		 -->
 	</dependencies>
 </project>

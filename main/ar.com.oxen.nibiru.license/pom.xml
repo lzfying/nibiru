@@ -19,6 +19,6 @@
     <module>ar.com.oxen.nibiru.license.module</module>
     <module>ar.com.oxen.nibiru.license.store.api</module>
     <module>ar.com.oxen.nibiru.license.store.jpa</module>
-    <module>ar.com.oxen.nibiru.license.store.jpa.service</module>
+    <module>ar.com.oxen.nibiru.license.store.jpa.blueprint</module>
   </modules>
 </project>

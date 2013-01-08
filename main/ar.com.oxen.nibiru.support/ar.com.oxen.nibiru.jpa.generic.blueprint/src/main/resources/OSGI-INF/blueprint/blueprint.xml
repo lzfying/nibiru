@@ -14,13 +14,20 @@
 
 	<bean id="entityManagerFactory"
 		class="ar.com.oxen.nibiru.jpa.generic.ConversationEntityManagerFactory">
-		<property name="decorated">
-			<bean
-				class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-				<property name="dataSource" ref="dataSource" />
-			</bean>
-		</property>
+		<property name="decorated" ref="springEntityManagerFactory" />
 		<property name="conversationAccessor" ref="conversationAccessor" />
 	</bean>
 
+	<bean id="springEntityManagerFactory" class="javax.persistence.EntityManagerFactory"
+		factory-ref="springJpaFactory" factory-method="getObject" />
+
+	<bean id="springJpaFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+	</bean> 
+
+<!--
+	<bean id="springJpaFactory" class="prueba.Prueba">
+	</bean>
+	-->
 </blueprint>

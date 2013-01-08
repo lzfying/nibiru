@@ -4,10 +4,7 @@ Bundle-Name: JPA configuration fragment
 Bundle-SymbolicName: ar.com.oxen.nibiru.sample.jpa.fragment
 Bundle-Version: 0.4.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Fragment-Host: ar.com.oxen.nibiru.jpa.spring;bundle-version="0.1.0"
-Import-Package: ar.com.oxen.nibiru.license.store.jpa.domain,
- ar.com.oxen.nibiru.sample.domain,
- ar.com.oxen.nibiru.security.manager.jpa.domain,
- org.h2;version="1.0.71",
+Fragment-Host: ar.com.oxen.nibiru.jpa.generic.blueprint;bundle-version="0.4.0"
+Import-Package: org.h2;version="1.0.71",
  org.hibernate;version="3.3.2.GA",
  org.hibernate.ejb;version="3.4.0.GA-A"
