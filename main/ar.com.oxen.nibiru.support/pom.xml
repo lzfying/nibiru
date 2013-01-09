@@ -21,6 +21,7 @@
         <module>ar.com.oxen.nibiru.datasource.c3p0.spring</module>
 		<module>ar.com.oxen.nibiru.datasource.dbcp.aries</module>
 		<module>ar.com.oxen.nibiru.datasource.dbcp.spring</module>
+		<module>ar.com.oxen.nibiru.http.utils</module>
 		<module>ar.com.oxen.nibiru.jpa.generic</module>
 		<module>ar.com.oxen.nibiru.jpa.generic.blueprint</module>
 		<module>ar.com.oxen.nibiru.jpa.generic.spring</module>

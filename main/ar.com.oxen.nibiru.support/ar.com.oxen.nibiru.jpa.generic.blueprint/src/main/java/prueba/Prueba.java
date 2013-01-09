@@ -3,7 +3,7 @@ package prueba;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-
+// TODO: probablemente se vaya este modulo completo
 public class Prueba {
 	public EntityManagerFactory getObject() {
 //		ClassLoader cl =  Thread.currentThread().getContextClassLoader();

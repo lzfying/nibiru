@@ -19,7 +19,7 @@
 		<module>ar.com.oxen.nibiru.ui.api</module>
 		<module>ar.com.oxen.nibiru.ui.utils</module>
 		<module>ar.com.oxen.nibiru.ui.vaadin</module>
-		<module>ar.com.oxen.nibiru.ui.vaadin.service</module>
+		<module>ar.com.oxen.nibiru.ui.vaadin.blueprint</module>
 		<module>ar.com.oxen.nibiru.ui.vaadin.fragment</module>
 	</modules>
 </project>
