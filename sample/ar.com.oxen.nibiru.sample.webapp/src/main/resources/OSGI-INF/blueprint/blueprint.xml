@@ -19,12 +19,13 @@
 	<service ref="nibiruServlet" interface="javax.servlet.http.HttpServlet">
 		<service-properties>
 			<entry key="alias" value="/sample" />
+			<entry key="widgetset" value="ar.com.oxen.nibiru.ui.vaadin.NibiruWidgetset" />
 		</service-properties>
 	</service>
 
 	<service ref="nibiruServlet" interface="javax.servlet.http.HttpServlet">
 		<service-properties>
-			<entry key="alias" value="/sample/VAADIN" />
+			<entry key="alias" value="/VAADIN" />
 		</service-properties>
 	</service>
 

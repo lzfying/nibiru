@@ -15,7 +15,7 @@ public class NibiruApplicationServlet extends AbstractApplicationServlet {
 	private static final long serialVersionUID = -4897206489141799154L;
 
 	private ApplicationAccessor applicationAccessor;
-
+	
 	@Override
 	protected Application getNewApplication(HttpServletRequest request)
 			throws ServletException {

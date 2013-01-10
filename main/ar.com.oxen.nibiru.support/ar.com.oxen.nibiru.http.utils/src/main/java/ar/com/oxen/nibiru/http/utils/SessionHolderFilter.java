@@ -17,10 +17,9 @@ public class SessionHolderFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res,
 			FilterChain chain) throws IOException, ServletException {
-		HttpServletRequest httpRequest = (HttpServletRequest) req;
-		SessionHolder.setSession(httpRequest.getSession(true));
+		SessionHolder.setRequest((HttpServletRequest) req);
 		chain.doFilter(req, res);
-		SessionHolder.setSession(null);
+		SessionHolder.setRequest(null);
 	}
 
 	@Override

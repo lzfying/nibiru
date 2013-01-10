@@ -16,8 +16,8 @@
 	</properties>
 	<modules>
 		<module>ar.com.oxen.nibiru.session.api</module>
-		<module>ar.com.oxen.nibiru.session.spring.http</module>
+		<module>ar.com.oxen.nibiru.session.http</module>
+		<module>ar.com.oxen.nibiru.session.http.blueprint</module>
 		<module>ar.com.oxen.nibiru.session.spring.scope</module>
-	    <module>ar.com.oxen.nibiru.session.spring.http.service</module>
   </modules>
 </project>

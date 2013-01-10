@@ -1,3 +1,11 @@
+Pendientes:
+- El fragmento de ANTLR probablemente no sea necesario ahora si se va Hibernate
+- Por el tema de las configuraciones se van los fragmentos para tal fin… a lo mejor quedan los que sean necesarios para ver drivers de base de datos
+- Ver el tema de correr Karaf desde eclipse.
+- Ver el tema de crear features para que nibiru se instale solo
+
+
+--------------------------------
 
 Pasos para habilitar los servicios de JPA:
 
