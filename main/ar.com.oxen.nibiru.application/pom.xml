@@ -18,10 +18,10 @@
 	<modules>
 		<module>ar.com.oxen.nibiru.application.api</module>
 		<module>ar.com.oxen.nibiru.application.generic</module>
-		<module>ar.com.oxen.nibiru.application.generic.service</module>
+		<module>ar.com.oxen.nibiru.application.generic.blueprint</module>
 		<module>ar.com.oxen.nibiru.application.generic.presenter</module>
-		<module>ar.com.oxen.nibiru.application.generic.presenter.service</module>
+		<module>ar.com.oxen.nibiru.application.generic.presenter.blueprint</module>
 		<module>ar.com.oxen.nibiru.application.generic.view</module>
-		<module>ar.com.oxen.nibiru.application.generic.view.service</module>
+		<module>ar.com.oxen.nibiru.application.generic.view.blueprint</module>
 	</modules>
 </project>

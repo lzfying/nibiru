@@ -7,8 +7,6 @@ import ar.com.oxen.nibiru.application.api.ApplicationThemeChangeEvent;
 import ar.com.oxen.nibiru.i18n.api.LocaleHolder;
 
 import com.vaadin.Application;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Window;
 
 public class NibiruApplication extends Application {
 	/**
@@ -21,20 +19,18 @@ public class NibiruApplication extends Application {
 
 	@Override
 	public void init() {
-		setMainWindow(new Window("Matanga"));
-		getMainWindow().addComponent(new Button("click aqui"));
-//		this.localeHolder.setLocale(this.getLocale());
-//
-//		this.applicationThemeChangeEventHandler = new EventHandler<ApplicationThemeChangeEvent>() {
-//			@Override
-//			public void onEvent(ApplicationThemeChangeEvent event) {
-//				setTheme(event.getTheme());
-//			}
-//		};
-//		this.eventBus.addHandler(ApplicationThemeChangeEvent.class,
-//				this.applicationThemeChangeEventHandler);
-//
-//		this.eventBus.fireEvent(new ApplicationStartEvent());
+		this.localeHolder.setLocale(this.getLocale());
+
+		this.applicationThemeChangeEventHandler = new EventHandler<ApplicationThemeChangeEvent>() {
+			@Override
+			public void onEvent(ApplicationThemeChangeEvent event) {
+				setTheme(event.getTheme());
+			}
+		};
+		this.eventBus.addHandler(ApplicationThemeChangeEvent.class,
+				this.applicationThemeChangeEventHandler);
+
+		this.eventBus.fireEvent(new ApplicationStartEvent());
 	}
 
 	@Override

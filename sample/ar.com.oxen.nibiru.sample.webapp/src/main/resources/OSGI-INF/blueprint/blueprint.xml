@@ -10,11 +10,10 @@
 
 	<service interface="javax.servlet.Filter">
 		<service-properties>
-			<entry key="urlPatterns" value="/sample" />
+			<entry key="urlPatterns" value="/*" />
 		</service-properties>
 		<bean class="ar.com.oxen.nibiru.http.utils.SessionHolderFilter" />
 	</service>
-
 
 	<service ref="nibiruServlet" interface="javax.servlet.http.HttpServlet">
 		<service-properties>

@@ -11,20 +11,16 @@
 	<service ref="viewFactory"
 		interface="ar.com.oxen.nibiru.ui.api.view.ViewFactory" />
 
-		<!-- 
 	<reference id="eventBus"
 		interface="ar.com.oxen.commons.eventbus.api.EventBus" />
 
 	<reference id="localeHolder"
 		interface="ar.com.oxen.nibiru.i18n.api.LocaleHolder" />
-		 -->
 
 	<bean id="applicationAccessor"
 		class="ar.com.oxen.nibiru.ui.vaadin.application.SimpleApplicationAccessor">
-		<!-- 
 		<property name="eventBus" ref="eventBus" />
 		<property name="localeHolder" ref="localeHolder" />
-		 -->
 	</bean>
 
 	<bean id="viewFactory" class="ar.com.oxen.nibiru.ui.vaadin.view.VaadinViewFactory">

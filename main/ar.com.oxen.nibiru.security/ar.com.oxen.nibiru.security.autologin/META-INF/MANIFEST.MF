@@ -10,3 +10,4 @@ Import-Package: ar.com.oxen.commons.eventbus.api,
  ar.com.oxen.nibiru.module.utils,
  ar.com.oxen.nibiru.security.api,
  ar.com.oxen.nibiru.ui.api.mvp
+Export-Package: ar.com.oxen.nibiru.security.autologin
