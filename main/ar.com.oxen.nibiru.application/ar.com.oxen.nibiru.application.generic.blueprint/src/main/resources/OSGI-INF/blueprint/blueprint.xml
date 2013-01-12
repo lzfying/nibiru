@@ -5,26 +5,21 @@
 		http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
 	">
 
-<!-- 
-	<service ref="messageProvider"
-		interface="ar.com.oxen.nibiru.i18n.api.MessageProvider" />
-	 -->
+	<service ref="messageProvider" interface="ar.com.oxen.nibiru.i18n.api.MessageProvider" />
 
-	<reference id="eventBus"
-		interface="ar.com.oxen.commons.eventbus.api.EventBus" />
+	<reference id="eventBus" interface="ar.com.oxen.commons.eventbus.api.EventBus" />
 
-	<reference id="wrapperFactory"
-		interface="ar.com.oxen.commons.bean.api.WrapperFactory" />
+	<reference id="wrapperFactory" interface="ar.com.oxen.commons.bean.api.WrapperFactory" />
 
 	<reference id="extensionPointManager"
 		interface="ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager" />
 
 	<reference id="applicationViewFactory"
 		interface="ar.com.oxen.nibiru.application.api.ApplicationViewFactory" />
-		
+
 	<reference id="applicationPresenterFactory"
 		interface="ar.com.oxen.nibiru.application.api.ApplicationPresenterFactory" />
-		
+
 	<bean init-method="startup" destroy-method="shutdown"
 		class="ar.com.oxen.nibiru.application.generic.ModuleConfigurator">
 		<property name="eventBus" ref="eventBus" />
@@ -33,22 +28,15 @@
 		<property name="extensionPointManager" ref="extensionPointManager" />
 	</bean>
 
-<!-- 
-	<bean id="messageProvider" class="ar.com.oxen.nibiru.i18n.generic.ResourceBundleMessageProvider">
-		<property name="baseName" value="ar.com.oxen.nibiru.application.generic.messages"/>
+	<bean id="messageProvider"
+		class="ar.com.oxen.nibiru.i18n.generic.ResourceBundleMessageProvider">
+		<property name="baseName"
+			value="ar.com.oxen.nibiru.application.generic.messages" />
 		<property name="resourceClassLoader">
-			<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-				<property name="targetObject">
-					<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-						<property name="staticMethod" value="java.lang.Thread.currentThread"/>
-						<property name="singleton" value="false"/>
-					</bean>
-				</property>
-				<property name="targetMethod" value="getContextClassLoader"/>
-				<property name="singleton" value="false"/>
+			<bean class="ar.com.oxen.nibiru.osgi.utils.BundleDelegatingClassLoader">
+				<argument ref="blueprintBundle" />
 			</bean>
 		</property>
 	</bean>
-	 -->
-	 	
+
 </blueprint>

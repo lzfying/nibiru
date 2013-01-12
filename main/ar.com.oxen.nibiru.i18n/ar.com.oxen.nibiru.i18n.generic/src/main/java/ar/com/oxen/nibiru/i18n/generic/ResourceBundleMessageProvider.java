@@ -9,7 +9,6 @@ import ar.com.oxen.nibiru.i18n.api.MessageProvider;
 
 public class ResourceBundleMessageProvider implements MessageProvider {
 	private String baseName;
-
 	private ClassLoader resourceClassLoader;
 
 	@Override

@@ -27,6 +27,7 @@
 		<module>ar.com.oxen.nibiru.jpa.generic.spring</module>
 		<module>ar.com.oxen.nibiru.transaction.spring</module>
 		<module>ar.com.oxen.nibiru.module.utils</module>
+		<module>ar.com.oxen.nibiru.osgi.utils</module>
 		<module>ar.com.oxen.nibiru.targetplatform</module>
 		<module>ar.com.oxen.nibiru.standalone</module>
   </modules>
