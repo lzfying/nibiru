@@ -9,8 +9,8 @@
 		<version>0.4-SNAPSHOT</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru.crud</groupId>
-	<artifactId>ar.com.oxen.nibiru.crud.ui.generic.view.service</artifactId>
-	<name>ar.com.oxen.nibiru.crud.ui.generic.view.service</name>
+	<artifactId>ar.com.oxen.nibiru.crud.ui.generic.view.blueprint</artifactId>
+	<name>ar.com.oxen.nibiru.crud.ui.generic.view.blueprint</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

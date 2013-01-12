@@ -19,9 +19,9 @@
 		<module>ar.com.oxen.nibiru.crud.manager.api</module>
 		<module>ar.com.oxen.nibiru.crud.manager.jpa</module>
 		<module>ar.com.oxen.nibiru.crud.ui.generic.presenter</module>
-		<module>ar.com.oxen.nibiru.crud.ui.generic.presenter.service</module>
+		<module>ar.com.oxen.nibiru.crud.ui.generic.presenter.blueprint</module>
 		<module>ar.com.oxen.nibiru.crud.ui.generic.view</module>
-		<module>ar.com.oxen.nibiru.crud.ui.generic.view.service</module>
+		<module>ar.com.oxen.nibiru.crud.ui.generic.view.blueprint</module>
 		<module>ar.com.oxen.nibiru.crud.ui.api</module>
 		<module>ar.com.oxen.nibiru.crud.bean</module>
 		<module>ar.com.oxen.nibiru.crud.utils</module>
