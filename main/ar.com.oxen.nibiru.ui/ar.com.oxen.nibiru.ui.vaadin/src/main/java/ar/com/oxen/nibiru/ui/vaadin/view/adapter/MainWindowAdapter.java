@@ -54,7 +54,7 @@ public class MainWindowAdapter extends AbstractWindowAdapter implements
 
 	@Override
 	public void removeMenuItem(ar.com.oxen.nibiru.ui.api.view.MenuItem menuItem) {
-		this.removeMenuItem(menuItem);
+		this.mainMenu.removeMenuItem(menuItem);
 	}
 
 	@Override

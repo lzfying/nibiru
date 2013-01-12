@@ -36,13 +36,16 @@ public abstract class AbstractModuleConfigurator<VF, PF> {
 	 * Same as startup, but for shutdown.
 	 */
 	public void shutdown() {
+		/* Custom configuration shutdown for subclasses */
+		this.unconfigure();
+		
+		this.eventBus.unsubscribeAnnotatedObject(this);
+		
 		/* Remove all the extensions */
 		for (Object extension : this.registeredExtensions) {
 			this.extensionPointManager.unregisterExtension(extension);
 		}
 		this.registeredExtensions.clear();
-
-		this.unconfigure();
 	}
 
 	/**
