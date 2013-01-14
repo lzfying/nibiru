@@ -17,8 +17,8 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>ar.com.oxen.nibiru.crud</groupId>
-			<artifactId>ar.com.oxen.nibiru.crud.bean</artifactId>
+			<groupId>ar.com.oxen.nibiru.sample</groupId>
+			<artifactId>ar.com.oxen.nibiru.sample.domain</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>

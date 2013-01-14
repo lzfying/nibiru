@@ -17,6 +17,7 @@ Import-Package: ar.com.oxen.commons.bean.api,
  ar.com.oxen.nibiru.module.utils,
  ar.com.oxen.nibiru.report.api,
  ar.com.oxen.nibiru.report.birt,
+ ar.com.oxen.nibiru.sample.domain,
  ar.com.oxen.nibiru.security.api,
  ar.com.oxen.nibiru.ui.api.extension,
  ar.com.oxen.nibiru.ui.utils.extension,
@@ -32,4 +33,3 @@ Import-Package: ar.com.oxen.commons.bean.api,
  org.springframework.beans.factory.config;version="3.0.6.RELEASE",
  org.springframework.orm.jpa.support;version="3.0.6.RELEASE",
  org.springframework.transaction;version="3.0.6.RELEASE"
-Export-Package: ar.com.oxen.nibiru.sample.domain
