@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+	">
+
+	<service interface="ar.com.oxen.nibiru.i18n.api.MessageProvider"
+		ref="sampleMessageProvider" />
+
+	<reference id="extensionPointManager"
+		interface="ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager" />
+
+	<reference id="eventBus" interface="ar.com.oxen.commons.eventbus.api.EventBus" />
+
+	<reference id="crudViewFactory"
+		interface="ar.com.oxen.nibiru.crud.ui.api.CrudViewFactory" />
+
+	<reference id="crudPresenterFactory"
+		interface="ar.com.oxen.nibiru.crud.ui.api.CrudPresenterFactory" />
+
+	<reference id="entityManagerFactory" interface="javax.persistence.EntityManagerFactory" />
+
+<!-- 
+	<reference id="transactionManager"
+		interface="org.springframework.transaction.PlatformTransactionManager" />
+		 -->
+
+	<reference id="wrapperFactory" interface="ar.com.oxen.commons.bean.api.WrapperFactory" />
+
+	<reference id="authorizationService"
+		interface="ar.com.oxen.nibiru.security.api.AuthorizationService" />
+		
+	<bean id="sampleMessageProvider"
+		class="ar.com.oxen.nibiru.i18n.generic.ResourceBundleMessageProvider">
+		<property name="baseName" value="ar.com.oxen.nibiru.sample.ui.i18n.messages" />
+		<property name="resourceClassLoader">
+			<bean class="ar.com.oxen.nibiru.osgi.utils.BundleDelegatingClassLoader">
+				<argument ref="blueprintBundle" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean init-method="startup" destroy-method="shutdown"
+		class="ar.com.oxen.nibiru.sample.module.ModuleConfigurator">
+		<property name="extensionPointManager" ref="extensionPointManager" />
+		<property name="eventBus" ref="eventBus" />
+		<property name="viewFactory" ref="crudViewFactory" />
+		<property name="presenterFactory" ref="crudPresenterFactory" />
+<!-- 
+		<property name="subjectCrudManager" ref="subjectCrudManager" />
+		<property name="courseCrudManager" ref="courseCrudManager" />
+		<property name="studentCrudManager" ref="studentCrudManager" />
+
+		<property name="subjectCrudActionExtension" ref="subjectCrudManager" />
+		<property name="courseCrudActionExtension" ref="courseCrudManager" />
+		<property name="studentCrudActionExtension" ref="studentCrudManager" />
+		 -->
+	</bean>
+
+	<!-- CRUD managers -->
+	<!-- 
+	<bean id="subjectCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
+		<property name="persistentClass" value="ar.com.oxen.nibiru.sample.domain.Subject" />
+		<property name="wrapperFactory" ref="wrapperFactory" />
+	</bean>
+
+	<bean id="courseCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
+		<property name="persistentClass" value="ar.com.oxen.nibiru.sample.domain.Course" />
+		<property name="wrapperFactory" ref="wrapperFactory" />
+	</bean>
+
+	<bean id="studentCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
+		<property name="persistentClass" value="ar.com.oxen.nibiru.sample.domain.Student" />
+		<property name="wrapperFactory" ref="wrapperFactory" />
+		<property name="authorizationService" ref="authorizationService" />
+	</bean>
+		 -->
+
+	<!-- TX and JPA support -->
+	<!-- TODO: resolver esto
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+		 -->
+</blueprint>

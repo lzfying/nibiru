@@ -11,7 +11,6 @@ import ar.com.oxen.nibiru.crud.utils.AbstractCrudActionExtension;
 import ar.com.oxen.nibiru.crud.utils.AbstractCrudModuleConfigurator;
 import ar.com.oxen.nibiru.crud.utils.SimpleCrudAction;
 import ar.com.oxen.nibiru.report.api.Report;
-import ar.com.oxen.nibiru.report.birt.BirtReport;
 import ar.com.oxen.nibiru.sample.domain.Course;
 import ar.com.oxen.nibiru.sample.domain.Student;
 import ar.com.oxen.nibiru.sample.domain.Subject;
@@ -91,9 +90,10 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 				+ ".description", Validator.class);
 
 		// Prueba con reportes
-		registerExtension(new BirtReport(
-				"/ar/com/oxen/nibiru/sample/report/myReport.rptdesign"),
-				Report.EXTENSION_POINT_NAME, Report.class);
+		// TODO: corregir
+//		registerExtension(new BirtReport(
+//				"/ar/com/oxen/nibiru/sample/report/myReport.rptdesign"),
+//				Report.EXTENSION_POINT_NAME, Report.class);
 	}
 
 	public void setSubjectCrudManager(CrudManager<Subject> subjectCrudManager) {
