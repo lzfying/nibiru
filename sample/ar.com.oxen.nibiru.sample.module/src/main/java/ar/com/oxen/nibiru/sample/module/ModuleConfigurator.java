@@ -6,6 +6,7 @@ import java.util.List;
 import ar.com.oxen.nibiru.crud.manager.api.CrudAction;
 import ar.com.oxen.nibiru.crud.manager.api.CrudActionExtension;
 import ar.com.oxen.nibiru.crud.manager.api.CrudEntity;
+import ar.com.oxen.nibiru.crud.manager.api.CrudFactory;
 import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.crud.utils.AbstractCrudActionExtension;
 import ar.com.oxen.nibiru.crud.utils.AbstractCrudModuleConfigurator;
@@ -22,34 +23,43 @@ import ar.com.oxen.nibiru.validation.generic.RegexpValidator;
 
 public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 	private static final String MENU_EXTENSION = "ar.com.oxen.nibiru.menu.sample.crud";
+	
+	private CrudFactory crudFactory;
 
-	private CrudManager<Subject> subjectCrudManager;
-	private CrudActionExtension<Subject> subjectCrudActionExtension;
-
-	private CrudManager<Course> courseCrudManager;
-	private CrudActionExtension<Course> courseCrudActionExtension;
-
-	private CrudManager<Student> studentCrudManager;
-	private CrudActionExtension<Student> studentCrudActionExtension;
 
 	@Override
 	protected void configure() {
+		CrudManager<Subject> subjectCrudManager = this.crudFactory
+				.createCrudManager(Subject.class);
+		CrudActionExtension<Subject> subjectCrudActionExtension = this.crudFactory
+				.createDefaultCrudActionExtension(Subject.class);
+
+		CrudManager<Course> courseCrudManager = this.crudFactory
+				.createCrudManager(Course.class);
+		CrudActionExtension<Course> courseCrudActionExtension = this.crudFactory
+				.createDefaultCrudActionExtension(Course.class);
+
+		CrudManager<Student> studentCrudManager = this.crudFactory
+				.createCrudManager(Student.class);
+		CrudActionExtension<Student> studentCrudActionExtension = this.crudFactory
+				.createDefaultCrudActionExtension(Student.class);		
+		
 		this.registerExtension(new SimpleSubMenuExtension("sample.crud",
 				MENU_EXTENSION, 1), "ar.com.oxen.nibiru.menu",
 				SubMenuExtension.class);
 
 		this.addCrudWithMenu("sample.crud.subject", MENU_EXTENSION,
-				this.subjectCrudManager, this.subjectCrudActionExtension);
+				subjectCrudManager, subjectCrudActionExtension);
 
-		this.addChildCrudWithMenu("editCourses", this.subjectCrudManager,
-				"subject", this.courseCrudManager,
-				this.courseCrudActionExtension);
+		this.addChildCrudWithMenu("editCourses", subjectCrudManager,
+				"subject", courseCrudManager,
+				courseCrudActionExtension);
 		
 		this.addCrudWithMenu("sample.crud.student", MENU_EXTENSION,
-				this.studentCrudManager, this.studentCrudActionExtension);
+				studentCrudManager, studentCrudActionExtension);
 
 		// per-entity action example
-		this.registerActions(this.studentCrudManager,
+		this.registerActions(studentCrudManager,
 				new AbstractCrudActionExtension<Student>(null) {
 
 					@Override
@@ -96,30 +106,7 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 //				Report.EXTENSION_POINT_NAME, Report.class);
 	}
 
-	public void setSubjectCrudManager(CrudManager<Subject> subjectCrudManager) {
-		this.subjectCrudManager = subjectCrudManager;
-	}
-
-	public void setSubjectCrudActionExtension(
-			CrudActionExtension<Subject> subjectCrudActionExtension) {
-		this.subjectCrudActionExtension = subjectCrudActionExtension;
-	}
-
-	public void setCourseCrudManager(CrudManager<Course> courseCrudManager) {
-		this.courseCrudManager = courseCrudManager;
-	}
-
-	public void setCourseCrudActionExtension(
-			CrudActionExtension<Course> courseCrudActionExtension) {
-		this.courseCrudActionExtension = courseCrudActionExtension;
-	}
-
-	public void setStudentCrudManager(CrudManager<Student> studentCrudManager) {
-		this.studentCrudManager = studentCrudManager;
-	}
-
-	public void setStudentCrudActionExtension(
-			CrudActionExtension<Student> studentCrudActionExtension) {
-		this.studentCrudActionExtension = studentCrudActionExtension;
+	public void setCrudFactory(CrudFactory crudFactory) {
+		this.crudFactory = crudFactory;
 	}
 }

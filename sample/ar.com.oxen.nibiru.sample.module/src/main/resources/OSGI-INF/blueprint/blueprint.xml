@@ -47,35 +47,14 @@
 		<property name="eventBus" ref="eventBus" />
 		<property name="viewFactory" ref="crudViewFactory" />
 		<property name="presenterFactory" ref="crudPresenterFactory" />
-<!-- 
-		<property name="subjectCrudManager" ref="subjectCrudManager" />
-		<property name="courseCrudManager" ref="courseCrudManager" />
-		<property name="studentCrudManager" ref="studentCrudManager" />
-
-		<property name="subjectCrudActionExtension" ref="subjectCrudManager" />
-		<property name="courseCrudActionExtension" ref="courseCrudManager" />
-		<property name="studentCrudActionExtension" ref="studentCrudManager" />
-		 -->
+		
+		<property name="crudFactory" ref="crudFactory" />
 	</bean>
 
-	<!-- CRUD managers -->
-	<!-- 
-	<bean id="subjectCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
-		<property name="persistentClass" value="ar.com.oxen.nibiru.sample.domain.Subject" />
-		<property name="wrapperFactory" ref="wrapperFactory" />
-	</bean>
-
-	<bean id="courseCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
-		<property name="persistentClass" value="ar.com.oxen.nibiru.sample.domain.Course" />
-		<property name="wrapperFactory" ref="wrapperFactory" />
-	</bean>
-
-	<bean id="studentCrudManager" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudManager">
-		<property name="persistentClass" value="ar.com.oxen.nibiru.sample.domain.Student" />
+	<bean id="crudFactory" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudFactory">
 		<property name="wrapperFactory" ref="wrapperFactory" />
 		<property name="authorizationService" ref="authorizationService" />
 	</bean>
-		 -->
 
 	<!-- TX and JPA support -->
 	<!-- TODO: resolver esto
