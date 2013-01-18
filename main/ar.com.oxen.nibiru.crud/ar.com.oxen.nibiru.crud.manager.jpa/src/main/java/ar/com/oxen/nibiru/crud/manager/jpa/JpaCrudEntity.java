@@ -92,7 +92,8 @@ public class JpaCrudEntity<T> extends AbstractBeanCrudEntity<T> {
 
 	@SuppressWarnings("unchecked")
 	private <K> List<K> findByFilter(Class<?> type, String filter) {
-		Query query = this.entityManager.createQuery("from " + type.getName()
+		Query query = this.entityManager.createQuery("select o from "
+				+ type.getName() + " o"
 				+ (filter.equals("") ? "" : (" where " + filter)));
 
 		return query.getResultList();

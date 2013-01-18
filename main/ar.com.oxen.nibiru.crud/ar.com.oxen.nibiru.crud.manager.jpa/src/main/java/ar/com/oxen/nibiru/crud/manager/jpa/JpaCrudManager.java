@@ -73,9 +73,9 @@ public class JpaCrudManager<T> extends AbstractJpaCrudComponent<T> implements
 	public List<CrudEntity<T>> findByfield(String field, Object value) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("from ");
+		sb.append("select o from ");
 		sb.append(this.getPersistentClass().getName());
-		sb.append(" where ");
+		sb.append(" o where ");
 		sb.append(field);
 		sb.append(" = :field");
 
@@ -94,8 +94,9 @@ public class JpaCrudManager<T> extends AbstractJpaCrudComponent<T> implements
 	private <K> List<K> findAll(Class<?> type) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("from ");
+		sb.append("select o from ");
 		sb.append(type.getName());
+		sb.append(" o");
 
 		String computedFilter = this.computeFilter();
 		if (computedFilter != null) {

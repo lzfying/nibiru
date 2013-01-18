@@ -11,5 +11,6 @@ Import-Package: ar.com.oxen.nibiru.http.utils,
  com.vaadin,
  com.vaadin.service,
  javax.servlet;version="2.4.0",
- javax.servlet.http;version="2.4.0"
+ javax.servlet.http;version="2.4.0",
+ org.h2;version="1.0.71"
 Require-Bundle: com.vaadin;bundle-version="6.6.4"

@@ -69,7 +69,7 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 
 						String name = entity.getEntity().getName();
 
-						if (name.length() > 0) {
+						if (name != null && name.length() > 0) {
 							String first = name.substring(0, 1);
 							if (first.equals(first.toLowerCase())) {
 								actions.add(new SimpleCrudAction("capitalize",
