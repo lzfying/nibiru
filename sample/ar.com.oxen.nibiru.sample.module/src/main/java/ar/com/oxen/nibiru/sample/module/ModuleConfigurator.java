@@ -21,11 +21,14 @@ import ar.com.oxen.nibiru.ui.utils.extension.SimpleSubMenuExtension;
 import ar.com.oxen.nibiru.validation.api.Validator;
 import ar.com.oxen.nibiru.validation.generic.NotEmptyValidator;
 import ar.com.oxen.nibiru.validation.generic.RegexpValidator;
+import ar.com.oxen.nibiru.mail.api.MailMessage;
+import ar.com.oxen.nibiru.mail.api.MailService;
 
 public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 	private static final String MENU_EXTENSION = "ar.com.oxen.nibiru.menu.sample.crud";
 	
 	private CrudFactory crudFactory;
+	private MailService mailService;
 
 
 	@Override
@@ -92,6 +95,39 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 					}
 
 				});
+		
+		
+		// email example
+		this.registerActions(studentCrudManager,
+				new AbstractCrudActionExtension<Student>(null) {
+
+					@Override
+					public List<CrudAction> getEntityActions(
+							CrudEntity<Student> entity) {
+						List<CrudAction> actions = new ArrayList<CrudAction>(1);
+
+						String name = entity.getEntity().getName();
+
+						if (name != null && name.indexOf("@") >= 0) {
+							actions.add(new SimpleCrudAction("sendMail", true,
+									false, true, false, true, null));
+						}
+
+						return actions;
+					}
+
+					@Override
+					public CrudEntity<?> performEntityAction(CrudAction action,
+							CrudEntity<Student> entity) {
+						MailMessage message = new MailMessage("test@gmail.com",
+								"Greets to " + entity.getEntity().getName(),
+								"This is a test");
+						message.getTo().add(entity.getEntity().getName());
+						mailService.sendMail(message);
+						return null;
+					}
+
+				});
 
 		this.registerExtension(
 				new RegexpValidator("^Mat.*", "subjectBeginning"),
@@ -109,5 +145,9 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 
 	public void setCrudFactory(CrudFactory crudFactory) {
 		this.crudFactory = crudFactory;
+	}
+
+	public void setMailService(MailService mailService) {
+		this.mailService = mailService;
 	}
 }

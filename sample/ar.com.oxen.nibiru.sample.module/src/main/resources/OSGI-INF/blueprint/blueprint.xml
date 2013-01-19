@@ -33,6 +33,9 @@
 	<reference id="authorizationService"
 		interface="ar.com.oxen.nibiru.security.api.AuthorizationService" />
 
+	<reference id="mailService"
+		interface="ar.com.oxen.nibiru.mail.api.MailService" />
+
 	<bean id="sampleMessageProvider"
 		class="ar.com.oxen.nibiru.i18n.generic.ResourceBundleMessageProvider">
 		<property name="baseName" value="ar.com.oxen.nibiru.sample.ui.i18n.messages" />
@@ -49,8 +52,8 @@
 		<property name="eventBus" ref="eventBus" />
 		<property name="viewFactory" ref="crudViewFactory" />
 		<property name="presenterFactory" ref="crudPresenterFactory" />
-
 		<property name="crudFactory" ref="crudFactory" />
+		<property name="mailService" ref="mailService" />
 	</bean>
 
 	<bean id="crudFactory" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudFactory">
