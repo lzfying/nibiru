@@ -16,8 +16,6 @@
 	</properties>
 	<modules>
 		<module>ar.com.oxen.nibiru.extensionpoint.api</module>
-		<module>ar.com.oxen.nibiru.extensionpoint.spring</module>
-		<module>ar.com.oxen.nibiru.extensionpoint.spring.service</module>
 		<module>ar.com.oxen.nibiru.extensionpoint.generic</module>
 		<module>ar.com.oxen.nibiru.extensionpoint.generic.blueprint</module>
   </modules>
