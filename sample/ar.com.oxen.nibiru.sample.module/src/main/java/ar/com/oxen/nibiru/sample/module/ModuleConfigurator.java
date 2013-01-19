@@ -11,7 +11,8 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.crud.utils.AbstractCrudActionExtension;
 import ar.com.oxen.nibiru.crud.utils.AbstractCrudModuleConfigurator;
 import ar.com.oxen.nibiru.crud.utils.SimpleCrudAction;
-import ar.com.oxen.nibiru.report.api.Report;
+// TODO: corregir
+//import ar.com.oxen.nibiru.report.api.Report;
 import ar.com.oxen.nibiru.sample.domain.Course;
 import ar.com.oxen.nibiru.sample.domain.Student;
 import ar.com.oxen.nibiru.sample.domain.Subject;

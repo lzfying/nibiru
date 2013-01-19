@@ -71,6 +71,11 @@
 			<artifactId>ar.com.oxen.nibiru.validation.generic</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.transaction</groupId>
+			<artifactId>ar.com.oxen.nibiru.transaction.api</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
 		<!-- TODO: Corregir el tema reportes 
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.report</groupId>

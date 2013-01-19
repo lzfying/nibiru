@@ -58,12 +58,13 @@
 		<module>ar.com.oxen.nibiru.security</module>
 		<module>ar.com.oxen.nibiru.session</module>
 		<module>ar.com.oxen.nibiru.support</module>
+		<module>ar.com.oxen.nibiru.transaction</module>
 		<module>ar.com.oxen.nibiru.ui</module>
 		<module>ar.com.oxen.nibiru.validation</module>
-    	<module>ar.com.oxen.nibiru.mail</module>
-    	<module>ar.com.oxen.nibiru.report</module>
-	    <module>ar.com.oxen.nibiru.license</module>
-  </modules>
+		<module>ar.com.oxen.nibiru.mail</module>
+		<module>ar.com.oxen.nibiru.report</module>
+		<module>ar.com.oxen.nibiru.license</module>
+	 </modules>
 	<build>
 		<resources>
 			<resource>

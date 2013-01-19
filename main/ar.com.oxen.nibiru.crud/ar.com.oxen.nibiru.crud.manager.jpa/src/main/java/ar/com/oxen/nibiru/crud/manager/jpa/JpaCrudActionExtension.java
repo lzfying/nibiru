@@ -4,12 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
 
 import ar.com.oxen.commons.bean.api.WrapperFactory;
 import ar.com.oxen.nibiru.crud.bean.annotation.Action;
@@ -18,16 +12,18 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudAction;
 import ar.com.oxen.nibiru.crud.manager.api.CrudActionExtension;
 import ar.com.oxen.nibiru.crud.manager.api.CrudEntity;
 import ar.com.oxen.nibiru.crud.utils.SimpleCrudAction;
+import ar.com.oxen.nibiru.transaction.api.TransactionCallback;
+import ar.com.oxen.nibiru.transaction.api.TransactionTemplate;
 
 public class JpaCrudActionExtension<T> extends AbstractJpaCrudComponent<T>
 		implements CrudActionExtension<T> {
-	private UserTransaction userTransaction;
+	private TransactionTemplate transactionTemplate;
 
 	public JpaCrudActionExtension(EntityManager entityManager,
 			Class<T> persistentClass, WrapperFactory wrapperFactory,
-			UserTransaction userTransaction) {
+			TransactionTemplate transactionTemplate) {
 		super(entityManager, persistentClass, wrapperFactory);
-		this.userTransaction = userTransaction;
+		this.transactionTemplate = transactionTemplate;
 	}
 
 	@Override
@@ -83,21 +79,26 @@ public class JpaCrudActionExtension<T> extends AbstractJpaCrudComponent<T>
 		if (CrudAction.EDIT.equals(action.getName())) {
 			return entity;
 		} else if (CrudAction.UPDATE.equals(action.getName())) {
-			this.doInTransacction(new TransactionCallback() {
-				@Override
-				public void execute() {
-					getEntityManager().merge(entity.getEntity());
-				}
-			});
+			this.transactionTemplate.execute(this.getEntityManager(),
+					new TransactionCallback<Void>() {
+						@Override
+						public Void doInTransaction() {
+							getEntityManager().merge(entity.getEntity());
+							return null;
+						}
+					});
 			return null;
 		} else if (CrudAction.DELETE.equals(action.getName())) {
-			this.doInTransacction(new TransactionCallback() {
-				@Override
-				public void execute() {
-					getEntityManager().remove(
-							getEntityManager().merge(entity.getEntity()));
-				}
-			});
+			this.transactionTemplate.execute(this.getEntityManager(),
+					new TransactionCallback<Void>() {
+						@Override
+						public Void doInTransaction() {
+							getEntityManager().remove(
+									getEntityManager()
+											.merge(entity.getEntity()));
+							return null;
+						}
+					});
 			return null;
 		} else {
 			throw new IllegalArgumentException("Invalid action: " + action);
@@ -107,30 +108,5 @@ public class JpaCrudActionExtension<T> extends AbstractJpaCrudComponent<T>
 	@Override
 	public String[] getAllowedRoles() {
 		return null;
-	}
-
-	private void doInTransacction(TransactionCallback callback) {
-		try {
-			this.userTransaction.begin();
-			this.getEntityManager().joinTransaction();
-			callback.execute();
-			this.userTransaction.commit();
-		} catch (NotSupportedException e) {
-			throw new IllegalStateException(e);
-		} catch (SystemException e) {
-			throw new IllegalStateException(e);
-		} catch (SecurityException e) {
-			throw new IllegalStateException(e);
-		} catch (RollbackException e) {
-			throw new IllegalStateException(e);
-		} catch (HeuristicMixedException e) {
-			throw new IllegalStateException(e);
-		} catch (HeuristicRollbackException e) {
-			throw new IllegalStateException(e);
-		}
-	}
-
-	private interface TransactionCallback {
-		void execute();
 	}
 }

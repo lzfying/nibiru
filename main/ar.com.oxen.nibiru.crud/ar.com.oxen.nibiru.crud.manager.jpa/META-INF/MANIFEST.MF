@@ -10,6 +10,7 @@ Import-Package: ar.com.oxen.commons.bean.api,
  ar.com.oxen.nibiru.crud.manager.api,
  ar.com.oxen.nibiru.crud.utils,
  ar.com.oxen.nibiru.security.api,
+ ar.com.oxen.nibiru.transaction.api,
  javax.persistence,
  javax.transaction,
  org.mvel2

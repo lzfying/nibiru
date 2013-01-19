@@ -35,45 +35,43 @@ public abstract class AbstractGenericCrudPresenter<V extends View, T> extends
 
 	protected void performGlobalAction(final CrudAction action,
 			final CrudActionExtension<T> actionExtension) {
-
-		CrudEntity<?> returnedEntity = this.getConversation().execute(
-				new ConversationCallback<CrudEntity<?>>() {
-					@Override
-					public CrudEntity<?> doInConversation(
-							Conversation conversation) throws Exception {
-						return actionExtension.performGlobalAction(action);
-					}
-				});
-
-		this.processReturnedEntity(returnedEntity);
+		this.getConversation().execute(new ConversationCallback<Void>() {
+			@Override
+			public Void doInConversation(Conversation conversation)
+					throws Exception {
+				CrudEntity<?> returnedEntity = actionExtension
+						.performGlobalAction(action);
+				processReturnedEntity(returnedEntity);
+				return null;
+			}
+		});
 	}
 
 	protected void performEntityAction(final CrudAction action,
 			final CrudEntity<T> entity,
 			final CrudActionExtension<T> actionExtension) {
+		this.getConversation().execute(new ConversationCallback<Void>() {
+			@Override
+			public Void doInConversation(Conversation conversation)
+					throws Exception {
+				CrudEntity<?> returnedEntity = actionExtension
+						.performEntityAction(action, entity);
+				/*
+				 * If the returned entity is the same of original entity, it is
+				 * still being modified.
+				 */
+				if (action.modifiesEntity() && entity != null
+						&& !entity.equals(returnedEntity)) {
+					getEventBus().fireEvent(
+							new ModifiedCrudEntityEvent(entity.getId()),
+							crudManager.getEntityTypeName());
+				}
 
-		CrudEntity<?> returnedEntity = this.getConversation().execute(
-				new ConversationCallback<CrudEntity<?>>() {
-					@Override
-					public CrudEntity<?> doInConversation(
-							Conversation conversation) throws Exception {
-						return actionExtension.performEntityAction(action,
-								entity);
-					}
-				});
+				processReturnedEntity(returnedEntity);
+				return null;
+			}
+		});
 
-		/*
-		 * If the returned entity is the same of original entity, it is still
-		 * being modified.
-		 */
-		if (action.modifiesEntity() && entity != null
-				&& !entity.equals(returnedEntity)) {
-			this.getEventBus().fireEvent(
-					new ModifiedCrudEntityEvent(entity.getId()),
-					this.crudManager.getEntityTypeName());
-		}
-
-		this.processReturnedEntity(returnedEntity);
 	}
 
 	private <X> void processReturnedEntity(CrudEntity<X> returnedEntity) {

@@ -8,9 +8,13 @@
 	<reference id="conversationAccessor"
 		interface="ar.com.oxen.nibiru.conversation.api.ConversationAccessor" />
 
+	<reference id="transactionTemplate"
+		interface="ar.com.oxen.nibiru.transaction.api.TransactionTemplate" />
+
 	<bean init-method="init" destroy-method="destroy"
 		class="ar.com.oxen.nibiru.jpa.blueprint.ConversationEntityManagerExtender">
 		<property name="bundleContext" ref="blueprintBundleContext" />
 		<property name="conversationAccessor" ref="conversationAccessor" />
+		<property name="transactionTemplate" ref="transactionTemplate" />
 	</bean>
 </blueprint>

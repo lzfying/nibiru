@@ -17,10 +17,12 @@ import org.osgi.framework.ServiceRegistration;
 
 import ar.com.oxen.nibiru.conversation.api.ConversationAccessor;
 import ar.com.oxen.nibiru.jpa.ConversationEntityManagerFactory;
+import ar.com.oxen.nibiru.transaction.api.TransactionTemplate;
 
 public class ConversationEntityManagerExtender {
 	private BundleContext bundleContext;
 	private ConversationAccessor conversationAccessor;
+	private TransactionTemplate transactionTemplate;
 
 	private Map<EntityManagerFactory, ServiceRegistration<EntityManagerFactory>> serviceMapping = new HashMap<EntityManagerFactory, ServiceRegistration<EntityManagerFactory>>();
 
@@ -79,7 +81,8 @@ public class ConversationEntityManagerExtender {
 
 		if (!(entityManagerFactory instanceof ConversationEntityManagerFactory)) {
 			EntityManagerFactory conversationEntityManagerFactory = new ConversationEntityManagerFactory(
-					entityManagerFactory, this.conversationAccessor);
+					entityManagerFactory, this.conversationAccessor,
+					this.transactionTemplate);
 
 			Dictionary<String, Object> props = new Hashtable<String, Object>();
 			for (String propertyKey : reference.getPropertyKeys()) {
@@ -110,5 +113,9 @@ public class ConversationEntityManagerExtender {
 	public void setConversationAccessor(
 			ConversationAccessor conversationAccessor) {
 		this.conversationAccessor = conversationAccessor;
+	}
+
+	public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
+		this.transactionTemplate = transactionTemplate;
 	}
 }

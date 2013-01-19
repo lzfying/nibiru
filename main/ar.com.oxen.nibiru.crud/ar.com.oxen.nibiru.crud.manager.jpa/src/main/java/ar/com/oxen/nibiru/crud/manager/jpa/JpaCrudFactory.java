@@ -1,19 +1,19 @@
 package ar.com.oxen.nibiru.crud.manager.jpa;
 
 import javax.persistence.EntityManager;
-import javax.transaction.UserTransaction;
 
 import ar.com.oxen.commons.bean.api.WrapperFactory;
 import ar.com.oxen.nibiru.crud.manager.api.CrudActionExtension;
 import ar.com.oxen.nibiru.crud.manager.api.CrudFactory;
 import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.security.api.AuthorizationService;
+import ar.com.oxen.nibiru.transaction.api.TransactionTemplate;
 
 public class JpaCrudFactory implements CrudFactory {
 	private EntityManager entityManager;
 	private WrapperFactory wrapperFactory;
 	private AuthorizationService authorizationService;
-	private UserTransaction userTransaction;
+	private TransactionTemplate transactionTemplate;
 
 	@Override
 	public <T> CrudManager<T> createCrudManager(Class<T> persistentClass) {
@@ -25,7 +25,7 @@ public class JpaCrudFactory implements CrudFactory {
 	public <T> CrudActionExtension<T> createDefaultCrudActionExtension(
 			Class<T> persistentClass) {
 		return new JpaCrudActionExtension<T>(entityManager, persistentClass,
-				wrapperFactory, this.userTransaction);
+				wrapperFactory, this.transactionTemplate);
 	}
 
 	public void setEntityManager(EntityManager entityManager) {
@@ -41,7 +41,8 @@ public class JpaCrudFactory implements CrudFactory {
 		this.authorizationService = authorizationService;
 	}
 
-	public void setUserTransaction(UserTransaction userTransaction) {
-		this.userTransaction = userTransaction;
+	public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
+		this.transactionTemplate = transactionTemplate;
 	}
+
 }
