@@ -39,6 +39,9 @@ public class Authorizer {
 		String customerName = ask("Customer name",
 				licenseInfo.getCustomerName());
 
+		String module = ask("Module",
+				licenseInfo.getModule());
+
 		Date expirationDate = null;
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
 		boolean dateOk = false;
@@ -61,7 +64,8 @@ public class Authorizer {
 		String code = ask("Code", licenseInfo.getCode());
 
 		DefaultLicenseInfo newLicenseInfo = new DefaultLicenseInfo(
-				customerName, expirationDate, code, licenseInfo.getHardwareId());
+				customerName, module, expirationDate, code,
+				licenseInfo.getHardwareId());
 		System.out.println("Generated license info: " + newLicenseInfo);
 
 		String license = this.licenseSerializer

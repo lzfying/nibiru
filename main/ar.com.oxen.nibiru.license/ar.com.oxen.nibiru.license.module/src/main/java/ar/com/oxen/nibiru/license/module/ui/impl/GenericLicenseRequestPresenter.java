@@ -38,13 +38,15 @@ public class GenericLicenseRequestPresenter extends
 
 	@Override
 	public void go() {
-		LicenceValueChangeHandler chengeHandler = new LicenceValueChangeHandler();
+		LicenceValueChangeHandler changeHandler = new LicenceValueChangeHandler();
 		this.getView().getCompanyChangeHandler()
-				.setValueChangeHandler(chengeHandler);
+				.setValueChangeHandler(changeHandler);
+		this.getView().getModuleChangeHandler()
+				.setValueChangeHandler(changeHandler);
 		this.getView().getExpirationChangeHandler()
-				.setValueChangeHandler(chengeHandler);
+				.setValueChangeHandler(changeHandler);
 		this.getView().getCodeChangeHandler()
-				.setValueChangeHandler(chengeHandler);
+				.setValueChangeHandler(changeHandler);
 
 		String licenseString = this.licenseStoreManager
 				.loadLicense(LicenseStoreManager.GENERIC_MODULE);
@@ -88,6 +90,7 @@ public class GenericLicenseRequestPresenter extends
 					licenseSerializer
 							.serializeLicenceInfo(new DefaultLicenseInfo(
 									getView().getCompanyName().getValue(),
+									getView().getModule().getValue(),
 									getView().getExpirationDate().getValue(),
 									getView().getCode().getValue(),
 									hardwareIdProvider.getHardwareId())));

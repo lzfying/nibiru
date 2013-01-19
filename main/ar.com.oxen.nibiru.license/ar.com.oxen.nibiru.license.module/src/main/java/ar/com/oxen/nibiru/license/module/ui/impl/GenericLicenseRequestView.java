@@ -19,6 +19,7 @@ import ar.com.oxen.nibiru.ui.utils.view.AbstractWindowViewAdapter;
 public class GenericLicenseRequestView extends
 		AbstractWindowViewAdapter<Window> implements LicenseRequestView {
 	private TextField<String> companyName;
+	private TextField<String> module;
 	private DateField expirationDate;
 	private TextField<String> code;
 	private TextArea<String> licenseRequest;
@@ -38,6 +39,11 @@ public class GenericLicenseRequestView extends
 		this.companyName.setCaption(messageSource
 				.getMessage("ar.com.oxen.nibiru.license.companyName"));
 		this.getAdapted().addComponent(this.companyName);
+
+		this.module = viewFactory.buildTextField(String.class);
+		this.module.setCaption(messageSource
+				.getMessage("ar.com.oxen.nibiru.license.module"));
+		this.getAdapted().addComponent(this.module);
 
 		this.expirationDate = viewFactory.buildDateField();
 		this.expirationDate.setCaption(messageSource
@@ -78,6 +84,16 @@ public class GenericLicenseRequestView extends
 	@Override
 	public HasValueChangeHandler getCompanyChangeHandler() {
 		return this.companyName;
+	}
+
+	@Override
+	public HasValue<String> getModule() {
+		return this.module;
+	}
+
+	@Override
+	public HasValueChangeHandler getModuleChangeHandler() {
+		return this.module;
 	}
 
 	@Override

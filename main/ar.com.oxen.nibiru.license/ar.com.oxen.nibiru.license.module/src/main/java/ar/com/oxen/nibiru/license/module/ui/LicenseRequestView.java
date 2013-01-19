@@ -12,6 +12,10 @@ public interface LicenseRequestView extends View {
 
 	HasValueChangeHandler getCompanyChangeHandler();
 
+	HasValue<String> getModule();
+
+	HasValueChangeHandler getModuleChangeHandler();
+
 	HasValue<Date> getExpirationDate();
 
 	HasValueChangeHandler getExpirationChangeHandler();
