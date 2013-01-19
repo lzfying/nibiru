@@ -18,6 +18,6 @@
 	<modules>
 		<module>ar.com.oxen.nibiru.mail.api</module>
 		<module>ar.com.oxen.nibiru.mail.javamail</module>
-		<module>ar.com.oxen.nibiru.mail.javamail.service</module>
+		<module>ar.com.oxen.nibiru.mail.javamail.blueprint</module>
 	</modules>
 </project>
