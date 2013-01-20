@@ -3,6 +3,8 @@ package ar.com.oxen.nibiru.sample.module;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import ar.com.oxen.nibiru.crud.manager.api.CrudAction;
 import ar.com.oxen.nibiru.crud.manager.api.CrudActionExtension;
 import ar.com.oxen.nibiru.crud.manager.api.CrudEntity;
@@ -11,8 +13,8 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.crud.utils.AbstractCrudActionExtension;
 import ar.com.oxen.nibiru.crud.utils.AbstractCrudModuleConfigurator;
 import ar.com.oxen.nibiru.crud.utils.SimpleCrudAction;
-// TODO: corregir
-//import ar.com.oxen.nibiru.report.api.Report;
+import ar.com.oxen.nibiru.report.api.Report;
+import ar.com.oxen.nibiru.report.jasper.JasperReport;
 import ar.com.oxen.nibiru.sample.domain.Course;
 import ar.com.oxen.nibiru.sample.domain.Student;
 import ar.com.oxen.nibiru.sample.domain.Subject;
@@ -29,7 +31,7 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 	
 	private CrudFactory crudFactory;
 	private MailService mailService;
-
+	private DataSource dataSource;
 
 	@Override
 	protected void configure() {
@@ -129,6 +131,7 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 
 				});
 
+		// Validation sample
 		this.registerExtension(
 				new RegexpValidator("^Mat.*", "subjectBeginning"),
 				Subject.class.getName() + ".name", Validator.class);
@@ -136,11 +139,10 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 		this.registerExtension(new NotEmptyValidator(), Subject.class.getName()
 				+ ".description", Validator.class);
 
-		// Prueba con reportes
-		// TODO: corregir
-//		registerExtension(new BirtReport(
-//				"/ar/com/oxen/nibiru/sample/report/myReport.rptdesign"),
-//				Report.EXTENSION_POINT_NAME, Report.class);
+		// Report sample
+		registerExtension(new JasperReport(
+				"/ar/com/oxen/nibiru/sample/report/myReport.jrxml",
+				this.dataSource), Report.EXTENSION_POINT_NAME, Report.class);
 	}
 
 	public void setCrudFactory(CrudFactory crudFactory) {
@@ -149,5 +151,9 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 
 	public void setMailService(MailService mailService) {
 		this.mailService = mailService;
+	}
+
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 }

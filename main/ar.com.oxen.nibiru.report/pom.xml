@@ -17,7 +17,8 @@
 	<modules>
 		<module>ar.com.oxen.nibiru.report.api</module>
 		<module>ar.com.oxen.nibiru.report.birt</module>
-    <module>ar.com.oxen.nibiru.report.crud</module>
-    <module>ar.com.oxen.nibiru.report.module</module>
-  </modules>
+		<module>ar.com.oxen.nibiru.report.crud</module>
+		<module>ar.com.oxen.nibiru.report.jasper</module>
+		<module>ar.com.oxen.nibiru.report.module</module>
+	</modules>
 </project>

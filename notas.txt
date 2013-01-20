@@ -8,6 +8,9 @@ Pendientes:
 
 --------------------------------
 
+features:install -v webconsole
+
+--------------------------------
 Pasos para habilitar los servicios de JPA:
 
 https://github.com/cschneider/Karaf-Tutorial/blob/master/db/examplejpa/ReadMe.txt
@@ -23,7 +26,7 @@ install -s mvn:org.apache.aries/org.apache.aries.util/0.4
 
 --------------------------------
 
-Instalar soporte para WAR:
+Instalar soporte para WAR (revisar si es necesario, porque al final no lo armé como WAR):
 
 features:install -v war
 
@@ -37,3 +40,11 @@ DEPLOYING A WAR TO THE INSTALLED WEB FEATUREThe following steps will describe h
 Tambien fue necesario esto:
 
 install -s mvn:commons-codec/commons-codec/1.7
+
+
+--------------------------------
+Bundles instlados para que funciona BIRT:
+
+org.eclipse.birt.core_4.2.1.v201209121203.jar
+
+

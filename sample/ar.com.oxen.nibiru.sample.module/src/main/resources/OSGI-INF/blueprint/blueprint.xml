@@ -36,6 +36,9 @@
 	<reference id="mailService"
 		interface="ar.com.oxen.nibiru.mail.api.MailService" />
 
+	<reference id="dataSource"
+		interface="javax.sql.DataSource" />
+
 	<bean id="sampleMessageProvider"
 		class="ar.com.oxen.nibiru.i18n.generic.ResourceBundleMessageProvider">
 		<property name="baseName" value="ar.com.oxen.nibiru.sample.ui.i18n.messages" />
@@ -54,6 +57,7 @@
 		<property name="presenterFactory" ref="crudPresenterFactory" />
 		<property name="crudFactory" ref="crudFactory" />
 		<property name="mailService" ref="mailService" />
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 	<bean id="crudFactory" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudFactory">
