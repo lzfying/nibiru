@@ -140,9 +140,11 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 				+ ".description", Validator.class);
 
 		// Report sample
-		registerExtension(new JasperReport(
-				"/ar/com/oxen/nibiru/sample/report/myReport.jrxml",
-				this.dataSource), Report.EXTENSION_POINT_NAME, Report.class);
+		registerExtension(
+				new JasperReport(this.getClass().getResourceAsStream(
+						"/ar/com/oxen/nibiru/sample/report/myReport.jrxml"),
+						this.dataSource), Report.EXTENSION_POINT_NAME,
+				Report.class);
 	}
 
 	public void setCrudFactory(CrudFactory crudFactory) {

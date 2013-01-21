@@ -43,8 +43,11 @@ install -s mvn:commons-codec/commons-codec/1.7
 
 
 --------------------------------
-Bundles instlados para que funciona BIRT:
+Bundles instlados para que funcione Jasper Reports:
 
-org.eclipse.birt.core_4.2.1.v201209121203.jar
+jasperreports-5.0.1.jar
+commons-digester-2.1.jar
+commons-beanutils-1.8.0.jar
+com.springsource.antlr-2.7.6.jar
 
-
+NOTA: si el reporte es de tipo Groovy (como viene por defecto) no funciona. Hay que ponerle que genere Java.

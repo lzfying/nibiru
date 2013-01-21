@@ -26,11 +26,10 @@ public class JasperReport implements Report {
 	private net.sf.jasperreports.engine.JasperReport report;
 	private DataSource dataSource;
 
-	public JasperReport(String file, DataSource dataSource) {
+	public JasperReport(InputStream reportInputStream, DataSource dataSource) {
 		super();
 		try {
-			this.report = JasperCompileManager.compileReport(this
-					.getReporFileInputStream(file));
+			this.report = JasperCompileManager.compileReport(reportInputStream);
 			this.dataSource = dataSource;
 		} catch (JRException e) {
 			throw new JasperReportException(e);
@@ -54,7 +53,11 @@ public class JasperReport implements Report {
 				reportParameters.length);
 
 		for (JRParameter reportParameter : reportParameters) {
-			parameterDefinitions.add(new JRParameterAdapter(reportParameter));
+			if (reportParameter.isForPrompting()
+					&& !reportParameter.isSystemDefined()) {
+				parameterDefinitions
+						.add(new JRParameterAdapter(reportParameter));
+			}
 		}
 
 		return parameterDefinitions;
@@ -66,9 +69,6 @@ public class JasperReport implements Report {
 		try {
 			final PipedOutputStream output = new PipedOutputStream();
 			InputStream input = new PipedInputStream(output);
-
-			// final ClassLoader classLoader = Thread.currentThread()
-			// .getContextClassLoader();
 
 			new Thread(new Runnable() {
 				@Override
@@ -112,20 +112,6 @@ public class JasperReport implements Report {
 				}
 			}
 		}
-	}
-
-	private InputStream getReporFileInputStream(String file) {
-		InputStream reportInputStream = this.getClass().getResourceAsStream(
-				file);
-		if (reportInputStream == null) {
-			reportInputStream = Thread.currentThread().getContextClassLoader()
-					.getResourceAsStream(file);
-		}
-		if (reportInputStream == null) {
-			throw new IllegalArgumentException("Invalid report file: " + file);
-		}
-
-		return reportInputStream;
 	}
 
 	private static class JRParameterAdapter implements ParameterDefinition {
