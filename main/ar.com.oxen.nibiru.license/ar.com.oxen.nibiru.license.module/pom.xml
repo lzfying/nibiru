@@ -37,6 +37,11 @@
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
+			<groupId>ar.com.oxen.nibiru.support</groupId>
+			<artifactId>ar.com.oxen.nibiru.osgi.utils</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>ar.com.oxen.commons</groupId>
 			<artifactId>ar.com.oxen.commons</artifactId>
 			<version>${commons-version}</version>

@@ -1,13 +1,11 @@
 package ar.com.oxen.nibiru.license.store.jpa;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import ar.com.oxen.nibiru.license.store.api.LicenseStoreManager;
 import ar.com.oxen.nibiru.license.store.jpa.domain.License;
 
 public class JpaLicenseStoreManager implements LicenseStoreManager {
-	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
@@ -29,5 +27,9 @@ public class JpaLicenseStoreManager implements LicenseStoreManager {
 		}
 		licenseEntity.setLicense(license);
 		this.entityManager.persist(licenseEntity);
+	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
 	}
 }
