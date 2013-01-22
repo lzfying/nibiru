@@ -7,4 +7,3 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: ar.com.oxen.nibiru.license.store.api,
  ar.com.oxen.nibiru.license.store.jpa,
  javax.persistence;version="1.0.0"
-Meta-Persistence: 

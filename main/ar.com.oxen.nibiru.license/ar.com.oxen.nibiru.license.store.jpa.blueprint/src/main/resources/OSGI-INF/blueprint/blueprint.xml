@@ -12,8 +12,6 @@
 	<service ref="licenseStoreManager"
 		interface="ar.com.oxen.nibiru.license.store.api.LicenseStoreManager" />
 
-	<reference id="entityManagerFactory" interface="javax.persistence.EntityManagerFactory" />
-
 	<bean id="licenseStoreManager"
 		class="ar.com.oxen.nibiru.license.store.jpa.JpaLicenseStoreManager">
 		<tx:transaction method="*" value="Required" />

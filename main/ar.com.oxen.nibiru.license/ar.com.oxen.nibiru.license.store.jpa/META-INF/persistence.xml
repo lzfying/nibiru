@@ -5,7 +5,7 @@
 
 	<persistence-unit name="nibiruLicense"
 		transaction-type="JTA">
-		<jta-data-source>osgi:service/javax.sql.DataSource/</jta-data-source>
+		<jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/nibiru)</jta-data-source>
 		<class>ar.com.oxen.nibiru.license.store.jpa.domain.License</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
