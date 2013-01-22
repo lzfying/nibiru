@@ -17,18 +17,18 @@
 	<modules>
 		<module>ar.com.oxen.nibiru.security.api</module>
 		<module>ar.com.oxen.nibiru.security.spring</module>
-		<module>ar.com.oxen.nibiru.security.spring.service</module>
+		<module>ar.com.oxen.nibiru.security.spring.blueprint</module>
 		<module>ar.com.oxen.nibiru.security.manager.api</module>
 		<module>ar.com.oxen.nibiru.security.manager.jpa</module>
+		<module>ar.com.oxen.nibiru.security.manager.jpa.blueprint</module>
 		<module>ar.com.oxen.nibiru.security.module</module>
-		<module>ar.com.oxen.nibiru.security.manager.jpa.service</module>
 		<module>ar.com.oxen.nibiru.security.autologin</module>
 		<module>ar.com.oxen.nibiru.security.autologin.blueprint</module>
 		<module>ar.com.oxen.nibiru.security.ui.api</module>
 		<module>ar.com.oxen.nibiru.security.ui.generic.presenter</module>
-		<module>ar.com.oxen.nibiru.security.ui.generic.presenter.service</module>
+		<module>ar.com.oxen.nibiru.security.ui.generic.presenter.blueprint</module>
 		<module>ar.com.oxen.nibiru.security.ui.generic.view</module>
-		<module>ar.com.oxen.nibiru.security.ui.generic.view.service</module>
+		<module>ar.com.oxen.nibiru.security.ui.generic.view.blueprint</module>
 		<module>ar.com.oxen.nibiru.security.rpc</module>
-  </modules>
+	</modules>
 </project>

@@ -12,7 +12,6 @@ import ar.com.oxen.nibiru.security.manager.api.UserNotFoundException;
 import ar.com.oxen.nibiru.security.manager.jpa.domain.User;
 
 public class JpaSecurityManager implements SecurityManager {
-	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
@@ -40,14 +39,19 @@ public class JpaSecurityManager implements SecurityManager {
 	private User findUserByUsername(String username) {
 		try {
 			Query query = this.entityManager
-					.createQuery("from User where username = ?");
+					.createQuery("select u from User u where username = ?");
 			query.setParameter(1, username);
 			User user = (User) query.getSingleResult();
 
+			// TODO: check this
 			this.entityManager.refresh(user); // Damn Hibernate cache
 			return user;
 		} catch (NoResultException e) {
 			throw new UserNotFoundException();
 		}
+	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
 	}
 }

@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: ODA configuration fragment
-Bundle-SymbolicName: ar.com.oxen.nibiru.sample.oda.jdbc.fragment
-Bundle-Version: 0.4.0
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Fragment-Host: org.eclipse.birt.report.data.oda.jdbc;bundle-version="3.7.2.v20120213"
-Import-Package: org.h2;version="1.0.71"

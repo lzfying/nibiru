@@ -53,6 +53,5 @@
 		<module>ar.com.oxen.nibiru.sample.module</module>
 		<module>ar.com.oxen.nibiru.sample.webapp</module>
 		<module>ar.com.oxen.nibiru.sample.springwebapp</module>
-		<module>ar.com.oxen.nibiru.sample.oda.jdbc.fragment</module>
  	</modules>
 </project>
