@@ -9,8 +9,8 @@
 		<version>0.4-SNAPSHOT</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru.support</groupId>
-	<artifactId>ar.com.oxen.nibiru.datasource.dbcp.aries</artifactId>
-	<name>ar.com.oxen.nibiru.datasource.dbcp.aries</name>
+	<artifactId>ar.com.oxen.nibiru.datasource.dbcp.blueprint</artifactId>
+	<name>ar.com.oxen.nibiru.datasource.dbcp.blueprint</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>

@@ -16,9 +16,9 @@
 	</properties>
 	<modules>
 		<module>ar.com.oxen.nibiru.commons.blueprint</module>
-		<module>ar.com.oxen.nibiru.datasource.c3p0.aries</module>
+		<module>ar.com.oxen.nibiru.datasource.c3p0.blueprint</module>
 		<module>ar.com.oxen.nibiru.datasource.c3p0.spring</module>
-		<module>ar.com.oxen.nibiru.datasource.dbcp.aries</module>
+		<module>ar.com.oxen.nibiru.datasource.dbcp.blueprint</module>
 		<module>ar.com.oxen.nibiru.datasource.dbcp.spring</module>
 		<module>ar.com.oxen.nibiru.http.utils</module>
 		<module>ar.com.oxen.nibiru.jpa</module>
