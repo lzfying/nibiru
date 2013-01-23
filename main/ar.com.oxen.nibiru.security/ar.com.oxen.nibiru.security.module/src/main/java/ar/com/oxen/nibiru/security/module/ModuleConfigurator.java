@@ -3,6 +3,7 @@ package ar.com.oxen.nibiru.security.module;
 import ar.com.oxen.commons.eventbus.api.EventHandlerMethod;
 import ar.com.oxen.nibiru.application.api.ApplicationStartEvent;
 import ar.com.oxen.nibiru.crud.manager.api.CrudActionExtension;
+import ar.com.oxen.nibiru.crud.manager.api.CrudFactory;
 import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.crud.utils.AbstractCrudModuleConfigurator;
 import ar.com.oxen.nibiru.security.api.AuthenticationService;
@@ -21,25 +22,32 @@ import ar.com.oxen.nibiru.ui.utils.mvp.SimpleEventBusClickHandler;
 public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 	private static final String MENU_EXTENSION = "ar.com.oxen.nibiru.security.db";
 
+	private CrudFactory crudFactory;
 	private AuthenticationService authenticationService;
-
 	private SecurityPresenterFactory securityPresenterFactory;
 	private SecurityViewFactory securityViewFactory;
 
-	private CrudManager<User> userCrudManager;
-	private CrudActionExtension<User> userCrudActionExtension;
-
-	private CrudManager<Role> roleCrudManager;
-	private CrudActionExtension<Role> roleCrudActionExtension;
-
-	private CrudManager<RoleGroup> groupCrudManager;
-	private CrudActionExtension<RoleGroup> groupCrudActionExtension;
-	
 	private final static String[] OPERATOR_ROLES = { "ar.com.oxen.nibiru.security.role.Operator" };
 	private final static String[] ADMINISTRATOR_ROLES = { "ar.com.oxen.nibiru.security.role.Administrator" };
 
 	@Override
 	protected void configure() {
+
+		CrudManager<User> userCrudManager = this.crudFactory
+				.createCrudManager(User.class);
+		CrudActionExtension<User> userCrudActionExtension = this.crudFactory
+				.createDefaultCrudActionExtension(User.class);
+
+		CrudManager<Role> roleCrudManager = this.crudFactory
+				.createCrudManager(Role.class);
+		CrudActionExtension<Role> roleCrudActionExtension = this.crudFactory
+				.createDefaultCrudActionExtension(Role.class);
+
+		CrudManager<RoleGroup> groupCrudManager = this.crudFactory
+				.createCrudManager(RoleGroup.class);
+		CrudActionExtension<RoleGroup> groupCrudActionExtension = this.crudFactory
+				.createDefaultCrudActionExtension(RoleGroup.class);
+
 		this.registerExtension(new SimpleSubMenuExtension("security",
 				MENU_EXTENSION, 80), "ar.com.oxen.nibiru.menu",
 				SubMenuExtension.class);
@@ -54,17 +62,14 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 						this.getEventBus(), ChangePasswordEvent.class, null),
 				OPERATOR_ROLES), MENU_EXTENSION, MenuItemExtension.class);
 
-		this.addCrudWithMenu("security.users", MENU_EXTENSION,
-				this.userCrudManager, this.userCrudActionExtension,
-				ADMINISTRATOR_ROLES);
+		this.addCrudWithMenu("security.users", MENU_EXTENSION, userCrudManager,
+				userCrudActionExtension, ADMINISTRATOR_ROLES);
 
-		this.addCrudWithMenu("security.roles", MENU_EXTENSION,
-				this.roleCrudManager, this.roleCrudActionExtension,
-				ADMINISTRATOR_ROLES);
+		this.addCrudWithMenu("security.roles", MENU_EXTENSION, roleCrudManager,
+				roleCrudActionExtension, ADMINISTRATOR_ROLES);
 
 		this.addCrudWithMenu("security.groups", MENU_EXTENSION,
-				this.groupCrudManager, this.groupCrudActionExtension,
-				ADMINISTRATOR_ROLES);
+				groupCrudManager, groupCrudActionExtension, ADMINISTRATOR_ROLES);
 
 	}
 
@@ -86,31 +91,8 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 				this.securityPresenterFactory.createLoginPresenter());
 	}
 
-	public void setUserCrudManager(CrudManager<User> userCrudManager) {
-		this.userCrudManager = userCrudManager;
-	}
-
-	public void setUserCrudActionExtension(
-			CrudActionExtension<User> userCrudActionExtension) {
-		this.userCrudActionExtension = userCrudActionExtension;
-	}
-
-	public void setRoleCrudManager(CrudManager<Role> roleCrudManager) {
-		this.roleCrudManager = roleCrudManager;
-	}
-
-	public void setRoleCrudActionExtension(
-			CrudActionExtension<Role> roleCrudActionExtension) {
-		this.roleCrudActionExtension = roleCrudActionExtension;
-	}
-
-	public void setGroupCrudManager(CrudManager<RoleGroup> groupCrudManager) {
-		this.groupCrudManager = groupCrudManager;
-	}
-
-	public void setGroupCrudActionExtension(
-			CrudActionExtension<RoleGroup> groupCrudActionExtension) {
-		this.groupCrudActionExtension = groupCrudActionExtension;
+	public void setCrudFactory(CrudFactory crudFactory) {
+		this.crudFactory = crudFactory;
 	}
 
 	public void setSecurityPresenterFactory(

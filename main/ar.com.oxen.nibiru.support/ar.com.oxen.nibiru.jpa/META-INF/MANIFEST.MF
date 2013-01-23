@@ -8,5 +8,6 @@ Import-Package: ar.com.oxen.nibiru.conversation.api,
  ar.com.oxen.nibiru.transaction.api,
  javax.persistence;version="2.0.0",
  javax.persistence.criteria;version="2.0.0",
+ javax.persistence.metamodel;version="2.0.0",
  javax.transaction
 Export-Package: ar.com.oxen.nibiru.jpa

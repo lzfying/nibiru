@@ -47,8 +47,18 @@
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
+			<groupId>ar.com.oxen.nibiru.transaction</groupId>
+			<artifactId>ar.com.oxen.nibiru.transaction.api</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>ar.com.oxen.nibiru.ui</groupId>
 			<artifactId>ar.com.oxen.nibiru.ui.utils</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.support</groupId>
+			<artifactId>ar.com.oxen.nibiru.osgi.utils</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>

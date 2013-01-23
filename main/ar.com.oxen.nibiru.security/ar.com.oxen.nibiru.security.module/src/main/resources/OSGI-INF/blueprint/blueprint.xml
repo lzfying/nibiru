@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.1.0"
 	xsi:schemaLocation="
 		http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
 		http://aries.apache.org/xmlns/jpa/v1.1.0 http://aries.apache.org/schemas/jpa/jpa_110.xsd
 	">
 
 	<service interface="ar.com.oxen.nibiru.i18n.api.MessageProvider"
-		ref="sampleMessageProvider" />
+		ref="securityMessageProvider" />
+
+	<reference id="authenticationService"
+		interface="ar.com.oxen.nibiru.security.api.AuthenticationService" />
+
+	<reference id="authorizationService"
+		interface="ar.com.oxen.nibiru.security.api.AuthorizationService" />
+
+	<reference id="securityViewFactory"
+		interface="ar.com.oxen.nibiru.security.ui.api.SecurityViewFactory" />
+
+	<reference id="securityPresenterFactory"
+		interface="ar.com.oxen.nibiru.security.ui.api.SecurityPresenterFactory" />
 
 	<reference id="extensionPointManager"
 		interface="ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager" />
@@ -21,23 +32,15 @@
 	<reference id="crudPresenterFactory"
 		interface="ar.com.oxen.nibiru.crud.ui.api.CrudPresenterFactory" />
 
+	<reference id="wrapperFactory" interface="ar.com.oxen.commons.bean.api.WrapperFactory" />
+
 	<reference id="transactionTemplate"
 		interface="ar.com.oxen.nibiru.transaction.api.TransactionTemplate" />
 
-	<reference id="wrapperFactory" interface="ar.com.oxen.commons.bean.api.WrapperFactory" />
-
-	<reference id="authorizationService"
-		interface="ar.com.oxen.nibiru.security.api.AuthorizationService" />
-
-	<reference id="mailService"
-		interface="ar.com.oxen.nibiru.mail.api.MailService" />
-
-	<reference id="dataSource"
-		interface="javax.sql.DataSource" />
-
-	<bean id="sampleMessageProvider"
+	<bean id="securityMessageProvider"
 		class="ar.com.oxen.nibiru.i18n.generic.ResourceBundleMessageProvider">
-		<property name="baseName" value="ar.com.oxen.nibiru.sample.ui.i18n.messages" />
+		<property name="baseName"
+			value="ar.com.oxen.nibiru.security.module.ui.i18n.messages" />
 		<property name="resourceClassLoader">
 			<bean class="ar.com.oxen.nibiru.osgi.utils.BundleDelegatingClassLoader">
 				<argument ref="blueprintBundle" />
@@ -46,18 +49,19 @@
 	</bean>
 
 	<bean init-method="startup" destroy-method="shutdown"
-		class="ar.com.oxen.nibiru.sample.module.ModuleConfigurator">
+		class="ar.com.oxen.nibiru.security.module.ModuleConfigurator">
 		<property name="extensionPointManager" ref="extensionPointManager" />
 		<property name="eventBus" ref="eventBus" />
+		<property name="authenticationService" ref="authenticationService" />
 		<property name="viewFactory" ref="crudViewFactory" />
 		<property name="presenterFactory" ref="crudPresenterFactory" />
+		<property name="securityViewFactory" ref="securityViewFactory" />
+		<property name="securityPresenterFactory" ref="securityPresenterFactory" />
 		<property name="crudFactory" ref="crudFactory" />
-		<property name="mailService" ref="mailService" />
-		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 	<bean id="crudFactory" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudFactory">
-		<jpa:context property="entityManager" unitname="nibiruSample_conversation" />
+		<jpa:context property="entityManager" unitname="nibiruSecurity_conversation" />
 		<property name="wrapperFactory" ref="wrapperFactory" />
 		<property name="authorizationService" ref="authorizationService" />
 		<property name="transactionTemplate" ref="transactionTemplate" />

@@ -15,7 +15,7 @@
 	<bean id="securityManager"
 		class="ar.com.oxen.nibiru.security.manager.jpa.JpaSecurityManager">
 		<tx:transaction method="*" value="Required" />
-		<jpa:context property="entityManager" unitname="nibiruSecurityManager" />
+		<jpa:context property="entityManager" unitname="nibiruSecurity" />
 	</bean>
 
 </blueprint>

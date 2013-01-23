@@ -2,7 +2,6 @@ package ar.com.oxen.nibiru.security.manager.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import ar.com.oxen.nibiru.security.manager.api.InvalidOldPassword;
@@ -39,8 +38,8 @@ public class JpaSecurityManager implements SecurityManager {
 	private User findUserByUsername(String username) {
 		try {
 			Query query = this.entityManager
-					.createQuery("select u from User u where username = ?");
-			query.setParameter(1, username);
+					.createQuery("select u from User u where u.username = :usernameParam");
+			query.setParameter("usernameParam", username);
 			User user = (User) query.getSingleResult();
 
 			// TODO: check this

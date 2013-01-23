@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
 
-	<persistence-unit name="nibiruSecurityManager"
+	<persistence-unit name="nibiruSecurity"
 		transaction-type="JTA">
 		<jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/nibiru)</jta-data-source>
 		<class>ar.com.oxen.nibiru.security.manager.jpa.domain.Role</class>
