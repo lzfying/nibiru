@@ -22,7 +22,7 @@ import ar.com.oxen.nibiru.crud.manager.api.WidgetType;
 		@Action(name = CrudAction.EDIT, requiresEntity = true, showInForm = false),
 		@Action(name = CrudAction.UPDATE, requiresEntity = true, showInList = false),
 		@Action(name = CrudAction.DELETE, requiresEntity = true, showInForm = false, requiresConfirmation = true) })
-@Filter("authz.isCallerInRole('admin') ? null : \" name like 'T%' \"")
+@Filter("authz.isCallerInRole('ar.com.oxen.nibiru.security.role.Administrator') ? null : \" o.name like 'T%' \"")
 public class Student {
 	@Id
 	@GeneratedValue

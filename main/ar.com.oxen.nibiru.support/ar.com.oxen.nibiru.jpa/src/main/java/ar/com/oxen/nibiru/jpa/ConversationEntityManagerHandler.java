@@ -23,7 +23,7 @@ class ConversationEntityManagerHandler implements InvocationHandler {
 			EntityManagerCreator entityManagerCreator) {
 		return (EntityManager) Proxy.newProxyInstance(
 				ConversationEntityManagerHandler.class.getClassLoader(),
-				new Class<?>[] { EntityManager.class },
+				new Class<?>[] { ConversationEntityManager.class },
 				new ConversationEntityManagerHandler(conversationAccessor,
 						transactionTemplate, entityManagerCreator));
 	}
