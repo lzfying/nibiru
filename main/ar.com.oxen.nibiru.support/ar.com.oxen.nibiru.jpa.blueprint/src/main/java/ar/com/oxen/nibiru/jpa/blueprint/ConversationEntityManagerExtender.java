@@ -20,6 +20,9 @@ import ar.com.oxen.nibiru.jpa.ConversationEntityManagerFactory;
 import ar.com.oxen.nibiru.transaction.api.TransactionTemplate;
 
 public class ConversationEntityManagerExtender {
+	private static final String OSGI_UNIT_NAME_PROPERTY = "osgi.unit.name";
+	private static final String NIBIRU_CONVERSATION_PROPERTY = "ar.com.oxen.nibiru.jpa.conversation";
+
 	private BundleContext bundleContext;
 	private ConversationAccessor conversationAccessor;
 	private TransactionTemplate transactionTemplate;
@@ -79,7 +82,8 @@ public class ConversationEntityManagerExtender {
 		EntityManagerFactory entityManagerFactory = this.bundleContext
 				.getService(reference);
 
-		if (!(entityManagerFactory instanceof ConversationEntityManagerFactory)) {
+		if (!Boolean.TRUE.equals(reference
+				.getProperty(NIBIRU_CONVERSATION_PROPERTY))) {
 			EntityManagerFactory conversationEntityManagerFactory = new ConversationEntityManagerFactory(
 					entityManagerFactory, this.conversationAccessor,
 					this.transactionTemplate);
@@ -88,10 +92,14 @@ public class ConversationEntityManagerExtender {
 			for (String propertyKey : reference.getPropertyKeys()) {
 				props.put(propertyKey, reference.getProperty(propertyKey));
 			}
-			props.put("osgi.unit.name", reference.getProperty("osgi.unit.name")
-					+ "_conversation");
+			props.put(OSGI_UNIT_NAME_PROPERTY,
+					reference.getProperty(OSGI_UNIT_NAME_PROPERTY)
+							+ "_conversation");
+			props.put(NIBIRU_CONVERSATION_PROPERTY, true);
 
-			ServiceRegistration<EntityManagerFactory> registration = this.bundleContext
+			ServiceRegistration<EntityManagerFactory> registration = reference
+					.getBundle()
+					.getBundleContext()
 					.registerService(EntityManagerFactory.class,
 							conversationEntityManagerFactory, props);
 
