@@ -7,6 +7,13 @@ Pendientes:
 - Ver de sacar el enhancer de open JPA, segun la pagina de Aries JPA, no seria necesario
 
 --------------------------------
+Features:
+
+features:addUrl mvn:ar.com.oxen.nibiru.support/ar.com.oxen.nibiru.feature/0.4-SNAPSHOT/xml/features
+features:install -v nibiru-core
+
+
+--------------------------------
 
 features:install -v webconsole
 
