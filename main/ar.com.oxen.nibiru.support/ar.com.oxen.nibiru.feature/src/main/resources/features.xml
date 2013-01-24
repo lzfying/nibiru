@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="nibiru" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+    <feature name='nibiru-core' description='Nibiru core components' version='${project.version}' resolver='(obr)'>
+        <bundle>mvn:ar.com.oxen.nibiru.application/ar.com.oxen.nibiru.application.api/${project.version}</bundle>
+    </feature>
+</features>
