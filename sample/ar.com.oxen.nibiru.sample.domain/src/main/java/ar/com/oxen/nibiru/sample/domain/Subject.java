@@ -37,7 +37,7 @@ public class Subject {
 
 	@ManyToOne
 	@Show(order = 30)
-	@Widget(type = WidgetType.COMBO_BOX, valuesFilterExpression = "'subject.id = ' + id")
+	@Widget(type = WidgetType.COMBO_BOX, valuesFilterExpression = "id != null ? 'o.subject.id = ' + id : '1=1'")
 	private Course mainCourse;
 
 	public Integer getId() {
