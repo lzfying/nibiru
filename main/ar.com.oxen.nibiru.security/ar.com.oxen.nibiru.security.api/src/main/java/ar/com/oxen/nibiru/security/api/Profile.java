@@ -8,4 +8,8 @@ public interface Profile {
 	String getFirstName();
 
 	String getLastName();
+
+	void activate(String username, String firstName, String lastName);
+
+	void deactivate();
 }

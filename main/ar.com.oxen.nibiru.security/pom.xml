@@ -16,12 +16,16 @@
 	</properties>
 	<modules>
 		<module>ar.com.oxen.nibiru.security.api</module>
+		<module>ar.com.oxen.nibiru.security.generic</module>
+		<module>ar.com.oxen.nibiru.security.generic.blueprint</module>
 		<module>ar.com.oxen.nibiru.security.spring</module>
 		<module>ar.com.oxen.nibiru.security.spring.blueprint</module>
 		<module>ar.com.oxen.nibiru.security.manager.api</module>
 		<module>ar.com.oxen.nibiru.security.manager.jpa</module>
 		<module>ar.com.oxen.nibiru.security.manager.jpa.blueprint</module>
 		<module>ar.com.oxen.nibiru.security.module</module>
+		<module>ar.com.oxen.nibiru.security.profile.session</module>
+		<module>ar.com.oxen.nibiru.security.profile.session.blueprint</module>
 		<module>ar.com.oxen.nibiru.security.autologin</module>
 		<module>ar.com.oxen.nibiru.security.autologin.blueprint</module>
 		<module>ar.com.oxen.nibiru.security.ui.api</module>

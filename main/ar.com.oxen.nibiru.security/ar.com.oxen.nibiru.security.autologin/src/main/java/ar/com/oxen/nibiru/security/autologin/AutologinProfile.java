@@ -24,4 +24,12 @@ public class AutologinProfile implements Profile {
 	public String getLastName() {
 		return null;
 	}
+
+	@Override
+	public void activate(String username, String firstName, String lastName) {
+	}
+
+	@Override
+	public void deactivate() {
+	}
 }

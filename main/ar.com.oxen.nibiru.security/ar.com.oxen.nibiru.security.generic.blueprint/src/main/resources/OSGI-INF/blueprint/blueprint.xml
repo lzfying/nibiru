@@ -21,42 +21,21 @@
 		interface="ar.com.oxen.nibiru.security.manager.api.SecurityManager" />
 
 	<bean id="authenticationService"
-		class="ar.com.oxen.nibiru.security.spring.SpringAuthenticationService">
+		class="ar.com.oxen.nibiru.security.generic.GenericAuthenticationService">
 		<property name="session" ref="nibiruSession" />
-		<property name="authenticationManager" ref="authenticationManager" />
 		<property name="securityManager" ref="securityManager" />
 		<property name="profile" ref="profile" />
+		<property name="hashService" ref="hashService" />
 	</bean>
 
 	<bean id="authorizationService"
-		class="ar.com.oxen.nibiru.security.spring.SpringAuthorizationService">
+		class="ar.com.oxen.nibiru.security.generic.GenericAuthorizationService">
 		<property name="session" ref="nibiruSession" />
 	</bean>
 
 	<bean id="hashService"
-		class="ar.com.oxen.nibiru.security.spring.PasswordEncoderHashService">
-		<property name="passwordEncoder" ref="passwordEncoder" />
+		class="ar.com.oxen.nibiru.security.generic.MessageDigestHashService">
+		<property name="algorithm" value="SHA-1" />
 	</bean>
-
-	<bean id="authenticationManager"
-		class="org.springframework.security.authentication.ProviderManager">
-		<property name="providers">
-			<list>
-				<bean
-					class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
-					<property name="userDetailsService" ref="userDetailsService" />
-					<property name="passwordEncoder" ref="passwordEncoder" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userDetailsService"
-		class="ar.com.oxen.nibiru.security.spring.SecurityManagerUserDetailsService">
-		<property name="securityManager" ref="securityManager" />
-		<property name="hashService" ref="hashService" />
-	</bean>
-	
-	<bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder"/>
 
 </blueprint>

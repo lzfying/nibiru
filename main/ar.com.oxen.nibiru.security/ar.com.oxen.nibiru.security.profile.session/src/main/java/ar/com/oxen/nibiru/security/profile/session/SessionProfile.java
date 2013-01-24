@@ -1,4 +1,4 @@
-package ar.com.oxen.nibiru.security.spring;
+package ar.com.oxen.nibiru.security.profile.session;
 
 import ar.com.oxen.nibiru.security.api.Profile;
 import ar.com.oxen.nibiru.session.api.Session;
