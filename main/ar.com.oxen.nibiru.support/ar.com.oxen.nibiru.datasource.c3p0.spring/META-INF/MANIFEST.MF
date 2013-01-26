@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: C3P0 datasource implementation with Spring configuration
-Bundle-SymbolicName: ar.com.oxen.nibiru.datasource.c3p0.spring
-Bundle-Version: 0.4.0
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: com.mchange.v2.c3p0,
- javax.sql,
- org.springframework.beans.factory.config;version="3.0.6.RELEASE"

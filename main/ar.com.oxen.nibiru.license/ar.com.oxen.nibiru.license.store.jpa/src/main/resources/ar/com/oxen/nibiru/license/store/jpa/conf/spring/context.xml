@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans.xsd
+    	http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    ">
+ 
+	<bean name="licenseStoreManager"
+		class="ar.com.oxen.nibiru.license.store.jpa.JpaLicenseStoreManager"/>
+	
+	<tx:advice id="licenseTxAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="getLicense" propagation="REQUIRED" />
+			<tx:method name="saveLicense" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames" value="licenseStoreManager" />
+		<property name="interceptorNames" value="licenseTxAdvice" />
+	</bean>
+</beans>

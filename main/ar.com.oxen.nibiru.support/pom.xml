@@ -15,11 +15,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<modules>
+		<module>ar.com.oxen.nibiru.commons</module>
 		<module>ar.com.oxen.nibiru.commons.blueprint</module>
+		<module>ar.com.oxen.nibiru.datasource.c3p0</module>
 		<module>ar.com.oxen.nibiru.datasource.c3p0.blueprint</module>
-		<module>ar.com.oxen.nibiru.datasource.c3p0.spring</module>
+		<module>ar.com.oxen.nibiru.datasource.dbcp</module>
 		<module>ar.com.oxen.nibiru.datasource.dbcp.blueprint</module>
-		<module>ar.com.oxen.nibiru.datasource.dbcp.spring</module>
 		<module>ar.com.oxen.nibiru.feature</module>
 		<module>ar.com.oxen.nibiru.http.utils</module>
 		<module>ar.com.oxen.nibiru.jpa</module>
@@ -28,5 +29,5 @@
 		<module>ar.com.oxen.nibiru.osgi.utils</module>
 		<module>ar.com.oxen.nibiru.targetplatform</module>
 		<module>ar.com.oxen.nibiru.standalone</module>
-  </modules>
+	</modules>
 </project>
