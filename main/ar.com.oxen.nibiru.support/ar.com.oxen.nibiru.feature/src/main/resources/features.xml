@@ -168,7 +168,7 @@
         <bundle>mvn:ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.manager.jpa.blueprint/${project.version}</bundle>
         <bundle>mvn:ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.module/${project.version}</bundle>
         <bundle>mvn:ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.profile.session/${project.version}</bundle>
-        <bundle>mvn:ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.profile.session/${project.version}</bundle>
+        <bundle>mvn:ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.profile.session.blueprint/${project.version}</bundle>
         <bundle>mvn:ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.ui.api/${project.version}</bundle>
         <bundle>mvn:ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.ui.generic.presenter/${project.version}</bundle>
         <bundle>mvn:ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.ui.generic.presenter.blueprint/${project.version}</bundle>

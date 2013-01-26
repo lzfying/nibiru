@@ -4,6 +4,8 @@
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
-	<!-- TODO: Crear un post processor o algo asi que genere los entity manager 
-		factories de conversacion -->
+
+	<import resource="classpath:/ar/com/oxen/nibiru/standalone/conf/spring/security-common.xml" />
+	<import resource="classpath:/ar/com/oxen/nibiru/security/spring/conf/spring/context.xml" />
+	
 </beans>
