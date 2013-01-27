@@ -36,7 +36,7 @@ public class Course {
 	@Show(order = 10)
 	private String name;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Subject subject;
 
 	@Column
