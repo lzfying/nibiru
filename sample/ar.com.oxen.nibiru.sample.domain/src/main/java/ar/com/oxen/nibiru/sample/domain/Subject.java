@@ -1,8 +1,10 @@
 package ar.com.oxen.nibiru.sample.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -21,7 +23,7 @@ import ar.com.oxen.nibiru.crud.manager.api.WidgetType;
 		@Action(name = CrudAction.DELETE, requiresEntity = true, showInForm = false, requiresConfirmation = true) })
 public class Subject {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Show(order = 0)
 	@Widget(type = WidgetType.TEXT_FIELD, readonly = true)
 	private Integer id;
@@ -35,7 +37,7 @@ public class Subject {
 	@Widget(type = WidgetType.TEXT_AREA, maxLength = 4000)
 	private String description;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@Show(order = 30)
 	@Widget(type = WidgetType.COMBO_BOX, valuesFilterExpression = "id != null ? 'o.subject.id = ' + id : '1=1'")
 	private Course mainCourse;

@@ -3,6 +3,7 @@ package ar.com.oxen.nibiru.security.manager.jpa.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -22,7 +23,7 @@ import ar.com.oxen.nibiru.crud.manager.api.WidgetType;
 @Table(name = "SecurityRole")
 public class Role {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(unique = true)

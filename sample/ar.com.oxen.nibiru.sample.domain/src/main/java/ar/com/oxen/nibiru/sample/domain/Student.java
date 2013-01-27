@@ -2,9 +2,11 @@ package ar.com.oxen.nibiru.sample.domain;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
@@ -25,7 +27,7 @@ import ar.com.oxen.nibiru.crud.manager.api.WidgetType;
 @Filter("authz.isCallerInRole('ar.com.oxen.nibiru.security.role.Administrator') ? null : \" o.name like 'T%' \"")
 public class Student {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Show(order = 0)
 	@Widget(type = WidgetType.TEXT_FIELD, readonly = true)
 	private Integer id;
@@ -38,7 +40,7 @@ public class Student {
 	@Show(order = 15, inList=true)
 	private Boolean active;
 
-	@ManyToMany(mappedBy = "students")
+	@ManyToMany(mappedBy = "students", cascade = CascadeType.ALL)
 	@Show(order = 30, inList = false)
 	@Widget(type = WidgetType.MULTISELECT, tab = "courses")
 	private Set<Course> courses;

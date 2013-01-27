@@ -7,6 +7,7 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudFactory;
 import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.crud.utils.AbstractCrudModuleConfigurator;
 import ar.com.oxen.nibiru.security.api.AuthenticationService;
+import ar.com.oxen.nibiru.security.api.AuthorizationService;
 import ar.com.oxen.nibiru.security.api.SuccessfulLogoutEvent;
 import ar.com.oxen.nibiru.security.manager.jpa.domain.Role;
 import ar.com.oxen.nibiru.security.manager.jpa.domain.RoleGroup;
@@ -27,8 +28,8 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 	private SecurityPresenterFactory securityPresenterFactory;
 	private SecurityViewFactory securityViewFactory;
 
-	private final static String[] OPERATOR_ROLES = { "ar.com.oxen.nibiru.security.role.Operator" };
-	private final static String[] ADMINISTRATOR_ROLES = { "ar.com.oxen.nibiru.security.role.Administrator" };
+	private final static String[] OPERATOR_ROLES = { AuthorizationService.OPERATOR_ROLE };
+	private final static String[] ADMINISTRATOR_ROLES = { AuthorizationService.ADMINISTRATOR_ROLE };
 
 	@Override
 	protected void configure() {

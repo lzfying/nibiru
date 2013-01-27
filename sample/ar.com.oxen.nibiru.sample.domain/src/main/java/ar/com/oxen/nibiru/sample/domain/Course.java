@@ -3,9 +3,11 @@ package ar.com.oxen.nibiru.sample.domain;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -25,7 +27,7 @@ import ar.com.oxen.nibiru.crud.manager.api.WidgetType;
 		@Action(name = CrudAction.DELETE, requiresEntity = true, showInForm = false, requiresConfirmation = true) })
 public class Course {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Show(order = 0)
 	@Widget(type = WidgetType.TEXT_FIELD, readonly = true)
 	private Integer id;
@@ -41,7 +43,7 @@ public class Course {
 	@Show(order = 30)
 	private Date startDate;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@Show(order = 40, inList = false)
 	private Set<Student> students;
 
