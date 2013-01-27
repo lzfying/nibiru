@@ -19,6 +19,7 @@ public class GenericMainPresenter extends AbstractPresenter<MainView> {
 	private ExtensionPointManager extensionPointManager;
 	private Profile profile;
 	private AuthorizationService authorizationService;
+	private String username;
 
 	public GenericMainPresenter(ExtensionPointManager extensionPointManager,
 			Profile profile, AuthorizationService authorizationService) {
@@ -30,6 +31,7 @@ public class GenericMainPresenter extends AbstractPresenter<MainView> {
 
 	@Override
 	public void go() {
+		this.username = this.profile.getUsername();
 		this.getView().setUserName(this.getUserName());
 
 		this.poulateMenuItem(this.getView().getMainMenu(),
@@ -48,7 +50,7 @@ public class GenericMainPresenter extends AbstractPresenter<MainView> {
 			return true;
 		}
 		for (String role : roles) {
-			if (authorizationService.isCallerInRole(role)) {
+			if (authorizationService.isUserInRole(username, role)) {
 				return true;
 			}
 		}

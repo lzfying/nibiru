@@ -7,4 +7,9 @@ public class AutologinAuthorizationService implements AuthorizationService {
 	public boolean isCallerInRole(String role) {
 		return true;
 	}
+
+	@Override
+	public boolean isUserInRole(String username, String role) {
+		return true;
+	}
 }

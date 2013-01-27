@@ -13,4 +13,15 @@ public interface AuthorizationService {
 	 * @return True if the user has the role
 	 */
 	boolean isCallerInRole(String role);
+
+	/**
+	 * Checks if an specific user has a given role.
+	 * 
+	 * @param username
+	 *            The username
+	 * @param role
+	 *            The role name.
+	 * @return True if the user has the role
+	 */
+	boolean isUserInRole(String username, String role);
 }
