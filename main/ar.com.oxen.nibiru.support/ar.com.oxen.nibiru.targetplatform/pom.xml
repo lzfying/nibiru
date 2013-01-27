@@ -13,11 +13,6 @@
 	<dependencies>
 		<!-- Librerias Oxen -->
 		<dependency>
-			<groupId>ar.com.oxen.nibiru.support</groupId>
-			<artifactId>ar.com.oxen.nibiru.antlr.fragment</artifactId>
-			<version>${nibiru-version}</version>
-		</dependency>
-		<dependency>
 			<groupId>ar.com.oxen.nibiru.application</groupId>
 			<artifactId>ar.com.oxen.nibiru.application.generic.service</artifactId>
 			<version>${nibiru-version}</version>
@@ -89,11 +84,6 @@
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.support</groupId>
-			<artifactId>ar.com.oxen.nibiru.jpa.spring</artifactId>
-			<version>${nibiru-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ar.com.oxen.nibiru.support</groupId>
 			<artifactId>ar.com.oxen.nibiru.module.utils</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
@@ -141,32 +131,6 @@
 			<groupId>ar.com.oxen.nibiru.i18n</groupId>
 			<artifactId>ar.com.oxen.nibiru.i18n.session.service</artifactId>
 			<version>${nibiru-version}</version>
-		</dependency>
-		<!-- Librerias Spring -->
-		<dependency>
-			<groupId>org.springframework.osgi</groupId>
-			<artifactId>spring-osgi-core</artifactId>
-			<version>2.0.0.M1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.osgi</groupId>
-			<artifactId>spring-osgi-extender</artifactId>
-			<version>2.0.0.M1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.osgi</groupId>
-			<artifactId>spring-osgi-web-extender</artifactId>
-			<version>2.0.0.M1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.osgi</groupId>
-			<artifactId>spring-osgi-web</artifactId>
-			<version>2.0.0.M1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.osgi</groupId>
-			<artifactId>spring-osgi-io</artifactId>
-			<version>2.0.0.M1</version>
 		</dependency>
 		<!-- Otras Librerias 3ros -->
 		<dependency>
@@ -243,6 +207,27 @@
 			<groupId>org.springframework.osgi</groupId>
 			<artifactId>catalina.osgi</artifactId>
 			<version>5.5.23-SNAPSHOT</version>
+			</dependency>
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+			<classifier>osgi</classifier>
+		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>com.springsource.javax.inject</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.6</version>
+		</dependency>
+		<dependency>
+			<artifactId>openjpa</artifactId>
+			<groupId>org.apache.openjpa</groupId>
+			<version>2.1.1</version>
 		</dependency>
 	</dependencies>
 	<properties>

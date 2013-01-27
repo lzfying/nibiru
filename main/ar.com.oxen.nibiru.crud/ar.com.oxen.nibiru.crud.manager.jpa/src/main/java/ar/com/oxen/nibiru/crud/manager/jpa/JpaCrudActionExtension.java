@@ -51,8 +51,8 @@ public class JpaCrudActionExtension<T> extends AbstractJpaCrudComponent<T>
 
 					crudActions.add(new SimpleCrudAction(action.name(), action
 							.requiresEntity(), action.requiresConfirmation(),
-							action.showInList(), modifiesEntity, action
-									.showInForm(), action.allowedRoles()));
+							action.showInList(), action.showInForm(),
+							modifiesEntity, action.allowedRoles()));
 				}
 			}
 		} else {
@@ -83,7 +83,7 @@ public class JpaCrudActionExtension<T> extends AbstractJpaCrudComponent<T>
 					new TransactionCallback<Void>() {
 						@Override
 						public Void doInTransaction() {
-							getEntityManager().merge(entity.getEntity());
+							getEntityManager().persist(entity.getEntity());
 							return null;
 						}
 					});

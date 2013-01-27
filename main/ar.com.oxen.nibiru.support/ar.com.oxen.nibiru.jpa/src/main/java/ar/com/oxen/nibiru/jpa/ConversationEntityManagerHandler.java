@@ -40,7 +40,8 @@ class ConversationEntityManagerHandler implements InvocationHandler {
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args)
 			throws Throwable {
-		if (method.getName().equals("close")) {
+		if (method.getName().equals("close")
+				|| method.getName().equals("clear")) {
 			return null;
 		} else {
 			return method.invoke(this.getConversationEntityManager(), args);

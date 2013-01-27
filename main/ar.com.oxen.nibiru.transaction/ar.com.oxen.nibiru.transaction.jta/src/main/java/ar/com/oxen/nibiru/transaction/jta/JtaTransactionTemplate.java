@@ -5,6 +5,7 @@ import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.NotSupportedException;
 import javax.transaction.RollbackException;
+import javax.transaction.Status;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
@@ -18,10 +19,15 @@ public class JtaTransactionTemplate implements TransactionTemplate {
 	public <T> T execute(EntityManager entityManager,
 			TransactionCallback<T> callback) {
 		try {
-			this.userTransaction.begin();
+			boolean newTransaction = this.userTransaction.getStatus() == Status.STATUS_NO_TRANSACTION;
+			if (newTransaction) {
+				this.userTransaction.begin();
+			}
 			entityManager.joinTransaction();
 			T returnValue = callback.doInTransaction();
-			this.userTransaction.commit();
+			if (newTransaction) {
+				this.userTransaction.commit();
+			}
 			return returnValue;
 		} catch (NotSupportedException e) {
 			throw new IllegalStateException(e);

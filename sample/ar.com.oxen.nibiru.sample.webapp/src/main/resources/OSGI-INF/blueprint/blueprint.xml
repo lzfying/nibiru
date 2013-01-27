@@ -25,6 +25,7 @@
 	<service ref="nibiruServlet" interface="javax.servlet.http.HttpServlet">
 		<service-properties>
 			<entry key="alias" value="/VAADIN" />
+			<entry key="widgetset" value="ar.com.oxen.nibiru.ui.vaadin.NibiruWidgetset" />
 		</service-properties>
 	</service>
 

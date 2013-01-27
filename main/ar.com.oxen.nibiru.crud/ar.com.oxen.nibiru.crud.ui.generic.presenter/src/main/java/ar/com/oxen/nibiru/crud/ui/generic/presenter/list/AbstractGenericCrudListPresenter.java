@@ -123,13 +123,20 @@ public abstract class AbstractGenericCrudListPresenter<T> extends
 					});
 
 			if (entity != null) {
+				boolean found = false;
 				for (int n = 0; n < this.entities.size(); n++) {
 					if (this.entities.get(n).getId().equals(id)) {
 						this.entities.set(n, entity);
-						this.refreshTable();
+						found = true;
 						break;
 					}
 				}
+				
+				if (!found) {
+					this.entities.add(entity);
+				}
+				
+				this.refreshTable();
 			} else {
 				/*
 				 * If it is not found, maybe the entity has been deleted.

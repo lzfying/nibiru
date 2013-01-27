@@ -75,7 +75,7 @@ public class JpaCrudManager<T> extends AbstractJpaCrudComponent<T> implements
 
 		sb.append("select o from ");
 		sb.append(this.getPersistentClass().getName());
-		sb.append(" o where ");
+		sb.append(" o where o.");
 		sb.append(field);
 		sb.append(" = :field");
 
