@@ -34,7 +34,6 @@
 	<reference id="entityManagerFactory" interface="javax.persistence.EntityManagerFactory"
 		filter="(osgi.unit.name=nibiruSample_conversation)" />
 
-
 	<bean id="sampleMessageProvider"
 		class="ar.com.oxen.nibiru.i18n.generic.ResourceBundleMessageProvider">
 		<property name="baseName" value="ar.com.oxen.nibiru.sample.ui.i18n.messages" />

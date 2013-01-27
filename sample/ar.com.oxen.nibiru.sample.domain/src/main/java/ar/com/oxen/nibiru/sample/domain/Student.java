@@ -37,7 +37,7 @@ public class Student {
 	private String name;
 
 	@Column
-	@Show(order = 15, inList=true)
+	@Show(order = 15, inList = true)
 	private Boolean active;
 
 	@ManyToMany(mappedBy = "students", cascade = CascadeType.ALL)
@@ -52,7 +52,6 @@ public class Student {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
 
 	public Boolean getActive() {
 		return active;
@@ -75,6 +74,18 @@ public class Student {
 	}
 
 	public void setCourses(Set<Course> courses) {
+		/*
+		 * OpenJPA updates in cascade just one side on a bidirectional relation
+		 * http://openjpa.apache.org/builds/1.0.1/apache-openjpa-1.0.1/docs/manual/jpa_overview_meta_field.html#jpa_overview_meta_mappedby
+		 */
+		for (Course course : this.courses) {
+			if (!courses.contains(course)) {
+				course.getStudents().remove(this);
+			}
+		}
+		for (Course course : courses) {
+			course.getStudents().add(this);
+		}
 		this.courses = courses;
 	}
 

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.1.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 		http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
-		http://aries.apache.org/xmlns/jpa/v1.1.0 http://aries.apache.org/schemas/jpa/jpa_110.xsd
 	">
 
 	<service interface="ar.com.oxen.nibiru.i18n.api.MessageProvider"
@@ -34,6 +33,9 @@
 
 	<reference id="wrapperFactory" interface="ar.com.oxen.commons.bean.api.WrapperFactory" />
 
+	<reference id="entityManagerFactory" interface="javax.persistence.EntityManagerFactory"
+		filter="(osgi.unit.name=nibiruSecurity_conversation)" />
+		
 	<reference id="transactionTemplate"
 		interface="ar.com.oxen.nibiru.transaction.api.TransactionTemplate" />
 
@@ -61,7 +63,9 @@
 	</bean>
 
 	<bean id="crudFactory" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudFactory">
-		<jpa:context property="entityManager" unitname="nibiruSecurity_conversation" />
+		<property name="entityManager">
+			<bean factory-ref="entityManagerFactory" factory-method="createEntityManager" />
+		</property>
 		<property name="wrapperFactory" ref="wrapperFactory" />
 		<property name="authorizationService" ref="authorizationService" />
 		<property name="transactionTemplate" ref="transactionTemplate" />

@@ -22,6 +22,7 @@ import ar.com.oxen.nibiru.transaction.api.TransactionTemplate;
 public class ConversationEntityManagerExtender {
 	private static final String OSGI_UNIT_NAME_PROPERTY = "osgi.unit.name";
 	private static final String NIBIRU_CONVERSATION_PROPERTY = "ar.com.oxen.nibiru.jpa.conversation";
+	private static final String ARIES_JPA_PROXY_PROPERTY = "org.apache.aries.jpa.proxy.factory";
 
 	private BundleContext bundleContext;
 	private ConversationAccessor conversationAccessor;
@@ -83,7 +84,8 @@ public class ConversationEntityManagerExtender {
 				.getService(reference);
 
 		if (!Boolean.TRUE.equals(reference
-				.getProperty(NIBIRU_CONVERSATION_PROPERTY))) {
+				.getProperty(NIBIRU_CONVERSATION_PROPERTY))
+				&& reference.getProperty(ARIES_JPA_PROXY_PROPERTY) == null) {
 			EntityManagerFactory conversationEntityManagerFactory = new ConversationEntityManagerFactory(
 					entityManagerFactory, this.conversationAccessor,
 					this.transactionTemplate);

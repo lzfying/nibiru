@@ -16,6 +16,9 @@
 	<reference id="conversationFactory"
 		interface="ar.com.oxen.nibiru.conversation.api.ConversationFactory" />
 
+	<reference id="conversationAccessor"
+		interface="ar.com.oxen.nibiru.conversation.api.ConversationAccessor" />
+
 	<reference id="authorizationService"
 		interface="ar.com.oxen.nibiru.security.api.AuthorizationService"
 		availability="optional" />
@@ -25,6 +28,7 @@
 		<property name="eventBus" ref="eventBus" />
 		<property name="extensionPointManager" ref="extensionPointManager" />
 		<property name="conversationFactory" ref="conversationFactory" />
+		<property name="conversationAccessor" ref="conversationAccessor" />
 		<property name="authorizationService" ref="authorizationService" />
 	</bean>
 

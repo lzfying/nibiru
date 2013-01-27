@@ -1,6 +1,5 @@
 package ar.com.oxen.nibiru.crud.bean.manager;
 
-import java.util.Collection;
 import java.util.List;
 
 import ar.com.oxen.commons.bean.api.BeanWrapper;
@@ -45,21 +44,9 @@ public abstract class AbstractBeanCrudEntity<T> implements CrudEntity<T> {
 		return this.bean.getProperty(fieldName);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void setValue(String fieldName, Object value) {
-		Collection<Object> oldCollection = null;
-		if (value instanceof Collection<?>) {
-			oldCollection = (Collection<Object>) this.bean
-					.getProperty(fieldName);
-		}
-		if (oldCollection != null) {
-			Collection<Object> newCollection = (Collection<Object>) value;
-			oldCollection.clear();
-			oldCollection.addAll(newCollection);
-		} else {
-			this.bean.setProperty(fieldName, value);
-		}
+		this.bean.setProperty(fieldName, value);
 	}
 
 	@Override

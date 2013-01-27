@@ -1,6 +1,7 @@
 package ar.com.oxen.nibiru.crud.ui.generic.presenter;
 
 import ar.com.oxen.commons.eventbus.api.EventBus;
+import ar.com.oxen.nibiru.conversation.api.ConversationAccessor;
 import ar.com.oxen.nibiru.conversation.api.ConversationFactory;
 import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.crud.manager.api.EditCrudEntityEvent;
@@ -18,6 +19,7 @@ public class GenericCrudPresenterFactory implements CrudPresenterFactory {
 	private EventBus eventBus;
 	private ExtensionPointManager extensionPointManager;
 	private ConversationFactory conversationFactory;
+	private ConversationAccessor conversationAccessor;
 	private AuthorizationService authorizationService;
 
 	@Override
@@ -31,9 +33,9 @@ public class GenericCrudPresenterFactory implements CrudPresenterFactory {
 	@Override
 	public <T> Presenter<CrudListView> buildListPresenter(
 			CrudManager<T> crudManager, String parentField, Object parentValue) {
-		return new GenericCrudListPresenterByParent<T>(crudManager, this.eventBus,
-				this.conversationFactory.buildConversation(),
-				this.extensionPointManager, parentField, parentValue, authorizationService);
+		return new GenericCrudListPresenterByParent<T>(crudManager,
+				this.eventBus, this.conversationAccessor.getCurrentConversation(), this.extensionPointManager,
+				parentField, parentValue, authorizationService);
 	}
 
 	@Override
@@ -55,6 +57,10 @@ public class GenericCrudPresenterFactory implements CrudPresenterFactory {
 
 	public void setConversationFactory(ConversationFactory conversationFactory) {
 		this.conversationFactory = conversationFactory;
+	}
+
+	public void setConversationAccessor(ConversationAccessor conversationAccessor) {
+		this.conversationAccessor = conversationAccessor;
 	}
 
 	public AuthorizationService getAuthorizationService() {
