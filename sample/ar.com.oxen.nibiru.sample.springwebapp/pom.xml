@@ -64,17 +64,12 @@
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.sample</groupId>
+			<artifactId>ar.com.oxen.nibiru.sample.domain</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.sample</groupId>
 			<artifactId>ar.com.oxen.nibiru.sample.module</artifactId>
-			<version>${nibiru-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ar.com.oxen.nibiru.sample</groupId>
-			<artifactId>ar.com.oxen.nibiru.sample.datasource.fragment</artifactId>
-			<version>${nibiru-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ar.com.oxen.nibiru.sample</groupId>
-			<artifactId>ar.com.oxen.nibiru.sample.jpa.fragment</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
