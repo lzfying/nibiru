@@ -65,7 +65,7 @@
 \begin_body
 
 \begin_layout Title
-Nibiru 0.3 Reference
+Nibiru 0.4 Reference
 \end_layout
 
 \begin_layout Standard
@@ -244,7 +244,7 @@ was chosen because it is currently the most widespread platform within the
 \end_layout
 
 \begin_layout Subsection
-OSGi / Spring DM
+OSGi / Blueprint
 \end_layout
 
 \begin_layout Standard
@@ -260,37 +260,27 @@ target "http://www.osgi.org"
  
 \begin_inset CommandInset href
 LatexCommand href
-name "Spring DM"
-target "http://www.springsource.org/osgi"
+name "Blueprint"
+target "http://www.ibm.com/developerworks/opensource/library/os-osgiblueprint/"
 
 \end_inset
 
  is used because it provides many facilities to implement the IoC pattern
  under OSGi.
- 
-\begin_inset CommandInset href
-LatexCommand href
-name "Gemini"
-target "http://www.eclipse.org/gemini/"
-
-\end_inset
-
- wasn't chosen because at the time of starting the project it was still
- very immature.
 \end_layout
 
 \begin_layout Standard
 Using these technologies, shared components are exposed using OSGi services.
  Also, the division between API and implementation allows service hot swapping,
  since the client components doesn't access to the concrete class implementation.
- On the other hand, Spring DM provides proxies that make such hot swapping
+ On the other hand, Blueprint provides proxies that make such hot swapping
  transparent to the client code.
 \end_layout
 
 \begin_layout Standard
-However, almost all components are independent of OSGi and Spring, thanks
- to the IoC pattern (except for the ones that implement specific Spring
- features).
+However, almost all components are independent of OSGi and Blueprint, thanks
+ to the IoC pattern (except for the ones that implement specific OSGi features
+ - which can be replaced).
  This way, we provide support for non-OSGi deployment too.
 \end_layout
 
@@ -441,7 +431,7 @@ You can run the sample inside a non-OSGi environment.
 \begin_inset CommandInset href
 LatexCommand href
 name "here"
-target "http://servidor.oxen.com.ar/artifactory/libs-release-local/ar/com/oxen/nibiru/sample/ar.com.oxen.nibiru.sample.springwebapp/0.2/ar.com.oxen.nibiru.sample.springwebapp-0.2.war"
+target "http://servidor.oxen.com.ar/artifactory/libs-release-local/ar/com/oxen/nibiru/sample/ar.com.oxen.nibiru.sample.springwebapp/0.4/ar.com.oxen.nibiru.sample.springwebapp-0.2.war"
 
 \end_inset
 
@@ -504,7 +494,7 @@ Hacer un namespace handler.
 \begin_layout Enumerate
 
 \emph on
-Armar anotaciones (aunque no se cómo encajaría esto con Spring DM).
+Armar anotaciones.
 \end_layout
 
 \begin_layout Enumerate
@@ -827,28 +817,12 @@ The ExtensionPointManager also provides methods for registering new extensions
 \end_layout
 
 \begin_layout Subsection
-Spring DM implementation
-\end_layout
-
-\begin_layout Standard
-The ar.com.oxen.nibiru.extensionpoint.spring bundle has an extension point implementa
-tion based on Spring DM and OSGi services.
-\end_layout
-
-\begin_layout Standard
-Under this implementation, each extension point is simply implemented using
- an OSGi service with a property called "extensionPoint".
- Such property is used to determine the name of the extension point where
- functionality should be added.
-\end_layout
-
-\begin_layout Subsection
 Generic implementation
 \end_layout
 
 \begin_layout Standard
 The ar.com.oxen.nibiru.extensionpoint.generic bundle provides a generic extension
- point implementation which can be used on non-OSGi environments.
+ point implementation which can be used on both, OSGi and non-OSGi environments.
 \end_layout
 
 \begin_layout Section
@@ -1046,163 +1020,12 @@ HTTP implementation
 \end_layout
 
 \begin_layout Standard
-The ar.com.oxen.nibiru.session.spring.http project provides access to the HTTP
- session using Spring components (Servlet filters that provide session access
- through a ThreadLocal).
-\end_layout
-
-\begin_layout Subsection
-Spring integration
-\end_layout
-
-\begin_layout Standard
-The ar.com.oxen.nibiru.session.spring.scope project provides a Spring scope which
- allows declaring context beans that are stored in the session provided
- by nibiru.
- In conjunction with the <aop:scoped-proxy/> tag provided by Spring, this
- mechanism allows beans which are stored in the session to be transparently
- injected into singleton beans.
-\end_layout
-
-\begin_layout Standard
-For example:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-...
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-<osgi:reference id="nibiruSession"
-\end_layout
-
-\begin_layout Plain Layout
-
-    interface="ar.com.oxen.nibiru.session.api.Session" />
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
-  
-\end_layout
-
-\begin_layout Plain Layout
-
-  <property name="scopes">
-\end_layout
-
-\begin_layout Plain Layout
-
-    <map>
-\end_layout
-
-\begin_layout Plain Layout
-
-      <entry key="nibiruSession">
-\end_layout
-
-\begin_layout Plain Layout
-
-        <bean
-\end_layout
-
-\begin_layout Plain Layout
-
-            class="ar.com.oxen.nibiru.session.spring.scope.SessionScope">
-\end_layout
-
-\begin_layout Plain Layout
-
-          <property name="session" ref="nibiruSession" />
-\end_layout
-
-\begin_layout Plain Layout
-
-        </bean>
-\end_layout
-
-\begin_layout Plain Layout
-
-      </entry>
-\end_layout
-
-\begin_layout Plain Layout
-
-    </map>
-\end_layout
-
-\begin_layout Plain Layout
-
-  </property>
-\end_layout
-
-\begin_layout Plain Layout
-
-</bean> 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-<bean name="myBean" scope="nibiruSession" 
-\end_layout
-
-\begin_layout Plain Layout
-
-    class="ar.com.oxen.nibiru.MyBean">
-\end_layout
-
-\begin_layout Plain Layout
-
-  <property name="eventBus" ref="eventBus" />
-\end_layout
-
-\begin_layout Plain Layout
-
-  <property name="localeHolder" ref="localeHolder" />
-\end_layout
-
-\begin_layout Plain Layout
-
-  <aop:scoped-proxy />
-\end_layout
-
-\begin_layout Plain Layout
-
-</bean>
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-...
-\end_layout
-
-\end_inset
-
-
+The ar.com.oxen.nibiru.session.http project provides access to the HTTP session
+ using components from ar.com.oxen.nibiru.http.utils.
+ In the webapp, you must place a filter of type ar.com.oxen.nibiru.http.utils.SessionH
+olderFilter in order to make HTTP session accessible via ar.com.oxen.nibiru.http.util
+s.SessionHolder.
+ For more details, look at the sample app.
 \end_layout
 
 \begin_layout Section
@@ -1434,33 +1257,60 @@ is used for persistence.
 \begin_layout Standard
 Since JPA is an API itself, no Nibiru-specific API was defined for object
  persistence.
- On the other hand, an instance of javax.persistence.EntityManagerFactory,
- from JPA specification, is exposed as a service.
- The ar.com.oxen.nibiru.jpa.spring bundle provides 2 implementations of such
- service that use Spring classes:
-\end_layout
-
-\begin_layout Enumerate
-ConversationEntityManagerFactory: Gets the EntityManager form the active
- conversation, creating it if not exists.
- Currently this component is exposed as a service.
- 
-\end_layout
-
-\begin_layout Enumerate
-SessionEntityManagerFactory: Gets the EntityManager form the session, creating
- it if not exists.
- Is currently evaluating whether this component should be removed (it was
- the original implementation of the service).
+ On the other hand, instances of javax.persistence.EntityManagerFactory, from
+ JPA specification, are exposed as services.
 \end_layout
 
 \begin_layout Standard
-Because JPA requires you to specify in the META-INF/persistence.xml file
- the classes to be persisted, an OSGi fragment must be created in order
- to add such file to JPA service bundle.
- This has the disadvantage that the file should include all the classes
- to be persisted by different modules.
- The project ar.com.oxen.nibiru.sample.jpa.fragment is an example of this.
+On Karaf container, when a bundle with JPA configuration is deployed, an
+ EntityManagerFactory is automatically created and exposed as mentioned
+ before.
+ Aries is responsible for doing this task.
+ For an explanation about which configuration and files must be included
+ into de bundle, read the 
+\begin_inset CommandInset href
+LatexCommand href
+name "Aries JPA documentation"
+target "http://aries.apache.org/modules/jpaproject.html"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In some scenarios (such as CRUD), a conversation bound EntityManager would
+ be useful.
+ This way, you can hold changes until the conversation is finished.
+ Also, you can avoid dealing with disconnected objects.
+\end_layout
+
+\begin_layout Standard
+For this purpose, the ar.com.oxen.nibiru.jpa bundle provides the ConversationEntityM
+anagerFactory class, which wraps an EntityManagerFactory and bounds each
+ EntityManager created to the conversation.
+ A proxy that looks for the EntityManager in the conversation is returned,
+ so you can inject it directly on your component and use it without caring
+ about conversation.
+\end_layout
+
+\begin_layout Standard
+As said before, Aries JPA exposes an EntityManagerFactory for each JPA bundle.
+ In order to integrate this approach with the conversation classes, the
+ ar.com.oxen.nibiru.jpa.blueprint bundle implements an extender (ConversationEntityMa
+nagerExtender) that listens when an EntityManagerFactory service is created,
+ wraps it into a ConversationEntityManagerFactory and exposes it as a new
+ service.
+ The osgi.unit.name property (which contains the persistence unit name) is
+ suffixed with 
+\begin_inset Quotes eld
+\end_inset
+
+_conversation
+\begin_inset Quotes erd
+\end_inset
+
+ in order to diferentiate it from the wrapped service.
 \end_layout
 
 \begin_layout Subsection
@@ -2220,8 +2070,8 @@ Default module
 \end_layout
 
 \begin_layout Standard
-The ar.com.oxen.nibiru.security.db bundle provides a security module implementation
- with:
+The ar.com.oxen.nibiru.security.module bundle provides a security module implementati
+on with:
 \end_layout
 
 \begin_layout Itemize
@@ -2245,7 +2095,7 @@ status open
 
 \backslash
 lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.module/src/main/
-resources/ar/com/oxen/nibiru/security/module/context.xml}
+resources/OSGI-INF/blueprint/blueprint.xml}
 \end_layout
 
 \end_inset
@@ -2265,8 +2115,8 @@ If your application doesn't have security requirements, you can use the
 \end_layout
 
 \begin_layout Standard
-Just include this module instead of default module and Spring Security /
- JPA implementations.
+Just include this module into the installation.
+ No other security module/implementation is required.
 \end_layout
 
 \begin_layout Subsection
@@ -2304,7 +2154,7 @@ Transaction management
 \end_layout
 
 \begin_layout Standard
-Since there are not intrusive mechanisms (using 
+There are transaction demarcation mechanisms (using 
 \begin_inset CommandInset href
 LatexCommand href
 name "AOP"
@@ -2312,117 +2162,42 @@ target "http://en.wikipedia.org/wiki/Aspect-oriented_programming"
 
 \end_inset
 
-), no specific API was defined in this case.
- It would be defined in order to provide programmatic transaction management.
+) which are not intrusive.
+ Where possible, such mechanisms are used.
+  Its implementation depends on the platform.
+ For example, when using Blueprint, you could use 
+\begin_inset CommandInset href
+LatexCommand href
+name "Aries JTA"
+target "http://aries.apache.org/modules/transactionsproject.html"
+
+\end_inset
+
+ integration.
+ When running on a non-OSGi environment (with Spring), you can choose a
+ PlatformTransactionManager implementation.
 \end_layout
 
 \begin_layout Standard
-The ar.com.oxen.nibiru.transaction.spring bundle exposes a Spring TransactionManager
- as an OSGi service.
- Within each bundle Spring AOP may be used in order to, declaratively, setting
- transactions (by injecting the TransactionManager service).
+An specific API was defined in order to provide programmatic transaction
+ management.
+ It is very limited, just to satisfy Nibiru requirements.
 \end_layout
 
 \begin_layout Standard
-For example:
+Currently, the only interface is TransactionTemplate:
 \end_layout
 
 \begin_layout Standard
-\begin_inset listings
-inline false
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-...
-\end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-<osgi:reference id="transactionManager" 
-\end_layout
-
-\begin_layout Plain Layout
-
-    interface="org.springframework.transaction.PlatformTransactionManager"
- />
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-<tx:advice id="txAdvice" transaction-manager="transactionManager"> 
-\end_layout
-
-\begin_layout Plain Layout
-
-  <tx:attributes>
-\end_layout
-
-\begin_layout Plain Layout
-
-    <tx:method name="*" propagation="REQUIRED"/>
-\end_layout
-
-\begin_layout Plain Layout
-
-  </tx:attributes>
-\end_layout
-
-\begin_layout Plain Layout
-
-</tx:advice>
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-<bean  class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProces
-sor" />
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"
- > 
-\end_layout
-
-\begin_layout Plain Layout
-
-  <property name="beanNames" value="dynamicBundleCrudManager"/>
-\end_layout
-
-\begin_layout Plain Layout
-
-  <property name="interceptorNames" value="txAdvice"/>
-\end_layout
-
-\begin_layout Plain Layout
-
-</bean> 
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-...
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.transaction/ar.com.oxen.nibiru.transaction.api/src/ma
+in/java/ar/com/oxen/nibiru/transaction/api/TransactionTemplate.java}
 \end_layout
 
 \end_inset
@@ -2431,24 +2206,23 @@ sor" />
 \end_layout
 
 \begin_layout Standard
-Currently, not all the Spring XML tags for transaction management are supported,
- so you should use a BeanNameAutoProxyCreator component, as shown in the
- example.
-\end_layout
-
-\begin_layout Standard
-
-\emph on
-TODO: El bundle expone un JpaTransactionManager.
- El nombre del proyecto debería decir 
+which allows running a callback inside a transaction (with 
 \begin_inset Quotes eld
 \end_inset
 
-jpa
+required
 \begin_inset Quotes erd
 \end_inset
 
- en algún lugar.
+ semantics: if a transaction is active, it is used, otherwise, a new one
+ is created).
+\end_layout
+
+\begin_layout Standard
+The ar.com.oxen.nibiru.transaction.jta bundle provides a JTA implementation for
+ such template.
+ It receives the UserTransaction (which is exposed as an OSGi service using
+ Aries/Karaf).
 \end_layout
 
 \begin_layout Section
@@ -2556,8 +2330,8 @@ Generic implementation
 The ar.com.oxen.nibiru.i18n.generic project contains an generic MessageSource
  implementation which is injected with LocaleHolder and a list of MessageProvide
 rs.
- Spring DM can inject a MessageProvider service list that is updated dynamically
- according to the availability of new instances of these services.
+ OSGi Blueprint can inject a MessageProvider service list that is updated
+ dynamically according to the availability of new instances of these services.
  This project also contains a MessageProvider implementation based on ResoruceBu
 ndle.
 \end_layout
@@ -3110,7 +2884,7 @@ status open
 
 
 \backslash
-lstinputlisting{../../sample/ar.com.oxen.nibiru.sample.module/src/main/java/ar/com/oxen/n
+lstinputlisting{../../sample/ar.com.oxen.nibiru.sample.domain/src/main/java/ar/com/oxen/n
 ibiru/sample/domain/Student.java}
 \end_layout
 
@@ -3598,36 +3372,11 @@ n.
 \end_layout
 
 \begin_layout Standard
-Inside this project, you can customize the web application.
- For example, you can change the context path:
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-lstinputlisting{../../sample/ar.com.oxen.nibiru.sample.webapp/META-INF/MANIFEST.MF}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 The current implementation uses Vaddin.
- Because of this, you should create two files inside the WEB-INF directory:
+ Because of this, you should create a Blueprint configuration like this
+ one:
 \end_layout
 
-\begin_layout Itemize
-web.xml:
-\end_layout
-
-\begin_deeper
 \begin_layout Standard
 \begin_inset ERT
 status open
@@ -3636,69 +3385,13 @@ status open
 
 
 \backslash
-lstinputlisting{../../sample/ar.com.oxen.nibiru.sample.webapp/WEB-INF/web.xml}
+lstinputlisting{../../sample/ar.com.oxen.nibiru.sample.webapp/src/main/resources/OSGI-INF
+/blueprint/blueprint.xml}
 \end_layout
 
 \end_inset
 
 
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-applicationContext.xml:
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-lstinputlisting{../../sample/ar.com.oxen.nibiru.sample.webapp/WEB-INF/applicationContext.x
-ml}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Subsection
-Datasource fragment
-\end_layout
-
-\begin_layout Standard
-This bundle provides database connection information, by adding a database.proper
-ties file to the bundle exposing the DataSource (ar.com.oxen.nibiru.datasource.dbcp
- for example).
- Also, dependencies to database driver must be added, in order to make them
- visible to DataSource bundle.
-\end_layout
-
-\begin_layout Subsection
-JPA fragment
-\end_layout
-
-\begin_layout Standard
-This bundle adds the META-INF/persistence.xml to the JPA bundle (for example,
- ar.com.oxen.nibiru.jpa.spring).
- It also must add dependency to domain classes, so JPA class loader can
- see them.
-\end_layout
-
-\begin_layout Subsection
-ODA fragment
-\end_layout
-
-\begin_layout Standard
-If your project uses BIRT reports based on Open Data Access, you must add
- a fragment in order to make driver classes visibles to org.eclipse.birt.report.data.
-oda.jdbc bundle.
 \end_layout
 
 \begin_layout Section
@@ -3730,7 +3423,7 @@ status open
 
 \backslash
 lstinputlisting{../ar.com.oxen.nibiru.support/ar.com.oxen.nibiru.standalone/src/main/resou
-rces/ar/com/oxen/nibiru/standalone/context.xml}
+rces/ar/com/oxen/nibiru/standalone/conf/spring/core.xml}
 \end_layout
 
 \end_inset
@@ -3740,7 +3433,8 @@ rces/ar/com/oxen/nibiru/standalone/context.xml}
 
 \begin_layout Standard
 However, not all the modules are included in this file.
- Check the ar.com.oxen.nibiru.standalone package for available configurations.
+ Check the ar.com.oxen.nibiru.standalone.conf.spring package for available configurati
+ons.
 \end_layout
 
 \begin_layout Part
