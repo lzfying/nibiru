@@ -289,6 +289,14 @@ Getting started
 \end_layout
 
 \begin_layout Subsection
+Run from binaries
+\end_layout
+
+\begin_layout Subsection
+Source code
+\end_layout
+
+\begin_layout Subsubsection
 Required software
 \end_layout
 
@@ -345,7 +353,7 @@ target "http://eclipse.org/egit/"
 .
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Installation
 \end_layout
 
@@ -438,84 +446,6 @@ target "http://servidor.oxen.com.ar/artifactory/libs-release-local/ar/com/oxen/n
 .
 \end_layout
 
-\begin_layout Subsection
-Sample project
-\end_layout
-
-\begin_layout Standard
-Running the sample application will create an 
-\begin_inset CommandInset href
-LatexCommand href
-name "H2 database"
-target "http://www.h2database.com/"
-
-\end_inset
-
- in a directory called nibiruDb inside your home directory.
- Windows users should modify the ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.data
-source.fragment/src/main/resources/database.properties file in order to specify
- the database location.
-\end_layout
-
-\begin_layout Standard
-The sample application uses a dummy authentication service.
- Log-in with user 
-\begin_inset Quotes eld
-\end_inset
-
-guest
-\begin_inset Quotes erd
-\end_inset
-
-, password 
-\begin_inset Quotes eld
-\end_inset
-
-guest
-\begin_inset Quotes erd
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-
-\emph on
-TODO: Simplificar el armado de un proyecto.
- Opciones:
-\end_layout
-
-\begin_layout Enumerate
-
-\emph on
-Hacer un namespace handler.
-\end_layout
-
-\begin_layout Enumerate
-
-\emph on
-Armar anotaciones.
-\end_layout
-
-\begin_layout Enumerate
-
-\emph on
-Usar directamente Guice+Peaberry (
-\begin_inset CommandInset href
-LatexCommand href
-target "http://code.google.com/p/peaberry/"
-
-\end_inset
-
-)
-\end_layout
-
-\begin_layout Enumerate
-
-\emph on
-Crear un DSL con Builders
-\end_layout
-
 \begin_layout Part
 Project Structure
 \end_layout
@@ -571,6 +501,10 @@ ar.com.oxen.nibiru.session
 
 \begin_layout Itemize
 ar.com.oxen.nibiru.support
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.transaction
 \end_layout
 
 \begin_layout Itemize
@@ -646,7 +580,7 @@ Another naming convention is that implementations of APIs that are not dependent
 \end_layout
 
 \begin_layout Subsection
-Division between classes and services
+Separation between classes and services
 \end_layout
 
 \begin_layout Standard
@@ -667,15 +601,17 @@ target "http://code.google.com/p/peaberry/"
 \end_layout
 
 \begin_layout Standard
-Bundles with service exporting definitions are suffixed with 
+Bundles with service exporting definitions have a descriptive suffix on
+ the name.
+ Blueprint bundles are suffixed with 
 \begin_inset Quotes eld
 \end_inset
 
-.service
+.blueprint
 \begin_inset Quotes erd
 \end_inset
 
- on the name.
+.
 \end_layout
 
 \begin_layout Part
@@ -1915,6 +1851,112 @@ a/ar/com/oxen/nibiru/security/api/HashService.java}
 \end_layout
 
 \begin_layout Subsubsection
+Session profile implementation
+\end_layout
+
+\begin_layout Standard
+An ar.com.oxen.security.api.Profile implementation that stores profile information
+ into Nibiru session can be found in the ar.com.oxen.security.profile.session
+ bundle:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.profile.session/s
+rc/main/java/ar/com/oxen/nibiru/security/profile/session/SessionProfile.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This service is accessed from different security implementations.
+\end_layout
+
+\begin_layout Subsubsection
+Generic security implementation
+\end_layout
+
+\begin_layout Standard
+The project ar.com.oxen.nibiru.security.generic provides a simple implementation
+ for security components.
+\end_layout
+
+\begin_layout Standard
+GenericAuthenticationService class performs authentication by retrieving
+ UserData from SecurityManager and storing it into the Nibiru session:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.generic/src/main
+/java/ar/com/oxen/nibiru/security/generic/GenericAuthenticationService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Because of this, the GenericAuthorizationService class just reads the UserData
+ from such session:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.generic/src/main
+/java/ar/com/oxen/nibiru/security/generic/GenericAuthorizationService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Hashing service is implemented by delegating to java.security.MessageDigest
+ class:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.generic/src/main
+/java/ar/com/oxen/nibiru/security/generic/MessageDigestHashService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
 Spring Security implementation
 \end_layout
 
@@ -1959,7 +2001,7 @@ However, an AuthenticationManager instance should be injected into instances
 \end_layout
 
 \begin_layout Standard
-Since SpringAuthenticationService stores the authentincation information
+Since SpringAuthenticationService stores the authentication information
  into the Nibiru session, the SpringAuthorizationService class just reads
  the authorities from such session:
 \end_layout
@@ -3387,6 +3429,38 @@ status open
 \backslash
 lstinputlisting{../../sample/ar.com.oxen.nibiru.sample.webapp/src/main/resources/OSGI-INF
 /blueprint/blueprint.xml}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Karaf installation
+\end_layout
+
+\begin_layout Standard
+Installing on Karaf is simple and straightforward.
+ Look at the Getting Started section for an explanation about how to do
+ this.
+\end_layout
+
+\begin_layout Standard
+Nibiru modules are grouped into different Karaf features.
+ Such features can be seen in this file:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.support/ar.com.oxen.nibiru.feature/src/main/resource
+s/features.xml}
 \end_layout
 
 \end_inset

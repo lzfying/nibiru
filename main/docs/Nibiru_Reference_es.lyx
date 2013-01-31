@@ -289,6 +289,14 @@ Primeros pasos
 \end_layout
 
 \begin_layout Subsection
+Ejecutar desde los binarios
+\end_layout
+
+\begin_layout Subsection
+Código fuente
+\end_layout
+
+\begin_layout Subsubsection
 Software requerido
 \end_layout
 
@@ -345,7 +353,7 @@ target "http://eclipse.org/egit/"
 .
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Instalación
 \end_layout
 
@@ -370,8 +378,8 @@ mvn eclipse:eclipse
 \begin_inset Quotes erd
 \end_inset
 
- desde el directorio para generar el proyecto Eclipse a partir de los archivos
- de Maven y descargar los JARs del target platform.
+ desde los directorios main y sample para generar los proyectos Eclipse
+ a partir de los archivos de Maven y descargar los JARs del target platform.
  
 \end_layout
 
@@ -440,69 +448,6 @@ target "http://servidor.oxen.com.ar/artifactory/libs-release-local/ar/com/oxen/n
 .
 \end_layout
 
-\begin_layout Subsection
-Proyecto de ejemplo
-\end_layout
-
-\begin_layout Standard
-Al ejecutar la aplicación se creará una 
-\begin_inset CommandInset href
-LatexCommand href
-name "base de datos H2"
-target "http://www.h2database.com/"
-
-\end_inset
-
- en un directorio nibiruDb en su home directory.
- Los usuarios de Windows deberían modificar el archivo ar.com.oxen.nibiru.sample/ar.c
-om.oxen.nibiru.sample.datasource.fragment/src/main/resources/database.properties
- para especificar la ubicación de la base de datos.
-\end_layout
-
-\begin_layout Standard
-La aplicación de ejemplo usa un servicio de autenticación de prueba.
- Ingrese con usuario “guest”, clave “guest”.
- 
-\end_layout
-
-\begin_layout Standard
-
-\emph on
-TODO: Simplificar el armado de un proyecto.
- Opciones:
-\end_layout
-
-\begin_layout Enumerate
-
-\emph on
-Hacer un namespace handler.
-\end_layout
-
-\begin_layout Enumerate
-
-\emph on
-Armar anotaciones.
-\end_layout
-
-\begin_layout Enumerate
-
-\emph on
-Usar directamente Guice+Peaberry (
-\begin_inset CommandInset href
-LatexCommand href
-target "http://code.google.com/p/peaberry/"
-
-\end_inset
-
-)
-\end_layout
-
-\begin_layout Enumerate
-
-\emph on
-Crear un DSL con Builders
-\end_layout
-
 \begin_layout Part
 Estructura del proyecto
 \end_layout
@@ -558,6 +503,10 @@ ar.com.oxen.nibiru.session
 
 \begin_layout Itemize
 ar.com.oxen.nibiru.support
+\end_layout
+
+\begin_layout Itemize
+ar.com.oxen.nibiru.transaction
 \end_layout
 
 \begin_layout Itemize
@@ -680,15 +629,17 @@ target "http://code.google.com/p/peaberry/"
 
 \begin_layout Standard
 Los bundles que exportan servicio se llaman igual que el bundle que contiene
- la clase que lo implementa, pero con un sufijo 
+ la clase que lo implementa, pero con un sufijo descriptivo en el nombre.
+ Por ejemplo, los bundles que exportan servicios mediante Blueprint tienen
+ el sufijo 
 \begin_inset Quotes eld
 \end_inset
 
-.service
+.blueprint
 \begin_inset Quotes erd
 \end_inset
 
- en el nombre.
+.
 \end_layout
 
 \begin_layout Part
@@ -1939,6 +1890,113 @@ status open
 \backslash
 lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.api/src/main/jav
 a/ar/com/oxen/nibiru/security/api/HashService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Implementación de perfil en sesión
+\end_layout
+
+\begin_layout Standard
+En el bundle ar.com.oxen.security.profile.session se puede encontrar una implementaci
+ón de ar.com.oxen.security.api.Profile implementation que almacena la información
+ de perfil en la sesión de Nibiru:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.profile.session/s
+rc/main/java/ar/com/oxen/nibiru/security/profile/session/SessionProfile.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Este servicio es accedido desde distintas implementaciones de seguridad.
+\end_layout
+
+\begin_layout Subsubsection
+Implementación de seguridad genérica
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.security.generic provee una implementación simple
+ de los componentes de seguridad.
+\end_layout
+
+\begin_layout Standard
+La clase GenericAuthenticationService realiza la autenticación obteniendo
+ una instancia de UserData a partir del SecurityManager y almacenando dicha
+ información en la sesión de Nibiru:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.generic/src/main
+/java/ar/com/oxen/nibiru/security/generic/GenericAuthenticationService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por este motivo, la clase GenericAuthorizationService simplemente lee la
+ instancia de UserData de dicha sesión:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.generic/src/main
+/java/ar/com/oxen/nibiru/security/generic/GenericAuthorizationService.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El servicio de hashing se implementa delegando en la clase java.security.MessageDi
+gest:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.generic/src/main
+/java/ar/com/oxen/nibiru/security/generic/MessageDigestHashService.java}
 \end_layout
 
 \end_inset
@@ -3465,6 +3523,38 @@ status open
 \backslash
 lstinputlisting{../../sample/ar.com.oxen.nibiru.sample.webapp/src/main/resources/OSGI-INF
 /blueprint/blueprint.xml}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Instalación en Karaf
+\end_layout
+
+\begin_layout Standard
+La instalación en Karaf es simple y directa.
+ Vaya a la sección Primeros Pasos para una explicación acerca de cómo hacer
+ esto.
+\end_layout
+
+\begin_layout Standard
+Los módulos de Nibiru están agrupados en diferentes features de Karaf.
+ Las mismas se pueden ver en este archivo:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.support/ar.com.oxen.nibiru.feature/src/main/resource
+s/features.xml}
 \end_layout
 
 \end_inset
