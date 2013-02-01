@@ -224,7 +224,7 @@
     	<feature>nibiru-security-autologin</feature>
     </feature>
 
-    <feature name='nibiru-sample-security' description='Nibiru sample app with autologin' version='${project.version}' resolver='(obr)'>
+    <feature name='nibiru-sample-security' description='Nibiru sample app with generic security' version='${project.version}' resolver='(obr)'>
     	<!-- Required features -->
     	<feature>nibiru-sample</feature>
     	<feature>nibiru-security-generic</feature>
