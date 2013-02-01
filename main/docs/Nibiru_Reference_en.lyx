@@ -292,6 +292,177 @@ Getting started
 Run from binaries
 \end_layout
 
+\begin_layout Standard
+The easiest way to run the OSGi version is using Apache Karaf.
+\end_layout
+
+\begin_layout Subsubsection
+Required software
+\end_layout
+
+\begin_layout Enumerate
+Java (
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.java.com/en/download/"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Enumerate
+Apache Karaf (
+\begin_inset CommandInset href
+LatexCommand href
+target "http://karaf.apache.org/"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsubsection
+Installation
+\end_layout
+
+\begin_layout Enumerate
+Install the software mentioned before and start Karaf.
+\end_layout
+
+\begin_layout Enumerate
+In Karaf installation directory, edit the etc/org.ops4j.pax.url.mvn.cfg file.
+ Change the org.ops4j.pax.url.mvn.repositories property in order to add required
+ Maven repositories.
+ You can get the repositories list from 
+\begin_inset CommandInset href
+LatexCommand href
+name "Nibiru pom.xml file"
+target "https://code.google.com/p/nibiru/source/browse/main/pom.xml"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+From Karaf console:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Add the Nibiru features URL executing:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+features:addUrl mvn:ar.com.oxen.nibiru.support/ar.com.oxen.nibiru.feature/0.4-SNAPSHOT/xm
+l/features
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Install the sample app with autologin by executing:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+features:install -v nibiru-sample-autologin
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+or, if you want to use generic security implementation:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+features:install -v nibiru-sample-security
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Install the Web console
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+features:install -v webconsole
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Go to Webconsole 
+\begin_inset CommandInset href
+LatexCommand href
+name "configuration page"
+target "http://localhost:8181/system/console/configMgr"
+
+\end_inset
+
+, select Nibiru Datasource and set database connection parameters.
+ Even if you don't change anything, you should press ok in order to bind
+ the configuration with the bundle.
+\end_layout
+
+\begin_layout Subsubsection
+Non-OSGi version
+\end_layout
+
+\begin_layout Standard
+You can run the sample inside a non-OSGi environment.
+ The ar.com.oxen.nibiru.sample.springwebapp project does this.
+ It runs as an standard WAR into a servlet container.
+ Download its binaries from 
+\begin_inset CommandInset href
+LatexCommand href
+name "here"
+target "http://servidor.oxen.com.ar/artifactory/libs-release-local/ar/com/oxen/nibiru/sample/ar.com.oxen.nibiru.sample.springwebapp/0.4/ar.com.oxen.nibiru.sample.springwebapp-0.2.war"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsection
 Source code
 \end_layout
@@ -378,8 +549,8 @@ mvn eclipse:eclipse
 \begin_inset Quotes erd
 \end_inset
 
- from root directory in order to build the Eclipse project from Maven files
- and downloading target platform JARS.
+ from main and sample directories in order to build the Eclipse projects
+ from Maven files and downloading target platform JARS.
  
 \end_layout
 
@@ -424,26 +595,28 @@ reload
  option in order to recognize the downloaded JARs.
 \end_layout
 
-\begin_layout Enumerate
-Run the OSGi application launch called "Nibiru Sample".
- By default, Eclipse adds all the plugin (OSGi) projects which are open
- in the workspace, so even if there is a JAR with the same module, the source
- project takes precedence.
-\end_layout
-
 \begin_layout Standard
-You can run the sample inside a non-OSGi environment.
- The ar.com.oxen.nibiru.sample.springwebapp project does this.
- It runs as an standard WAR into a servlet container.
- Download its binaries from 
+Currently, the target platform exists only in order to make Eclipse projects
+ compile.
+ Previous to Karaf migration, it was used in order to run Nibiru from Eclipse.
+ Now, 
 \begin_inset CommandInset href
 LatexCommand href
-name "here"
-target "http://servidor.oxen.com.ar/artifactory/libs-release-local/ar/com/oxen/nibiru/sample/ar.com.oxen.nibiru.sample.springwebapp/0.4/ar.com.oxen.nibiru.sample.springwebapp-0.2.war"
+name "Eclipse Integration for Karaf"
+target "http://karaf.apache.org/index/subprojects/eik.html"
 
 \end_inset
 
-.
+ should be used, but at the time of writing this document such plugin was
+ still unstable.
+\end_layout
+
+\begin_layout Standard
+Karaf can be debugged from Eclipse by creating an standard Java launch (no
+ extra plugin is required).
+ A trick for creating this configuration is adding an "echo" in bin/karaf
+ file, were the Java command line is created, and copying these parameters
+ into a Java Eclipse launch.
 \end_layout
 
 \begin_layout Part
@@ -3044,6 +3217,44 @@ ding extension point is provided.
 \end_layout
 
 \begin_layout Subsection
+JasperReports implementation
+\end_layout
+
+\begin_layout Standard
+The ar.com.oxen.nibiru.report.jasper project provides a report implementation
+ using 
+\begin_inset CommandInset href
+LatexCommand href
+name "JasperReports"
+target "http://community.jaspersoft.com/project/jasperreports-library"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.report/ar.com.oxen.nibiru.report.jasper/src/main/java
+/ar/com/oxen/nibiru/report/jasper/JasperReport.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It extracts all the report information from JasperReports file.
+\end_layout
+
+\begin_layout Subsection
 BIRT implementation
 \end_layout
 
@@ -3079,6 +3290,10 @@ r/com/oxen/nibiru/report/birt/BirtReport.java}
 
 \begin_layout Standard
 It extracts all the report information from BIRT file.
+\end_layout
+
+\begin_layout Standard
+Currently, BIRT implementation doesn't run on Karf, due to Equinox dependencies.
 \end_layout
 
 \begin_layout Subsection
@@ -3436,6 +3651,13 @@ lstinputlisting{../../sample/ar.com.oxen.nibiru.sample.webapp/src/main/resources
 
 \end_layout
 
+\begin_layout Standard
+When running on Karaf, the database driver must be visible from webapp project.
+ In the sample app, H2 packages are added to webapp bundle manifest.
+ But in the real world, an OSGi fragment would be better (in order to be
+ able to change the database driver without modifying the webapp).
+\end_layout
+
 \begin_layout Subsection
 Karaf installation
 \end_layout
@@ -3466,6 +3688,40 @@ s/features.xml}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+As you can see, the sample app features already includes required Nibiru
+ modules.
+ When developing your app, you could just install your required modules,
+ for example:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+features:install -v nibiru-core
+\end_layout
+
+\begin_layout Plain Layout
+
+features:install -v nibiru-security-autologin
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and copy your app bundles to Karaf deploy directory.
+ However, we recommend creating a feature for your app in order to make
+ it easier for installing.
+ You can look to ar.com.oxen.nibiru.feature project for an example.
 \end_layout
 
 \begin_layout Section

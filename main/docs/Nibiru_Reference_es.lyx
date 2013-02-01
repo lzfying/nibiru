@@ -292,6 +292,174 @@ Primeros pasos
 Ejecutar desde los binarios
 \end_layout
 
+\begin_layout Standard
+La forma más simple de ejecutar la versión OSGi es usando Apache Karaf.
+\end_layout
+
+\begin_layout Subsubsection
+Software requerido
+\end_layout
+
+\begin_layout Enumerate
+Java (
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.java.com/en/download/"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Enumerate
+Apache Karaf (
+\begin_inset CommandInset href
+LatexCommand href
+target "http://karaf.apache.org/"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsubsection
+Instalación
+\end_layout
+
+\begin_layout Enumerate
+Instale el software mencionado previamente e inicie Karaf.
+\end_layout
+
+\begin_layout Enumerate
+En el directorio donde instaló Karaf, edite el archivo etc/org.ops4j.pax.url.mvn.cfg.
+ Agregue a la propiedad org.ops4j.pax.url.mvn.repositories property los repositorios
+ Maven requeridos.
+ La lista de repositorios se puede obtener del 
+\begin_inset CommandInset href
+LatexCommand href
+name "archivo pom.xml de Nibiru"
+target "https://code.google.com/p/nibiru/source/browse/main/pom.xml"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Dese la consola Karaf:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Agregue la URL de features de Nibiru ejecutando:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+features:addUrl mvn:ar.com.oxen.nibiru.support/ar.com.oxen.nibiru.feature/0.4-SNAPSHOT/xm
+l/features
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Instale la aplicación de ejemplo con autologin ejecutando:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+features:install -v nibiru-sample-autologin
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+o bien con la implementación genérica de seguridad:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+features:install -v nibiru-sample-security
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Instale la consola Web
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+features:install -v webconsole
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Vaya a la 
+\begin_inset CommandInset href
+LatexCommand href
+name "página de configuración"
+target "http://localhost:8181/system/console/configMgr"
+
+\end_inset
+
+ de la consola Web, seleccione Nibiru Datasource y establezca los parámetros
+ de conexión.
+ Incluso si no se cambia nada, se debería presionar "ok" para asociar la
+ configuración al bundle.
+\end_layout
+
+\begin_layout Subsubsection
+Versión no OSGi
+\end_layout
+
+\begin_layout Standard
+Puede ejecutar el ejemplo dentro de un entorno no-OSGi.
+ El proyecto ar.com.oxen.nibiru.sample.springwebapp hace esto.
+ Se ejecuta como un WAR convencional en un contenedor de servlets.
+ Puede descargar los binarios de 
+\begin_inset CommandInset href
+LatexCommand href
+name "aquí"
+target "http://servidor.oxen.com.ar/artifactory/libs-release-local/ar/com/oxen/nibiru/sample/ar.com.oxen.nibiru.sample.springwebapp/0.4/ar.com.oxen.nibiru.sample.springwebapp-0.2.war"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsection
 Código fuente
 \end_layout
@@ -418,34 +586,29 @@ reload
  para que tome en cuenta los JARs descargados.
 \end_layout
 
-\begin_layout Enumerate
-Ejecutar el launch de aplicación OSGi que se llama 
-\begin_inset Quotes eld
+\begin_layout Standard
+Actualmente, el target platform existe sólamente a fin de hacer que los
+ proyectos Eclipse compilen.
+ Previo a la migración a Karaf, se utilizaba para ejecutar Nibiru desde
+ Eclipse.
+ Ahora se debería usar 
+\begin_inset CommandInset href
+LatexCommand href
+name "Eclipse Integration for Karaf"
+target "http://karaf.apache.org/index/subprojects/eik.html"
+
 \end_inset
 
-Nibiru Sample
-\begin_inset Quotes erd
-\end_inset
-
-.
- Eclipse agrega por defecto los proyectos de tipo plugin (OSGi) que estén
- en el workspace, de manera que aunque exista un JAR con el mismo proyecto,
- el proyecto fuente tiene precedencia.
+, pero al momento de escribir esto dicho plugin era todavía inestable.
 \end_layout
 
 \begin_layout Standard
-Puede ejecutar el ejemplo dentro de un entorno no-OSGi.
- El proyecto ar.com.oxen.nibiru.sample.springwebapp hace esto.
- Se ejecuta como un WAR convencional en un contenedor de servlets.
- Puede descargar los binarios de 
-\begin_inset CommandInset href
-LatexCommand href
-name "aquí"
-target "http://servidor.oxen.com.ar/artifactory/libs-release-local/ar/com/oxen/nibiru/sample/ar.com.oxen.nibiru.sample.springwebapp/0.4/ar.com.oxen.nibiru.sample.springwebapp-0.2.war"
-
-\end_inset
-
-.
+Se puede depurar Karaf desde Eclipse creando un launc estándar de Java (no
+ se requiere ningún plugin extra).
+ Un truco para crear esta configuración es editar el archivo bin/karaf y
+ agregar un "echo" donde se crea la línea de comando de Java a ejecutar.
+ De lo que se muestre por consola, se pueden obtener los parámetros a colocar
+ en el launch de Java.
 \end_layout
 
 \begin_layout Part
@@ -3134,6 +3297,45 @@ Dado que el reporte usualmente se expondrá como una extensión, se provee
 \end_layout
 
 \begin_layout Subsection
+Implementación JasperReports
+\end_layout
+
+\begin_layout Standard
+El proyecto ar.com.oxen.nibiru.report.jasper provee una implementación basada
+ en 
+\begin_inset CommandInset href
+LatexCommand href
+name "JasperReports"
+target "http://community.jaspersoft.com/project/jasperreports-library"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting{../ar.com.oxen.nibiru.report/ar.com.oxen.nibiru.report.jasper/src/main/java
+/ar/com/oxen/nibiru/report/jasper/JasperReport.java}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La misma obtiene toda la información de reporte desde un archivo de reporte
+ JasperReports.
+\end_layout
+
+\begin_layout Subsection
 Implementación BIRT
 \end_layout
 
@@ -3170,6 +3372,11 @@ r/com/oxen/nibiru/report/birt/BirtReport.java}
 \begin_layout Standard
 La misma obtiene toda la información de reporte desde un archivo de reporte
  BIRT.
+\end_layout
+
+\begin_layout Standard
+Actualmente, la implementación BIRT no corre en Karaf, debido a dependencias
+ con Equinox.
 \end_layout
 
 \begin_layout Subsection
@@ -3530,6 +3737,15 @@ lstinputlisting{../../sample/ar.com.oxen.nibiru.sample.webapp/src/main/resources
 
 \end_layout
 
+\begin_layout Standard
+Cuando se ejecuta en Karaf, el driver de base de datos debe ser visible
+ desde el proyecto webapp.
+ En la aplicación de ejemplo, los paquetes de H2 están agregados en el manifest
+ del bundle de la webapp.
+ Pero en el mundo real, un fragmento OSGi sería mejor (a fin de poder cambiar
+ el driver de base de datos sin modificar el bundle de la webapp).
+\end_layout
+
 \begin_layout Subsection
 Instalación en Karaf
 \end_layout
@@ -3560,6 +3776,39 @@ s/features.xml}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Como se puede ver, las features de la aplicación de ejemplo ya incluyen
+ a las que proveen los módulos de Nibiru.
+ Cuando usted desarrolle su aplicación, podría simplemente instalar los
+ features que necesite:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+features:install -v nibiru-core
+\end_layout
+
+\begin_layout Plain Layout
+features:install -v nibiru-security-autologin
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+y copiar los bundles de su aplicación al directorio deploy de Karaf.
+ Sin embargo, se recomienda crea un feature para su aplicación, a fin de
+ facilitar la instalación.
+ Para un ejemplo sobre cómo crear un feature, se puede ver el proyecto ar.com.oxen.
+nibiru.feature.
 \end_layout
 
 \begin_layout Section
