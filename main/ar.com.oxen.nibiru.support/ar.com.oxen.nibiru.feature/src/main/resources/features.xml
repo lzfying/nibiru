@@ -208,7 +208,6 @@
     	<feature>nibiru-core</feature>
     	<feature>nibiru-mail</feature>
     	<feature>nibiru-report-jasper</feature>
-    	<feature>nibiru-security-autologin</feature>
     	
     	<!-- Sample bundles -->
         <bundle>mvn:ar.com.oxen.nibiru.sample/ar.com.oxen.nibiru.sample.domain/${project.version}</bundle>
@@ -217,5 +216,17 @@
         
     	<!-- 3rd party bundles -->
         <bundle>mvn:com.h2database/com.springsource.org.h2/1.0.71</bundle>
+    </feature>
+
+    <feature name='nibiru-sample-autologin' description='Nibiru sample app with autologin' version='${project.version}' resolver='(obr)'>
+    	<!-- Required features -->
+    	<feature>nibiru-sample</feature>
+    	<feature>nibiru-security-autologin</feature>
+    </feature>
+
+    <feature name='nibiru-sample-security' description='Nibiru sample app with autologin' version='${project.version}' resolver='(obr)'>
+    	<!-- Required features -->
+    	<feature>nibiru-sample</feature>
+    	<feature>nibiru-security-generic</feature>
     </feature>
 </features>
