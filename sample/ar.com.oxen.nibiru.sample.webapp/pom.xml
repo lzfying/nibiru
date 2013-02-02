@@ -31,5 +31,10 @@
 			<artifactId>ar.com.oxen.nibiru.http.utils</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>com.springsource.org.h2</artifactId>
+			<version>1.0.71</version>
+		</dependency>
 	</dependencies>
 </project>
