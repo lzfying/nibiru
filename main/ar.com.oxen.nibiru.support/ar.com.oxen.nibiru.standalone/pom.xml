@@ -17,18 +17,18 @@
 	</properties>
 	<dependencies>
 		<dependency>
+			<groupId>ar.com.oxen.nibiru.support</groupId>
+			<artifactId>ar.com.oxen.nibiru.commons</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>ar.com.oxen.nibiru.ui</groupId>
 			<artifactId>ar.com.oxen.nibiru.ui.vaadin</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.session</groupId>
-			<artifactId>ar.com.oxen.nibiru.session.spring.http</artifactId>
-			<version>${nibiru-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>ar.com.oxen.nibiru.session</groupId>
-			<artifactId>ar.com.oxen.nibiru.session.spring.scope</artifactId>
+			<artifactId>ar.com.oxen.nibiru.session.http</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
@@ -83,12 +83,12 @@
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.support</groupId>
-			<artifactId>ar.com.oxen.nibiru.jpa.spring</artifactId>
+			<artifactId>ar.com.oxen.nibiru.jpa</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
-			<groupId>ar.com.oxen.nibiru.support</groupId>
-			<artifactId>ar.com.oxen.nibiru.transaction.spring</artifactId>
+			<groupId>ar.com.oxen.nibiru.transaction</groupId>
+			<artifactId>ar.com.oxen.nibiru.transaction.jta</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
