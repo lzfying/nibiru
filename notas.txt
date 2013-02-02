@@ -1,10 +1,13 @@
 Pendientes:
 - El fragmento de ANTLR probablemente no sea necesario ahora si se va Hibernate - SACADO
-- Por el tema de las configuraciones se van los fragmentos para tal finâ a lo mejor quedan los que sean necesarios para ver drivers de base de datos - borrados, el dirver tiene que ser visible desde la WEBAPP!!! (debe susar el context xlassloader)
-- Ver el tema de correr Karaf desde eclipse.
-- Ver el tema de crear features para que nibiru se instale solo
+- Por el tema de las configuraciones se van los fragmentos para tal finâ a lo mejor quedan los que sean necesarios para ver drivers de base de datos - borrados, el dirver tiene que ser visible desde la WEBAPP!!! (debe usar el context classloader) DOCUMENTAR ESTO EN LA REFERENCIA - ACLARAR QUE SE PUEDE PONER COMO FRAGMENTO
+- Ver el tema de correr Karaf desde eclipse - EIK no anda, hay que hacer la truchada - documetarlo  LISTO
+- Ver el tema de crear features para que nibiru se instale solo - LISTO
 - El mecanismo de extension points basado en Spring DM tambien se podria sacar y usar solo el generico - SACADO
 - Ver de sacar el enhancer de open JPA, segun la pagina de Aries JPA, no seria necesario
+- Aclarar en la doc que Birt no anda en KARAF - LISTO
+- Aclarar que en Jasper si el reporte es de tipo Groovy (como viene por defecto) no funciona. Hay que ponerle que genere Java.
+
 
 --------------------------------
 Features:
@@ -12,6 +15,13 @@ Features:
 features:addUrl mvn:ar.com.oxen.nibiru.support/ar.com.oxen.nibiru.feature/0.4-SNAPSHOT/xml/features
 features:install -v nibiru-core
 
+hay que configurar el archivo org.ops4j.pax.url.mvn.cfg
+http://team.ops4j.org/wiki/display/paxurl/Mvn+Protocol
+
+Orders:
+features:addUrl mvn:ar.com.oxen.nibiru.support/ar.com.oxen.nibiru.feature/0.4-SNAPSHOT/xml/features
+features:addUrl mvn:ar.com.oxen.orders/ar.com.oxen.orders.server.feature/1.0-SNAPSHOT/xml/features
+features:install -v orders
 
 --------------------------------
 
