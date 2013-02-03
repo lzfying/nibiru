@@ -12,18 +12,29 @@
 
 	<import resource="classpath:/ar/com/oxen/nibiru/standalone/conf/spring/core.xml" />
 	<import resource="classpath:/ar/com/oxen/nibiru/standalone/conf/spring/security-generic.xml" />
+	<!-- 
 	<import resource="classpath:/ar/com/oxen/nibiru/standalone/conf/spring/report.xml" />
 	<import resource="classpath:/ar/com/oxen/nibiru/standalone/conf/spring/mail.xml" />
 
 	<import resource="classpath:/ar/com/oxen/nibiru/sample/module/conf/spring/context.xml" />
+	 -->
+
+	<bean id="nibiruServlet"
+		class="ar.com.oxen.nibiru.ui.vaadin.servlet.NibiruApplicationServlet">
+		<property name="applicationAccessor" ref="applicationAccessor" />
+	</bean>
 
 	<bean name="messageProviders" class="java.util.ArrayList">
 		<constructor-arg>
 			<list>
+<!-- 
 				<ref bean="sampleMessageProvider" />
+				 -->
 				<ref bean="applicationMessageProvider" />
 				<ref bean="securityMessageProvider" />
+<!-- 
 				<ref bean="reportMessageProvider" />
+				 -->
 			</list>
 		</constructor-arg>
 	</bean>

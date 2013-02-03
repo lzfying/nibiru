@@ -27,6 +27,7 @@
 		<module>ar.com.oxen.nibiru.jpa.blueprint</module>
 		<module>ar.com.oxen.nibiru.module.utils</module>
 		<module>ar.com.oxen.nibiru.osgi.utils</module>
+		<module>ar.com.oxen.nibiru.spring.utils</module>
 		<module>ar.com.oxen.nibiru.targetplatform</module>
 		<module>ar.com.oxen.nibiru.standalone</module>
 	</modules>

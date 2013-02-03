@@ -7,25 +7,29 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<filter>
+		<filter-name>sessionHolderFilter</filter-name>
+		<filter-class>ar.com.oxen.nibiru.http.utils.SessionHolderFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>sessionHolderFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
-	<listener>
-		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-	</listener>
 
- 	<servlet>
-		<servlet-name>Niburu</servlet-name>
-		<servlet-class>ar.com.oxen.nibiru.ui.vaadin.servlet.NibiruApplicationServlet</servlet-class>
-		<init-param>
-			<param-name>widgetset</param-name>
-			<param-value>ar.com.oxen.nibiru.ui.vaadin.NibiruWidgetset</param-value>
-		</init-param>
+	<servlet>
+	    <display-name>Nibiru Servlet</display-name>
+	    <servlet-name>nibiruServlet</servlet-name>
+	    <servlet-class>ar.com.oxen.nibiru.spring.utils.DelegatingServletProxy</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Niburu</servlet-name>
+		<servlet-name>nibiruServlet</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>Niburu</servlet-name>
+		<servlet-name>nibiruServlet</servlet-name>
 		<url-pattern>/VAADIN/*</url-pattern>
 	</servlet-mapping>
 </web-app>
