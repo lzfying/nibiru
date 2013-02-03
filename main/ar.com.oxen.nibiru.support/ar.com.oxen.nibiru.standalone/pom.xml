@@ -88,7 +88,7 @@
 		</dependency>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.transaction</groupId>
-			<artifactId>ar.com.oxen.nibiru.transaction.jta</artifactId>
+			<artifactId>ar.com.oxen.nibiru.transaction.jpa</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
@@ -157,19 +157,9 @@
 			<version>9.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>com.springsource.org.hibernate</artifactId>
-			<version>3.3.2.GA</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>com.springsource.org.hibernate.annotations</artifactId>
-			<version>3.4.0.GA-A</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>com.springsource.org.hibernate.ejb</artifactId>
-			<version>3.4.0.GA-A</version>
+			<artifactId>openjpa</artifactId>
+			<groupId>org.apache.openjpa</groupId>
+			<version>2.1.1</version>
 		</dependency>
 	</dependencies>
 </project>

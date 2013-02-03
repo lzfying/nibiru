@@ -23,7 +23,7 @@
         
 	<import resource="classpath:/ar/com/oxen/nibiru/session/http/conf/spring/context.xml" />
         
-	<import resource="classpath:/ar/com/oxen/nibiru/transaction/jta/conf/spring/context.xml" />
+	<import resource="classpath:/ar/com/oxen/nibiru/transaction/jpa/conf/spring/context.xml" />
         
 	<import resource="classpath:/ar/com/oxen/nibiru/ui/vaadin/conf/spring/context.xml" />
 

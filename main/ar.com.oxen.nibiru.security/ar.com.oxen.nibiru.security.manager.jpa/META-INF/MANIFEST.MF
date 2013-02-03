@@ -13,4 +13,4 @@ Import-Package: ar.com.oxen.nibiru.crud.bean.annotation,
  org.apache.openjpa.util;version="2.1.1"
 Export-Package: ar.com.oxen.nibiru.security.manager.jpa,
  ar.com.oxen.nibiru.security.manager.jpa.domain
-Meta-Persistence: 
+Meta-Persistence: ar/com/oxen/nibiru/security/manager/jpa/conf/jpa/persistence.xml
