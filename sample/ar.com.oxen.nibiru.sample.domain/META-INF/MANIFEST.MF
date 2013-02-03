@@ -8,7 +8,5 @@ Export-Package: ar.com.oxen.nibiru.sample.domain
 Import-Package: ar.com.oxen.nibiru.crud.bean.annotation,
  ar.com.oxen.nibiru.crud.manager.api,
  javax.persistence;version="2.0.0",
- javax.sql,
- org.apache.openjpa.enhance;version="2.1.1",
- org.apache.openjpa.util;version="2.1.1"
-Meta-Persistence: 
+ javax.sql
+Meta-Persistence: ar/com/oxen/nibiru/sample/domain/conf/jpa/persistence_osgi.xml

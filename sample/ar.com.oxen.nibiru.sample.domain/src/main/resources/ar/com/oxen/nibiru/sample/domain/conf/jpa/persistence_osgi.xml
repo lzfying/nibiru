@@ -13,7 +13,7 @@
 		<properties>
 			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema" />
 			<property name="openjpa.jdbc.DBDictionary" value="h2" />
-			<property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE"/>
+			<property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
 		</properties>
 	</persistence-unit>
 </persistence>

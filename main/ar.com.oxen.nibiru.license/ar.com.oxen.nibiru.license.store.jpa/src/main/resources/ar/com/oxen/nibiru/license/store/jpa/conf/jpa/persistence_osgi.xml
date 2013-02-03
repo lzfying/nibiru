@@ -11,6 +11,7 @@
 		<properties>
 			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema" />
 			<property name="openjpa.jdbc.DBDictionary" value="h2" />
+			<property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
 		</properties>
 	</persistence-unit>
 </persistence>
