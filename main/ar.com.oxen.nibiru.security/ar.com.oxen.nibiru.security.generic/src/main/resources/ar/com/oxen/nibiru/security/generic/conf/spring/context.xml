@@ -16,6 +16,7 @@
 	<bean id="authorizationService"
 		class="ar.com.oxen.nibiru.security.generic.GenericAuthorizationService">
 		<property name="session" ref="nibiruSession" />
+		<property name="securityManager" ref="securityManager" />
 	</bean>
 
 	<bean id="hashService"

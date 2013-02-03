@@ -8,9 +8,7 @@ Import-Package: ar.com.oxen.nibiru.crud.bean.annotation,
  ar.com.oxen.nibiru.crud.manager.api,
  ar.com.oxen.nibiru.security.api,
  ar.com.oxen.nibiru.security.manager.api,
- javax.persistence;version="2.0.0",
- org.apache.openjpa.enhance;version="2.1.1",
- org.apache.openjpa.util;version="2.1.1"
+ javax.persistence;version="2.0.0"
 Export-Package: ar.com.oxen.nibiru.security.manager.jpa,
  ar.com.oxen.nibiru.security.manager.jpa.domain
-Meta-Persistence: ar/com/oxen/nibiru/security/manager/jpa/conf/jpa/persistence.xml
+Meta-Persistence: ar/com/oxen/nibiru/security/manager/jpa/conf/jpa/persistence_osgi.xml

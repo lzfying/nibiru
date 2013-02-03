@@ -15,7 +15,7 @@
 	<bean id="securityManagerEmFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="nibiruSecurity" />
-		<property name="persistenceXmlLocation" value="classpath:ar/com/oxen/nibiru/security/manager/jpa/conf/jpa/persistence.xml" />
+		<property name="persistenceXmlLocation" value="classpath:ar/com/oxen/nibiru/security/manager/jpa/conf/jpa/persistence_standalone.xml" />
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
