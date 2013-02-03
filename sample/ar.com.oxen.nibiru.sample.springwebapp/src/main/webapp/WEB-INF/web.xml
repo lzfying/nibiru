@@ -20,9 +20,13 @@
 
 
 	<servlet>
-	    <display-name>Nibiru Servlet</display-name>
-	    <servlet-name>nibiruServlet</servlet-name>
-	    <servlet-class>ar.com.oxen.nibiru.spring.utils.DelegatingServletProxy</servlet-class>
+		<display-name>Nibiru Servlet</display-name>
+		<servlet-name>nibiruServlet</servlet-name>
+		<servlet-class>ar.com.oxen.nibiru.spring.utils.DelegatingServletProxy</servlet-class>
+		<init-param>
+			<param-name>widgetset</param-name>
+			<param-value>ar.com.oxen.nibiru.ui.vaadin.NibiruWidgetset</param-value>
+		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>nibiruServlet</servlet-name>
