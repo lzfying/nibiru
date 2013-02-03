@@ -12,10 +12,8 @@
 
 	<import resource="classpath:/ar/com/oxen/nibiru/standalone/conf/spring/core.xml" />
 	<import resource="classpath:/ar/com/oxen/nibiru/standalone/conf/spring/security-generic.xml" />
-	<!-- 
 	<import resource="classpath:/ar/com/oxen/nibiru/standalone/conf/spring/report.xml" />
 	<import resource="classpath:/ar/com/oxen/nibiru/standalone/conf/spring/mail.xml" />
-	 -->
 
 	<import resource="classpath:/ar/com/oxen/nibiru/sample/module/conf/spring/context.xml" />
 
@@ -30,9 +28,7 @@
 				<ref bean="sampleMessageProvider" />
 				<ref bean="applicationMessageProvider" />
 				<ref bean="securityMessageProvider" />
-<!-- 
 				<ref bean="reportMessageProvider" />
-				 -->
 			</list>
 		</constructor-arg>
 	</bean>
