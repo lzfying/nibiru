@@ -8,9 +8,29 @@
     ">
  
 	<bean name="licenseStoreManager"
-		class="ar.com.oxen.nibiru.license.store.jpa.JpaLicenseStoreManager"/>
+		class="ar.com.oxen.nibiru.license.store.jpa.JpaLicenseStoreManager">
+		<property name="entityManager" ref="licenseManagerEm" />
+	</bean>
 	
-	<tx:advice id="licenseTxAdvice" transaction-manager="transactionManager">
+	<!-- JPA -->
+	<bean id="licenseManagerEmFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="nibiruLicense" />
+		<property name="persistenceXmlLocation" value="classpath:ar/com/oxen/nibiru/license/store/jpa/conf/jpa/persistence_standalone.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean name="licenseManagerEm"
+		class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
+		<property name="entityManagerFactory" ref="licenseManagerEmFactory" />
+	</bean>
+
+	<!-- Transaction -->
+	<bean name="licenseManagerTxManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="licenseManagerEmFactory" />
+	</bean>
+
+	<tx:advice id="licenseManagerTxAdvice" transaction-manager="licenseManagerTxManager">
 		<tx:attributes>
 			<tx:method name="getLicense" propagation="REQUIRED" />
 			<tx:method name="saveLicense" propagation="REQUIRED" />
@@ -20,6 +40,6 @@
 	<bean
 		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
 		<property name="beanNames" value="licenseStoreManager" />
-		<property name="interceptorNames" value="licenseTxAdvice" />
+		<property name="interceptorNames" value="licenseManagerTxAdvice" />
 	</bean>
 </beans>
