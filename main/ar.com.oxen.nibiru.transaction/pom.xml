@@ -18,6 +18,7 @@
 	</properties>
 	<modules>
 		<module>ar.com.oxen.nibiru.transaction.api</module>
+		<module>ar.com.oxen.nibiru.transaction.jpa</module>
 		<module>ar.com.oxen.nibiru.transaction.jta</module>
 		<module>ar.com.oxen.nibiru.transaction.jta.blueprint</module>
 	</modules>

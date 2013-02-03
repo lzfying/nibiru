@@ -9,8 +9,8 @@
 		<version>0.4-SNAPSHOT</version>
 	</parent>
 	<groupId>ar.com.oxen.nibiru.transaction</groupId>
-	<artifactId>ar.com.oxen.nibiru.transaction.jta</artifactId>
-	<name>ar.com.oxen.nibiru.transaction.jta</name>
+	<artifactId>ar.com.oxen.nibiru.transaction.jpa</artifactId>
+	<name>ar.com.oxen.nibiru.transaction.jpa</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,11 +20,6 @@
 			<groupId>ar.com.oxen.nibiru.transaction</groupId>
 			<artifactId>ar.com.oxen.nibiru.transaction.api</artifactId>
 			<version>${nibiru-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>javax.transaction</groupId>
-			<artifactId>com.springsource.javax.transaction</artifactId>
-			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.geronimo.specs</groupId>
