@@ -20,24 +20,28 @@ public class GenericAuthenticationService implements AuthenticationService {
 	public void login(String username, String password)
 			throws BadCredentialsException {
 		try {
-		UserData userData = this.securityManager.getUserData(username);
+			UserData userData = this.securityManager.getUserData(username);
 
-		String hashedPassword = password != null && !password.equals("") ? this.hashService
-				.hash(password) : "";
+			String hashedPassword = password != null && !password.equals("") ? this.hashService
+					.hash(password) : "";
 
-		if (userData == null || !userData.getPassword().equals(hashedPassword)) {
-			this.raiseLoginError();
-		}
+			String storedPassword = userData != null
+					&& userData.getPassword() != null ? userData.getPassword()
+					: "";
 
-		this.session.put(USER_DATA_KEY, userData);
+			if (userData == null || !storedPassword.equals(hashedPassword)) {
+				this.raiseLoginError();
+			} else {
+				this.session.put(USER_DATA_KEY, userData);
 
-		this.profile.activate(userData.getUsername(), userData.getFirstName(),
-				userData.getLastName());
+				this.profile.activate(userData.getUsername(),
+						userData.getFirstName(), userData.getLastName());
+			}
+
 		} catch (UserNotFoundException e) {
 			this.raiseLoginError();
 		}
 	}
-	
 
 	@Override
 	public void logout() {
@@ -49,7 +53,7 @@ public class GenericAuthenticationService implements AuthenticationService {
 		UserData userData = this.session.get(USER_DATA_KEY);
 		return userData.getUsername();
 	}
-	
+
 	private void raiseLoginError() {
 		this.profile.deactivate();
 		throw new BadCredentialsException();
