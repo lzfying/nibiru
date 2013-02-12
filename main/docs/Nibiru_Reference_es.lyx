@@ -360,6 +360,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 features:addUrl mvn:ar.com.oxen.nibiru.support/ar.com.oxen.nibiru.feature/0.4-SNAPSHOT/xm
 l/features
 \end_layout
@@ -379,6 +380,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 features:install -v nibiru-sample-autologin
 \end_layout
 
@@ -397,6 +399,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 features:install -v nibiru-sample-security
 \end_layout
 
@@ -417,6 +420,7 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 features:install -v webconsole
 \end_layout
 
@@ -815,8 +819,8 @@ Aplicación base
 
 \begin_layout Standard
 El bundle ar.com.oxen.nibiru.application.api contiene las interfaces utilizadas
- para implementar funciones básicas de la aplicación como ser login, ventana
- de 
+ para implementar funciones básicas de la aplicación como ser la ventana
+ principal, la ventana de 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1485,10 +1489,15 @@ target "http://sourceforge.net/projects/c3p0/"
 \end_layout
 
 \begin_layout Standard
-La configuración de conexión a la base de datos, así como la visibilidad
- del driver JDBC, se agregan también mediante fragmentos OSGi.
- Para más información, ver el proyecto ar.com.oxen.nibiru.sample.datasource.fragment.
- La implementación con c3p0 requiere de la creación de un fragmento extra,
+La visibilidad del driver JDBC se debería agregar mediante fragmentos OSGi.
+ Para más información, ver el proyecto ejemplo.
+ Cuando se ejecuta en Karaf, es necesario que el bundle que contiene la
+ webapp tenga visibilidad sobre la clase del driver de base de datos (probableme
+nte utlice el context class loader.
+\end_layout
+
+\begin_layout Standard
+La implementación con c3p0 requiere de la creación de un fragmento extra,
  para que c3p0 tenga visibilidad sobre la clase del driver JDBC usado.
 \end_layout
 
@@ -1636,7 +1645,7 @@ n/nibiru/ui/api/view/ViewFactory.java}
 \end_layout
 
 \begin_layout Subsection
-Vaadin implementation
+Implementación Vaadin
 \end_layout
 
 \begin_layout Standard
@@ -1703,7 +1712,7 @@ oxen/nibiru/ui/vaadin/api/ApplicationAccessor.java}
 \end_layout
 
 \begin_layout Standard
-Y, como es de esperar, una implementación simple:
+Y, como es de esperar, también se provee una implementación simple:
 \end_layout
 
 \begin_layout Standard
@@ -2336,7 +2345,7 @@ Administración sobre esas entidades utilizando el módulo de ABM.
 \end_layout
 
 \begin_layout Standard
-El siguiente archivo de ocnfiguración muestra cómo se conectan los componentes:
+El siguiente archivo de configuración muestra cómo se conectan los componentes:
 \end_layout
 
 \begin_layout Standard
@@ -2478,6 +2487,11 @@ El bundle ar.com.oxen.nibiru.transaction.jta provee una implementación JTA para
  OSGi en Aries/Karaf).
 \end_layout
 
+\begin_layout Standard
+Una implementación que usa transacciones locales de JPA se puede encontrar
+ en el bundle ar.com.oxen.nibiru.transaction.jpa.
+\end_layout
+
 \begin_layout Section
 Internacionalizacion
 \end_layout
@@ -2500,7 +2514,8 @@ MessageSource: Utilizado para consultar mensajes por clave (con parámetros).
 MessageProvider: Utilizado para proveer mensajes consultando por clave y
  Locale.
  Se realizó esta división para que cada módulo provea su MessageProvider.
- Típicamente habrá una implementación de MessageSource que los consolide.
+ Típicamente habrá una instancia de una implementación de MessageSource
+ que los consolide.
 \end_layout
 
 \begin_layout Standard
@@ -2587,7 +2602,7 @@ ovider.
  Mediante OSGi Blueprint se puede inyectar una lista de servicios de tipo
  MessageProvider que se actualice dinámicamente ante la disponibilidad de
  nuevas instancias de dichos servicios.
- Este proyecto también contiene una implementación basada en ResoruceBundle
+ Este proyecto también contiene una implementación basada en ResourceBundle
  de MessageProvider.
 \end_layout
 
@@ -3111,7 +3126,8 @@ Una clase base para configurar módulos de ABM (AbstractCrudModuleConfigurator).
 \end_layout
 
 \begin_layout Standard
-La clase AbstractCrudModuleConfigurator provee los siguientes métodos:
+La clase AbstractCrudModuleConfigurator provee los siguientes métodos, entre
+ otros:
 \end_layout
 
 \begin_layout Itemize
@@ -3658,13 +3674,6 @@ mpl.DefaultLicenseInfo.
  deben crear vistas y presentadores para tal fin.
 \end_layout
 
-\begin_layout Standard
-
-\emph on
-TODO: Crear un proyecto service, para que se puedan personalizar los servicios
- de vista y presenter
-\end_layout
-
 \begin_layout Subsection
 Interfaz de línea de comando
 \end_layout
@@ -3791,10 +3800,12 @@ inline false
 status open
 
 \begin_layout Plain Layout
+
 features:install -v nibiru-core
 \end_layout
 
 \begin_layout Plain Layout
+
 features:install -v nibiru-security-autologin
 \end_layout
 
@@ -3827,8 +3838,8 @@ nibiru.standalone.
 \begin_layout Standard
 El proyecto también contiene archivos de configuración de Spring para todos
  los módulos de Nibiru.
- El archivo ar/com/oxen/nibiru/standalone/context.xml consolida los archivos
- de configuraciónnecesarios para una aplicación típica.
+ El archivo ar/com/oxen/nibiru/standalone/conf/spring/core.xml consolida
+ los archivos de configuraciónnecesarios para una aplicación típica.
 \end_layout
 
 \begin_layout Standard

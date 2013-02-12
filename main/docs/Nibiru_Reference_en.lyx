@@ -100,7 +100,7 @@ Framework objective
 \end_layout
 
 \begin_layout Standard
-The framework objective is to facilitate the building of modular applications.
+The framework objective is easing the building of modular applications.
  The following goals are established in order to meet such objective:
 \end_layout
 
@@ -238,8 +238,8 @@ target "http://www.java.com/en/"
 
 \end_inset
 
-was chosen because it is currently the most widespread platform within the
- enterprise applications, in addition to being easily portable to different
+ was chosen because it is currently the most widespread platform within
+ the enterprise applications, in addition to being easily portable to different
  environments and having many frameworks and libraries.
 \end_layout
 
@@ -797,12 +797,12 @@ Base application
 
 \begin_layout Standard
 The ar.com.oxen.nibiru.application.api bundle contains interfaces used to implement
- basic functions such as application login, "about" window , etc.
+ basic functions such as main window, "about" window , etc.
 \end_layout
 
 \begin_layout Standard
 The idea is that an implementation of this bundle must provide the basis
- to setput the application.
+ to setup the application.
  All the extra functionality will be added by other modules.
 \end_layout
 
@@ -973,8 +973,8 @@ Modules
 \end_layout
 
 \begin_layout Standard
-As mentioned earlier, the framework is designed so that the functionality
- can be added as separate modules.
+As mentioned earlier, the framework design allows adding functionality as
+ separate modules.
 \end_layout
 
 \begin_layout Standard
@@ -1354,7 +1354,7 @@ target "http://en.wikipedia.org/wiki/Java_Persistence_API"
 
 \end_inset
 
-is used for persistence.
+ is used for persistence.
  While there are mutliple persistence mechanisms in Java, JPA is the most
  widespread.
  For this reason, this specification was chosen over other mechanisms.
@@ -1452,10 +1452,14 @@ target "http://sourceforge.net/projects/c3p0/"
 \end_layout
 
 \begin_layout Standard
-The database connection settings and JDBC driver visibility are also added
- as OSGi fragments.
- Look at ar.com.oxen.nibiru.sample.datasource.fragment project for an example.
- c3p0 implementatio requires an extra fragment, in order to make JDBC driver
+The JDBC driver visibility should be added as OSGi fragment.
+ Look at the sample project for an example.
+ Running on Karaf, the database driver must be visible from webapp bundle
+ (it seems like it uses the context class loader).
+\end_layout
+
+\begin_layout Standard
+c3p0 implementation requires an extra fragment, in order to make JDBC driver
  class visible to c3p0 bundle.
 \end_layout
 
@@ -1518,8 +1522,9 @@ Using a specific technology and making the view class implementing the interface
 \end_layout
 
 \begin_layout Standard
-As the proposed MVP model is passive view, the presenter simply has a reference
- to an interface that represents the view (at Google the term 
+Since the proposed MVP model is passive view, the presenter simply has a
+ reference to an interface that represents the view (at Google the term
+ 
 \begin_inset CommandInset href
 LatexCommand href
 name "Display"
@@ -1580,7 +1585,7 @@ The presentation logic should be put on the method go() of Presenter class.
 
 \begin_layout Standard
 Widgets abstraction interfaces (ar.com.oxen.nibiru.ui.api.view package) are varied.
- But all should be instantiated by an implementation of ViewFactory:
+ But all should be instantiated by using a ViewFactory implementation:
 \end_layout
 
 \begin_layout Standard
@@ -1619,7 +1624,7 @@ target "http://vaadin.com"
 \end_layout
 
 \begin_layout Standard
-It also provides an specific Vaadin application for Nibiru:
+It also provides a specific Vaadin application for Nibiru:
 \end_layout
 
 \begin_layout Standard
@@ -1668,7 +1673,7 @@ oxen/nibiru/ui/vaadin/api/ApplicationAccessor.java}
 \end_layout
 
 \begin_layout Standard
-And, as expected, a simple implementation:
+And, as expected, it also provides a simple implementation:
 \end_layout
 
 \begin_layout Standard
@@ -1693,11 +1698,11 @@ UI utilities
 \end_layout
 
 \begin_layout Standard
-The ar.com.oxen.nibiru.ui.utils project contains generic classes for use in the
- user interface.
- Mostly contains abstract classes to be used as base for presenters , views,
- extensions, etc.
- But also contains decorators and generic use classes.
+The ar.com.oxen.nibiru.ui.utils project contains generic classes for using when
+ building the user interface.
+ It mostly contains abstract classes to be used as base for presenters ,
+ views, extensions, etc.
+ But it also contains decorators and generic use classes.
 \end_layout
 
 \begin_layout Itemize
@@ -1930,7 +1935,7 @@ Security API
 The interfaces required for accessing security services (authentication
  and authorization) are found in the ar.com.oxen.nibiru.security.api project
  .
- Currently user/password authentication and key role authorization are supported.
+ Currently user/password authentication and role authorization are supported.
 \end_layout
 
 \begin_layout Standard
@@ -2440,6 +2445,11 @@ The ar.com.oxen.nibiru.transaction.jta bundle provides a JTA implementation for
  Aries/Karaf).
 \end_layout
 
+\begin_layout Standard
+A local JPA transaction implementation can be found in the ar.com.oxen.nibiru.transa
+ction.jpa bundle.
+\end_layout
+
 \begin_layout Section
 Internationalization
 \end_layout
@@ -2460,8 +2470,8 @@ MessageSource: Used to get messages by key (with parameters).
 \begin_layout Enumerate
 MessageProvider: Used to provide message querying using a key and a Locale.
  This division was made so that each module can provide its own MessageProvider.
- Typically there will be a MessageSource implementation that consolidates
- them.
+ Typically there will be one MessageSource implementation instance that
+ consolidates them.
 \end_layout
 
 \begin_layout Standard
@@ -2542,12 +2552,12 @@ Generic implementation
 \end_layout
 
 \begin_layout Standard
-The ar.com.oxen.nibiru.i18n.generic project contains an generic MessageSource
+The ar.com.oxen.nibiru.i18n.generic project contains a generic MessageSource
  implementation which is injected with LocaleHolder and a list of MessageProvide
 rs.
  OSGi Blueprint can inject a MessageProvider service list that is updated
  dynamically according to the availability of new instances of these services.
- This project also contains a MessageProvider implementation based on ResoruceBu
+ This project also contains a MessageProvider implementation based on ResourceBu
 ndle.
 \end_layout
 
@@ -2835,7 +2845,7 @@ In order to make the CRUD modular, the actions to perform on an entity are
  not provided directly by the CrudManager, but using the extension point
  mechanism.
  The interface CrudActionExtension allows implementing extensions that add
- different possible actions to perform on an entity.
+ different possible actions to be performed over an entity.
 \end_layout
 
 \begin_layout Standard
@@ -2861,7 +2871,7 @@ The ar.com.oxen.nibiru.crud.manager.jpa bundle contains implementations based
  It relies on ar.com.oxen.nibiru.crud.bean and ar.com.oxen.nibiru.crud.utils classes.
  Where possible, it uses JPA information and reflection to return the informatio
 n required for CRUD.
- Where not possible, it uses ar.com.oxen.nibiru.crud.bean based on annotations.
+ Where not possible, it uses ar.com.oxen.nibiru.crud.bean annotations.
 \end_layout
 
 \begin_layout Subsubsection
@@ -3043,7 +3053,8 @@ A base class for CRUD modules configuration (AbstractCrudModuleConfigurator).
 \end_layout
 
 \begin_layout Standard
-The AbstractCrudModuleConfigurator class provides the following methods:
+The AbstractCrudModuleConfigurator class provides the following methods,
+ among others:
 \end_layout
 
 \begin_layout Itemize
@@ -3572,13 +3583,6 @@ faultLicenseInfo.
  must be created.
 \end_layout
 
-\begin_layout Standard
-
-\emph on
-TODO: Crear un proyecto service, para que se puedan personalizar los servicios
- de vista y presenter
-\end_layout
-
 \begin_layout Subsection
 Command line interface
 \end_layout
@@ -3591,7 +3595,7 @@ In order to allow license authorization, a command line tool is provided.
 \begin_layout Standard
 As before, it is based on ar.com.oxen.commons.license.impl.DefaultLicenseInfo
  license information.
- Also, and it identifies hardware using the MAC address.
+ Also, it identifies hardware using the MAC address.
  For a different license information and/or hardware identification, a custom
  authorizer must be created.
 \end_layout
@@ -3732,7 +3736,7 @@ Non-OSGi deployment
 Support for non-OSGi environments is provided through ar.com.oxen.nibiru.standalone
  project.
  Such project contains the required dependencies for running the framework,
- pretty much as it is done in the ar.com.oxen.nibiru.targetplatform proyect.
+ pretty much as it is done in the ar.com.oxen.nibiru.targetplatform project.
  However, it is intended to be used in an standard Java environment, such
  as a servlet container.
 \end_layout
@@ -3740,8 +3744,8 @@ Support for non-OSGi environments is provided through ar.com.oxen.nibiru.standal
 \begin_layout Standard
 The project also provides Spring configuration files for all the Nibiru
  modules.
- The ar/com/oxen/nibiru/standalone/context.xml file consolidates configuration
- files for a typical application.
+ The ar/com/oxen/nibiru/standalone/conf/spring/core.xml file consolidates
+ configuration files for a typical application.
 \end_layout
 
 \begin_layout Standard
