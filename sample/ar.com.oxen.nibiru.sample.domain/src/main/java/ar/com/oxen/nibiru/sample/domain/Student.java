@@ -1,5 +1,6 @@
 package ar.com.oxen.nibiru.sample.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -78,13 +79,18 @@ public class Student {
 		 * OpenJPA updates in cascade just one side on a bidirectional relation
 		 * http://openjpa.apache.org/builds/1.0.1/apache-openjpa-1.0.1/docs/manual/jpa_overview_meta_field.html#jpa_overview_meta_mappedby
 		 */
+		if (this.courses == null) {
+			this.courses = new HashSet<Course>();
+		}
 		for (Course course : this.courses) {
-			if (!courses.contains(course)) {
+			if (courses == null || !courses.contains(course)) {
 				course.getStudents().remove(this);
 			}
 		}
-		for (Course course : courses) {
-			course.getStudents().add(this);
+		if (courses != null) {
+			for (Course course : courses) {
+				course.getStudents().add(this);
+			}
 		}
 		this.courses = courses;
 	}
