@@ -3,6 +3,7 @@ package ar.com.oxen.nibiru.crud.ui.generic.presenter;
 import ar.com.oxen.commons.eventbus.api.EventBus;
 import ar.com.oxen.nibiru.conversation.api.Conversation;
 import ar.com.oxen.nibiru.conversation.api.ConversationCallback;
+import ar.com.oxen.nibiru.crud.manager.api.BeforeSaveEntityEvent;
 import ar.com.oxen.nibiru.crud.manager.api.CrudAction;
 import ar.com.oxen.nibiru.crud.manager.api.CrudActionExtension;
 import ar.com.oxen.nibiru.crud.manager.api.CrudEntity;
@@ -54,6 +55,13 @@ public abstract class AbstractGenericCrudPresenter<V extends View, T> extends
 			@Override
 			public Void doInConversation(Conversation conversation)
 					throws Exception {
+				
+				if (action.modifiesEntity() && entity != null) {
+					getEventBus().fireEvent(
+							new BeforeSaveEntityEvent(entity),
+							crudManager.getEntityTypeName());
+				}
+
 				CrudEntity<?> returnedEntity = actionExtension
 						.performEntityAction(action, entity);
 				/*

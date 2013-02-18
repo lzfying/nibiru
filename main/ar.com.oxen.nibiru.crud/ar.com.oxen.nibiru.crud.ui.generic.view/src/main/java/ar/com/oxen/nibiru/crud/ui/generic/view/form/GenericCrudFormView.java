@@ -112,8 +112,14 @@ public class GenericCrudFormView extends AbstractCrudView implements
 			ComboBox<?> combo = this.getViewFactory().buildComboBox(
 					(Class<?>) crudField.getType());
 
-			for (Object item : crudEntity.getAvailableValues(crudField)) {
-				((ComboBox<Object>) combo).addItem(item);
+			if (formInfo.getValues() != null && formInfo.getValues().length > 0) {
+				for (String item : formInfo.getValues()) {
+					((ComboBox<String>) combo).addItem(item);
+				}
+			} else {
+				for (Object item : crudEntity.getAvailableValues(crudField)) {
+					((ComboBox<Object>) combo).addItem(item);
+				}				
 			}
 
 			field = combo;

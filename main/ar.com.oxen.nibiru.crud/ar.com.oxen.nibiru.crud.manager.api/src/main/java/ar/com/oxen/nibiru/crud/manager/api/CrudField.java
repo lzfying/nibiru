@@ -71,5 +71,12 @@ public interface CrudField {
 		 * @return The tab name
 		 */
 		String getTab();
+
+		/**
+		 * Returns the possible values for this field
+		 * 
+		 * @return The tab name
+		 */
+		String[] getValues();
 	}
 }

@@ -58,14 +58,16 @@ public class SimpleCrudField implements CrudField {
 		private boolean readonly;
 		private int maxLength;
 		private String tab;
+		private String[] values;
 
 		public SimpleFormInfo(WidgetType widgetType, boolean readonly,
-				int maxLength, String tab) {
+				int maxLength, String tab, String[] values) {
 			super();
 			this.widgetType = widgetType;
 			this.readonly = readonly;
 			this.maxLength = maxLength;
 			this.tab = tab;
+			this.values = values;
 		}
 
 		@Override
@@ -86,6 +88,11 @@ public class SimpleCrudField implements CrudField {
 		@Override
 		public String getTab() {
 			return this.tab;
+		}
+
+		@Override
+		public String[] getValues() {
+			return values;
 		}
 	}
 }

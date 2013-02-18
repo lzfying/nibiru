@@ -90,6 +90,7 @@ class AbstractJpaCrudComponent<T> {
 			int maxLength = -1;
 			WidgetType widgetType = null;
 			String tab = CrudField.FormInfo.GENERAL_TAB;
+			String[] values = null;
 
 			Show show = descriptor.getAnnotation(Show.class);
 			Widget crudWidget = descriptor.getAnnotation(Widget.class);
@@ -98,6 +99,7 @@ class AbstractJpaCrudComponent<T> {
 				widgetType = crudWidget.type();
 				maxLength = crudWidget.maxLength();
 				tab = crudWidget.tab();
+				values = crudWidget.values();
 			}
 
 			if (!this.isBasicType(descriptor.getType())) {
@@ -125,7 +127,7 @@ class AbstractJpaCrudComponent<T> {
 			fields.add(new SimpleCrudField(descriptor.getName(), descriptor
 					.getType(), new SimpleCrudField.SimpleListInfo(show
 					.columWidth()), new SimpleCrudField.SimpleFormInfo(
-					widgetType, readonly, maxLength, tab)));
+					widgetType, readonly, maxLength, tab, values)));
 		}
 
 		return fields;
