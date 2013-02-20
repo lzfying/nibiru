@@ -37,7 +37,13 @@ public class SessionProfile implements Profile {
 	}
 
 	private ProfileHolder getHolder() {
-		return session.get(PROFILE_KEY);
+		ProfileHolder holder = this.session.get(PROFILE_KEY);
+		if (holder != null) {
+			return holder;
+		} else {
+			/* Fallback to avoid exceptions when session is cleaned */
+			return new ProfileHolder("", "", "");
+		}
 	}
 
 	private class ProfileHolder {
