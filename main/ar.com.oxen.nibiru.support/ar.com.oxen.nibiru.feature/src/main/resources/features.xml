@@ -188,10 +188,18 @@
 	<feature name='nibiru-security-spring' description='Nibiru Spring security components' version='${project.version}' resolver='(obr)'>
     	<!-- Required features -->
     	<feature>nibiru-security-common</feature>
+    	<feature version="[3.0.7,4)">spring</feature>
+    	<feature version="[3.0.7,4)">spring-web</feature>
     	
     	<!-- Nibiru bundles -->
         <bundle>mvn:ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.spring/${project.version}</bundle>
         <bundle>mvn:ar.com.oxen.nibiru.security/ar.com.oxen.nibiru.security.spring.blueprint/${project.version}</bundle>
+        
+    	<!-- 3rd party bundles -->
+        <bundle>mvn:org.springframework.security/spring-security-core/${spring-security-version}</bundle>
+        <bundle>mvn:org.springframework.security/spring-security-web/${spring-security-version}</bundle>
+        <bundle>mvn:org.springframework.security/spring-security-config/${spring-security-version}</bundle>
+        <bundle>mvn:org.aopalliance/com.springsource.org.aopalliance/1.0.0</bundle>
     </feature>
     
 	<feature name='nibiru-security-autologin' description='Nibiru Spring security components' version='${project.version}' resolver='(obr)'>
