@@ -41,7 +41,7 @@ public class ReportCrudActionExtension extends
 			return entity;
 		} else if (action.getName().equals(RUN_REPORT)) {
 			String format = (String) entity
-					.getValue(ReportCrudEntity.REPORT_FORMAT_FIELD);
+					.getValue(ReportCrudManager.REPORT_FORMAT_FIELD);
 
 			Map<String, Object> parameters = new HashMap<String, Object>();
 

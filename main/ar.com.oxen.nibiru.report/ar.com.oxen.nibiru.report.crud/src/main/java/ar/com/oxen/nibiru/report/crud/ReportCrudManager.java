@@ -13,6 +13,8 @@ import ar.com.oxen.nibiru.extensionpoint.api.ExtensionTracker;
 import ar.com.oxen.nibiru.crud.utils.SimpleCrudField;
 
 public class ReportCrudManager implements CrudManager<Report> {
+	public final static String REPORT_NAME_FIELD = "reportName";
+	public final static String REPORT_FORMAT_FIELD = "reportFormat";
 	private List<Report> reports = new LinkedList<Report>();
 
 	public ReportCrudManager(ExtensionPointManager extensionPointManager) {
@@ -38,8 +40,8 @@ public class ReportCrudManager implements CrudManager<Report> {
 	@Override
 	public List<CrudField> getListFields() {
 		List<CrudField> listFields = new ArrayList<CrudField>(1);
-		listFields.add(new SimpleCrudField(ReportCrudEntity.REPORT_NAME_FIELD,
-				String.class, new SimpleCrudField.SimpleListInfo(500), null));
+		listFields.add(new SimpleCrudField(REPORT_NAME_FIELD, String.class,
+				new SimpleCrudField.SimpleListInfo(500), null));
 		return listFields;
 	}
 

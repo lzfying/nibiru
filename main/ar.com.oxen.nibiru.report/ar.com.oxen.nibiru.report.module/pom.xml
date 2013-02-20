@@ -72,6 +72,11 @@
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
+			<groupId>ar.com.oxen.nibiru.validation</groupId>
+			<artifactId>ar.com.oxen.nibiru.validation.generic</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>ar.com.oxen.nibiru.support</groupId>
 			<artifactId>ar.com.oxen.nibiru.osgi.utils</artifactId>
 			<version>${nibiru-version}</version>

@@ -14,8 +14,6 @@ import ar.com.oxen.nibiru.report.api.Report;
 import ar.com.oxen.nibiru.report.api.Report.ParameterDefinition;
 
 class ReportCrudEntity implements CrudEntity<Report> {
-	final static String REPORT_NAME_FIELD = "reportName";
-	final static String REPORT_FORMAT_FIELD = "reportFormat";
 	private Report report;
 	private String format;
 	private Map<String, Object> parameters;
@@ -36,9 +34,10 @@ class ReportCrudEntity implements CrudEntity<Report> {
 		List<CrudField> formFields = new LinkedList<CrudField>();
 
 		/* Format field */
-		formFields.add(new SimpleCrudField(REPORT_FORMAT_FIELD, String.class,
-				null, new SimpleCrudField.SimpleFormInfo(WidgetType.COMBO_BOX,
-						false, 0, GENERAL_TAB)));
+		formFields.add(new SimpleCrudField(
+				ReportCrudManager.REPORT_FORMAT_FIELD, String.class, null,
+				new SimpleCrudField.SimpleFormInfo(WidgetType.COMBO_BOX, false,
+						0, GENERAL_TAB, null)));
 
 		/* Parameter fields */
 		for (Report.ParameterDefinition paramDef : this.report
@@ -56,9 +55,9 @@ class ReportCrudEntity implements CrudEntity<Report> {
 
 	@Override
 	public Object getValue(String fieldName) {
-		if (REPORT_NAME_FIELD.equals(fieldName)) {
+		if (ReportCrudManager.REPORT_NAME_FIELD.equals(fieldName)) {
 			return this.report.getName();
-		} else if (REPORT_FORMAT_FIELD.equals(fieldName)) {
+		} else if (ReportCrudManager.REPORT_FORMAT_FIELD.equals(fieldName)) {
 			return this.format;
 		} else {
 			return this.parameters.get(fieldName);
@@ -72,10 +71,10 @@ class ReportCrudEntity implements CrudEntity<Report> {
 
 	@Override
 	public void setValue(String fieldName, Object value) {
-		if (REPORT_NAME_FIELD.equals(fieldName)) {
+		if (ReportCrudManager.REPORT_NAME_FIELD.equals(fieldName)) {
 			throw new IllegalArgumentException("Report name can't be modified "
 					+ fieldName);
-		} else if (REPORT_FORMAT_FIELD.equals(fieldName)) {
+		} else if (ReportCrudManager.REPORT_FORMAT_FIELD.equals(fieldName)) {
 			this.format = (String) value;
 		} else {
 			this.parameters.put(fieldName, value);
@@ -99,7 +98,7 @@ class ReportCrudEntity implements CrudEntity<Report> {
 
 	@Override
 	public Iterable<?> getAvailableValues(String fieldName) {
-		if (REPORT_FORMAT_FIELD.equals(fieldName)) {
+		if (ReportCrudManager.REPORT_FORMAT_FIELD.equals(fieldName)) {
 			return this.report.getFormats();
 		} else {
 			throw new IllegalArgumentException(
@@ -133,7 +132,7 @@ class ReportCrudEntity implements CrudEntity<Report> {
 		@Override
 		public FormInfo getFormInfo() {
 			return new SimpleCrudField.SimpleFormInfo(WidgetType.TEXT_FIELD,
-					false, 9999, GENERAL_TAB);
+					false, 9999, GENERAL_TAB, null);
 		}
 	}
 }
