@@ -12,13 +12,20 @@ public class JpaTransactionTemplate implements TransactionTemplate {
 			TransactionCallback<T> callback) {
 		EntityTransaction transaction = entityManager.getTransaction();
 		boolean newTransaction = !transaction.isActive();
-		if (newTransaction) {
-			transaction.begin();
+
+		try {
+			if (newTransaction) {
+				transaction.begin();
+			}
+			T returnValue = callback.doInTransaction();
+			if (newTransaction) {
+				transaction.commit();
+			}
+			return returnValue;
+			
+		} catch (RuntimeException e) {
+			transaction.rollback();
+			throw e;
 		}
-		T returnValue = callback.doInTransaction();
-		if (newTransaction) {
-			transaction.commit();
-		}
-		return returnValue;
 	}
 }
