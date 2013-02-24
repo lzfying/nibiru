@@ -590,6 +590,10 @@ reload
  para que tome en cuenta los JARs descargados.
 \end_layout
 
+\begin_layout Subsubsection
+Ejecución desde Eclipse
+\end_layout
+
 \begin_layout Standard
 Actualmente, el target platform existe sólamente a fin de hacer que los
  proyectos Eclipse compilen.
@@ -613,6 +617,152 @@ Se puede depurar Karaf desde Eclipse creando un launc estándar de Java (no
  agregar un "echo" donde se crea la línea de comando de Java a ejecutar.
  De lo que se muestre por consola, se pueden obtener los parámetros a colocar
  en el launch de Java.
+\end_layout
+
+\begin_layout Standard
+Simplemente siga estos pasos:
+\end_layout
+
+\begin_layout Enumerate
+Desde el directorio de instalación de Karaf, edite el archivo bin/karaf
+ (o bin/karaf.bat en Windows, supongo) y copia la siguiente línea:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+exec "$JAVA" $JAVA_OPTS -Djava.endorsed.dirs="${JAVA_ENDORSED_DIRS}" -Djava.ext.dirs
+="${JAVA_EXT_DIRS}" -Dkaraf.instances="${KARAF_HOME}/instances" -Dkaraf.home="$KAR
+AF_HOME" -Dkaraf.base="$KARAF_BASE" -Dkaraf.data="$KARAF_DATA" -Djava.io.tmpdir="$KA
+RAF_DATA/tmp" -Djava.util.logging.config.file="$KARAF_BASE/etc/java.util.logging.proper
+ties" $KARAF_OPTS $OPTS -classpath "$CLASSPATH" $MAIN "$@"
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+reemplazando 
+\begin_inset Quotes eld
+\end_inset
+
+exec
+\begin_inset Quotes erd
+\end_inset
+
+ por 
+\begin_inset Quotes eld
+\end_inset
+
+echo
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+echo "$JAVA" $JAVA_OPTS -Djava.endorsed.dirs="${JAVA_ENDORSED_DIRS}" -Djava.ext.dirs
+="${JAVA_EXT_DIRS}" -Dkaraf.instances="${KARAF_HOME}/instances" -Dkaraf.home="$KAR
+AF_HOME" -Dkaraf.base="$KARAF_BASE" -Dkaraf.data="$KARAF_DATA" -Djava.io.tmpdir="$KA
+RAF_DATA/tmp" -Djava.util.logging.config.file="$KARAF_BASE/etc/java.util.logging.proper
+ties" $KARAF_OPTS $OPTS -classpath "$CLASSPATH" $MAIN "$@"
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Levante Karaf ejecutando bin/karaf.
+ Obtendrá un mensaje de consola con el comando Java a ser ejecutado.
+ Por ejemplo:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+/System/Library/Frameworks/JavaVM.framework/Home/bin/java -server -Xms128M
+ -Xmx512M -Dcom.sun.management.jmxremote -Djava.endorsed.dirs=/System/Library/Framewo
+rks/JavaVM.framework/Home/jre/lib/endorsed:/System/Library/Frameworks/JavaVM.frame
+work/Home/lib/endorsed:/Developer/Applications/Java/apache-karaf-2.3.0/lib/endorse
+d -Djava.ext.dirs=/System/Library/Frameworks/JavaVM.framework/Home/jre/lib/ext:/Sys
+tem/Library/Frameworks/JavaVM.framework/Home/lib/ext:/Developer/Applications/Java
+/apache-karaf-2.3.0/lib/ext -Dkaraf.instances=/Developer/Applications/Java/apache-k
+araf-2.3.0/instances -Dkaraf.home=/Developer/Applications/Java/apache-karaf-2.3.0
+ -Dkaraf.base=/Developer/Applications/Java/apache-karaf-2.3.0 -Dkaraf.data=/Develope
+r/Applications/Java/apache-karaf-2.3.0/data -Djava.io.tmpdir=/Developer/Applications
+/Java/apache-karaf-2.3.0/data/tmp -Djava.util.logging.config.file=/Developer/Applicati
+ons/Java/apache-karaf-2.3.0/etc/java.util.logging.properties -Dkaraf.startLocalConsole
+=true -Dkaraf.startRemoteShell=true -classpath /Developer/Applications/Java/apach
+e-karaf-2.3.0/lib/karaf-jaas-boot.jar:/Developer/Applications/Java/apache-karaf-2.3.0
+/lib/karaf.jar org.apache.karaf.main.Main
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Cree un nuevo launch de aplicación Java en Eclipse.
+ Establezca org.apache.karaf.main.Main como clase principal.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/lautaro/workspace/nibiru/main/docs/karaf_eclipse_1.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Vaya a la pestaña Arguments y copie los argumentos de VM que obtuvo en el
+ paso 2 en la caja de texto apropiada.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/lautaro/workspace/nibiru/main/docs/karaf_eclipse_2.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Además, asegúrese de pone el directorio de instalación de Karaf en el campo
+ Working Directory.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Y eso es todo.
+ Ahora puede ejecutar el launch creado tanto en modo normal como en modo
+ debug.
 \end_layout
 
 \begin_layout Part
