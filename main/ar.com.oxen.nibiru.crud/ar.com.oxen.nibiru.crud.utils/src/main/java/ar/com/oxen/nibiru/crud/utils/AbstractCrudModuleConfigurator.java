@@ -12,15 +12,10 @@ import ar.com.oxen.nibiru.crud.manager.api.ManageCrudEntitiesEvent;
 import ar.com.oxen.nibiru.crud.ui.api.CrudPresenterFactory;
 import ar.com.oxen.nibiru.crud.ui.api.CrudViewFactory;
 import ar.com.oxen.nibiru.module.utils.AbstractModuleConfigurator;
-import ar.com.oxen.nibiru.ui.api.extension.MenuItemExtension;
-import ar.com.oxen.nibiru.ui.utils.extension.SimpleMenuItemExtension;
-import ar.com.oxen.nibiru.ui.utils.mvp.SimpleEventBusClickHandler;
 
 public abstract class AbstractCrudModuleConfigurator extends
 		AbstractModuleConfigurator<CrudViewFactory, CrudPresenterFactory> {
 	private List<EventHandler<?>> registeredHandlers = new LinkedList<EventHandler<?>>();
-
-	int menuPos = 0;
 
 	/**
 	 * Adds a CRUD menu
@@ -144,22 +139,14 @@ public abstract class AbstractCrudModuleConfigurator extends
 
 	protected void registerMenu(String menuName, String parentMenuExtension,
 			CrudManager<?> crudManager) {
-		this.registerExtension(
-				new SimpleMenuItemExtension(menuName, menuPos++,
-						new SimpleEventBusClickHandler(this.getEventBus(),
-								ManageCrudEntitiesEvent.class, crudManager
-										.getEntityTypeName())),
-				parentMenuExtension, MenuItemExtension.class);
+		this.registerMenu(menuName, parentMenuExtension, crudManager, null);
 	}
 
 	protected void registerMenu(String menuName, String parentMenuExtension,
 			CrudManager<?> crudManager, String[] allowedRoles) {
-		this.registerExtension(
-				new SimpleMenuItemExtension(menuName, menuPos++,
-						new SimpleEventBusClickHandler(this.getEventBus(),
-								ManageCrudEntitiesEvent.class, crudManager
-										.getEntityTypeName()), allowedRoles),
-				parentMenuExtension, MenuItemExtension.class);
+		this.registerMenu(menuName, parentMenuExtension,
+				ManageCrudEntitiesEvent.class, crudManager.getEntityTypeName(),
+				allowedRoles);
 	}
 
 	protected <K> void registerActions(CrudManager<K> crudManager,

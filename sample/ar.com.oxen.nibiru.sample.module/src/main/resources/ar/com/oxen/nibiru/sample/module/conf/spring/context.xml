@@ -29,7 +29,7 @@
 	</bean>
 
 	<bean init-method="startup" destroy-method="shutdown"
-		class="ar.com.oxen.nibiru.sample.module.ModuleConfigurator">
+		class="ar.com.oxen.nibiru.sample.crud.CrudSampleModuleConfigurator">
 		<property name="extensionPointManager" ref="extensionPointManager" />
 		<property name="eventBus" ref="eventBus" />
 		<property name="viewFactory" ref="crudViewFactory" />
@@ -50,6 +50,25 @@
 		<property name="wrapperFactory" ref="wrapperFactory" />
 		<property name="authorizationService" ref="authorizationService" />
 		<property name="transactionTemplate" ref="transactionTemplate" />
+	</bean>
+	
+	<bean init-method="startup" destroy-method="shutdown"
+		class="ar.com.oxen.nibiru.sample.showcase.ShowcaseModuleConfigurator">
+		<property name="extensionPointManager" ref="extensionPointManager" />
+		<property name="eventBus" ref="eventBus" />
+		<property name="viewFactory" ref="showcaseViewFactory" />
+		<property name="presenterFactory" ref="showcasePresenterFactory" />
+	</bean>
+
+	<bean id="showcaseViewFactory" class="ar.com.oxen.nibiru.sample.showcase.ShowcaseViewFactory">
+		<property name="viewFactory" ref="viewFactory" />
+		<property name="messageSource" ref="nibiruMessageSource" />
+	</bean>
+
+	<bean id="showcasePresenterFactory"
+		class="ar.com.oxen.nibiru.sample.showcase.ShowcasePresenterFactory">
+		<property name="eventBus" ref="eventBus" />
+		<property name="mailService" ref="mailService" />
 	</bean>
 	
 	<!-- JPA -->

@@ -5,8 +5,13 @@ import java.util.LinkedList;
 
 import ar.com.oxen.commons.eventbus.api.EventBus;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
+import ar.com.oxen.nibiru.ui.api.extension.MenuItemExtension;
+import ar.com.oxen.nibiru.ui.api.extension.SubMenuExtension;
 import ar.com.oxen.nibiru.ui.api.mvp.Presenter;
 import ar.com.oxen.nibiru.ui.api.mvp.View;
+import ar.com.oxen.nibiru.ui.utils.extension.SimpleMenuItemExtension;
+import ar.com.oxen.nibiru.ui.utils.extension.SimpleSubMenuExtension;
+import ar.com.oxen.nibiru.ui.utils.mvp.SimpleEventBusClickHandler;
 
 /**
  * Base class for module configurators.
@@ -22,6 +27,7 @@ public abstract class AbstractModuleConfigurator<VF, PF> {
 	private EventBus eventBus;
 	private VF viewFactory;
 	private PF presenterFactory;
+	private int menuPos = 0;
 
 	/**
 	 * Starts the module. This method must be externally called (for example,
@@ -100,6 +106,21 @@ public abstract class AbstractModuleConfigurator<VF, PF> {
 		this.registeredExtensions.add(extension);
 	}
 
+	protected void registerSubMenu(String subMenuName, String menuExtension,
+			String parentMenuExtension, int position) {
+		this.registerExtension(new SimpleSubMenuExtension(subMenuName,
+				menuExtension, position), parentMenuExtension,
+				SubMenuExtension.class);
+	}
+			
+	protected void registerMenu(String menuName, String parentMenuExtension,
+			Class<?> eventClass, String topic, String[] allowedRoles) {
+		this.registerExtension(new SimpleMenuItemExtension(menuName, menuPos++,
+				new SimpleEventBusClickHandler(this.getEventBus(), eventClass,
+						topic), allowedRoles), parentMenuExtension,
+				MenuItemExtension.class);
+	}
+	
 	public void setEventBus(EventBus eventBus) {
 		this.eventBus = eventBus;
 	}

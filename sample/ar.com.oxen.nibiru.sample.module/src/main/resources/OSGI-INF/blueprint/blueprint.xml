@@ -8,10 +8,16 @@
 	<service interface="ar.com.oxen.nibiru.i18n.api.MessageProvider"
 		ref="sampleMessageProvider" />
 
+	<reference id="messageSource" availability="optional"
+		interface="ar.com.oxen.nibiru.i18n.api.MessageSource" />
+
 	<reference id="extensionPointManager"
 		interface="ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager" />
 
 	<reference id="eventBus" interface="ar.com.oxen.commons.eventbus.api.EventBus" />
+
+	<reference id="viewFactory"
+		interface="ar.com.oxen.nibiru.ui.api.view.ViewFactory" />
 
 	<reference id="crudViewFactory"
 		interface="ar.com.oxen.nibiru.crud.ui.api.CrudViewFactory" />
@@ -45,7 +51,7 @@
 	</bean>
 
 	<bean init-method="startup" destroy-method="shutdown"
-		class="ar.com.oxen.nibiru.sample.module.ModuleConfigurator">
+		class="ar.com.oxen.nibiru.sample.crud.CrudSampleModuleConfigurator">
 		<property name="extensionPointManager" ref="extensionPointManager" />
 		<property name="eventBus" ref="eventBus" />
 		<property name="viewFactory" ref="crudViewFactory" />
@@ -62,5 +68,24 @@
 		<property name="wrapperFactory" ref="wrapperFactory" />
 		<property name="authorizationService" ref="authorizationService" />
 		<property name="transactionTemplate" ref="transactionTemplate" />
+	</bean>
+	
+	<bean init-method="startup" destroy-method="shutdown"
+		class="ar.com.oxen.nibiru.sample.showcase.ShowcaseModuleConfigurator">
+		<property name="extensionPointManager" ref="extensionPointManager" />
+		<property name="eventBus" ref="eventBus" />
+		<property name="viewFactory" ref="showcaseViewFactory" />
+		<property name="presenterFactory" ref="showcasePresenterFactory" />
+	</bean>
+
+	<bean id="showcaseViewFactory" class="ar.com.oxen.nibiru.sample.showcase.ShowcaseViewFactory">
+		<property name="viewFactory" ref="viewFactory" />
+		<property name="messageSource" ref="messageSource" />
+	</bean>
+
+	<bean id="showcasePresenterFactory"
+		class="ar.com.oxen.nibiru.sample.showcase.ShowcasePresenterFactory">
+		<property name="eventBus" ref="eventBus" />
+		<property name="mailService" ref="mailService" />
 	</bean>
 </blueprint>

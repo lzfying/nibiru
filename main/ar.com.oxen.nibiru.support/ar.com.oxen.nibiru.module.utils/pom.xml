@@ -19,6 +19,11 @@
 			<version>${nibiru-version}</version>
 		</dependency>
 		<dependency>
+			<groupId>ar.com.oxen.nibiru.ui</groupId>
+			<artifactId>ar.com.oxen.nibiru.ui.utils</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
+		<dependency>
 			<groupId>ar.com.oxen.nibiru.extensionpoint</groupId>
 			<artifactId>ar.com.oxen.nibiru.extensionpoint.api</artifactId>
 			<version>${nibiru-version}</version>

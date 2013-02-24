@@ -1,4 +1,4 @@
-package ar.com.oxen.nibiru.sample.module;
+package ar.com.oxen.nibiru.sample.crud;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,20 +13,18 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.crud.utils.AbstractCrudActionExtension;
 import ar.com.oxen.nibiru.crud.utils.AbstractCrudModuleConfigurator;
 import ar.com.oxen.nibiru.crud.utils.SimpleCrudAction;
+import ar.com.oxen.nibiru.mail.api.MailMessage;
+import ar.com.oxen.nibiru.mail.api.MailService;
 import ar.com.oxen.nibiru.report.api.Report;
 import ar.com.oxen.nibiru.report.jasper.JasperReport;
 import ar.com.oxen.nibiru.sample.domain.Course;
 import ar.com.oxen.nibiru.sample.domain.Student;
 import ar.com.oxen.nibiru.sample.domain.Subject;
-import ar.com.oxen.nibiru.ui.api.extension.SubMenuExtension;
-import ar.com.oxen.nibiru.ui.utils.extension.SimpleSubMenuExtension;
 import ar.com.oxen.nibiru.validation.api.Validator;
 import ar.com.oxen.nibiru.validation.generic.NotEmptyValidator;
 import ar.com.oxen.nibiru.validation.generic.RegexpValidator;
-import ar.com.oxen.nibiru.mail.api.MailMessage;
-import ar.com.oxen.nibiru.mail.api.MailService;
 
-public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
+public class CrudSampleModuleConfigurator extends AbstractCrudModuleConfigurator {
 	private static final String MENU_EXTENSION = "ar.com.oxen.nibiru.menu.sample.crud";
 	
 	private CrudFactory crudFactory;
@@ -50,9 +48,8 @@ public class ModuleConfigurator extends AbstractCrudModuleConfigurator {
 		CrudActionExtension<Student> studentCrudActionExtension = this.crudFactory
 				.createDefaultCrudActionExtension(Student.class);		
 		
-		this.registerExtension(new SimpleSubMenuExtension("sample.crud",
-				MENU_EXTENSION, 1), "ar.com.oxen.nibiru.menu",
-				SubMenuExtension.class);
+		this.registerSubMenu("sample.crud", MENU_EXTENSION,
+				"ar.com.oxen.nibiru.menu", 2);
 
 		this.addCrudWithMenu("sample.crud.subject", MENU_EXTENSION,
 				subjectCrudManager, subjectCrudActionExtension);
