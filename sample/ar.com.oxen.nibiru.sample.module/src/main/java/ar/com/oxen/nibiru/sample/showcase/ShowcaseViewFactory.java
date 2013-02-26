@@ -1,6 +1,8 @@
 package ar.com.oxen.nibiru.sample.showcase;
 
 import ar.com.oxen.nibiru.i18n.api.MessageSource;
+import ar.com.oxen.nibiru.sample.eventbus.EventBusSamplePresenter;
+import ar.com.oxen.nibiru.sample.eventbus.EventBusSampleView;
 import ar.com.oxen.nibiru.sample.mail.MailSamplePresenter;
 import ar.com.oxen.nibiru.sample.mail.MailSampleView;
 import ar.com.oxen.nibiru.ui.api.view.ViewFactory;
@@ -11,6 +13,10 @@ public class ShowcaseViewFactory {
 
 	public MailSamplePresenter.Display createMailSampleDisplay() {
 		return new MailSampleView(this.viewFactory, this.messageSource);
+	}
+
+	public EventBusSamplePresenter.Display createEventBusSampleDisplay() {
+		return new EventBusSampleView(this.viewFactory, this.messageSource);
 	}
 
 	public void setViewFactory(ViewFactory viewFactory) {
