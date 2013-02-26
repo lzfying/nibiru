@@ -3,8 +3,6 @@ package ar.com.oxen.nibiru.sample.crud;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import ar.com.oxen.nibiru.crud.manager.api.CrudAction;
 import ar.com.oxen.nibiru.crud.manager.api.CrudActionExtension;
 import ar.com.oxen.nibiru.crud.manager.api.CrudEntity;
@@ -15,8 +13,6 @@ import ar.com.oxen.nibiru.crud.utils.AbstractCrudModuleConfigurator;
 import ar.com.oxen.nibiru.crud.utils.SimpleCrudAction;
 import ar.com.oxen.nibiru.mail.api.MailMessage;
 import ar.com.oxen.nibiru.mail.api.MailService;
-import ar.com.oxen.nibiru.report.api.Report;
-import ar.com.oxen.nibiru.report.jasper.JasperReport;
 import ar.com.oxen.nibiru.sample.domain.Course;
 import ar.com.oxen.nibiru.sample.domain.Student;
 import ar.com.oxen.nibiru.sample.domain.Subject;
@@ -24,12 +20,12 @@ import ar.com.oxen.nibiru.validation.api.Validator;
 import ar.com.oxen.nibiru.validation.generic.NotEmptyValidator;
 import ar.com.oxen.nibiru.validation.generic.RegexpValidator;
 
-public class CrudSampleModuleConfigurator extends AbstractCrudModuleConfigurator {
+public class CrudSampleModuleConfigurator extends
+		AbstractCrudModuleConfigurator {
 	private static final String MENU_EXTENSION = "ar.com.oxen.nibiru.menu.sample.crud";
-	
+
 	private CrudFactory crudFactory;
 	private MailService mailService;
-	private DataSource dataSource;
 
 	@Override
 	protected void configure() {
@@ -46,18 +42,17 @@ public class CrudSampleModuleConfigurator extends AbstractCrudModuleConfigurator
 		CrudManager<Student> studentCrudManager = this.crudFactory
 				.createCrudManager(Student.class);
 		CrudActionExtension<Student> studentCrudActionExtension = this.crudFactory
-				.createDefaultCrudActionExtension(Student.class);		
-		
+				.createDefaultCrudActionExtension(Student.class);
+
 		this.registerSubMenu("sample.crud", MENU_EXTENSION,
 				"ar.com.oxen.nibiru.menu", 2);
 
 		this.addCrudWithMenu("sample.crud.subject", MENU_EXTENSION,
 				subjectCrudManager, subjectCrudActionExtension);
 
-		this.addChildCrudWithMenu("editCourses", subjectCrudManager,
-				"subject", courseCrudManager,
-				courseCrudActionExtension);
-		
+		this.addChildCrudWithMenu("editCourses", subjectCrudManager, "subject",
+				courseCrudManager, courseCrudActionExtension);
+
 		this.addCrudWithMenu("sample.crud.student", MENU_EXTENSION,
 				studentCrudManager, studentCrudActionExtension);
 
@@ -94,8 +89,7 @@ public class CrudSampleModuleConfigurator extends AbstractCrudModuleConfigurator
 					}
 
 				});
-		
-		
+
 		// email example
 		this.registerActions(studentCrudManager,
 				new AbstractCrudActionExtension<Student>(null) {
@@ -135,13 +129,6 @@ public class CrudSampleModuleConfigurator extends AbstractCrudModuleConfigurator
 
 		this.registerExtension(new NotEmptyValidator(), Subject.class.getName()
 				+ ".description", Validator.class);
-
-		// Report sample
-		registerExtension(
-				new JasperReport(this.getClass().getResourceAsStream(
-						"/ar/com/oxen/nibiru/sample/report/myReport.jrxml"),
-						this.dataSource), Report.EXTENSION_POINT_NAME,
-				Report.class);
 	}
 
 	public void setCrudFactory(CrudFactory crudFactory) {
@@ -150,9 +137,5 @@ public class CrudSampleModuleConfigurator extends AbstractCrudModuleConfigurator
 
 	public void setMailService(MailService mailService) {
 		this.mailService = mailService;
-	}
-
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
 	}
 }

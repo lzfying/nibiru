@@ -58,7 +58,6 @@
 		<property name="presenterFactory" ref="crudPresenterFactory" />
 		<property name="crudFactory" ref="crudFactory" />
 		<property name="mailService" ref="mailService" />
-		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 	<bean id="crudFactory" class="ar.com.oxen.nibiru.crud.manager.jpa.JpaCrudFactory">
@@ -68,6 +67,13 @@
 		<property name="wrapperFactory" ref="wrapperFactory" />
 		<property name="authorizationService" ref="authorizationService" />
 		<property name="transactionTemplate" ref="transactionTemplate" />
+	</bean>
+	
+	<bean init-method="startup" destroy-method="shutdown"
+		class="ar.com.oxen.nibiru.sample.report.ReportSampleModuleConfigurator">
+		<property name="extensionPointManager" ref="extensionPointManager" />
+		<property name="eventBus" ref="eventBus" />
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
 	<bean init-method="startup" destroy-method="shutdown"
