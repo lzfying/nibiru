@@ -86,7 +86,7 @@
         <bundle>mvn:org.mvel/mvel2/2.0.19</bundle>
     </feature>
 
-    <feature name='nibiru-license' description='Nibiru mail components' version='${project.version}' resolver='(obr)'>
+    <feature name='nibiru-license' description='Nibiru license components' version='${project.version}' resolver='(obr)'>
     	<!-- Required features -->
     	<feature>nibiru-core</feature>
     	
@@ -108,9 +108,11 @@
     	
     	<!-- 3rd party bundles -->
         <bundle>mvn:javax.mail/com.springsource.javax.mail/1.4.1</bundle>
+        <bundle>mvn:javax.activation/com.springsource.javax.activation/1.1.1</bundle>
     </feature>
 
-    <feature name='nibiru-report' description='Nibiru report components' version='${project.version}' resolver='(obr)'>
+	<feature name='nibiru-report' description='Nibiru report components'
+		version='${project.version}' resolver='(obr)'>
     	<!-- Required features -->
     	<feature>nibiru-core</feature>
     	
