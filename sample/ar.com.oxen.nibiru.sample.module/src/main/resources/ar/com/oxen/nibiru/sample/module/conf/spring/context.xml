@@ -76,6 +76,9 @@
 		class="ar.com.oxen.nibiru.sample.showcase.ShowcasePresenterFactory">
 		<property name="eventBus" ref="eventBus" />
 		<property name="mailService" ref="mailService" />
+		<property name="session" ref="nibiruSession" />
+		<property name="conversationFactory" ref="conversationFactory" />
+		<property name="conversationAccessor" ref="conversationAccessor" />
 	</bean>
 	
 	<!-- JPA -->

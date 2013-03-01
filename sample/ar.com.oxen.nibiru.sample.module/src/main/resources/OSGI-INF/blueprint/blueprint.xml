@@ -37,6 +37,12 @@
 
 	<reference id="dataSource" interface="javax.sql.DataSource" />
 
+	<reference id="nibiruSession" interface="ar.com.oxen.nibiru.session.api.Session" />
+
+	<reference id="conversationFactory" interface="ar.com.oxen.nibiru.conversation.api.ConversationFactory" />
+
+	<reference id="conversationAccessor" interface="ar.com.oxen.nibiru.conversation.api.ConversationAccessor" />
+
 	<reference id="entityManagerFactory" interface="javax.persistence.EntityManagerFactory"
 		filter="(osgi.unit.name=nibiruSample_conversation)" />
 
@@ -93,5 +99,8 @@
 		class="ar.com.oxen.nibiru.sample.showcase.ShowcasePresenterFactory">
 		<property name="eventBus" ref="eventBus" />
 		<property name="mailService" ref="mailService" />
+		<property name="session" ref="nibiruSession" />
+		<property name="conversationFactory" ref="conversationFactory" />
+		<property name="conversationAccessor" ref="conversationAccessor" />
 	</bean>
 </blueprint>

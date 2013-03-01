@@ -91,5 +91,10 @@
 			<artifactId>ar.com.oxen.nibiru.mail.api</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>ar.com.oxen.nibiru.session</groupId>
+			<artifactId>ar.com.oxen.nibiru.session.api</artifactId>
+			<version>${nibiru-version}</version>
+		</dependency>
 	</dependencies>
 </project>
