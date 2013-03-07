@@ -73,7 +73,7 @@
     	<!-- 3rd party bundles -->
         <bundle>mvn:com.googlecode.guava-osgi/guava-osgi/9.0.0</bundle>
         <bundle>mvn:javax.inject/com.springsource.javax.inject/1.0.0</bundle>
-        <bundle>mvn:com.vaadin/vaadin/6.6.4</bundle>
+        <bundle>mvn:com.vaadin/vaadin/6.8.9</bundle>
         <bundle>mvn:org.vaadin.peter/contextmenu/3.1.0/jar/osgi</bundle>
         <bundle>mvn:commons-codec/commons-codec/1.7</bundle>
         <bundle>mvn:commons-collections/commons-collections/3.2.1</bundle>
