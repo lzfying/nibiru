@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Generic Validators
+Bundle-Name: JTA transaction blueprint configuration
 Bundle-SymbolicName: ar.com.oxen.nibiru.transaction.jta.blueprint
 Bundle-Version: 0.4.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
