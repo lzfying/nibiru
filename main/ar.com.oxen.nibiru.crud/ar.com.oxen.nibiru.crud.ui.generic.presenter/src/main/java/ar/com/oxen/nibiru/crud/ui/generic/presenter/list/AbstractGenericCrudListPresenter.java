@@ -18,6 +18,7 @@ import ar.com.oxen.nibiru.crud.ui.generic.presenter.AbstractGenericCrudPresenter
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionTracker;
 import ar.com.oxen.nibiru.security.api.AuthorizationService;
+import ar.com.oxen.nibiru.security.api.Profile;
 import ar.com.oxen.nibiru.ui.api.mvp.ClickHandler;
 import ar.com.oxen.nibiru.ui.api.mvp.CloseHandler;
 
@@ -29,9 +30,9 @@ public abstract class AbstractGenericCrudListPresenter extends
 	public AbstractGenericCrudListPresenter(CrudManager<?> crudManager,
 			EventBus eventBus, Conversation conversation,
 			ExtensionPointManager extensionPointManager,
-			AuthorizationService authorizationService) {
+			AuthorizationService authorizationService, Profile profile) {
 		super(crudManager, eventBus, conversation, extensionPointManager,
-				authorizationService);
+				authorizationService, profile);
 	}
 
 	private boolean isAllowedRole(String[] roles) {

@@ -34,6 +34,7 @@ import ar.com.oxen.nibiru.crud.manager.api.WidgetType;
 import ar.com.oxen.nibiru.crud.utils.SimpleCrudAction;
 import ar.com.oxen.nibiru.crud.utils.SimpleCrudField;
 import ar.com.oxen.nibiru.security.api.AuthorizationService;
+import ar.com.oxen.nibiru.security.api.Profile;
 
 public class JpaCrudManager<T> implements CrudManager<T>,
 		CrudActionExtension<T> {
@@ -44,6 +45,7 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 	private String pkName;
 	private String filter;
 	private AuthorizationService authorizationService;
+	private Profile profile;
 
 	@Override
 	public String getEntityTypeName() {
@@ -262,6 +264,10 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 		if (this.filter != null) {
 			Map<String, Object> environment = new HashMap<String, Object>();
 			environment.put("authz", this.authorizationService);
+			
+			if (this.profile != null ) {
+				environment.put("profile", this.profile);
+			}
 
 			Object computedFilter = MVEL.eval(this.filter, environment);
 
@@ -324,6 +330,11 @@ public class JpaCrudManager<T> implements CrudManager<T>,
 		this.authorizationService = authorizationService;
 	}
 
+	public void setProfile(
+			Profile profile) {
+		this.profile = profile;
+	}
+	
 	private interface ShowValidator {
 		boolean mustShow(Show show);
 	}

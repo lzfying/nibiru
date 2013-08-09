@@ -72,8 +72,8 @@ public class GenericCrudFormView extends AbstractCrudView implements
 			TextField<?> textField = this.getViewFactory().buildTextField(
 					(Class<?>) crudField.getType());
 
-			textField.setMaxLength(formInfo.getMaxLength());
-
+			textField.setMaxLength(formInfo. getMaxLength());
+			
 			field = textField;
 			break;
 
@@ -136,10 +136,14 @@ public class GenericCrudFormView extends AbstractCrudView implements
 					+ formInfo.getWidgetType());
 		}
 
-		field.setCaption(this.getMessage(CrudViewFactory.I18N_FIELD_PREFIX
+		field.setCaption(" " + this.getMessage(CrudViewFactory.I18N_FIELD_PREFIX
 				+ crudField.getName()));
 		field.setReadOnly(formInfo.isReadonly());
 
+		if (formInfo.getMaxLength() > this.fieldsTabPanel.getWidth()) {
+			this.fieldsTabPanel.setWidth((int) (formInfo.getMaxLength() * 1.2 ));
+		}
+		
 		String tabName = crudField.getFormInfo().getTab();
 		FormPanel fieldsPanel = this.fieldsPanels.get(tabName);
 

@@ -11,6 +11,7 @@ import ar.com.oxen.nibiru.crud.manager.api.EditCrudEntityEvent;
 import ar.com.oxen.nibiru.crud.manager.api.ModifiedCrudEntityEvent;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
 import ar.com.oxen.nibiru.security.api.AuthorizationService;
+import ar.com.oxen.nibiru.security.api.Profile;
 import ar.com.oxen.nibiru.ui.api.mvp.View;
 import ar.com.oxen.nibiru.ui.utils.mvp.AbstractPresenter;
 
@@ -20,16 +21,19 @@ public abstract class AbstractGenericCrudPresenter<V extends View> extends
 	private Conversation conversation;
 	private ExtensionPointManager extensionPointManager;
 	private AuthorizationService authorizationService;
+	private Profile profile;
 	
 	public AbstractGenericCrudPresenter(CrudManager<?> crudManager,
 			EventBus eventBus, Conversation conversation,
 			ExtensionPointManager extensionPointManager,
-			AuthorizationService authorizationService) {
+			AuthorizationService authorizationService,
+			Profile profile) {
 		super(eventBus);
 		this.crudManager = crudManager;
 		this.conversation = conversation;
 		this.extensionPointManager = extensionPointManager;
 		this.authorizationService = authorizationService;
+		this.profile = profile;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -83,6 +87,10 @@ public abstract class AbstractGenericCrudPresenter<V extends View> extends
 
 	protected AuthorizationService getAuthorizationService() {
 		return authorizationService;
+	}
+	
+	protected Profile getProfile() {
+		return profile;
 	}
 	
 }

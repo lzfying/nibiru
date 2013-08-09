@@ -9,6 +9,7 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudEntity;
 import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
 import ar.com.oxen.nibiru.security.api.AuthorizationService;
+import ar.com.oxen.nibiru.security.api.Profile;
 import ar.com.oxen.nibiru.ui.api.mvp.CloseHandler;
 
 public class GenericCrudListPresenter extends AbstractGenericCrudListPresenter {
@@ -16,8 +17,9 @@ public class GenericCrudListPresenter extends AbstractGenericCrudListPresenter {
 	public GenericCrudListPresenter(CrudManager<?> crudManager,
 			EventBus eventBus, Conversation conversation,
 			ExtensionPointManager extensionPointManager,
-			AuthorizationService authorizationService) {
-		super(crudManager, eventBus, conversation, extensionPointManager, authorizationService);
+			AuthorizationService authorizationService,
+			Profile profile) {
+		super(crudManager, eventBus, conversation, extensionPointManager, authorizationService, profile);
 	}
 
 	@Override

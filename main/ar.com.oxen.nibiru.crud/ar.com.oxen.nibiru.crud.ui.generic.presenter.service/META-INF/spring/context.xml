@@ -23,11 +23,15 @@
 	<osgi:reference id="authorizationService"
 		interface="ar.com.oxen.nibiru.security.api.AuthorizationService" cardinality="0..1"/>
 		
+	<osgi:reference id="profile"
+		interface="ar.com.oxen.nibiru.security.api.Profile" cardinality="0..1"/>
+				
 	<bean id="crudPresenterFactory"
 		class="ar.com.oxen.nibiru.crud.ui.generic.presenter.GenericCrudPresenterFactory">
 		<property name="eventBus" ref="eventBus" />
 		<property name="extensionPointManager" ref="extensionPointManager" />
 		<property name="conversationFactory" ref="conversationFactory" />
 		<property name="authorizationService" ref="authorizationService" />
+		<property name="profile" ref="profile" />
 	</bean>
 </beans>
