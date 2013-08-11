@@ -7,6 +7,7 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudActionExtension;
 import ar.com.oxen.nibiru.crud.manager.api.CrudFactory;
 import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.security.api.AuthorizationService;
+import ar.com.oxen.nibiru.security.api.Profile;
 import ar.com.oxen.nibiru.transaction.api.TransactionTemplate;
 
 public class JpaCrudFactory implements CrudFactory {
@@ -14,11 +15,12 @@ public class JpaCrudFactory implements CrudFactory {
 	private WrapperFactory wrapperFactory;
 	private AuthorizationService authorizationService;
 	private TransactionTemplate transactionTemplate;
+	private Profile profile;
 
 	@Override
 	public <T> CrudManager<T> createCrudManager(Class<T> persistentClass) {
 		return new JpaCrudManager<T>(this.entityManager, persistentClass,
-				this.wrapperFactory, this.authorizationService);
+				this.wrapperFactory, this.authorizationService, this.profile);
 	}
 
 	@Override
@@ -45,4 +47,7 @@ public class JpaCrudFactory implements CrudFactory {
 		this.transactionTemplate = transactionTemplate;
 	}
 
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
 }

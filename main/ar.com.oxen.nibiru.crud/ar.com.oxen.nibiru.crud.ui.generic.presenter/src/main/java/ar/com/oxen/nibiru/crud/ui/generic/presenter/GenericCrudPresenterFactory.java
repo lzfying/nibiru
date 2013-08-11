@@ -13,6 +13,7 @@ import ar.com.oxen.nibiru.crud.ui.generic.presenter.list.GenericCrudListPresente
 import ar.com.oxen.nibiru.crud.ui.generic.presenter.list.GenericCrudListPresenterByParent;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
 import ar.com.oxen.nibiru.security.api.AuthorizationService;
+import ar.com.oxen.nibiru.security.api.Profile;
 import ar.com.oxen.nibiru.ui.api.mvp.Presenter;
 
 public class GenericCrudPresenterFactory implements CrudPresenterFactory {
@@ -21,13 +22,14 @@ public class GenericCrudPresenterFactory implements CrudPresenterFactory {
 	private ConversationFactory conversationFactory;
 	private ConversationAccessor conversationAccessor;
 	private AuthorizationService authorizationService;
+	private Profile profile;
 
 	@Override
 	public <T> Presenter<CrudListView> buildListPresenter(
 			CrudManager<T> crudManager) {
 		return new GenericCrudListPresenter<T>(crudManager, this.eventBus, 
 				this.conversationFactory.buildConversation(),
-				this.extensionPointManager, authorizationService);
+				this.extensionPointManager, authorizationService, profile);
 	}
 
 	@Override
@@ -35,7 +37,7 @@ public class GenericCrudPresenterFactory implements CrudPresenterFactory {
 			CrudManager<T> crudManager, String parentField, Object parentValue) {
 		return new GenericCrudListPresenterByParent<T>(crudManager,
 				this.eventBus, this.conversationAccessor.getCurrentConversation(), this.extensionPointManager,
-				parentField, parentValue, authorizationService);
+				parentField, parentValue, authorizationService, profile);
 	}
 
 	@Override
@@ -43,7 +45,7 @@ public class GenericCrudPresenterFactory implements CrudPresenterFactory {
 			CrudManager<T> crudManager, EditCrudEntityEvent<T> event) {
 		return new GenericCrudFormPresenter<T>(crudManager, this.eventBus, 
 				event.getConversation(), event.getCrudEntity(),
-				this.extensionPointManager, authorizationService);
+				this.extensionPointManager, authorizationService, profile);
 	}
 
 	public void setEventBus(EventBus eventBus) {
@@ -71,4 +73,11 @@ public class GenericCrudPresenterFactory implements CrudPresenterFactory {
 		this.authorizationService = authorizationService;
 	}
 
+	public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
+	}
 }

@@ -17,18 +17,21 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudEntity;
 import ar.com.oxen.nibiru.crud.manager.api.CrudField;
 import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.security.api.AuthorizationService;
+import ar.com.oxen.nibiru.security.api.Profile;
 
 public class JpaCrudManager<T> extends AbstractJpaCrudComponent<T> implements
 		CrudManager<T> {
 	private String filter;
 	private AuthorizationService authorizationService;
+	private Profile profile;
 
 	public JpaCrudManager(EntityManager entityManager,
 			Class<T> persistentClass, WrapperFactory wrapperFactory,
-			AuthorizationService authorizationService) {
+			AuthorizationService authorizationService, Profile profile) {
 		super(entityManager, persistentClass, wrapperFactory);
 
 		this.authorizationService = authorizationService;
+		this.profile = profile;
 
 		Filter filterAnnotation = persistentClass.getAnnotation(Filter.class);
 		if (filterAnnotation != null) {
@@ -112,6 +115,10 @@ public class JpaCrudManager<T> extends AbstractJpaCrudComponent<T> implements
 		if (this.filter != null) {
 			Map<String, Object> environment = new HashMap<String, Object>();
 			environment.put("authz", this.authorizationService);
+			
+			if (this.profile != null ) {
+				environment.put("profile", this.profile);
+			}
 
 			Object computedFilter = MVEL.eval(this.filter, environment);
 

@@ -9,6 +9,7 @@ import ar.com.oxen.nibiru.crud.manager.api.CrudEntity;
 import ar.com.oxen.nibiru.crud.manager.api.CrudManager;
 import ar.com.oxen.nibiru.extensionpoint.api.ExtensionPointManager;
 import ar.com.oxen.nibiru.security.api.AuthorizationService;
+import ar.com.oxen.nibiru.security.api.Profile;
 
 public class GenericCrudListPresenterByParent<T> extends
 		AbstractGenericCrudListPresenter<T> {
@@ -18,8 +19,8 @@ public class GenericCrudListPresenterByParent<T> extends
 	public GenericCrudListPresenterByParent(CrudManager<T> crudManager,
 			EventBus eventBus, Conversation conversation,
 			ExtensionPointManager extensionPointManager, String parentField,
-			Object parent, AuthorizationService authorizationService) {
-		super(crudManager, eventBus, conversation, extensionPointManager, authorizationService);
+			Object parent, AuthorizationService authorizationService, Profile profile) {
+		super(crudManager, eventBus, conversation, extensionPointManager, authorizationService, profile);
 
 		this.parentField = parentField;
 		this.parent = parent;
