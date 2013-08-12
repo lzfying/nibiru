@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import javax.inject.Inject;
 
+import ar.com.oxen.commons.license.api.HardwareIdProvider;
 import ar.com.oxen.commons.license.api.LicenseAuthorizer;
 import ar.com.oxen.commons.license.api.LicenseSerializer;
 import ar.com.oxen.commons.license.impl.DefaultLicenseInfo;
@@ -19,28 +20,30 @@ import com.google.inject.Guice;
  * Command-line authorizer
  */
 public class Authorizer {
-	private LicenseSerializer<DefaultLicenseInfo> licenseSerializer;
-	private LicenseAuthorizer<DefaultLicenseInfo> licenseAuthorizer;
+	private final LicenseSerializer<DefaultLicenseInfo> licenseSerializer;
+	private final LicenseAuthorizer<DefaultLicenseInfo> licenseAuthorizer;
+	private final HardwareIdProvider hardwareIdProvider;
 
 	@Inject
 	public Authorizer(LicenseSerializer<DefaultLicenseInfo> licenseSerializer,
-			LicenseAuthorizer<DefaultLicenseInfo> licenseAuthorizer) {
-		super();
+			LicenseAuthorizer<DefaultLicenseInfo> licenseAuthorizer,
+			HardwareIdProvider hardwareIdProvider) {
 		this.licenseSerializer = licenseSerializer;
 		this.licenseAuthorizer = licenseAuthorizer;
+		this.hardwareIdProvider = hardwareIdProvider;
 	}
 
 	public void authorize(Map<String, String> args) {
 		String request = ask("License info string", "request", args);
 
-		DefaultLicenseInfo licenseInfo = this.licenseSerializer
-				.deserializeLicenceInfo(request);
+		DefaultLicenseInfo licenseInfo = ".".equals(request) ? new DefaultLicenseInfo(
+				null, null, null, null, hardwareIdProvider.getHardwareId())
+				: licenseSerializer.deserializeLicenceInfo(request);
 
 		String customerName = ask("Customer name",
 				licenseInfo.getCustomerName());
 
-		String module = ask("Module",
-				licenseInfo.getModule());
+		String module = ask("Module", licenseInfo.getModule());
 
 		Date expirationDate = null;
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
@@ -50,8 +53,7 @@ public class Authorizer {
 				String dateStr = ask(
 						"Expiration date",
 						licenseInfo.getExpirationDate() != null ? df
-								.format(licenseInfo.getExpirationDate())
-								: "");
+								.format(licenseInfo.getExpirationDate()) : "");
 				if (dateStr != null && !dateStr.trim().equals("")) {
 					expirationDate = df.parse(dateStr);
 				}
@@ -67,6 +69,8 @@ public class Authorizer {
 				customerName, module, expirationDate, code,
 				licenseInfo.getHardwareId());
 		System.out.println("Generated license info: " + newLicenseInfo);
+		System.out.println("Serialization: "
+				+ licenseSerializer.serializeLicenceInfo(newLicenseInfo));
 
 		String license = this.licenseSerializer
 				.serializeLicence(this.licenseAuthorizer
