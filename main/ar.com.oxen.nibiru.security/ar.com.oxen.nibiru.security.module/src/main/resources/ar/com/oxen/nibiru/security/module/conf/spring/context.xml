@@ -45,6 +45,7 @@
 		<property name="wrapperFactory" ref="wrapperFactory" />
 		<property name="authorizationService" ref="authorizationService" />
 		<property name="transactionTemplate" ref="transactionTemplate" />
+		<property name="profile" ref="profile" />
 	</bean>
 
 	<!-- JPA -->

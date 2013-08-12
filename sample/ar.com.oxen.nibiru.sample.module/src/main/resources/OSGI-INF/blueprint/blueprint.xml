@@ -46,6 +46,9 @@
 	<reference id="entityManagerFactory" interface="javax.persistence.EntityManagerFactory"
 		filter="(osgi.unit.name=nibiruSample_conversation)" />
 
+	<reference id="profile" interface="ar.com.oxen.nibiru.security.api.Profile"
+		availability="optional" />
+
 	<bean id="sampleMessageProvider"
 		class="ar.com.oxen.nibiru.i18n.generic.ResourceBundleMessageProvider">
 		<property name="baseName" value="ar.com.oxen.nibiru.sample.ui.i18n.messages" />
@@ -73,6 +76,7 @@
 		<property name="wrapperFactory" ref="wrapperFactory" />
 		<property name="authorizationService" ref="authorizationService" />
 		<property name="transactionTemplate" ref="transactionTemplate" />
+		<property name="profile" ref="profile" />
 	</bean>
 	
 	<bean init-method="startup" destroy-method="shutdown"

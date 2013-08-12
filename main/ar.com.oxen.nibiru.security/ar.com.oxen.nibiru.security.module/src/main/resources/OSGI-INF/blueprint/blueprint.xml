@@ -39,6 +39,9 @@
 	<reference id="transactionTemplate"
 		interface="ar.com.oxen.nibiru.transaction.api.TransactionTemplate" />
 
+	<reference id="profile" interface="ar.com.oxen.nibiru.security.api.Profile"
+		availability="optional" />
+
 	<bean id="securityMessageProvider"
 		class="ar.com.oxen.nibiru.i18n.generic.ResourceBundleMessageProvider">
 		<property name="baseName"
@@ -69,5 +72,6 @@
 		<property name="wrapperFactory" ref="wrapperFactory" />
 		<property name="authorizationService" ref="authorizationService" />
 		<property name="transactionTemplate" ref="transactionTemplate" />
+		<property name="profile" ref="profile" />
 	</bean>
 </blueprint>
