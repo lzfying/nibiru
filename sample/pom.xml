@@ -50,6 +50,7 @@
 	<modules>
 		<module>ar.com.oxen.nibiru.sample.domain</module>
 		<module>ar.com.oxen.nibiru.sample.loginview</module>
+		<module>ar.com.oxen.nibiru.sample.layout</module>
 		<module>ar.com.oxen.nibiru.sample.mainview</module>
 		<module>ar.com.oxen.nibiru.sample.module</module>
 		<module>ar.com.oxen.nibiru.sample.springwebapp</module>
