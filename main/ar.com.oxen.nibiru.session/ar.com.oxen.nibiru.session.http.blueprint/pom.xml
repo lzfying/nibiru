@@ -18,7 +18,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>ar.com.oxen.nibiru.session</groupId>
-			<artifactId>ar.com.oxen.nibiru.session.spring.http</artifactId>
+			<artifactId>ar.com.oxen.nibiru.session.http</artifactId>
 			<version>${nibiru-version}</version>
 		</dependency>
 	</dependencies>
