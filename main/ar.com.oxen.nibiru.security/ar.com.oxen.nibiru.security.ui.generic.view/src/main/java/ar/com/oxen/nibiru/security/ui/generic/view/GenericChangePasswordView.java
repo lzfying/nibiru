@@ -21,7 +21,8 @@ public class GenericChangePasswordView extends
 
 	public GenericChangePasswordView(ViewFactory viewFactory,
 			MessageSource messageSource) {
-		super(viewFactory.buildWindow(), viewFactory, messageSource);
+		super(viewFactory.buildWindow(Window.Style.FORM), viewFactory,
+				messageSource);
 		this.getTitle()
 				.setValue(
 						messageSource

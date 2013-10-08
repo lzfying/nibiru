@@ -56,7 +56,7 @@ public class VaadinViewFactory implements ViewFactory {
 	}
 
 	@Override
-	public Window buildWindow() {
+	public Window buildWindow(Window.Style style) {
 		return new WindowAdapter(new com.vaadin.ui.Window(),
 				this.applicationAccessor.getApplication().getMainWindow());
 	}

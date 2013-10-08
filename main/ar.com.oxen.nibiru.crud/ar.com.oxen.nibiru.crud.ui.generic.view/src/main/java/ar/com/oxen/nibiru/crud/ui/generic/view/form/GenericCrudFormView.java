@@ -20,6 +20,7 @@ import ar.com.oxen.nibiru.ui.api.view.PasswordField;
 import ar.com.oxen.nibiru.ui.api.view.TextArea;
 import ar.com.oxen.nibiru.ui.api.view.TextField;
 import ar.com.oxen.nibiru.ui.api.view.ViewFactory;
+import ar.com.oxen.nibiru.ui.api.view.Window;
 import ar.com.oxen.nibiru.validation.api.ValidationException;
 import ar.com.oxen.nibiru.validation.api.Validator;
 
@@ -32,7 +33,7 @@ public class GenericCrudFormView extends AbstractCrudView implements
 
 	public GenericCrudFormView(ViewFactory viewFactory,
 			MessageSource messageSource, LocaleHolder localeHolder) {
-		super(viewFactory.buildWindow(), viewFactory, messageSource,
+		super(viewFactory.buildWindow(Window.Style.FORM), viewFactory, messageSource,
 				localeHolder);
 
 		this.fieldsTabPanel = viewFactory.buildTabPanel();

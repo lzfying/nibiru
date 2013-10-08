@@ -16,7 +16,8 @@ public class GenericReportView extends AbstractWindowViewAdapter<Window>
 
 	public GenericReportView(ViewFactory viewFactory,
 			MessageSource messageSource) {
-		super(viewFactory.buildWindow(), viewFactory, messageSource);
+		super(viewFactory.buildWindow(Window.Style.FORM), viewFactory,
+				messageSource);
 
 		this.getAdapted()
 				.setValue(

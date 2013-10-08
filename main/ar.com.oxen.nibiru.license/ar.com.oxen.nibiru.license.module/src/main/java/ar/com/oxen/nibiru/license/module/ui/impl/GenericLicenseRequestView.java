@@ -29,7 +29,8 @@ public class GenericLicenseRequestView extends
 
 	public GenericLicenseRequestView(ViewFactory viewFactory,
 			MessageSource messageSource) {
-		super(viewFactory.buildWindow(), viewFactory, messageSource);
+		super(viewFactory.buildWindow(Window.Style.FORM), viewFactory,
+				messageSource);
 		this.getTitle()
 				.setValue(
 						messageSource
@@ -54,7 +55,7 @@ public class GenericLicenseRequestView extends
 		this.code.setCaption(messageSource
 				.getMessage("ar.com.oxen.nibiru.license.code"));
 		this.getAdapted().addComponent(this.code);
-		
+
 		this.licenseRequest = viewFactory.buildTextArea(String.class);
 		this.licenseRequest.setCaption(messageSource
 				.getMessage("ar.com.oxen.nibiru.license.licenseRequest"));

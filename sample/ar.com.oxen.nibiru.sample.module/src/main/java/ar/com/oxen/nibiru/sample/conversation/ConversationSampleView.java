@@ -21,7 +21,8 @@ public class ConversationSampleView extends AbstractWindowViewAdapter<Window>
 
 	public ConversationSampleView(ViewFactory viewFactory,
 			MessageSource messageSource) {
-		super(viewFactory.buildWindow(), viewFactory, messageSource);
+		super(viewFactory.buildWindow(Window.Style.FORM), viewFactory,
+				messageSource);
 		Label<String> title = viewFactory.buildLabel(String.class);
 
 		String titleText = messageSource
@@ -33,8 +34,9 @@ public class ConversationSampleView extends AbstractWindowViewAdapter<Window>
 		this.input = viewFactory.buildTextField(String.class);
 		this.input.setCaption(messageSource
 				.getMessage("ar.com.oxen.nibiru.sample.input"));
-		this.input.setValue(messageSource
-				.getMessage("ar.com.oxen.nibiru.sample.conversation.defaultInput"));
+		this.input
+				.setValue(messageSource
+						.getMessage("ar.com.oxen.nibiru.sample.conversation.defaultInput"));
 		this.getAdapted().addComponent(this.input);
 
 		this.write = viewFactory.buildButton();
@@ -43,8 +45,9 @@ public class ConversationSampleView extends AbstractWindowViewAdapter<Window>
 		this.getAdapted().addComponent(this.write);
 
 		this.writeAccessor = viewFactory.buildButton();
-		this.writeAccessor.setValue(messageSource
-				.getMessage("ar.com.oxen.nibiru.sample.conversation.writeAccessor"));
+		this.writeAccessor
+				.setValue(messageSource
+						.getMessage("ar.com.oxen.nibiru.sample.conversation.writeAccessor"));
 		this.getAdapted().addComponent(this.writeAccessor);
 
 		this.output = viewFactory.buildTextField(String.class);
@@ -58,8 +61,9 @@ public class ConversationSampleView extends AbstractWindowViewAdapter<Window>
 		this.getAdapted().addComponent(this.read);
 
 		this.readAccessor = viewFactory.buildButton();
-		this.readAccessor.setValue(messageSource
-				.getMessage("ar.com.oxen.nibiru.sample.conversation.readAccessor"));
+		this.readAccessor
+				.setValue(messageSource
+						.getMessage("ar.com.oxen.nibiru.sample.conversation.readAccessor"));
 		this.getAdapted().addComponent(this.readAccessor);
 	}
 

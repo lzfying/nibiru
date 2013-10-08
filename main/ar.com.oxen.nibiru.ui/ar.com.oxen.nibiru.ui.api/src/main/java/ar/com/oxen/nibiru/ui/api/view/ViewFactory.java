@@ -15,9 +15,11 @@ public interface ViewFactory {
 	/**
 	 * Builds a window.
 	 * 
+	 * @param style
+	 *            The window style or null if not specified
 	 * @return The window
 	 */
-	Window buildWindow();
+	Window buildWindow(Window.Style style);
 
 	/**
 	 * Builds a label.

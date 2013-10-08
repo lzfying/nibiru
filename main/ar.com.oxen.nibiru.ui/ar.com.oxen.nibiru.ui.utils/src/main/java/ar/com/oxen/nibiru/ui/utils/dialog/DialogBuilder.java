@@ -17,7 +17,7 @@ public class DialogBuilder {
 		super();
 		this.viewFactory = viewFactory;
 
-		this.window = viewFactory.buildWindow();
+		this.window = viewFactory.buildWindow(null);
 		this.window.setModal(true);
 
 		this.messagePanel = viewFactory.buildVerticalPanel();

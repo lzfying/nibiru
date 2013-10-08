@@ -19,7 +19,8 @@ public class EventBusSampleView extends AbstractWindowViewAdapter<Window>
 
 	public EventBusSampleView(ViewFactory viewFactory,
 			MessageSource messageSource) {
-		super(viewFactory.buildWindow(), viewFactory, messageSource);
+		super(viewFactory.buildWindow(Window.Style.FORM), viewFactory,
+				messageSource);
 		Label<String> title = viewFactory.buildLabel(String.class);
 
 		String titleText = messageSource

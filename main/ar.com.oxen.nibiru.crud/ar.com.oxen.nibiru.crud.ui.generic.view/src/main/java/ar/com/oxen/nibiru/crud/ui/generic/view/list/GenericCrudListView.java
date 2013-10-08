@@ -1,6 +1,5 @@
 package ar.com.oxen.nibiru.crud.ui.generic.view.list;
 
-
 import java.util.List;
 
 import ar.com.oxen.nibiru.crud.ui.api.CrudViewFactory;
@@ -15,6 +14,7 @@ import ar.com.oxen.nibiru.ui.api.view.MenuItem;
 import ar.com.oxen.nibiru.ui.api.view.Panel;
 import ar.com.oxen.nibiru.ui.api.view.Table;
 import ar.com.oxen.nibiru.ui.api.view.ViewFactory;
+import ar.com.oxen.nibiru.ui.api.view.Window;
 
 public class GenericCrudListView extends AbstractCrudView implements
 		CrudListView {
@@ -23,8 +23,8 @@ public class GenericCrudListView extends AbstractCrudView implements
 
 	public GenericCrudListView(ViewFactory viewFactory,
 			MessageSource messageSource, LocaleHolder localeHolder) {
-		super(viewFactory.buildWindow(), viewFactory, messageSource,
-				localeHolder);
+		super(viewFactory.buildWindow(Window.Style.LIST), viewFactory,
+				messageSource, localeHolder);
 
 		this.table = this.getViewFactory().buildTable();
 		this.getAdapted().addComponent(table);
