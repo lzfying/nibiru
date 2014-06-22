@@ -3,9 +3,12 @@ package ar.com.oxen.nibiru.jpa;
 import java.util.Map;
 
 import javax.persistence.Cache;
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnitUtil;
+import javax.persistence.Query;
+import javax.persistence.SynchronizationType;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.metamodel.Metamodel;
 
@@ -21,7 +24,6 @@ public class ConversationEntityManagerFactory implements EntityManagerFactory {
 			EntityManagerFactory entityManagerFactory,
 			ConversationAccessor conversationAccessor,
 			TransactionTemplate transactionTemplate) {
-		super();
 		this.entityManagerFactory = entityManagerFactory;
 		this.conversationAccessor = conversationAccessor;
 		this.transactionTemplate = transactionTemplate;
@@ -86,4 +88,48 @@ public class ConversationEntityManagerFactory implements EntityManagerFactory {
 	public Map<String, Object> getProperties() {
 		return this.entityManagerFactory.getProperties();
 	}
+
+    @Override
+    public <T> void addNamedEntityGraph(String arg0, EntityGraph<T> arg1) {
+        entityManagerFactory.addNamedEntityGraph(arg0, arg1);
+    }
+
+    @Override
+    public void addNamedQuery(String arg0, Query arg1) {
+        entityManagerFactory.addNamedQuery(arg0, arg1);
+    }
+
+    @Override
+    public EntityManager createEntityManager(
+            final SynchronizationType synchronizationType) {
+        return ConversationEntityManagerHandler.buidlProxy(
+                this.conversationAccessor, this.transactionTemplate,
+                new EntityManagerCreator() {
+                    @Override
+                    public EntityManager create() {
+                        return entityManagerFactory
+                                .createEntityManager(synchronizationType);
+                    }
+                });
+    }
+
+    @Override
+    public EntityManager createEntityManager(
+            final SynchronizationType synchronizationType,
+            @SuppressWarnings("rawtypes") final Map map) {
+        return ConversationEntityManagerHandler.buidlProxy(
+                this.conversationAccessor, this.transactionTemplate,
+                new EntityManagerCreator() {
+                    @Override
+                    public EntityManager create() {
+                        return entityManagerFactory.createEntityManager(
+                                synchronizationType, map);
+                    }
+                });
+    }
+
+    @Override
+    public <T> T unwrap(Class<T> arg0) {
+        return entityManagerFactory.unwrap(arg0);
+    }
 }
